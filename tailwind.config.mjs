@@ -1,9 +1,18 @@
+import defaultTheme from 'tailwindcss/defaultTheme'
+import tailwindForm from '@tailwindcss/forms'
+import tailwindTypography from '@tailwindcss/typography'
+import tailwindAspectRatio from '@tailwindcss/aspect-ratio'
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+      },
       colors: {
         primary: {
           DEFAULT: '#3490dc', // 主色
@@ -26,5 +35,5 @@ export default {
   variants: {
     extend: {}
   },
-  plugins: []
+  plugins: [tailwindForm, tailwindTypography, tailwindAspectRatio]
 }
