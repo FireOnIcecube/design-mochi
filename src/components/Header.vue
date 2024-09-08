@@ -43,7 +43,24 @@ const { isOpen } = useSidebar()
     </div>
 
     <div class="flex items-center">
-      <button class="flex mx-4 text-gray-600 focus:outline-none">
+      <button type="button" class="flex mx-4 text-gray-600 focus:outline-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+          />
+        </svg>
+      </button>
+
+      <!-- <button class="flex mx-4 text-gray-600 focus:outline-none">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
@@ -53,9 +70,23 @@ const { isOpen } = useSidebar()
             stroke-linejoin="round"
           />
         </svg>
-      </button>
+      </button> -->
 
-      <div class="relative">
+      <!-- <button type="button" class="layout-topbar-action" @click="toggleDarkMode">
+                    <i :class="['pi', { 'pi-moon': isDarkTheme, 'pi-sun': !isDarkTheme }]"></i>
+                </button> -->
+      <!-- <div class="relative">
+                    <button
+                        v-styleclass="{ selector: '@next', enterFromClass: 'hidden', enterActiveClass: 'animate-scalein', leaveToClass: 'hidden', leaveActiveClass: 'animate-fadeout', hideOnOutsideClick: true }"
+                        type="button"
+                        class="layout-topbar-action layout-topbar-action-highlight"
+                    >
+                        <i class="pi pi-palette"></i>
+                    </button>
+                    <AppConfigurator />
+                </div> -->
+
+      <!-- <div class="relative">
         <button
           class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
           @click="dropdownOpen = !dropdownOpen"
@@ -103,7 +134,7 @@ const { isOpen } = useSidebar()
             </router-link>
           </div>
         </transition>
-      </div>
+      </div> -->
     </div>
   </header>
 </template>

@@ -13,9 +13,9 @@ import Blank from '@/views/Blank.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Login',
-    component: Login,
-    meta: { layout: 'empty' }
+    // name: 'Dashboard',
+    component: Dashboard
+    // meta: { layout: 'empty' }
   },
   {
     path: '/dashboard',

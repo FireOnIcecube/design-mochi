@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import ResourceItem from '@/components/ResourceItem.vue'
+import ResourceFilter from '@/components/ResourceFilter.vue'
 
 interface User {
   name: string
@@ -24,10 +26,29 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser))
 
 <template>
   <div>
-    <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
+    <h3 class="text-3xl font-semibold text-[#755540]">免費字體</h3>
+    <div
+      class="flex flex-col gap-2 max-w-2xl mt-4 px-5 py-6 text-[#755540] bg-white rounded-md shadow-sm"
+    >
+      <div>1. 你可以透過資源類型篩選來查詢需要的字體資源</div>
+      <div>2. 另有些字體為簡中或日文字體，會有缺字的問題，使用時請考慮使用情境</div>
+      <div>3. 各種字體的使用規範請依照各字體網站詳細說明為準</div>
+    </div>
 
-    <div class="mt-4">
-      <div class="flex flex-wrap -mx-6">
+    <div class="flex mt-8 gap-4">
+      <ResourceFilter />
+      <ResourceFilter />
+
+      <ResourceFilter />
+
+      <ResourceFilter />
+
+      <ResourceFilter />
+      <ResourceFilter />
+    </div>
+
+    <!-- <div class="mt-6">
+      <div class="flex flex-wrap mx-6">
         <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
           <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
             <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
@@ -133,13 +154,33 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser))
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="mt-8" />
+    <!-- <div class="mt-8"></div> -->
 
-    <div class="flex flex-col mt-8">
-      <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div
+    <div class="flex flex-col mt-4">
+      <div class="py-2 -my-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+          <ResourceItem />
+        </div>
+        <!-- <div
           class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
         >
           <table class="min-w-full">
@@ -222,7 +263,7 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser))
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
