@@ -28,14 +28,14 @@ const users = ref<User[]>([...Array(10).keys()].map(() => testUser))
   <div>
     <h3 class="text-3xl font-semibold text-[#755540]">免費字體</h3>
     <div
-      class="flex flex-col gap-2 max-w-2xl mt-4 px-5 py-6 text-[#755540] bg-white rounded-md shadow-sm"
+      class="flex flex-col gap-y-2 max-w-2xl mt-4 px-5 py-6 text-[#755540] bg-white rounded-md shadow-sm"
     >
       <div>1. 你可以透過資源類型篩選來查詢需要的字體資源</div>
       <div>2. 另有些字體為簡中或日文字體，會有缺字的問題，使用時請考慮使用情境</div>
       <div>3. 各種字體的使用規範請依照各字體網站詳細說明為準</div>
     </div>
 
-    <div class="flex mt-8 gap-4">
+    <div class="flex mt-8 gap-4 flex-wrap">
       <ResourceFilter />
       <ResourceFilter />
 
