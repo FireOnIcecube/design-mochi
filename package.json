@@ -18,6 +18,7 @@
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@vueuse/core": "^11.0.3",
+    "@vueuse/motion": "^2.2.5",
     "firebase": "^10.13.1",
     "install": "^0.13.0",
     "pinia": "^2.1.7",

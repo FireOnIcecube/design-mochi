@@ -9,13 +9,14 @@ import Login from '@/views/Login.vue'
 import Modal from '@/views/Modal.vue'
 import Card from '@/views/Card.vue'
 import Blank from '@/views/Blank.vue'
+import HomePage from '@/views/HomePage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    // name: 'Dashboard',
-    component: Dashboard
-    // meta: { layout: 'empty' }
+    name: 'Home',
+    component: HomePage,
+    meta: { layout: 'empty' }
   },
   {
     path: '/dashboard',

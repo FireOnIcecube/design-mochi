@@ -24,8 +24,9 @@ const inactiveClass = ref(
       class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-[#755540] lg:translate-x-0 lg:static lg:inset-0"
     >
       <div class="flex items-center justify-center mt-8">
-        <div class="flex items-center">
-          <!-- <svg
+        <router-link to="/">
+          <div class="flex items-center">
+            <!-- <svg
             class="w-12 h-12"
             viewBox="0 0 512 512"
             fill="none"
@@ -45,8 +46,9 @@ const inactiveClass = ref(
             />
           </svg> -->
 
-          <span class="mx-2 text-2xl font-semibold text-white">Design Mochi</span>
-        </div>
+            <span class="mx-2 text-2xl font-semibold text-white">Design Mochi</span>
+          </div>
+        </router-link>
       </div>
 
       <nav class="mt-10">
