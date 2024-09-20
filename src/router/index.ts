@@ -18,11 +18,24 @@ const routes: RouteRecordRaw[] = [
     component: HomePage,
     meta: { layout: 'empty' }
   },
+
   {
-    path: '/dashboard',
-    name: 'Dashboard',
+    path: '/fonts',
+    name: 'Fonts',
     component: Dashboard
   },
+  {
+    path: '/text-templates',
+    name: 'TextTemplates',
+    component: Dashboard
+  },
+
+  {
+    path: '/thumbnails',
+    name: 'Thumbnails',
+    component: Dashboard
+  },
+
   {
     path: '/forms',
     name: 'Forms',
