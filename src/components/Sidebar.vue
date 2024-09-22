@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useSidebar } from '../composables/useSidebar'
+import { Icon } from '@iconify/vue'
+
 import { useRoute } from 'vue-router'
 
 const $route = useRoute()
@@ -61,12 +63,7 @@ const inactiveClass = ref(
           :class="[$route.name === 'Fonts' ? activeClass : inactiveClass]"
           to="/fonts"
         >
-          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              fill="white"
-              d="M9.6 14.95h4.8l.875 2.425q.1.275.35.45t.55.175q.5 0 .813-.413t.112-.912l-3.8-10.05q-.125-.275-.375-.45T12.375 6h-.75q-.3 0-.55.175t-.375.45l-3.8 10.05q-.2.475.1.9t.8.425q.325 0 .563-.175t.362-.475zm.6-1.75l1.75-4.95h.1l1.75 4.95zM4 22q-.825 0-1.412-.587T2 20V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v16q0 .825-.587 1.413T20 22z"
-            />
-          </svg>
+          <Icon icon="ic:round-font-download" class="text-white text-6xl lg:text-2xl" />
 
           <span class="mx-4">字體資源</span>
         </router-link>
@@ -75,12 +72,7 @@ const inactiveClass = ref(
           :class="[$route.name === 'TextTemplates' ? activeClass : inactiveClass]"
           to="/text-templates"
         >
-          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              fill="white"
-              d="M9.6 14.95h4.8l.875 2.425q.1.275.35.45t.55.175q.5 0 .813-.413t.112-.912l-3.8-10.05q-.125-.275-.375-.45T12.375 6h-.75q-.3 0-.55.175t-.375.45l-3.8 10.05q-.2.475.1.9t.8.425q.325 0 .563-.175t.362-.475zm.6-1.75l1.75-4.95h.1l1.75 4.95zM4 22q-.825 0-1.412-.587T2 20V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v16q0 .825-.587 1.413T20 22z"
-            />
-          </svg>
+          <Icon icon="icon-park-solid:text" class="text-white text-6xl lg:text-2xl" />
 
           <span class="mx-4">字卡資源</span>
         </router-link>
@@ -89,12 +81,7 @@ const inactiveClass = ref(
           :class="[$route.name === 'Thumbnails' ? activeClass : inactiveClass]"
           to="/thumbnails"
         >
-          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              fill="white"
-              d="M9.6 14.95h4.8l.875 2.425q.1.275.35.45t.55.175q.5 0 .813-.413t.112-.912l-3.8-10.05q-.125-.275-.375-.45T12.375 6h-.75q-.3 0-.55.175t-.375.45l-3.8 10.05q-.2.475.1.9t.8.425q.325 0 .563-.175t.362-.475zm.6-1.75l1.75-4.95h.1l1.75 4.95zM4 22q-.825 0-1.412-.587T2 20V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v16q0 .825-.587 1.413T20 22z"
-            />
-          </svg>
+          <Icon icon="gravity-ui:picture" class="text-white text-6xl lg:text-2xl" />
 
           <span class="mx-4">封面資源</span>
         </router-link>
