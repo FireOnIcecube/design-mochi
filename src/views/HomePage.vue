@@ -13,7 +13,7 @@ const navItems: { title: string; primaryColor: string; icon: string; routeName: 
   {
     title: '字卡資源',
     primaryColor: 'bg-red-500',
-    icon: 'ic:round-font-download',
+    icon: 'icon-park-solid:text',
     routeName: 'TextTemplates'
   },
   {
