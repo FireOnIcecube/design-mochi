@@ -13,7 +13,7 @@ const props = defineProps<{
   <router-link
     :to="{ name: props.routeName }"
     :class="props.primaryColor"
-    class="flex items-center justify-end gap-2 py-2.5 px-4 z-10 rounded-r-full cursor-pointer transition-all hover:-translate-y-1.5 hover:scale-[1.15] hover:shadow-2xl peer"
+    class="flex items-center justify-end gap-2 py-2.5 px-4 z-10 rounded-r-full cursor-pointer transition-all hover:-translate-y-1.5 hover:scale-[1.15] hover:shadow-2xl"
   >
     <div class="text-white font-semibold tracking-wide text-lg lg:text-xl">{{ props.title }}</div>
 

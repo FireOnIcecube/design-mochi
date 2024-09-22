@@ -19,7 +19,7 @@ const navItems: { title: string; primaryColor: string; icon: string; routeName: 
   {
     title: '封面資源',
     primaryColor: 'bg-yellow-500',
-    icon: 'ic:round-font-download',
+    icon: 'gravity-ui:picture',
     routeName: 'Thumbnails'
   }
 ]
@@ -57,33 +57,36 @@ const hoveredItem = ref<{
           @mouseenter="hoveredItem = item"
           @mouseleave="hoveredItem = null"
         />
-
-        <span
-          :class="hoveredItem?.primaryColor ?? 'bg-transparent'"
-          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-20 w-20 rounded-full transition-all duration-500 opacity-50 peer-hover:scale-[30]"
-        ></span>
       </div>
 
       <div class="container flex items-center justify-center">
         <span v-motion-fade>
           <h1 class="text-9xl font-[900] md:text-[12rem] inline-block text-black">設計</h1>
 
-          <h1
-            v-if="hoveredItem"
-            v-motion-slide-visible-bottom
-            class="text-9xl font-[900] md:text-[12rem] inline-block text-white"
-          >
-            {{ hoveredItem.title.slice(0, 2) }}
-          </h1>
-
-          <h1
-            v-else
-            v-motion-slide-visible-top
-            :delay="200"
-            class="text-9xl font-[900] md:text-[12rem] inline-block text-black"
-          >
-            麻糬
-          </h1>
+          <div class="relative inline-block">
+            <span
+              :class="[
+                hoveredItem?.primaryColor ?? 'bg-transparent',
+                { 'scale-[40]': hoveredItem }
+              ]"
+              class="absolute top-1/2 left-1/2 -z-10 transform -translate-x-1/2 -translate-y-1/2 h-20 w-20 rounded-full transition-all duration-[600ms] opacity-50"
+            ></span>
+            <h1
+              v-if="hoveredItem"
+              v-motion-slide-visible-bottom
+              class="text-9xl font-[900] md:text-[12rem] inline-block text-white"
+            >
+              {{ hoveredItem.title.slice(0, 2) }}
+            </h1>
+            <h1
+              v-else
+              v-motion-slide-visible-top
+              :delay="200"
+              class="text-9xl font-[900] md:text-[12rem] inline-block text-black"
+            >
+              麻糬
+            </h1>
+          </div>
         </span>
       </div>
     </div>
