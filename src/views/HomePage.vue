@@ -7,13 +7,16 @@ const navItems: { title: string; primaryColor: string; icon: string; routeName: 
   {
     title: '字體資源',
     primaryColor: 'bg-sky-500',
-    icon: 'ic:round-font-download',
+    //icon: 'ic:round-font-download',
+    icon: 'mingcute:text-2-fill',
     routeName: 'Fonts'
   },
   {
     title: '字卡資源',
     primaryColor: 'bg-red-500',
-    icon: 'icon-park-solid:text',
+    // icon: 'icon-park-solid:text',
+
+    icon: 'mingcute:text-2-fill',
     routeName: 'TextTemplates'
   },
   {

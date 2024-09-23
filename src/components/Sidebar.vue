@@ -63,7 +63,7 @@ const inactiveClass = ref(
           :class="[$route.name === 'Fonts' ? activeClass : inactiveClass]"
           to="/fonts"
         >
-          <Icon icon="ic:round-font-download" class="text-white text-6xl lg:text-2xl" />
+          <Icon icon="mingcute:text-2-fill" class="text-white text-6xl lg:text-2xl" />
 
           <span class="mx-4">字體資源</span>
         </router-link>
@@ -72,7 +72,7 @@ const inactiveClass = ref(
           :class="[$route.name === 'TextTemplates' ? activeClass : inactiveClass]"
           to="/text-templates"
         >
-          <Icon icon="icon-park-solid:text" class="text-white text-6xl lg:text-2xl" />
+          <Icon icon="mingcute:text-2-fill" class="text-white text-6xl lg:text-2xl" />
 
           <span class="mx-4">字卡資源</span>
         </router-link>
