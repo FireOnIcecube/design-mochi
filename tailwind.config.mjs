@@ -12,6 +12,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        mantou: ['MantouSans', ...defaultTheme.fontFamily.sans],
         sans: ['Inter var', ...defaultTheme.fontFamily.sans]
       }
 

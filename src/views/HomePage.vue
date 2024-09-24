@@ -64,7 +64,7 @@ const hoveredItem = ref<{
 
       <div class="container flex items-center justify-center">
         <span v-motion-fade>
-          <h1 class="text-9xl font-[900] md:text-[12rem] inline-block text-black">設計</h1>
+          <h1 class="text-9xl md:text-[14rem] inline-block text-black font-mantou">設計</h1>
 
           <div class="relative inline-block">
             <span
@@ -77,7 +77,7 @@ const hoveredItem = ref<{
             <h1
               v-if="hoveredItem"
               v-motion-slide-visible-bottom
-              class="text-9xl font-[900] md:text-[12rem] inline-block text-white"
+              class="text-9xl md:text-[14rem] inline-block text-white font-mantou"
             >
               {{ hoveredItem.title.slice(0, 2) }}
             </h1>
@@ -85,7 +85,7 @@ const hoveredItem = ref<{
               v-else
               v-motion-slide-visible-top
               :delay="200"
-              class="text-9xl font-[900] md:text-[12rem] inline-block text-black"
+              class="text-9xl md:text-[14rem] inline-block text-black font-mantou"
             >
               麻糬
             </h1>
