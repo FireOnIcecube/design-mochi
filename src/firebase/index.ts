@@ -10,13 +10,13 @@ import process from 'process'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID
+  apiKey: 'AIzaSyB3LW9HF9nmXKj0pxtOcXTk1nMpdJrxzks',
+  authDomain: 'design-mochi.firebaseapp.com',
+  projectId: 'design-mochi',
+  storageBucket: 'design-mochi.appspot.com',
+  messagingSenderId: '251093326008',
+  appId: '1:251093326008:web:ecff57bcd5de677dc1fc4d',
+  measurementId: 'G-9M90SRNF58'
 }
 
 // Initialize Firebase
