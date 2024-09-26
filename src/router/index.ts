@@ -9,6 +9,7 @@ import Modal from '@/views/Modal.vue'
 import Card from '@/views/Card.vue'
 import Blank from '@/views/Blank.vue'
 import HomePage from '@/views/HomePage.vue'
+import FontPage from '@/views/FontPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,9 +20,9 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/fonts',
-    name: 'Fonts',
-    component: Dashboard
+    path: '/font-families',
+    name: 'FontFamilies',
+    component: FontPage
   },
   {
     path: '/text-templates',

@@ -9,7 +9,7 @@ const navItems: { title: string; primaryColor: string; icon: string; routeName: 
     primaryColor: 'bg-sky-500',
     //icon: 'ic:round-font-download',
     icon: 'mingcute:text-2-fill',
-    routeName: 'Fonts'
+    routeName: 'FontFamilies'
   },
   {
     title: '字卡資源',
@@ -37,7 +37,7 @@ const hoveredItem = ref<{
 <template>
   <div class="flex flex-col flex-1 relative overflow-hidden">
     <header class="mt-4 mx-10 md:mx-15 lg:mx-20 flex justify-end gap-6 z-10">
-      <router-link to="/fonts">
+      <router-link to="/font-families">
         <div
           :class="hoveredItem ? 'text-white' : 'text-black'"
           class="font-bold duration-300 transition-all"
