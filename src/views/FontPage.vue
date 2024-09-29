@@ -31,7 +31,7 @@ const imgUrls = await Promise.all(imgRefs.items.map((item) => getDownloadURL(ite
 
 <template>
   <div>
-    <div>{{ imgUrls }}</div>
+    <!-- <div>{{ imgUrls }}</div> -->
     <!-- <div v-for="(item, index) in imageUrls" :key="index">{{ item }}</div> -->
     <h3 class="text-3xl font-semibold text-[#755540]">免費字體</h3>
     <div
