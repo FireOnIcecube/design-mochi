@@ -3,15 +3,23 @@ import Card from 'primevue/card'
 import Tag from 'primevue/tag'
 import { ref } from 'vue'
 
+const props = defineProps<{
+  imgUrl: string | undefined
+}>()
+// @/assets/test.gif
 const isOpen = ref(false)
 </script>
 
 <template>
   <Card
-    class="mb-2 cursor-pointer duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
+    class="mb-2 !grow-0 cursor-pointer duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
     @click="isOpen = true"
   >
-    <template #header> <img src="@/assets/test.gif" /> </template>
+    <template #header>
+      <div class="aspect-w-16 aspect-h-9">
+        <img :src="props.imgUrl" class="object-contain" />
+      </div>
+    </template>
     <template #title><div>Cutie Star Free Font</div> </template>
     <!-- <template #subtitle
       ><a href="https://www.zitijia.com/i/250417369808129081.html">www.dafontfree.io</a>
@@ -56,7 +64,7 @@ const isOpen = ref(false)
 
         <!-- Body -->
         <div class="flex flex-col gap-y-4">
-          <div><img alt="user header" src="@/assets/test.gif" /></div>
+          <div><img alt="user header" :src="props.imgUrl" /></div>
           <div class="text-2xl font-bold">Cutie Star Free Font</div>
           <div><Tag severity="info" value="Info" rounded></Tag></div>
         </div>

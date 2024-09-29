@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, Suspense } from 'vue'
 import { useRouter } from 'vue-router'
 
 const defaultLayout = 'default'
@@ -11,6 +11,6 @@ const layout = computed(() => `${currentRoute.value.meta.layout || defaultLayout
 
 <template>
   <component :is="layout">
-    <router-view />
+    <Suspense> <router-view /> </Suspense>
   </component>
 </template>
