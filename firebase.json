@@ -2,7 +2,6 @@
   "hosting": {
     "public": "dist",
 
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -11,7 +10,7 @@
     ],
     "headers": [
       {
-        "source": "/images/**",
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp|js|css|eot|otf|ttf|ttc|woff|woff2|font.css)",
         "headers": [
           {
             "key": "Cache-Control",
@@ -19,6 +18,7 @@
           }
         ]
       }
-    ]
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
