@@ -4,6 +4,7 @@ import Tag from 'primevue/tag'
 import { ref } from 'vue'
 
 const props = defineProps<{
+  title: string
   imgUrl: string | undefined
 }>()
 // @/assets/test.gif
@@ -20,7 +21,9 @@ const isOpen = ref(false)
         <img :src="props.imgUrl" class="object-contain" />
       </div>
     </template>
-    <template #title><div>Cutie Star Free Font</div> </template>
+    <template #title
+      ><div>{{ props.title }}</div>
+    </template>
     <!-- <template #subtitle
       ><a href="https://www.zitijia.com/i/250417369808129081.html">www.dafontfree.io</a>
     </template> -->
@@ -65,7 +68,7 @@ const isOpen = ref(false)
         <!-- Body -->
         <div class="flex flex-col gap-y-4">
           <div><img alt="user header" :src="props.imgUrl" /></div>
-          <div class="text-2xl font-bold">Cutie Star Free Font</div>
+          <div class="text-2xl font-bold">{{ props.title }}</div>
           <div><Tag severity="info" value="Info" rounded></Tag></div>
         </div>
 
