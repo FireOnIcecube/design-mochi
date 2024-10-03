@@ -1,7 +1,8 @@
 <script setup lang="tsx">
 import NavItem from '@/components/NavItem.vue'
+import { resourceData } from '@/composables/useResourceData'
 import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const navItems: { title: string; primaryColor: string; icon: string; routeName: string }[] = [
   {

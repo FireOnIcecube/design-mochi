@@ -9,30 +9,12 @@ import {
   listAll,
   type StorageReference
 } from 'firebase/storage'
-import { collection, getDocs, orderBy, query, startAt, where } from 'firebase/firestore'
-import { useFetch } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
-
-type Font = {
-  name: string
-  type: string
-  cover_url: string
-}
-
-// 取得集合中的所有文件
-const fontCollection = collection(db, 'fonts')
-const fontsSnapshot = await getDocs(fontCollection)
-
-const fontDatasets: Font[] = fontsSnapshot.docs.map((doc) => doc.data() as Font)
-
-const imgRefs = await list(getStorageRef(storage, 'images'), { maxResults: 100 })
-const imgUrls = await Promise.all(imgRefs.items.map((item) => getDownloadURL(item)))
+import { collection, getDocs } from 'firebase/firestore'
+import { resourceData } from '@/composables/useResourceData'
 </script>
 
 <template>
   <div>
-    <!-- <div>{{ imgUrls }}</div> -->
-    <!-- <div v-for="(item, index) in imageUrls" :key="index">{{ item }}</div> -->
     <h3 class="text-3xl font-semibold text-[#755540]">免費字體</h3>
     <div
       class="flex flex-col gap-y-2 max-w-2xl mt-4 px-5 py-6 text-[#755540] bg-white rounded-md shadow-sm"
@@ -51,7 +33,7 @@ const imgUrls = await Promise.all(imgRefs.items.map((item) => getDownloadURL(ite
       <div class="py-2 -my-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <ResourceItem
-            v-for="(data, index) in fontDatasets"
+            v-for="(data, index) in resourceData.fonts"
             :key="index"
             :title="data.name"
             :img-url="data.cover_url"
