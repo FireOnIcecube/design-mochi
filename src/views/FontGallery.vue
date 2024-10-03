@@ -32,12 +32,11 @@ import { resourceData } from '@/composables/useResourceData'
     <div class="flex flex-col mt-4">
       <div class="py-2 -my-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <ResourceItem
-            v-for="(data, index) in resourceData.fonts"
-            :key="index"
-            :title="data.name"
-            :img-url="data.cover_url"
-          />
+          <div v-for="(data, index) in resourceData.fonts" :key="index">
+            <router-link :to="{ name: 'FontInfo', params: { id: data.id } }">
+              <ResourceItem :title="data.name" :img-url="data.cover_url"
+            /></router-link>
+          </div>
         </div>
       </div>
     </div>
