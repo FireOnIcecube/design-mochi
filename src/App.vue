@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, Suspense } from 'vue'
 import { useRouter } from 'vue-router'
-import { resourceData } from './composables/useResourceData'
+import { resourceData } from './stores/resourceStore'
 
 const defaultLayout = 'default'
 

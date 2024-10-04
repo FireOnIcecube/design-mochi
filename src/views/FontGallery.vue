@@ -10,7 +10,7 @@ import {
   type StorageReference
 } from 'firebase/storage'
 import { collection, getDocs } from 'firebase/firestore'
-import { resourceData } from '@/composables/useResourceData'
+import { resourceData } from '@/stores/resourceStore'
 </script>
 
 <template>
