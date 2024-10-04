@@ -34,7 +34,7 @@ import { resourceData } from '@/composables/useResourceData'
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           <div v-for="(data, index) in resourceData.fonts" :key="index">
             <router-link :to="{ name: 'FontInfo', params: { id: data.id } }">
-              <ResourceItem :title="data.name" :img-url="data.cover_url"
+              <ResourceItem :title="data.name" :img-url="data.cover_url" :type="data.type"
             /></router-link>
           </div>
         </div>

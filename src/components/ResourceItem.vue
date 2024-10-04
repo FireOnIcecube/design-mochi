@@ -5,6 +5,7 @@ import { ref } from 'vue'
 
 const props = defineProps<{
   title: string
+  type: string
   imgUrl: string | undefined
 }>()
 const isOpen = ref(false)
@@ -27,7 +28,7 @@ const isOpen = ref(false)
       ><a href="https://www.zitijia.com/i/250417369808129081.html">www.dafontfree.io</a>
     </template> -->
     <template #content>
-      <div><Tag severity="info" value="Info" rounded></Tag></div
+      <div><Tag severity="info" :value="props.type" rounded></Tag></div
     ></template>
   </Card>
 </template>

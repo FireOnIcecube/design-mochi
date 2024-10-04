@@ -5,12 +5,12 @@ import { doc, getDoc, collection, getDocs } from 'firebase/firestore'
 interface Resource {
   id: string
   name: string
+  type: string
+  tags: string[]
   cover_url: string
 }
 
-interface Font extends Resource {
-  type: string
-}
+interface Font extends Resource {}
 
 export type CollectionName = 'fonts'
 
