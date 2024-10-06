@@ -18,13 +18,13 @@ const navItems: { title: string; primaryColor: string; icon: string; routeName: 
     // icon: 'icon-park-solid:text',
 
     icon: 'mingcute:text-2-fill',
-    routeName: 'TextTemplates'
+    routeName: 'FontFamilies'
   },
   {
     title: '封面資源',
     primaryColor: 'bg-yellow-500',
     icon: 'gravity-ui:picture',
-    routeName: 'Thumbnails'
+    routeName: 'FontFamilies'
   }
 ]
 
