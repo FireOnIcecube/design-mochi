@@ -11,12 +11,12 @@ const data = await resourceData.getResource('fonts', props.id)
 <template>
   <div v-if="data === null">查無資料</div>
   <div v-else>
-    <div class="mx-auto flex flex-wrap py-4 rounded-lg bg-white gap-4">
+    <div class="mx-auto flex flex-wrap py-4 rounded-lg bg-white justify-evenly">
       <div class="lg:h-96 sm:h-80 grow-[1.5]">
         <img :src="data.cover_url" class="h-full object-cover mx-auto" />
       </div>
 
-      <div class="px-8 grow">
+      <div class="grow">
         <div class="text-3xl font-semibold text-[#755540]">{{ data.name }}</div>
         <div>手寫體</div>
         <div>生氣 穩重 現代</div>
@@ -42,9 +42,6 @@ const data = await resourceData.getResource('fonts', props.id)
           </a>
         </div>
       </div>
-
-      <!-- <div class="flex flex-grow aspect-[4/3] bg-green-500"></div> -->
-      <!-- <div class="bg-blue-500 w-1/2">123</div> -->
     </div>
   </div>
 </template>
