@@ -7,7 +7,7 @@ import MainHeader from '@/components/MainHeader.vue'
   <div class="flex h-screen bg-[#FEF7EC]">
     <Sidebar />
 
-    <div class="flex-grow flex flex-col">
+    <div class="w-full">
       <MainHeader />
 
       <main class="overflow-x-hidden overflow-y-auto px-6 py-8">
