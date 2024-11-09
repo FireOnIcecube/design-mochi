@@ -7,10 +7,10 @@ import MainHeader from '@/components/MainHeader.vue'
   <div class="flex h-screen bg-[#FEF7EC]">
     <Sidebar />
 
-    <div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex-1 flex overflow-x-hidden flex-col">
       <MainHeader />
 
-      <main class="flex-1 overflow-x-hidden overflow-y-auto px-6 py-8">
+      <main class="flex-1 overflow-y-auto px-6 py-8">
         <div class="container mx-auto">
           <slot />
         </div>

@@ -43,5 +43,26 @@ const data = await resourceData.getResource('fonts', props.id)
         </div>
       </div>
     </div>
+
+    <div class="ml-8">
+      <div>● 介紹影片</div>
+      <div class="aspect-[16/9] lg:w-10/12 xl:w-8/12 mx-auto">
+        <iframe
+          src="https://www.youtube.com/embed/gmwp-2nWNyI"
+          title="Pariah Nexus - Finale/Salamander Arrives | Full HD | Warhammer+ TV (2023)"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          frameborder="0"
+          allowfullscreen
+          class="w-full h-full"
+        ></iframe>
+      </div>
+
+      <div>● 下載說明</div>
+      <div>進入網站後跟著 ReadMe 的步驟即可完成安裝</div>
+
+      <div class="text-red-500">注意事項</div>
+      <div>對中文的支持度相較英文低，可能會出現缺字的狀況</div>
+    </div>
   </div>
 </template>
