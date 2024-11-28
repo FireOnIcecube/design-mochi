@@ -8,6 +8,7 @@ import { MotionPlugin } from '@vueuse/motion'
 
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import EmptyLayout from '@/layouts/EmptyLayout.vue'
+import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
 
@@ -23,4 +24,6 @@ app.use(PrimeVue, {
     preset: Aura
   }
 })
+app.directive('tooltip', Tooltip)
+
 app.mount('#app')
