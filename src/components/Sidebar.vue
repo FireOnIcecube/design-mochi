@@ -63,7 +63,7 @@ const inactiveClass = ref(
           :class="[$route.name === 'FontFamilies' ? activeClass : inactiveClass]"
           to="/font-families"
         >
-          <Icon icon="mingcute:text-2-fill" class="text-white text-6xl lg:text-2xl" />
+          <Icon icon="mingcute:text-2-fill" class="text-white text-xl" />
 
           <span class="mx-4">字體資源</span>
         </router-link>
