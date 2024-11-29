@@ -99,7 +99,7 @@ const data = await resourceData.getResource('fonts', props.id)
       </div>
 
       <div class="text-2xl font-black mt-16 mb-4">● 下載說明</div>
-      <div class="text-[#334155]">進入網站後跟著 ReadMe 的步驟即可完成安裝</div>
+      <div class="text-[#1e293b]">進入網站後跟著 ReadMe 的步驟即可完成安裝</div>
 
       <div class="mt-16 mb-4 flex gap-2">
         <svg
@@ -122,7 +122,7 @@ const data = await resourceData.getResource('fonts', props.id)
         <div class="text-red-500 text-2xl font-black">注意事項</div>
       </div>
 
-      <div class="text-[#334155]">對中文的支持度相較英文低，可能會出現缺字的狀況</div>
+      <div class="text-[#1e293b]">對中文的支持度相較英文低，可能會出現缺字的狀況</div>
     </div>
   </div>
 </template>
