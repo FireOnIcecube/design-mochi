@@ -122,7 +122,7 @@ const data = await resourceData.getResource('fonts', props.id)
         <div class="text-red-500 text-2xl font-black">注意事項</div>
       </div>
 
-      <div class="text-[#1e293b]">對中文的支持度相較英文低，可能會出現缺字的狀況</div>
+      <div class="text-[#1e293b]">偶爾缺字</div>
     </div>
   </div>
 </template>
