@@ -85,7 +85,7 @@ const data = await resourceData.getResource('fonts', props.id)
     </div>
 
     <div class="ml-8 mt-16">
-      <div class="text-2xl font-black mb-4">● 介紹影片</div>
+      <div class="text-2xl font-black mb-4 text-gray-900">● 介紹影片</div>
       <div class="aspect-[16/9] lg:w-10/12 xl:w-8/12 mx-auto">
         <iframe
           src="https://www.youtube.com/embed/gmwp-2nWNyI"
@@ -98,7 +98,7 @@ const data = await resourceData.getResource('fonts', props.id)
         ></iframe>
       </div>
 
-      <div class="text-2xl font-black mt-16 mb-4">● 下載說明</div>
+      <div class="text-2xl font-black mt-16 mb-4 text-gray-900">● 下載說明</div>
       <div class="text-[#1e293b]">進入網站後跟著 ReadMe 的步驟即可完成安裝</div>
 
       <div class="mt-16 mb-4 flex gap-2">
