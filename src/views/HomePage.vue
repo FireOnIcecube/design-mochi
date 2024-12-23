@@ -15,8 +15,6 @@ const navItems: { title: string; primaryColor: string; icon: string; routeName: 
   {
     title: '字卡資源',
     primaryColor: 'bg-red-500',
-    // icon: 'icon-park-solid:text',
-
     icon: 'mingcute:text-2-fill',
     routeName: 'FontFamilies'
   },
@@ -63,7 +61,7 @@ const hoveredItem = ref<{
         />
       </div>
 
-      <div class="container flex items-center justify-center">
+      <div class="mx-auto container flex items-center justify-center">
         <span v-motion-fade>
           <h1 class="text-9xl md:text-[14rem] inline-block text-black font-mantou">設計</h1>
 
@@ -78,7 +76,7 @@ const hoveredItem = ref<{
             <h1
               v-if="hoveredItem"
               v-motion-slide-visible-bottom
-              class="text-9xl md:text-[14rem] inline-block text-white font-mantou"
+              class="text-9xl md:text-[14rem] text-white font-mantou"
             >
               {{ hoveredItem.title.slice(0, 2) }}
             </h1>
@@ -86,7 +84,7 @@ const hoveredItem = ref<{
               v-else
               v-motion-slide-visible-top
               :delay="200"
-              class="text-9xl md:text-[14rem] inline-block text-black font-mantou"
+              class="text-9xl md:text-[14rem] text-black font-mantou"
             >
               麻糬
             </h1>
