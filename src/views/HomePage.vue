@@ -62,7 +62,7 @@ const hoveredItem = ref<{
       </div>
 
       <div class="mx-auto container flex items-center justify-center">
-        <span v-motion-fade class="ml-4">
+        <div v-motion-fade class="ml-4">
           <h1 class="text-9xl md:text-[14rem] inline-block text-black font-mantou">設計</h1>
 
           <div class="relative inline-block">
@@ -89,7 +89,7 @@ const hoveredItem = ref<{
               麻糬
             </h1>
           </div>
-        </span>
+        </div>
       </div>
     </div>
   </div>
