@@ -25,7 +25,7 @@ const iconMap = {
   modern: { label: '現代', icon: 'tdesign:system-sum', color: '#0ea5e9' },
   nostalgic: { label: '懷舊', icon: 'tdesign:city-ancient-1-filled', color: '#78350f' },
   steady: { label: '穩重', icon: 'mdi:pillar', color: '#57534e' },
-  beautiful: { label: '唯美', icon: 'ion:flower', color: '#be123c' }
+  beautiful: { label: '唯美', icon: 'mdi:flower', color: '#be123c' }
 } as const
 
 const englishKey = computed(() => labelMap[props.label])
