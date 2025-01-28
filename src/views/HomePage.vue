@@ -69,9 +69,9 @@ const hoveredItem = ref<{
             <span
               :class="[
                 hoveredItem?.primaryColor ?? 'bg-transparent',
-                { 'scale-[40]': hoveredItem }
+                { 'scale-[300]': hoveredItem }
               ]"
-              class="absolute top-1/2 left-1/2 -z-10 transform -translate-x-1/2 -translate-y-1/2 h-20 w-20 rounded-full transition-all duration-[400ms] opacity-50"
+              class="absolute top-1/2 left-1/2 -z-10 transform -translate-x-1/2 -translate-y-1/2 h-[1vh] w-[1vh] rounded-full transition-all duration-[400ms] opacity-50"
             ></span>
             <h1
               v-if="hoveredItem"
