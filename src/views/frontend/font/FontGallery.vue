@@ -2,14 +2,7 @@
 import ResourceItem from '@/components/ResourceItem.vue'
 import ResourceFilter from '@/components/ResourceFilter.vue'
 import { db, storage } from '@/firebase/index'
-import {
-  getDownloadURL,
-  ref as getStorageRef,
-  list,
-  listAll,
-  type StorageReference
-} from 'firebase/storage'
-import { collection, getDocs } from 'firebase/firestore'
+
 import { resourceData } from '@/stores/resourceStore'
 </script>
 
@@ -24,10 +17,7 @@ import { resourceData } from '@/stores/resourceStore'
       <p>3. 各種字體的使用規範請依照各字體網站詳細說明為準</p>
     </div>
 
-    <div class="flex mt-8 gap-4 flex-wrap">
-      <!-- <ResourceFilter />
-      <ResourceFilter /> -->
-    </div>
+    <div class="flex mt-8 gap-4 flex-wrap"></div>
 
     <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <div v-for="(data, index) in resourceData.fonts" :key="index">

@@ -23,10 +23,6 @@ const data = await resourceData.getResource('fonts', props.id)
       <div class="flex flex-col basis-2/5 mt-4 ml-8 gap-4 grow">
         <div class="text-4xl font-semibold text-[#755540]">{{ data.name }}</div>
 
-        <!-- <div class="flex gap-2">
-          <div class="text-[#334155]">手寫體</div>
-        </div> -->
-
         <div class="mt-2 flex gap-6">
           <Chip label="手寫體">
             <template #icon>
@@ -38,15 +34,7 @@ const data = await resourceData.getResource('fonts', props.id)
               <Icon icon="tabler:coin-filled" width="1.8rem" height="1.8rem"></Icon>
             </template>
           </Chip>
-
-          <!-- <Chip label="Facebook">
-            <template #icon>
-              <Icon icon="tabler:coin-filled" width="2.3rem" height="2.3rem"></Icon>
-            </template>
-          </Chip> -->
         </div>
-
-        <!-- <div>生氣 穩重 現代</div> -->
 
         <div class="flex flex-wrap gap-4">
           <IconDisplay label="憤怒" />
@@ -57,9 +45,6 @@ const data = await resourceData.getResource('fonts', props.id)
           <IconDisplay label="懷舊" />
           <IconDisplay label="穩重" />
           <IconDisplay label="唯美" />
-
-          <!-- <IconDisplay />
-          <IconDisplay /> -->
         </div>
 
         <div class="my-auto">
