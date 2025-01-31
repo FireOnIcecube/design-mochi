@@ -1,7 +1,6 @@
 <script setup lang="tsx">
 import NavItem from '@/components/NavItem.vue'
 import EmptyLayout from '@/layouts/EmptyLayout.vue'
-import { resourceData } from '@/stores/resourceStore'
 import { Icon } from '@iconify/vue'
 import { onMounted, ref } from 'vue'
 

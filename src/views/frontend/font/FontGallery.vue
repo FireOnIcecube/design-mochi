@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import ResourceItem from '@/components/ResourceItem.vue'
 import ResourceFilter from '@/components/ResourceFilter.vue'
-import { db, storage } from '@/firebase/index'
-import { resourceData } from '@/stores/resourceStore'
-import { collection, onSnapshot } from 'firebase/firestore'
-import { fetchFonts } from '@/firebase/db/entities/font'
+import { db } from '@/firebase'
+import { fetchFontList } from '@/firebase/db/entities/font'
 import { onMounted, ref } from 'vue'
 import type { Font } from '@/firebase/db/types'
 
@@ -12,7 +10,15 @@ const items = ref<Font[]>([])
 const isLoading = ref(false)
 
 const fetchData = async () => {
-  items.value = await fetchFonts(db)
+  try {
+    isLoading.value = true
+    items.value = await fetchFontList(db)
+  } catch (error) {
+    console.error(error)
+    throw new Error('Failed to fetch data')
+  } finally {
+    isLoading.value = false
+  }
 }
 
 onMounted(() => {

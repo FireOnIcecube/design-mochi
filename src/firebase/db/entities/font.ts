@@ -25,7 +25,7 @@ export async function fetchFont(db: Firestore, id: string) {
   return docSnap.data()
 }
 
-export async function fetchFonts(db: Firestore): Promise<Font[]> {
+export async function fetchFontList(db: Firestore): Promise<Font[]> {
   const querySnapshot = await getDocs(fetchFontCollection(db))
 
   return querySnapshot.docs.map((doc) => doc.data())
