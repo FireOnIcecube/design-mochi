@@ -2,8 +2,22 @@
 import ResourceItem from '@/components/ResourceItem.vue'
 import ResourceFilter from '@/components/ResourceFilter.vue'
 import { db, storage } from '@/firebase/index'
-
 import { resourceData } from '@/stores/resourceStore'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { fetchFonts } from '@/firebase/db/entities/font'
+import { onMounted, ref } from 'vue'
+import type { Font } from '@/firebase/db/types'
+
+const items = ref<Font[]>([])
+const isLoading = ref(false)
+
+const fetchData = async () => {
+  items.value = await fetchFonts(db)
+}
+
+onMounted(() => {
+  fetchData()
+})
 </script>
 
 <template>
@@ -20,9 +34,9 @@ import { resourceData } from '@/stores/resourceStore'
     <div class="flex mt-8 gap-4 flex-wrap"></div>
 
     <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      <div v-for="(data, index) in resourceData.fonts" :key="index">
-        <router-link :to="{ name: 'FontInfo', params: { id: data.id } }">
-          <ResourceItem :title="data.name" :img-url="data.cover_url" :type="data.type"
+      <div v-for="(item, index) in items" :key="index">
+        <router-link :to="{ name: 'FontInfo', params: { id: item.id } }">
+          <ResourceItem :title="item.name" :img-url="item.coverUrl" :type="item.type"
         /></router-link>
       </div>
     </div>
