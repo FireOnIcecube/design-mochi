@@ -24,6 +24,13 @@ app.use(PrimeVue, {
     preset: Aura
   }
 })
+
+// vue 的全局錯誤處理器
+app.config.errorHandler = (err, instance, info) => {
+  console.error('[Global Error]:', err, info)
+  // 你可以在這裡整合通知系統，如 Toast 或 Sentry
+}
+
 app.directive('tooltip', Tooltip)
 
 app.mount('#app')
