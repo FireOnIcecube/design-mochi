@@ -2,34 +2,49 @@ import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Blank from '@/views/Blank.vue'
-import HomePage from '@/views/HomePage.vue'
-import FontGallery from '@/views/FontGallery.vue'
-import FontInfo from '@/views/FontInfo.vue'
+import HomePage from '@/views/frontend/HomePage.vue'
+import FontGallery from '@/views/frontend/font/FontGallery.vue'
+import defaultLayout from '@/layouts/DefaultLayout.vue'
 
 const routes: RouteRecordRaw[] = [
+  // frontend
   {
     path: '/',
     name: 'Home',
-    component: HomePage,
-    meta: { layout: 'empty' }
+    component: HomePage
   },
 
   {
-    path: '/font-families',
-    name: 'FontFamilies',
-    component: FontGallery
+    path: '/fonts',
+    name: 'fonts',
+    component: defaultLayout,
+    children: [
+      {
+        path: '',
+        name: 'FontGallery',
+        component: FontGallery
+      },
+      {
+        path: ':id',
+        name: 'FontInfo',
+        component: () => import('@/views/frontend/font/FontInfo.vue'),
+        props: true
+      }
+    ]
   },
-  {
-    path: '/font-families/:id',
-    name: 'FontInfo',
-    component: FontInfo,
-    props: true
-  },
+
   {
     path: '/blank',
     name: 'Blank',
     component: Blank
   }
+
+  // admin
+  // {
+  //   path: '/admin',
+  //   name: 'AdminHome',
+  //   component: () => import('@/views/admin/AdminHome.vue'),
+  // }
 ]
 
 const router = createRouter({

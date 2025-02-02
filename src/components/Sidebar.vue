@@ -60,8 +60,8 @@ const inactiveClass = ref(
       <nav class="mt-16">
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[$route.name === 'FontFamilies' ? activeClass : inactiveClass]"
-          to="/font-families"
+          :class="[$route.name === 'FontGallery' ? activeClass : inactiveClass]"
+          to="/fonts"
         >
           <Icon icon="mingcute:text-2-fill" class="text-white text-xl" />
 

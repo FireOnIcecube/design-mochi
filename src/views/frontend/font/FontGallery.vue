@@ -1,16 +1,29 @@
 <script setup lang="ts">
 import ResourceItem from '@/components/ResourceItem.vue'
 import ResourceFilter from '@/components/ResourceFilter.vue'
-import { db, storage } from '@/firebase/index'
-import {
-  getDownloadURL,
-  ref as getStorageRef,
-  list,
-  listAll,
-  type StorageReference
-} from 'firebase/storage'
-import { collection, getDocs } from 'firebase/firestore'
-import { resourceData } from '@/stores/resourceStore'
+import { db } from '@/firebase'
+import { fetchFontList } from '@/firebase/db/entities/font'
+import { onMounted, ref } from 'vue'
+import type { Font } from '@/firebase/db/types'
+
+const items = ref<Font[]>([])
+const isLoading = ref(false)
+
+const fetchData = async () => {
+  try {
+    isLoading.value = true
+    items.value = await fetchFontList(db)
+  } catch (error) {
+    console.error(error)
+    throw new Error('Failed to fetch data')
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchData()
+})
 </script>
 
 <template>
@@ -24,15 +37,12 @@ import { resourceData } from '@/stores/resourceStore'
       <p>3. 各種字體的使用規範請依照各字體網站詳細說明為準</p>
     </div>
 
-    <div class="flex mt-8 gap-4 flex-wrap">
-      <!-- <ResourceFilter />
-      <ResourceFilter /> -->
-    </div>
+    <div class="flex mt-8 gap-4 flex-wrap"></div>
 
     <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      <div v-for="(data, index) in resourceData.fonts" :key="index">
-        <router-link :to="{ name: 'FontInfo', params: { id: data.id } }">
-          <ResourceItem :title="data.name" :img-url="data.cover_url" :type="data.type"
+      <div v-for="(item, index) in items" :key="index">
+        <router-link :to="{ name: 'FontInfo', params: { id: item.id } }">
+          <ResourceItem :title="item.name" :img-url="item.coverUrl" :type="item.type"
         /></router-link>
       </div>
     </div>

@@ -1,31 +1,45 @@
 <script setup lang="tsx">
-import { resourceData } from '@/stores/resourceStore'
 import Button from 'primevue/button'
 import { Icon } from '@iconify/vue'
 import Chip from 'primevue/chip'
 import Tag from 'primevue/tag'
-
+import { db, storage } from '@/firebase'
+import { fetchFont } from '@/firebase/db/entities/font'
 import IconDisplay from '@/components/IconDisplay.vue'
+import type { Font } from '@/firebase/db/types'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps<{ id: string }>()
 
-const data = await resourceData.getResource('fonts', props.id)
+const item = ref<Font>()
+const isLoading = ref(false)
+
+const fetchData = async () => {
+  try {
+    isLoading.value = true
+    item.value = await fetchFont(db, props.id)
+  } catch (error) {
+    console.error(error)
+    throw new Error('Failed to fetch data')
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchData()
+})
 </script>
 
 <template>
-  <div v-if="data === null">查無資料</div>
-  <div v-else>
+  <div>
     <div class="flex flex-wrap py-4 rounded-lg bg-white">
       <div class="lg:h-96 sm:h-80 grow-[1.3]">
-        <img :src="data.cover_url" class="h-full object-cover mx-auto" />
+        <img :src="item?.coverUrl" class="h-full object-cover mx-auto" />
       </div>
 
       <div class="flex flex-col basis-2/5 mt-4 ml-8 gap-4 grow">
-        <div class="text-4xl font-semibold text-[#755540]">{{ data.name }}</div>
-
-        <!-- <div class="flex gap-2">
-          <div class="text-[#334155]">手寫體</div>
-        </div> -->
+        <div class="text-4xl font-semibold text-[#755540]">{{ item?.name }}</div>
 
         <div class="mt-2 flex gap-6">
           <Chip label="手寫體">
@@ -38,15 +52,7 @@ const data = await resourceData.getResource('fonts', props.id)
               <Icon icon="tabler:coin-filled" width="1.8rem" height="1.8rem"></Icon>
             </template>
           </Chip>
-
-          <!-- <Chip label="Facebook">
-            <template #icon>
-              <Icon icon="tabler:coin-filled" width="2.3rem" height="2.3rem"></Icon>
-            </template>
-          </Chip> -->
         </div>
-
-        <!-- <div>生氣 穩重 現代</div> -->
 
         <div class="flex flex-wrap gap-4">
           <IconDisplay label="憤怒" />
@@ -57,9 +63,6 @@ const data = await resourceData.getResource('fonts', props.id)
           <IconDisplay label="懷舊" />
           <IconDisplay label="穩重" />
           <IconDisplay label="唯美" />
-
-          <!-- <IconDisplay />
-          <IconDisplay /> -->
         </div>
 
         <div class="my-auto">
