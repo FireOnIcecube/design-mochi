@@ -6,14 +6,9 @@ import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 import { MotionPlugin } from '@vueuse/motion'
 
-import DashboardLayout from '@/layouts/DashboardLayout.vue'
-import EmptyLayout from '@/layouts/EmptyLayout.vue'
 import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App)
-
-app.component('DefaultLayout', DashboardLayout)
-app.component('EmptyLayout', EmptyLayout)
 
 app.use(router)
 app.use(MotionPlugin)
