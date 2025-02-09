@@ -1,7 +1,4 @@
-<script setup lang="tsx">
-import { Icon } from '@iconify/vue'
-import { onMounted, ref } from 'vue'
-</script>
+<script setup lang="tsx"></script>
 
 <template>
   <div>設計麻糬</div>
