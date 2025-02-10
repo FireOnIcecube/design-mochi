@@ -8,9 +8,20 @@ import primeUi from 'tailwindcss-primeui'
 export default {
   mode: 'jit',
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: 'media', // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#1E293B', // 白天模式的主要顏色
+          dark: '#0F172A' // 黑夜模式的主要顏色
+        },
+        text: {
+          DEFAULT: '#1E293B', // 白天模式的文字顏色
+          dark: '#F8FAFC' // 黑夜模式的文字顏色
+        }
+      },
+
       fontFamily: {
         mantou: ['MantouSans', ...defaultTheme.fontFamily.sans],
         sans: ['Inter var', ...defaultTheme.fontFamily.sans]

@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, Suspense } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+
+const route = useRoute()
+const layout = computed(() => route.meta.layout || DefaultLayout)
 </script>
 
 <template>
-  <Suspense> <router-view /> </Suspense>
+  <component :is="layout"> <router-view /> </component>
 </template>
