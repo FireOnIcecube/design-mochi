@@ -14,7 +14,7 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <header class="bg-white dark:bg-gray-900 p-4 border-b border-gray-200 dark:border-gray-700">
+  <header class="bg-primary dark:bg-primary-dark p-4 border-b border-gray-200 dark:border-gray-700">
     <div class="container mx-auto flex items-center justify-between">
       <!-- LOGO -->
       <router-link to="/" class="text-gray-900 dark:text-white text-xl font-bold hover:opacity-80">
@@ -52,7 +52,7 @@ const toggleMenu = () => {
       <!-- 漢堡選單按鈕 (行動版) -->
       <button
         @click="toggleMenu"
-        class="md:hidden text-gray-900 dark:text-white focus:outline-none ml-4"
+        class="md:hidden text-gray-900 dark:text-text-dark focus:outline-none ml-4"
       >
         <span v-if="isMenuOpen">✕</span>
         <span v-else>☰</span>

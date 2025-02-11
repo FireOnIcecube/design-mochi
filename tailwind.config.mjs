@@ -13,7 +13,7 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#1E293B', // 白天模式的主要顏色
+          DEFAULT: '#ffffff', // 白天模式的主要顏色
           dark: '#0F172A' // 黑夜模式的主要顏色
         },
         text: {
