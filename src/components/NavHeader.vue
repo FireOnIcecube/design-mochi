@@ -1,6 +1,8 @@
-<script setup>
+<script setup lang="tsx">
 import { ref, onMounted } from 'vue'
 import { useDark, useToggle } from '@vueuse/core'
+import InputGroup from 'primevue/inputgroup'
+import InputGroupAddon from 'primevue/inputgroupaddon'
 
 const isMenuOpen = ref(false)
 
@@ -15,48 +17,57 @@ const toggleMenu = () => {
 
 <template>
   <div class="border-b border-gray-200 bg-primary p-4 dark:border-gray-700 dark:bg-primary-dark">
-    <div class="container mx-auto flex items-center justify-between">
+    <div class="flex items-center justify-between md:mx-4">
       <!-- LOGO -->
-      <router-link to="/" class="text-xl font-bold text-text hover:opacity-80 dark:text-text-dark">
-        MyApp
+      <router-link
+        to="/"
+        class="font-mantou text-3xl text-text hover:opacity-80 dark:text-text-dark lg:text-4xl"
+      >
+        設計麻糬
       </router-link>
 
-      <!-- 桌面版導覽選單 -->
-      <nav class="hidden space-x-6 md:flex">
-        <router-link
-          to="/"
-          class="text-text hover:text-gray-500 dark:text-text-dark dark:hover:text-gray-400"
-        >
-          Home
-        </router-link>
-        <router-link
-          to="/about"
-          class="text-text hover:text-gray-500 dark:text-text-dark dark:hover:text-gray-400"
-        >
-          About
-        </router-link>
-        <router-link
-          to="/contact"
-          class="text-text hover:text-gray-500 dark:text-text-dark dark:hover:text-gray-400"
-        >
-          Contact
-        </router-link>
-      </nav>
+      <div class="flex items-center">
+        <nav class="mr-4 hidden space-x-8 md:flex">
+          <router-link
+            to="/"
+            class="text-text hover:text-gray-500 dark:text-text-dark dark:hover:text-gray-400"
+          >
+            首頁
+          </router-link>
 
-      <!-- 控制黑夜模式的按鈕 -->
-      <button @click="toggleDark()" class="ml-4 text-text focus:outline-none dark:text-text-dark">
-        <span v-if="isDark">🌙</span>
-        <span v-else>☀️</span>
-      </button>
+          <router-link
+            to="/contact"
+            class="text-text hover:text-gray-500 dark:text-text-dark dark:hover:text-gray-400"
+            exact-active-class="text-red-500"
+          >
+            設計封面
+          </router-link>
+          <!-- <router-link
+            to="/contact"
+            class="text-text hover:text-gray-500 dark:text-text-dark dark:hover:text-gray-400"
+          >
+            我的收藏
+          </router-link> -->
+        </nav>
 
-      <!-- 漢堡選單按鈕 (行動版) -->
-      <button
-        @click="toggleMenu"
-        class="ml-4 text-text focus:outline-none dark:text-text-dark md:hidden"
-      >
-        <span v-if="isMenuOpen">✕</span>
-        <span v-else>☰</span>
-      </button>
+        <!-- 控制黑夜模式的按鈕 -->
+        <button
+          @click="() => toggleDark()"
+          class="mx-4 text-text focus:outline-none dark:text-text-dark"
+        >
+          <span v-if="isDark">🌙</span>
+          <span v-else>☀️</span>
+        </button>
+
+        <!-- 漢堡選單按鈕 (行動版) -->
+        <button
+          @click="toggleMenu"
+          class="ml-4 text-text focus:outline-none dark:text-text-dark md:hidden"
+        >
+          <span v-if="isMenuOpen">✕</span>
+          <span v-else>☰</span>
+        </button>
+      </div>
     </div>
 
     <!-- 行動版選單 -->
