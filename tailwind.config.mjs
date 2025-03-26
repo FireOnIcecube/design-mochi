@@ -1,4 +1,3 @@
-import defaultTheme from 'tailwindcss/defaultTheme'
 import tailwindForm from '@tailwindcss/forms'
 import tailwindTypography from '@tailwindcss/typography'
 import tailwindAspectRatio from '@tailwindcss/aspect-ratio'
@@ -20,11 +19,6 @@ export default {
           DEFAULT: '#1E293B', // 白天模式的文字顏色
           dark: '#F8FAFC' // 黑夜模式的文字顏色
         }
-      },
-
-      fontFamily: {
-        mantou: ['MantouSans', ...defaultTheme.fontFamily.sans],
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
       }
     }
   },
