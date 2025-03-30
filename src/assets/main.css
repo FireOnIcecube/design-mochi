@@ -1,18 +1,14 @@
-@import 'tailwindcss';
-@tailwind utilities;
+@import 'primeicons/primeicons.css';
 
-/* @import 'tailwindcss/preflight';
-@import 'primeicons/primeicons.css'; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: 'MantouSans';
   src: url('./fonts/MantouSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
-
-@theme {
-  --font-mantou: 'MantouSans', sans-serif;
 }
 
 ::-webkit-scrollbar {

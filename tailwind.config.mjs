@@ -10,6 +10,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        mantou: ['MantouSans', 'sans-serif']
+      },
       colors: {
         primary: {
           DEFAULT: '#ffffff', // 白天模式的主要顏色
