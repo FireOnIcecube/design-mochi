@@ -1,42 +1,5 @@
-<template>
-  <div class="relative max-w-sm overflow-hidden rounded-lg shadow-lg">
-    <!-- Image -->
-    <img :src="imageSrc" alt="Card Image" class="h-80 w-full object-cover" />
-
-    <!-- Tags (Overlay on Image) -->
-    <div class="absolute right-2 bottom-2 left-2 rounded-lg bg-black/50 p-2">
-      <div class="flex flex-wrap gap-1">
-        <span
-          v-for="(tag, index) in displayedTags"
-          :key="index"
-          class="rounded-full bg-blue-200 px-2 py-1 text-xs text-blue-800"
-        >
-          {{ tag }}
-        </span>
-        <!-- More Tags Button -->
-        <span
-          v-if="tags.length > maxTags"
-          class="cursor-pointer text-xs text-blue-300"
-          @click="toggleShowMore"
-        >
-          {{ showMore ? 'Show Less' : 'Show More' }}
-        </span>
-      </div>
-      <!-- Expanded Tags -->
-      <div v-if="showMore" class="mt-1 flex flex-wrap gap-1">
-        <span
-          v-for="(tag, index) in tags.slice(maxTags)"
-          :key="index"
-          class="rounded-full bg-blue-200 px-2 py-1 text-xs text-blue-800"
-        >
-          {{ tag }}
-        </span>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="tsx">
+import { Icon } from '@iconify/vue'
 import { ref, computed } from 'vue'
 
 const imageSrc = ref('/testThumbnail.jpg') // Replace with your image URL
@@ -63,3 +26,35 @@ const toggleShowMore = () => {
   showMore.value = !showMore.value
 }
 </script>
+
+<template>
+  <div>
+    <a href="#" class="group block overflow-hidden rounded-lg px-2 pb-2 transition hover:shadow-lg">
+      <div class="aspect-video w-full">
+        <img src="/testimage.jpg" class="h-full w-full object-cover" />
+      </div>
+
+      <div class="mt-2 flex shrink-0 flex-wrap gap-3">
+        <div class="flex flex-nowrap items-center gap-1.5 rounded-lg bg-blue-100 px-2 py-1">
+          <Icon icon="ic:round-science" class="text-blue-600" width="24" height="24" />
+          <span class="font-notosans">科技</span>
+        </div>
+
+        <div class="flex flex-nowrap items-center gap-1.5 rounded-lg bg-orange-100 px-2 py-1">
+          <Icon icon="fluent:food-16-regular" class="text-orange-600" width="24" height="24" />
+          <span class="font-notosans">美食</span>
+        </div>
+
+        <div class="flex flex-nowrap items-center gap-1.5 rounded-lg bg-green-100 px-2 py-1">
+          <Icon icon="zondicons:travel" class="text-green-600" width="24" height="24" />
+          <span class="font-notosans">旅遊</span>
+        </div>
+      </div>
+
+      <p class="mt-2 line-clamp-2 group-hover:text-blue-800">
+        【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
+        cooking【ティアキン再現】
+      </p>
+    </a>
+  </div>
+</template>

@@ -9,9 +9,18 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
+    screens: {
+      sm: '700px',
+      md: '900px',
+      lg: '1100px',
+      xl: '1400px',
+      '2xl': '1700px'
+    },
+
     extend: {
       fontFamily: {
-        mantou: ['MantouSans', 'sans-serif']
+        mantou: ['MantouSans', 'sans-serif'],
+        notosans: ['NotoSansTC', 'ui-sans-serif', 'system-ui']
       },
       colors: {
         primary: {

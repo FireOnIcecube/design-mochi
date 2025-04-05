@@ -24,7 +24,7 @@ import TopButton from '@/components/TopButton.vue'
       <!-- <SearchBar /> -->
     </section>
 
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto">
       <router-view />
       <Drawer />
     </div>
