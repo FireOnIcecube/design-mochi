@@ -10,11 +10,12 @@ export default {
   darkMode: 'class',
   theme: {
     screens: {
-      sm: '700px',
-      md: '900px',
-      lg: '1100px',
-      xl: '1400px',
-      '2xl': '1700px'
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px',
+      '3xl': '1920px'
     },
 
     extend: {
@@ -23,11 +24,11 @@ export default {
         notosans: ['NotoSansTC', 'ui-sans-serif', 'system-ui']
       },
       colors: {
-        primary: {
+        surface: {
           DEFAULT: '#ffffff', // 白天模式的主要顏色
           dark: '#0F172A' // 黑夜模式的主要顏色
         },
-        text: {
+        content: {
           DEFAULT: '#1E293B', // 白天模式的文字顏色
           dark: '#F8FAFC' // 黑夜模式的文字顏色
         }

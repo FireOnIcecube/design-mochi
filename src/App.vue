@@ -8,7 +8,7 @@ const layout = computed(() => route.meta.layout || DefaultLayout)
 </script>
 
 <template>
-  <div class="min-h-screen bg-primary dark:bg-primary-dark">
+  <div class="bg-surface dark:bg-surface-dark min-h-screen">
     <component :is="layout"> <router-view /> </component>
   </div>
 </template>

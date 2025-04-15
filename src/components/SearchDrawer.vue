@@ -20,12 +20,12 @@ const toggleDrawer = () => {
   <div
     v-if="isOpen"
     @click="toggleDrawer"
-    class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+    class="fixed inset-0 z-10 bg-black bg-opacity-50 transition-opacity"
   ></div>
 
   <!-- Drawer -->
   <transition name="slide">
-    <div v-if="isOpen" class="fixed right-0 top-0 h-full w-64 bg-white p-4 shadow-lg">
+    <div v-if="isOpen" class="fixed right-0 top-0 z-20 h-full w-64 bg-white p-4 shadow-lg">
       <button @click="toggleDrawer" class="mb-4 text-gray-600">Close</button>
       <p class="text-lg font-bold">這是 Drawer 內容</p>
       <p>你可以在這裡放一些選單、按鈕、或其他內容。</p>
