@@ -19,19 +19,19 @@ import TopButton from '@/components/TopButton.vue'
   </section> -->
     <!-- <TopButton /> -->
 
-    <main class="mb-20 flex-grow">
-      <section class="sticky top-0 z-10 mb-20">
+    <main class="flex-grow">
+      <section class="sticky top-0 z-10 hidden lg:block 3xl:mb-20">
         <CategoryMenu />
 
         <!-- <SearchBar /> -->
       </section>
 
-      <div class="container mx-auto">
+      <div class="container mx-auto mt-10">
         <router-view />
         <Drawer />
       </div>
     </main>
-    <footer class="bg-gray-900 py-6 text-white">
+    <footer class="mt-20 bg-gray-900 py-6 text-white">
       <div class="container mx-auto flex flex-col items-center justify-between px-4 md:flex-row">
         <p class="text-sm">&copy; 2025 YourSite. All rights reserved.</p>
         <div class="mt-4 flex space-x-4 md:mt-0">
