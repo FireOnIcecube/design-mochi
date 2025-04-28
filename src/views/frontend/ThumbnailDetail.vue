@@ -9,12 +9,10 @@ const liked = ref(false)
   <div class="px-4">
     <div class="flex flex-col items-start justify-around md:flex-row">
       <div class="w-full md:w-1/2">
-        <!-- 第一張圖片：套用 object-contain + max-w 容器包裹 -->
-        <div class="aspect-video flex w-full shrink-0 justify-center bg-gray-300">
-          <div class="lg:max-h-[90%] lg:max-w-[90%]">
-            <img src="/testimage.jpg" alt="標題" class="h-full w-full object-contain" />
-          </div>
+        <div class="flex items-center justify-center bg-gray-50 lg:h-[50vh]">
+          <img src="/testimage.jpg" class="max-h-[50vh] object-contain" />
         </div>
+
         <div class="flex flex-nowrap justify-between">
           <span class="text-sm">
             來源:
@@ -26,7 +24,7 @@ const liked = ref(false)
             >
           </span>
 
-          <div class="hidden md:block">
+          <div class="mr-4 hidden md:block">
             <button
               @click="liked = !liked"
               aria-label="收藏"
@@ -133,10 +131,10 @@ const liked = ref(false)
     <section class="mt-24 px-4">
       <div class="mx-auto flex flex-col items-stretch gap-4 md:flex-row md:justify-between">
         <div class="w-full rounded-xl bg-orange-300 p-6 shadow-md md:max-w-md">
-          左邊元件（最多寬度 sm）
+          上一個（最多寬度 sm）
         </div>
         <div class="w-full rounded-xl bg-blue-300 p-6 shadow-md md:max-w-md">
-          右邊元件（最多寬度 sm）
+          下一個（最多寬度 sm）
         </div>
       </div>
     </section>
