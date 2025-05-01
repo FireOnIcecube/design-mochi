@@ -25,7 +25,7 @@ import { ref, computed } from 'vue'
       </div> -->
 
       <p
-        class="mt-2 line-clamp-2 font-notosans text-xs group-hover:text-blue-800 dark:text-content-dark lg:text-lg"
+        class="mt-2 line-clamp-2 font-notosans text-xs group-hover:text-blue-500 dark:text-content-dark lg:text-lg"
       >
         【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
         cooking【ティアキン再現】
