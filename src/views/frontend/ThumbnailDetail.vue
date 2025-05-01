@@ -9,7 +9,7 @@ const liked = ref(false)
   <div class="px-4">
     <div class="flex flex-col justify-around md:flex-row">
       <div class="w-full md:w-1/2">
-        <div class="flex items-center justify-center bg-gray-300 lg:h-[50vh]">
+        <div class="flex items-center justify-center bg-gray-100 lg:h-[50vh]">
           <img src="/testimage.jpg" class="max-h-[50vh] object-contain" />
         </div>
 
