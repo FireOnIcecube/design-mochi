@@ -80,35 +80,67 @@ const liked = ref(false)
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">配色:</div>
             <div class="text-md flex gap-x-4 font-notosans">
-              <div class="rounded-lg border border-outline px-3 py-2">#綠色</div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #綠色
+              </div>
             </div>
           </div>
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">主題:</div>
             <div class="text-md flex gap-x-4 font-notosans">
-              <div class="rounded-lg border border-outline px-3 py-2 font-black">#生活</div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 font-black hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #生活
+              </div>
             </div>
           </div>
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">語調:</div>
             <div class="text-md flex gap-x-4 font-notosans">
-              <div class="rounded-lg border border-outline px-3 py-2">#文青</div>
-              <div class="rounded-lg border border-outline px-3 py-2">#專業</div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #文青
+              </div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #專業
+              </div>
             </div>
           </div>
 
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">風格:</div>
             <div class="text-md flex gap-x-4 font-notosans">
-              <div class="rounded-lg border border-outline px-3 py-2">#藝術</div>
-              <div class="rounded-lg border border-outline px-3 py-2">#財經</div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #藝術
+              </div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #財經
+              </div>
             </div>
           </div>
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">情緒:</div>
             <div class="text-md flex gap-x-4 font-notosans">
-              <div class="rounded-lg border border-outline px-3 py-2">#療癒</div>
-              <div class="rounded-lg border border-outline px-3 py-2">#理性</div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #療癒
+              </div>
+              <div
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+              >
+                #理性
+              </div>
             </div>
           </div>
         </div>
@@ -128,7 +160,9 @@ const liked = ref(false)
     <section class="mt-16 px-4">
       <div class="flex flex-col gap-4 md:flex-row md:justify-between">
         <!-- Prev -->
-        <div class="w-full rounded-xl border border-outline p-4 shadow-md lg:max-w-2xl">
+        <div
+          class="w-full cursor-pointer rounded-xl border border-outline p-4 shadow-md hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-800 lg:max-w-2xl"
+        >
           <div class="flex items-center gap-4">
             <div class="group relative inline-block h-12 w-12">
               <Icon
@@ -152,7 +186,9 @@ const liked = ref(false)
           </div>
         </div>
         <!-- Next -->
-        <div class="w-full rounded-xl border border-outline p-4 shadow-md lg:max-w-2xl">
+        <div
+          class="w-full cursor-pointer rounded-xl border border-outline p-4 shadow-md hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-800 lg:max-w-2xl"
+        >
           <div class="flex items-center gap-4">
             <div class="flex h-28 w-36 flex-shrink-0 items-center justify-center">
               <img src="/testimage2.jpg" class="h-full w-full object-contain" />
