@@ -12,7 +12,7 @@ const toggleCategoryMenu = () => {
 <template>
   <div class="bg-surface shadow-md dark:bg-surface-dark">
     <div class="flex justify-center">
-      <div class="flex space-x-2 overflow-x-auto p-3">
+      <div class="flex gap-x-8 overflow-x-auto p-3">
         <div
           class="flex-shrink-0 cursor-pointer px-8 py-2 text-xl font-bold text-content transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:text-content-dark dark:hover:text-blue-600"
         >
@@ -55,12 +55,14 @@ const toggleCategoryMenu = () => {
         </div>
       </div>
 
-      <div class="group ml-8 flex cursor-pointer items-center justify-center bg-gray-200 px-6">
+      <div
+        class="group ml-8 flex cursor-pointer items-center justify-center bg-gray-200 px-6 dark:bg-gray-800"
+      >
         <Icon
           icon="ion:search"
           width="1.8em"
           height="1.8em"
-          class="translate-transform text-content duration-150 ease-out group-hover:scale-110"
+          class="translate-transform text-content duration-150 ease-out group-hover:scale-110 dark:text-content-dark"
         />
       </div>
     </div>

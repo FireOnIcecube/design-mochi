@@ -14,12 +14,12 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <div class="bg-surface dark:bg-surface-dark border-b border-gray-200 p-4 dark:border-gray-700">
+  <div class="border-b border-gray-200 bg-surface p-4 dark:border-gray-700 dark:bg-surface-dark">
     <div class="flex items-center justify-between md:mx-4">
       <!-- LOGO -->
       <router-link
         to="/"
-        class="text-content dark:text-content-dark font-mantou text-3xl hover:opacity-80 lg:text-4xl"
+        class="font-mantou text-3xl text-content hover:opacity-80 dark:text-content-dark lg:text-4xl"
       >
         設計麻糬
       </router-link>
@@ -48,7 +48,7 @@ const toggleMenu = () => {
           </router-link> -->
           <button
             @click="() => toggleDark()"
-            class="text-content dark:text-content-dark mx-4 focus:outline-none"
+            class="mx-4 text-content focus:outline-none dark:text-content-dark"
           >
             <span v-if="isDark">🌙</span>
             <span v-else>☀️</span>
