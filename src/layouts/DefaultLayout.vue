@@ -17,7 +17,6 @@ import TopButton from '@/components/TopButton.vue'
     <h1 class="text-3xl font-bold md:text-5xl">設計封面</h1>
     <p class="mt-2 text-lg md:text-xl">提升點擊率！從最佳封面設計中獲取靈感</p>
   </section> -->
-    <!-- <TopButton /> -->
 
     <main class="flex-grow">
       <section class="sticky top-0 z-10 hidden lg:block 3xl:mb-20">
@@ -33,7 +32,7 @@ import TopButton from '@/components/TopButton.vue'
     </main>
     <footer class="mt-20 bg-gray-900 py-6 text-white">
       <div class="container mx-auto grid grid-cols-1 items-center px-4 md:grid-cols-3">
-        <p class="justify-self-start text-sm">© 2025 Design Mochi</p>
+        <p class="justify-self-center text-sm lg:justify-self-start">© 2025 Design Mochi</p>
         <div class="mt-4 flex justify-center space-x-4 md:mt-0">
           <a href="#" class="hover:underline">關於本站</a>
           <a href="#" class="hover:underline">聯絡我們</a>
