@@ -48,7 +48,7 @@ const liked = ref(false)
 
       <div class="w-full md:w-1/3">
         <div class="mt-8 border-b-2 border-outline pb-6 dark:text-content-dark lg:mt-0">
-          <p class="font-notosans text-2xl">
+          <p class="font-notosans text-xl lg:text-2xl">
             【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
             cooking【ティアキン再現】
           </p>
