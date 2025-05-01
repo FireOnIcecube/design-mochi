@@ -127,7 +127,7 @@ const liked = ref(false)
 
     <section class="mt-16 px-4">
       <div class="flex flex-col gap-4 md:flex-row md:justify-between">
-        <!-- Card 1 -->
+        <!-- Prev -->
         <div class="w-full rounded-xl border border-outline p-4 shadow-md lg:max-w-2xl">
           <div class="flex items-center gap-4">
             <div class="group relative inline-block h-12 w-12">
@@ -139,7 +139,9 @@ const liked = ref(false)
               />
             </div>
 
-            <div class="line-clamp-2 flex-1 text-lg text-content dark:text-content-dark">
+            <div
+              class="line-clamp-2 flex-1 text-lg font-semibold text-content dark:text-content-dark"
+            >
               【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
               cooking【ティアキン再現】
             </div>
@@ -149,13 +151,15 @@ const liked = ref(false)
             </div>
           </div>
         </div>
-        <!-- Card 2 -->
+        <!-- Next -->
         <div class="w-full rounded-xl border border-outline p-4 shadow-md lg:max-w-2xl">
           <div class="flex items-center gap-4">
             <div class="flex h-28 w-36 flex-shrink-0 items-center justify-center">
               <img src="/testimage2.jpg" class="h-full w-full object-contain" />
             </div>
-            <div class="line-clamp-2 flex-1 text-lg text-content dark:text-content-dark">
+            <div
+              class="line-clamp-2 flex-1 text-lg font-semibold text-content dark:text-content-dark"
+            >
               歓送迎会シーズンにおすすめ ルミネ立川厳選【プチギフト】
             </div>
             <div class="group relative inline-block h-12 w-12">
