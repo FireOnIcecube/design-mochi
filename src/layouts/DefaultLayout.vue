@@ -32,9 +32,9 @@ import TopButton from '@/components/TopButton.vue'
       </div>
     </main>
     <footer class="mt-20 bg-gray-900 py-6 text-white">
-      <div class="container mx-auto flex flex-col items-center justify-between px-4 md:flex-row">
-        <p class="text-sm">© 2025 Design-Mochi</p>
-        <div class="mt-4 flex space-x-4 md:mt-0">
+      <div class="container mx-auto grid grid-cols-1 items-center px-4 md:grid-cols-3">
+        <p class="justify-self-start text-sm">© 2025 Design Mochi</p>
+        <div class="mt-4 flex justify-center space-x-4 md:mt-0">
           <a href="#" class="hover:underline">關於本站</a>
           <a href="#" class="hover:underline">聯絡我們</a>
         </div>
