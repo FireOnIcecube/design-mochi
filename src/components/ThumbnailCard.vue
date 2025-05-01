@@ -7,7 +7,7 @@ import { ref, computed } from 'vue'
   <div>
     <router-link
       :to="{ name: 'ThumbnailDetail', params: { id: 1 } }"
-      class="group block select-none overflow-hidden rounded-lg px-2 pb-2 transition hover:shadow-lg"
+      class="group block select-none overflow-hidden rounded-lg px-2 pb-4 transition hover:shadow-lg"
     >
       <div class="aspect-video">
         <img src="/testimage.jpg" class="h-full w-full object-cover" />
