@@ -25,12 +25,20 @@ export default {
       },
       colors: {
         surface: {
-          DEFAULT: '#ffffff', // 白天模式的主要顏色
-          dark: '#0F172A' // 黑夜模式的主要顏色
+          DEFAULT: '#ffffff', // 白天模式的 主要 顏色
+          dark: '#0F172A' // 黑夜模式的 主要 顏色
         },
         content: {
-          DEFAULT: '#1E293B', // 白天模式的文字顏色
-          dark: '#F8FAFC' // 黑夜模式的文字顏色
+          DEFAULT: '#1E293B', // 白天模式的 文字 顏色
+          dark: '#F8FAFC' // 黑夜模式的 文字 顏色
+        },
+        outline: {
+          DEFAULT: '#d1d5db', // 白天模式的 框線 顏色
+          dark: '#374151' // 黑夜模式的 框線 顏色
+        },
+        elevation: {
+          DEFAULT: 'rgba(0, 0, 0, 0.05)', // 白天模式的 陰影 顏色
+          dark: 'rgba(255, 255, 255, 0.08)' // 黑夜模式的 陰影 顏色
         }
       }
     }
