@@ -1,7 +1,6 @@
 import tailwindForm from '@tailwindcss/forms'
 import tailwindTypography from '@tailwindcss/typography'
 import tailwindAspectRatio from '@tailwindcss/aspect-ratio'
-import primeUi from 'tailwindcss-primeui'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -47,5 +46,5 @@ export default {
   variants: {
     extend: {}
   },
-  plugins: [tailwindForm, tailwindTypography, primeUi, tailwindAspectRatio]
+  plugins: [tailwindForm, tailwindTypography, tailwindAspectRatio]
 }
