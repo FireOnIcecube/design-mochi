@@ -13,7 +13,7 @@ const liked = ref(false)
           <img src="/testimage.jpg" class="max-h-[50vh] object-contain" />
         </div>
 
-        <div class="flex flex-nowrap justify-between text-content dark:text-content-dark">
+        <div class="text-content dark:text-content-dark flex flex-nowrap justify-between">
           <span class="text-sm">
             來源:
             <a
@@ -31,7 +31,7 @@ const liked = ref(false)
               class="mt-4 transition-colors duration-300"
             >
               <div
-                class="rounded-full border p-3 shadow-md hover:shadow-lg dark:border-outline-dark"
+                class="dark:border-outline-dark rounded-full border p-3 shadow-md hover:shadow-lg"
               >
                 <Icon
                   :icon="liked ? 'mdi:heart' : 'mdi:heart-outline'"
@@ -47,7 +47,7 @@ const liked = ref(false)
       </div>
 
       <div class="w-full md:w-1/3">
-        <div class="mt-8 border-b-2 border-outline pb-6 dark:text-content-dark lg:mt-0">
+        <div class="border-outline dark:text-content-dark mt-8 border-b-2 pb-6 lg:mt-0">
           <p class="font-notosans text-xl lg:text-2xl">
             【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
             cooking【ティアキン再現】
@@ -60,7 +60,7 @@ const liked = ref(false)
               class="mt-4 transition-colors duration-300"
             >
               <div
-                class="rounded-full border p-3 shadow-md hover:shadow-lg dark:border-outline-dark"
+                class="dark:border-outline-dark rounded-full border p-3 shadow-md hover:shadow-lg"
               >
                 <Icon
                   :icon="liked ? 'mdi:heart' : 'mdi:heart-outline'"
@@ -75,13 +75,13 @@ const liked = ref(false)
         </div>
 
         <div
-          class="flex flex-col justify-items-center gap-y-4 border-b-2 border-outline pb-6 pt-3 text-content dark:text-content-dark"
+          class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 border-b-2 pt-3 pb-6"
         >
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">配色:</div>
-            <div class="text-md flex gap-x-4 font-notosans">
+            <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #綠色
               </div>
@@ -89,9 +89,9 @@ const liked = ref(false)
           </div>
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">主題:</div>
-            <div class="text-md flex gap-x-4 font-notosans">
+            <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 font-black hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 font-black hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #生活
               </div>
@@ -99,14 +99,14 @@ const liked = ref(false)
           </div>
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">語調:</div>
-            <div class="text-md flex gap-x-4 font-notosans">
+            <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #文青
               </div>
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #專業
               </div>
@@ -115,14 +115,14 @@ const liked = ref(false)
 
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">風格:</div>
-            <div class="text-md flex gap-x-4 font-notosans">
+            <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #藝術
               </div>
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #財經
               </div>
@@ -130,14 +130,14 @@ const liked = ref(false)
           </div>
           <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">情緒:</div>
-            <div class="text-md flex gap-x-4 font-notosans">
+            <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #療癒
               </div>
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
+                class="border-outline cursor-pointer rounded-lg border px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #理性
               </div>
@@ -161,7 +161,7 @@ const liked = ref(false)
       <div class="flex flex-col gap-4 md:flex-row md:justify-between">
         <!-- Prev -->
         <div
-          class="w-full cursor-pointer rounded-xl border border-outline p-4 shadow-md hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-800 lg:max-w-2xl"
+          class="border-outline w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
         >
           <div class="flex items-center gap-4">
             <div class="group relative inline-block h-12 w-12">
@@ -174,7 +174,7 @@ const liked = ref(false)
             </div>
 
             <div
-              class="line-clamp-2 flex-1 text-lg font-semibold text-content dark:text-content-dark"
+              class="text-content dark:text-content-dark line-clamp-2 flex-1 text-lg font-semibold"
             >
               【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
               cooking【ティアキン再現】
@@ -187,14 +187,14 @@ const liked = ref(false)
         </div>
         <!-- Next -->
         <div
-          class="w-full cursor-pointer rounded-xl border border-outline p-4 shadow-md hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-800 lg:max-w-2xl"
+          class="border-outline w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
         >
           <div class="flex items-center gap-4">
             <div class="flex h-28 w-36 shrink-0 items-center justify-center">
               <img src="/testimage2.jpg" class="h-full w-full object-contain" />
             </div>
             <div
-              class="line-clamp-2 flex-1 text-lg font-semibold text-content dark:text-content-dark"
+              class="text-content dark:text-content-dark line-clamp-2 flex-1 text-lg font-semibold"
             >
               歓送迎会シーズンにおすすめ ルミネ立川厳選【プチギフト】
             </div>
