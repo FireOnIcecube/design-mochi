@@ -81,7 +81,7 @@ const liked = ref(false)
             <div class="font-notosans text-xl">配色:</div>
             <div class="text-md flex gap-x-4 font-notosans">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #綠色
               </div>
@@ -91,7 +91,7 @@ const liked = ref(false)
             <div class="font-notosans text-xl">主題:</div>
             <div class="text-md flex gap-x-4 font-notosans">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 font-black hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 font-black hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #生活
               </div>
@@ -101,12 +101,12 @@ const liked = ref(false)
             <div class="font-notosans text-xl">語調:</div>
             <div class="text-md flex gap-x-4 font-notosans">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #文青
               </div>
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #專業
               </div>
@@ -117,12 +117,12 @@ const liked = ref(false)
             <div class="font-notosans text-xl">風格:</div>
             <div class="text-md flex gap-x-4 font-notosans">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #藝術
               </div>
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #財經
               </div>
@@ -132,12 +132,12 @@ const liked = ref(false)
             <div class="font-notosans text-xl">情緒:</div>
             <div class="text-md flex gap-x-4 font-notosans">
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #療癒
               </div>
               <div
-                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-sm dark:hover:bg-gray-800"
+                class="cursor-pointer rounded-lg border border-outline px-3 py-2 hover:bg-gray-100 hover:shadow-xs dark:hover:bg-gray-800"
               >
                 #理性
               </div>
@@ -180,7 +180,7 @@ const liked = ref(false)
               cooking【ティアキン再現】
             </div>
 
-            <div class="flex h-28 w-36 flex-shrink-0 items-center justify-center">
+            <div class="flex h-28 w-36 shrink-0 items-center justify-center">
               <img src="/testimage.jpg" class="h-full w-full object-contain" />
             </div>
           </div>
@@ -190,7 +190,7 @@ const liked = ref(false)
           class="w-full cursor-pointer rounded-xl border border-outline p-4 shadow-md hover:bg-gray-100 hover:shadow-lg dark:hover:bg-gray-800 lg:max-w-2xl"
         >
           <div class="flex items-center gap-4">
-            <div class="flex h-28 w-36 flex-shrink-0 items-center justify-center">
+            <div class="flex h-28 w-36 shrink-0 items-center justify-center">
               <img src="/testimage2.jpg" class="h-full w-full object-contain" />
             </div>
             <div
@@ -212,8 +212,8 @@ const liked = ref(false)
     </section>
 
     <!-- <div class="mt-24 flex flex-col gap-4 lg:flex-row">
-      <div class="flex-1 rounded bg-orange-300 p-4">123</div>
-      <div class="flex-1 rounded bg-blue-300 p-4">456</div>
+      <div class="flex-1 rounded-sm bg-orange-300 p-4">123</div>
+      <div class="flex-1 rounded-sm bg-blue-300 p-4">456</div>
     </div> -->
   </div>
 </template>

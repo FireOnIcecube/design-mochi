@@ -18,7 +18,7 @@ import TopButton from '@/components/TopButton.vue'
     <p class="mt-2 text-lg md:text-xl">提升點擊率！從最佳封面設計中獲取靈感</p>
   </section> -->
 
-    <main class="flex-grow">
+    <main class="grow">
       <section class="sticky top-0 z-10 hidden lg:block 3xl:mb-20">
         <CategoryMenu />
 

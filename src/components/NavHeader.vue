@@ -48,7 +48,7 @@ const toggleMenu = () => {
           </router-link> -->
           <button
             @click="() => toggleDark()"
-            class="mx-4 text-content focus:outline-none dark:text-content-dark"
+            class="mx-4 text-content focus:outline-hidden dark:text-content-dark"
           >
             <span v-if="isDark">🌙</span>
             <span v-else>☀️</span>

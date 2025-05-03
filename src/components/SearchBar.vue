@@ -6,7 +6,7 @@
         v-model="keyword"
         type="text"
         placeholder="搜尋關鍵字"
-        class="rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="rounded-md border px-4 py-2 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
       />
     </div>
 
@@ -17,7 +17,7 @@
         v-model="selectedTags[index]"
         multiple
         :id="'selector-' + index"
-        class="rounded-md border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="rounded-md border px-4 py-2 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
       >
         <option v-for="tag in options" :key="tag" :value="tag">{{ tag }}</option>
       </select>
