@@ -9,15 +9,15 @@ import TopButton from '@/components/TopButton.vue'
 
 <template>
   <div class="flex min-h-screen flex-col">
-    <header>
+    <header class="bg-surface dark:bg-surface-dark transition-theme">
       <section class="border-b p-4 dark:border-gray-700"><NavHeader /></section>
-
-      <section class="3xl:mb-20 sticky top-0 z-10 hidden lg:block">
-        <CategoryMenu />
-
-        <!-- <SearchBar /> -->
-      </section>
     </header>
+
+    <section class="3xl:mb-20 sticky top-0 z-10 hidden lg:block">
+      <CategoryMenu />
+
+      <!-- <SearchBar /> -->
+    </section>
 
     <!-- <section class="bg-blue-500 px-6 py-12 text-center text-white">
     <h1 class="text-3xl font-bold md:text-5xl">設計封面</h1>
