@@ -31,7 +31,7 @@ const liked = ref(false)
               class="mt-4 transition-colors duration-300"
             >
               <div
-                class="dark:border-outline-dark rounded-full border p-3 shadow-md hover:shadow-lg"
+                class="dark:border-outline-dark cursor-pointer rounded-full border p-3 shadow-md hover:shadow-lg"
               >
                 <Icon
                   :icon="liked ? 'mdi:heart' : 'mdi:heart-outline'"
@@ -60,7 +60,7 @@ const liked = ref(false)
               class="mt-4 transition-colors duration-300"
             >
               <div
-                class="dark:border-outline-dark rounded-full border p-3 shadow-md hover:shadow-lg"
+                class="dark:border-outline-dark cursor-pointer rounded-full border p-3 shadow-md hover:shadow-lg"
               >
                 <Icon
                   :icon="liked ? 'mdi:heart' : 'mdi:heart-outline'"
