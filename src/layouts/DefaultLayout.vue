@@ -10,7 +10,13 @@ import TopButton from '@/components/TopButton.vue'
 <template>
   <div class="flex min-h-screen flex-col">
     <header>
-      <NavHeader />
+      <section class="border-b p-4 dark:border-gray-700"><NavHeader /></section>
+
+      <section class="3xl:mb-20 sticky top-0 z-10 hidden lg:block">
+        <CategoryMenu />
+
+        <!-- <SearchBar /> -->
+      </section>
     </header>
 
     <!-- <section class="bg-blue-500 px-6 py-12 text-center text-white">
@@ -19,18 +25,14 @@ import TopButton from '@/components/TopButton.vue'
   </section> -->
 
     <main class="grow">
-      <section class="3xl:mb-20 sticky top-0 z-10 hidden lg:block">
-        <CategoryMenu />
-
-        <!-- <SearchBar /> -->
-      </section>
-
       <div class="container mx-auto mt-10">
         <router-view />
         <Drawer />
       </div>
     </main>
-    <footer class="mt-20 bg-gray-900 py-6 text-white">
+    <footer
+      class="border-outline dark:border-outline-dark mt-20 border-t bg-gray-900 py-6 text-white"
+    >
       <div class="container mx-auto grid grid-cols-1 items-center px-4 md:grid-cols-3">
         <p class="justify-self-center text-sm lg:justify-self-start">© 2025 Design Mochi</p>
         <!-- <div class="mt-4 flex justify-center space-x-4 md:mt-0">

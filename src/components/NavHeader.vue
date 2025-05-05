@@ -14,9 +14,7 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <div
-    class="bg-surface dark:bg-surface-dark transition-theme border-b border-gray-200 p-4 dark:border-gray-700"
-  >
+  <div class="bg-surface dark:bg-surface-dark transition-theme">
     <div class="flex items-center justify-between md:mx-4">
       <!-- LOGO -->
       <router-link

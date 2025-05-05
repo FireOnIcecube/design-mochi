@@ -33,7 +33,7 @@ export default {
           dark: '#F8FAFC' // 黑夜模式的 文字 顏色
         },
         outline: {
-          DEFAULT: '#d1d5db', // 白天模式的 框線 顏色
+          DEFAULT: '#e5e7eb', // 白天模式的 框線 顏色
           dark: '#374151' // 黑夜模式的 框線 顏色
         },
         elevation: {
