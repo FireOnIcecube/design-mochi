@@ -34,6 +34,13 @@
   font-style: normal;
 }
 
+@layer utilities {
+  /* 切換主題時的過度效果 */
+  .transition-theme {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 7px;
 }

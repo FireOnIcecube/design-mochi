@@ -19,7 +19,7 @@ import TopButton from '@/components/TopButton.vue'
   </section> -->
 
     <main class="grow">
-      <section class="sticky top-0 z-10 hidden lg:block 3xl:mb-20">
+      <section class="3xl:mb-20 sticky top-0 z-10 hidden lg:block">
         <CategoryMenu />
 
         <!-- <SearchBar /> -->

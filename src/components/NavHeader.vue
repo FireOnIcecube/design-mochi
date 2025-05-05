@@ -1,12 +1,12 @@
 <script setup lang="tsx">
-import { ref } from 'vue'
-import { useDark, useToggle } from '@vueuse/core'
+import { ref, watch } from 'vue'
+import { Icon } from '@iconify/vue'
+
+import { useDarkMode } from '@/composables/useDarkMode'
 
 const isMenuOpen = ref(false)
 
-// 使用 VueUse 的 useDark 來偵測與切換黑夜模式
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+const { isDarkMode, toggleDarkMode } = useDarkMode()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -14,12 +14,14 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <div class="border-b border-gray-200 bg-surface p-4 dark:border-gray-700 dark:bg-surface-dark">
+  <div
+    class="bg-surface dark:bg-surface-dark transition-theme border-b border-gray-200 p-4 dark:border-gray-700"
+  >
     <div class="flex items-center justify-between md:mx-4">
       <!-- LOGO -->
       <router-link
         to="/"
-        class="font-mantou text-3xl text-content hover:opacity-80 dark:text-content-dark lg:text-4xl"
+        class="font-mantou text-content dark:text-content-dark text-3xl hover:opacity-80 lg:text-4xl"
       >
         設計麻糬
       </router-link>
@@ -46,17 +48,22 @@ const toggleMenu = () => {
           >
             我的收藏
           </router-link> -->
-          <button
-            @click="() => toggleDark()"
-            class="mx-4 text-content focus:outline-hidden dark:text-content-dark"
-          >
-            <span v-if="isDark">🌙</span>
-            <span v-else>☀️</span>
-          </button>
-        </nav>
 
-        <!-- 控制黑夜模式的按鈕 -->
+          <label class="swap swap-rotate text-content dark:text-content-dark">
+            <input
+              type="checkbox"
+              class="theme-controller hidden"
+              @change="() => toggleDarkMode()"
+            />
+
+            <Icon icon="uil:sun" width="2.5rem" height="2.5rem" class="swap-off fill-current" />
+
+            <Icon icon="uil:moon" width="2.5rem" height="2.5rem" class="swap-on fill-current" />
+          </label>
+        </nav>
       </div>
     </div>
   </div>
 </template>
+
+<style lang="postcss" scoped></style>
