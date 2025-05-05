@@ -81,7 +81,7 @@ const liked = ref(false)
             <div class="font-notosans text-xl">配色:</div>
             <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #綠色
               </div>
@@ -91,7 +91,7 @@ const liked = ref(false)
             <div class="font-notosans text-xl">主題:</div>
             <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #生活
               </div>
@@ -101,12 +101,12 @@ const liked = ref(false)
             <div class="font-notosans text-xl">語調:</div>
             <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #文青
               </div>
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #專業
               </div>
@@ -117,12 +117,12 @@ const liked = ref(false)
             <div class="font-notosans text-xl">風格:</div>
             <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #藝術
               </div>
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #財經
               </div>
@@ -132,12 +132,12 @@ const liked = ref(false)
             <div class="font-notosans text-xl">情緒:</div>
             <div class="text-md font-notosans flex gap-x-4">
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #療癒
               </div>
               <div
-                class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
               >
                 #理性
               </div>
@@ -187,7 +187,7 @@ const liked = ref(false)
         </div>
         <!-- Next -->
         <div
-          class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg lg:max-w-2xl"
+          class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg lg:max-w-2xl"
         >
           <div class="flex items-center gap-4">
             <div class="flex h-28 w-36 shrink-0 items-center justify-center">
