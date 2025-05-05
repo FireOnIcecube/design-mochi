@@ -20,7 +20,7 @@ const toggleDrawer = () => {
   <div
     v-if="isOpen"
     @click="toggleDrawer"
-    class="bg-opacity-50 fixed inset-0 z-10 bg-black transition-opacity"
+    class="fixed inset-0 z-10 bg-black opacity-50 transition-opacity"
   ></div>
 
   <!-- Drawer -->
