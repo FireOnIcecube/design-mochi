@@ -27,7 +27,7 @@ export default {
         surface: {
           DEFAULT: '#ffffff', // 白天模式的 主要 顏色
           dark: '#0F172A', // 黑夜模式的 主要 顏色
-          active: '#1E293B', // 白天模式的 主要 顏色
+          active: '#f3f4f6', // 白天模式的 主要 顏色
           'active-dark': '#1E293B' // 黑夜模式的 主要 顏色
         },
         content: {

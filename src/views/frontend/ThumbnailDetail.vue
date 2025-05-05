@@ -187,7 +187,7 @@ const liked = ref(false)
         </div>
         <!-- Next -->
         <div
-          class="border-outline w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
+          class="border-outline hover:bg-surface-active dark:hover:bg-surface-active-dark w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg lg:max-w-2xl"
         >
           <div class="flex items-center gap-4">
             <div class="flex h-28 w-36 shrink-0 items-center justify-center">
