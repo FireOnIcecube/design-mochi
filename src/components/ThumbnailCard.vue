@@ -7,7 +7,7 @@ import { ref, computed } from 'vue'
   <div>
     <router-link
       :to="{ name: 'ThumbnailDetail', params: { id: 1 } }"
-      class="group block overflow-hidden rounded-lg px-2 pb-4 transition select-none hover:shadow-lg"
+      class="group dark:hover:bg-surface-active-dark block overflow-hidden rounded-lg px-2 pb-4 transition select-none hover:shadow-lg"
     >
       <div class="aspect-video">
         <img src="/testimage.jpg" class="h-full w-full object-cover" />
@@ -25,7 +25,7 @@ import { ref, computed } from 'vue'
       </div> -->
 
       <p
-        class="font-notosans dark:text-content-dark mt-2 line-clamp-2 text-xs group-hover:text-blue-500 lg:text-lg"
+        class="font-notosans dark:text-content-dark mt-2 line-clamp-2 text-xs group-hover:text-blue-500 lg:text-lg dark:group-hover:text-blue-400"
       >
         【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
         cooking【ティアキン再現】
