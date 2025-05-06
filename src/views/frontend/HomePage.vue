@@ -1,99 +1,42 @@
 <script setup lang="tsx">
-import NavItem from '@/components/NavItem.vue'
-import EmptyLayout from '@/layouts/EmptyLayout.vue'
-import { Icon } from '@iconify/vue'
-import { onMounted, ref } from 'vue'
-
-const navItems: { title: string; primaryColor: string; icon: string; routeName: string }[] = [
-  {
-    title: '字體資源',
-    primaryColor: 'bg-sky-500',
-    //icon: 'ic:round-font-download',
-    icon: 'mingcute:text-2-fill',
-    routeName: 'FontGallery'
-  },
-  {
-    title: '字卡資源',
-    primaryColor: 'bg-red-500',
-    icon: 'mingcute:text-2-fill',
-    routeName: 'FontGallery'
-  },
-  {
-    title: '封面資源',
-    primaryColor: 'bg-yellow-500',
-    icon: 'gravity-ui:picture',
-    routeName: 'FontGallery'
-  }
-]
-
-const hoveredItem = ref<{
-  title: string
-  primaryColor: string
-  icon: string
-} | null>(null)
+import ThumbnailCard from '@/components/ThumbnailCard.vue'
 </script>
 
 <template>
-  <EmptyLayout>
-    <div class="flex flex-col flex-1 relative overflow-hidden">
-      <header class="mt-4 mx-10 md:mx-15 lg:mx-20 flex justify-end gap-6 z-10">
-        <router-link to="/fonts">
-          <div
-            :class="hoveredItem ? 'text-white' : 'text-black'"
-            class="font-bold duration-300 transition-all"
-          >
-            進入網站
-          </div>
-        </router-link>
-      </header>
-
-      <div class="flex flex-row flex-1">
-        <div class="flex flex-col justify-center gap-8">
-          <NavItem
-            v-for="(item, index) in navItems"
-            :key="index"
-            :title="item.title"
-            :primaryColor="item.primaryColor"
-            :icon="item.icon"
-            :routeName="item.routeName"
-            @mouseenter="hoveredItem = item"
-            @mouseleave="hoveredItem = null"
-          />
-        </div>
-
-        <div class="mx-auto container flex items-center justify-center">
-          <div v-motion-fade class="ml-4">
-            <h1 class="text-9xl sm:text-[14rem] inline-block text-black font-mantou">設計</h1>
-
-            <div class="relative inline-block">
-              <span
-                :class="[
-                  hoveredItem?.primaryColor ?? 'bg-transparent',
-                  { 'scale-[300]': hoveredItem }
-                ]"
-                class="absolute top-1/2 left-1/2 -z-10 transform -translate-x-1/2 -translate-y-1/2 h-[1vh] w-[1vh] rounded-full transition-all duration-[400ms] opacity-50"
-              ></span>
-              <h1
-                v-if="hoveredItem"
-                v-motion-slide-visible-bottom
-                class="text-9xl sm:text-[14rem] text-white font-mantou"
-              >
-                {{ hoveredItem.title.slice(0, 2) }}
-              </h1>
-              <h1
-                v-else
-                v-motion-slide-visible-top
-                :delay="200"
-                class="text-9xl sm:text-[14rem] text-black font-mantou"
-              >
-                麻糬
-              </h1>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </EmptyLayout>
+  <div
+    class="grid grid-cols-2 place-items-center gap-y-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12 xl:grid-cols-4"
+  >
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+    <ThumbnailCard />
+  </div>
 </template>
 
 <style lang="css" scoped></style>

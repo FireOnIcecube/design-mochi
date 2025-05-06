@@ -1,4 +1,25 @@
-@import 'primeicons/primeicons.css';
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@config '../../tailwind.config.mjs';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 @font-face {
   font-family: 'MantouSans';
@@ -6,10 +27,19 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'NotoSansTC';
+  src: url('./fonts/NotoSansTC-Regular.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer utilities {
+  /* 切換主題時的過度效果 */
+  .transition-theme {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
 
 ::-webkit-scrollbar {
   width: 7px;
