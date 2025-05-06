@@ -1,7 +1,6 @@
 import tailwindForm from '@tailwindcss/forms'
 import tailwindTypography from '@tailwindcss/typography'
 import tailwindAspectRatio from '@tailwindcss/aspect-ratio'
-import { link } from 'fs'
 
 /** @type {import('tailwindcss').Config} */
 export default {
