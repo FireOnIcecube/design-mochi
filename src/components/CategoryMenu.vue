@@ -7,51 +7,29 @@ const isCategoryOpen = ref(false)
 const toggleCategoryMenu = () => {
   isCategoryOpen.value = !isCategoryOpen.value
 }
+
+const categories = ref([
+  { name: '分類一', items: ['項目 A', '項目 B'] },
+  { name: '分類二', items: ['項目 A'] },
+  { name: '分類三', items: ['項目 A', '項目 B', '項目 C'] },
+  { name: '分類四', items: ['項目 A'] },
+  { name: '分類五', items: ['項目 A', '項目 B', '項目 C', '項目 D'] },
+  { name: '分類六', items: ['項目 A'] },
+  { name: '分類七', items: ['項目 A', '項目 B'] },
+  { name: '分類八', items: ['項目 A', '項目 B', '項目 C'] }
+])
 </script>
 
 <template>
   <div class="bg-surface dark:bg-surface-dark transition-theme shadow-md">
     <div class="mx-auto flex max-w-screen-xl justify-center">
-      <div class="flex gap-[0.5vw] p-2">
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類一
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類二
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類三
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類四
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類五
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類六
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類七
-        </div>
-        <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
-        >
-          分類八
+      <div class="flex gap-[2vw] p-2">
+        <div v-for="(category, index) in categories" :key="index">
+          <div
+            class="text-content dark:text-content-dark shrink-0 cursor-pointer px-4 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          >
+            {{ category.name }}
+          </div>
         </div>
       </div>
 
