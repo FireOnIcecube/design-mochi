@@ -9,22 +9,24 @@ import TopButton from '@/components/TopButton.vue'
 
 <template>
   <div class="flex min-h-screen flex-col">
-    <header class="bg-surface dark:bg-surface-dark transition-theme">
-      <section class="border-b p-4 dark:border-gray-700"><NavHeader /></section>
+    <header class="border-b p-4 dark:border-gray-700">
+      <NavHeader />
     </header>
 
-    <section class="3xl:mb-20 sticky top-0 z-10 hidden lg:block">
+    <section class="sticky top-0 z-10 hidden lg:block">
       <CategoryMenu />
 
       <!-- <SearchBar /> -->
     </section>
+
+    <!-- Banner 暫不啟用-->
 
     <!-- <section class="bg-blue-500 px-6 py-12 text-center text-white">
     <h1 class="text-3xl font-bold md:text-5xl">設計封面</h1>
     <p class="mt-2 text-lg md:text-xl">提升點擊率！從最佳封面設計中獲取靈感</p>
   </section> -->
 
-    <main class="grow">
+    <main class="3xl:mt-20 grow">
       <div class="container mx-auto mt-10">
         <router-view />
         <Drawer />
