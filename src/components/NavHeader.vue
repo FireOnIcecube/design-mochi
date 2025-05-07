@@ -49,9 +49,9 @@ const toggleMenu = () => {
         <label class="swap swap-rotate text-content dark:text-content-dark">
           <input type="checkbox" class="theme-controller hidden" @change="() => toggleDarkMode()" />
 
-          <Icon icon="uil:sun" width="2.5rem" height="2.5rem" class="swap-off fill-current" />
+          <Icon icon="uil:sun" width="2.0rem" height="2.0rem" class="swap-off fill-current" />
 
-          <Icon icon="uil:moon" width="2.5rem" height="2.5rem" class="swap-on fill-current" />
+          <Icon icon="uil:moon" width="2.0rem" height="2.0rem" class="swap-on fill-current" />
         </label>
       </nav>
     </div>
