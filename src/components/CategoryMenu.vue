@@ -11,45 +11,45 @@ const toggleCategoryMenu = () => {
 
 <template>
   <div class="bg-surface dark:bg-surface-dark transition-theme shadow-md">
-    <div class="flex justify-center">
-      <div class="flex gap-x-4 overflow-x-hidden p-3">
+    <div class="mx-auto flex max-w-screen-xl justify-center">
+      <div class="flex gap-[0.5vw] p-2">
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類一
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類二
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類三
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類四
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類五
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類六
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類七
         </div>
         <div
-          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-xl font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
+          class="text-content dark:text-content-dark shrink-0 cursor-pointer px-8 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
         >
           分類八
         </div>
