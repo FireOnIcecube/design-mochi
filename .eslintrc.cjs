@@ -9,6 +9,10 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  rules: {
+    // 關閉 multi-word component name 的檢查
+    'vue/multi-word-component-names': 'off'
+  },
   parserOptions: {
     ecmaVersion: 'latest'
   }
