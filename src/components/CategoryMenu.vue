@@ -9,6 +9,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport
+} from '@/components/ui/navigation-menu'
+
 const isCategoryOpen = ref(false)
 
 const toggleCategoryMenu = () => {
@@ -32,7 +44,18 @@ const categories = ref([
     <div class="mx-auto flex max-w-screen-xl justify-center">
       <div class="flex flex-nowrap gap-[2vw] p-2">
         <div v-for="(category, index) in categories" :key="index" class="shrink-0">
-          <DropdownMenu>
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>{{ category.name }}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink>Link</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          <!-- <DropdownMenu>
             <DropdownMenuTrigger> {{ category.name }} </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -42,7 +65,7 @@ const categories = ref([
               <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuItem>Subscription</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> -->
 
           <!-- <div
             class="text-content dark:text-content-dark shrink-0 cursor-pointer px-4 py-2 text-lg font-bold transition-transform ease-out hover:scale-95 hover:text-blue-600 active:scale-90 dark:hover:text-blue-600"
