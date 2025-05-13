@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import {
   DropdownMenu,
@@ -45,10 +45,7 @@ const categories = ref<Category[]>([
 
   {
     title: '類別二',
-    items: [
-      { name: '項目 A', href: '#' },
-      { name: '項目 B', href: '#' }
-    ]
+    items: [{ name: '項目 A', href: '#' }]
   },
   {
     title: '類別三',
@@ -78,6 +75,9 @@ const categories = ref<Category[]>([
     items: [
       { name: '項目 A', href: '#' },
       { name: '項目 B', href: '#' },
+      { name: '項目 C', href: '#' },
+      { name: '項目 A', href: '#' },
+      { name: '項目 B', href: '#' },
       { name: '項目 C', href: '#' }
     ]
   },
@@ -98,6 +98,14 @@ const categories = ref<Category[]>([
     ]
   }
 ])
+
+const gridClass = computed(() => {
+  const numItems = categories.value.reduce((acc, category) => acc + category.items.length, 0)
+  const numColumns = Math.ceil(numItems / 5)
+  const safeCol = Math.min(numColumns, 6)
+
+  return `grid grid-cols-${safeCol}`
+})
 </script>
 
 <template>
@@ -110,16 +118,19 @@ const categories = ref<Category[]>([
               category.title
             }}</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              <ul
+                class="w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]"
+                :class="`grid grid-cols-${Math.ceil(category.items.length / 5)}`"
+              >
                 <li v-for="(item, itemIndex) in category.items" :key="itemIndex">
                   <NavigationMenuLink as-child>
                     <a
                       :href="item.href"
-                      class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none"
+                      class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md bg-red-300 p-3 leading-none no-underline transition-colors outline-none select-none"
                     >
                       <div class="text-sm leading-none font-medium">{{ item.name }}</div>
                       <!-- <p class="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                        {{ component.description }}
+                        {{ item.description }}
                       </p> -->
                     </a>
                   </NavigationMenuLink>
