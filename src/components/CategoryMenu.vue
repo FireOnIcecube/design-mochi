@@ -3,14 +3,6 @@ import { computed, ref } from 'vue'
 import { ChevronDown, ChevronFirst, ChevronRight } from 'lucide-vue-next'
 
 import { Icon } from '@iconify/vue'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
 
 import {
   NavigationMenu,
@@ -22,7 +14,6 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport
 } from '@/components/ui/navigation-menu'
-import NavBar from './NavBar.vue'
 
 const isCategoryOpen = ref(false)
 
