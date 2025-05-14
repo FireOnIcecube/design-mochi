@@ -126,7 +126,7 @@ const gridClass = computed(() => {
                   <NavigationMenuLink as-child>
                     <a
                       :href="item.href"
-                      class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md bg-red-300 p-3 leading-none no-underline transition-colors outline-none select-none"
+                      class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none"
                     >
                       <div class="text-sm leading-none font-medium">{{ item.name }}</div>
                       <!-- <p class="text-muted-foreground line-clamp-2 text-sm leading-snug">
