@@ -116,7 +116,7 @@ const categories = ref<Category[]>([
                       <div
                         class="text-content dark:text-content-dark flex items-center justify-between"
                       >
-                        <p class="text-md leading-none font-semibold">
+                        <p class="text-md font-notosans leading-none">
                           {{ item.name }}
                         </p>
                         <ChevronRight class="size-5" aria-hidden="true" />
