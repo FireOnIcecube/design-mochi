@@ -1,8 +1,8 @@
 <script setup lang="tsx">
 import { computed, ref } from 'vue'
 import { ChevronDown, ChevronFirst, ChevronRight } from 'lucide-vue-next'
-
 import { Icon } from '@iconify/vue'
+import Drawer from '@/components/SearchDrawer.vue'
 
 import {
   NavigationMenu,
@@ -129,6 +129,7 @@ const categories = ref<Category[]>([
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+      <Drawer />
 
       <div
         class="group ml-16 flex cursor-pointer items-center justify-center bg-gray-200 px-4 dark:bg-gray-800"

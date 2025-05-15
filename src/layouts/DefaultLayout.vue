@@ -3,7 +3,6 @@ import NavHeader from '@/components/NavHeader.vue'
 import CategoryMenu from '@/components/CategoryMenu.vue'
 import WebFooter from '@/components/WebFooter.vue'
 import SearchBar from '@/components/SearchBar.vue'
-import Drawer from '@/components/SearchDrawer.vue'
 import TopButton from '@/components/TopButton.vue'
 </script>
 
@@ -29,7 +28,6 @@ import TopButton from '@/components/TopButton.vue'
     <main class="3xl:mt-20 grow">
       <div class="container mx-auto mt-10">
         <router-view />
-        <Drawer />
       </div>
     </main>
     <footer
