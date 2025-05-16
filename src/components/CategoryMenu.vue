@@ -129,9 +129,8 @@ const categories = ref<Category[]>([
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <Drawer />
 
-      <div
+      <!-- <div
         class="group ml-16 flex cursor-pointer items-center justify-center bg-gray-200 px-4 dark:bg-gray-800"
       >
         <Icon
@@ -140,6 +139,12 @@ const categories = ref<Category[]>([
           height="1.8rem"
           class="translate-transform text-content dark:text-content-dark duration-150 ease-out group-hover:scale-105"
         />
+      </div> -->
+
+      <div
+        class="group ml-16 flex cursor-pointer items-center justify-center bg-gray-200 dark:bg-gray-800"
+      >
+        <Drawer />
       </div>
     </div>
 
