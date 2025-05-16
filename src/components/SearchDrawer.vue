@@ -1,5 +1,6 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const isOpen = ref(false)
 const toggleDrawer = () => {
@@ -8,19 +9,20 @@ const toggleDrawer = () => {
 </script>
 
 <template>
-  <!-- 觸發按鈕 -->
-  <button
-    @click="toggleDrawer"
-    class="fixed right-4 bottom-4 rounded-full bg-blue-500 p-3 text-white shadow-lg transition-colors hover:bg-blue-600"
-  >
-    Open Drawer
-  </button>
+  <div @click="toggleDrawer" class="p-4">
+    <Icon
+      icon="ion:search"
+      width="1.8rem"
+      height="1.8rem"
+      class="translate-transform text-content dark:text-content-dark duration-150 ease-out select-none group-hover:scale-105"
+    />
+  </div>
 
   <!-- 遮罩層 (點擊可關閉) -->
   <div
     v-if="isOpen"
     @click="toggleDrawer"
-    class="fixed inset-0 z-10 bg-black opacity-50 transition-opacity"
+    class="fixed inset-0 z-10 cursor-default bg-black opacity-50 transition-opacity"
   ></div>
 
   <!-- Drawer -->
@@ -34,11 +36,11 @@ const toggleDrawer = () => {
   >
     <div
       v-if="isOpen"
-      class="fixed top-0 right-0 z-20 h-full w-64 transform bg-white p-4 shadow-lg"
+      class="bg-surface dark:bg-surface-dark fixed top-0 right-0 z-20 h-full w-80 transform p-4 shadow-lg"
     >
-      <button @click="toggleDrawer" class="mb-4 text-gray-600">Close</button>
-      <p class="text-lg font-bold">這是 Drawer 內容</p>
-      <p>你可以在這裡放一些選單、按鈕、或其他內容。</p>
+      <button @click="toggleDrawer" class="mb-4 cursor-pointer text-gray-600">Close</button>
+      <p class="text-content dark:text-content-dark text-lg font-bold">這是 Drawer 內容</p>
+      <p class="text-content dark:text-content-dark">你可以在這裡放一些選單、按鈕、或其他內容。</p>
     </div>
   </transition>
 </template>
