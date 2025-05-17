@@ -24,7 +24,7 @@ const toggleMenu = () => {
     </router-link>
 
     <div>
-      <nav class="mr-4 flex space-x-4 md:space-x-8">
+      <nav class="flex gap-2 lg:mr-4">
         <!-- <router-link
             to="/"
             class="text-content hover:text-gray-500 dark:text-content-dark dark:hover:text-gray-400"
