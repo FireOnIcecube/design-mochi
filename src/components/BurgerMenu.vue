@@ -10,12 +10,18 @@ const toggleDrawer = () => {
 
 <template>
   <div @click="toggleDrawer" class="p-4">
-    <Icon
-      icon="uil:bars"
-      width="1.8rem"
-      height="1.8rem"
-      class="translate-transform text-content dark:text-content-dark duration-150 ease-out select-none group-hover:scale-105"
-    />
+    <label class="swap swap-rotate text-content dark:text-content-dark lg:hidden">
+      <input
+        type="checkbox"
+        v-model="isOpen"
+        class="theme-controller hidden"
+        @change="() => toggleDrawer()"
+      />
+
+      <Icon icon="uil:bars" width="2.0rem" height="2.0rem" class="swap-off fill-current" />
+
+      <Icon icon="uil:multiply" width="2.0rem" height="2.0rem" class="swap-on fill-current" />
+    </label>
   </div>
 
   <!-- 遮罩層 (點擊可關閉) -->

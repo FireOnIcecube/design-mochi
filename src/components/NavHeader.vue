@@ -4,12 +4,7 @@ import { Icon } from '@iconify/vue'
 import { useDarkMode } from '@/composables/useDarkMode'
 import BurgerMenu from './BurgerMenu.vue'
 
-const isMenuOpen = ref(false)
 const { isDarkMode, toggleDarkMode } = useDarkMode()
-
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value
-}
 </script>
 
 <template>
@@ -24,7 +19,7 @@ const toggleMenu = () => {
     </router-link>
 
     <div>
-      <nav class="flex gap-2 lg:mr-4">
+      <nav class="flex gap-1 lg:mr-4">
         <!-- <router-link
             to="/"
             class="text-content hover:text-gray-500 dark:text-content-dark dark:hover:text-gray-400"
@@ -54,9 +49,7 @@ const toggleMenu = () => {
           <Icon icon="uil:moon" width="2.0rem" height="2.0rem" class="swap-on fill-current" />
         </label>
 
-        <div class="lg:hidden">
-          <BurgerMenu />
-        </div>
+        <BurgerMenu />
       </nav>
     </div>
   </div>
