@@ -19,21 +19,7 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
     </router-link>
 
     <div>
-      <nav class="flex gap-1 lg:mr-4">
-        <!-- <router-link
-            to="/"
-            class="text-content hover:text-gray-500 dark:text-content-dark dark:hover:text-gray-400"
-          >
-            首頁
-          </router-link> -->
-
-        <!-- <router-link
-            to="/contact"
-            class="text-content hover:text-gray-500 dark:text-content-dark dark:hover:text-gray-400"
-            exact-active-class="text-red-500"
-          >
-            設計封面
-          </router-link> -->
+      <nav class="flex gap-2 lg:mr-4">
         <!-- <router-link
             to="/contact"
             class="text-content hover:text-gray-500 dark:text-content-dark dark:hover:text-gray-400"
