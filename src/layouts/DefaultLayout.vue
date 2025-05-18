@@ -14,8 +14,6 @@ import TopButton from '@/components/TopButton.vue'
 
     <section class="sticky top-0 z-10 hidden lg:block">
       <CategoryMenu />
-
-      <!-- <SearchBar /> -->
     </section>
 
     <!-- Banner 暫不啟用-->
@@ -30,16 +28,8 @@ import TopButton from '@/components/TopButton.vue'
         <router-view />
       </div>
     </main>
-    <footer
-      class="border-outline dark:border-outline-dark mt-20 border-t bg-gray-900 py-6 text-white"
-    >
-      <div class="container mx-auto grid grid-cols-1 items-center px-4 md:grid-cols-3">
-        <p class="justify-self-center text-sm lg:justify-self-start">© 2025 Design Mochi</p>
-        <!-- <div class="mt-4 flex justify-center space-x-4 md:mt-0">
-          <a href="#" class="hover:underline">關於本站</a>
-          <a href="#" class="hover:underline">聯絡我們</a>
-        </div> -->
-      </div>
+    <footer class="border-outline dark:border-outline-dark mt-20 border-t">
+      <WebFooter />
     </footer>
   </div>
 </template>
