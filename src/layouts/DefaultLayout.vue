@@ -8,7 +8,7 @@ import TopButton from '@/components/TopButton.vue'
 
 <template>
   <div class="flex min-h-screen flex-col">
-    <header class="border-b p-4 dark:border-gray-700">
+    <header class="border-b p-2 lg:p-4 dark:border-gray-700">
       <NavHeader />
     </header>
 
