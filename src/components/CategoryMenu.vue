@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { ChevronDown, ChevronFirst, ChevronRight } from 'lucide-vue-next'
 import { Icon } from '@iconify/vue'
-import Drawer from '@/components/SearchDrawer.vue'
+import SearchDialog from '@/components/SearchDialog.vue'
 
 import {
   NavigationMenu,
@@ -133,7 +133,7 @@ const categories = ref<Category[]>([
       <div
         class="group ml-16 flex cursor-pointer items-center justify-center bg-gray-200 dark:bg-gray-800"
       >
-        <Drawer />
+        <SearchDialog />
       </div>
     </div>
   </div>
