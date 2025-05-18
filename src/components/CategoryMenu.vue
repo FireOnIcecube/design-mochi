@@ -136,21 +136,5 @@ const categories = ref<Category[]>([
         <Drawer />
       </div>
     </div>
-
-    <!-- 手機版分類選單 -->
-    <transition
-      enter-active-class="transition-opacity duration-200"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-200"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div v-show="isCategoryOpen" class="flex flex-col space-y-2 bg-white p-4 shadow-md md:hidden">
-        <a href="#" class="border-b py-2">字體</a>
-        <a href="#" class="border-b py-2">設計素材</a>
-        <a href="#" class="border-b py-2">YouTube 縮圖</a>
-      </div>
-    </transition>
   </div>
 </template>
