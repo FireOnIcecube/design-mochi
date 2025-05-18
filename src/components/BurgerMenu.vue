@@ -18,9 +18,9 @@ const toggleDrawer = () => {
         @change="() => toggleDrawer()"
       />
 
-      <Icon icon="uil:bars" width="2.0rem" height="2.0rem" class="swap-off fill-current" />
+      <Icon icon="uil:bars" class="swap-off h-6 w-6 fill-current lg:h-8 lg:w-8" />
 
-      <Icon icon="uil:multiply" width="2.0rem" height="2.0rem" class="swap-on fill-current" />
+      <Icon icon="uil:multiply" class="swap-on h-6 w-6 fill-current lg:h-8 lg:w-8" />
     </label>
   </div>
 

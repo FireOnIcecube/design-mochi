@@ -13,7 +13,7 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
   >
     <router-link
       to="/"
-      class="font-mantou text-content dark:text-content-dark text-3xl hover:opacity-80 lg:text-4xl"
+      class="font-mantou text-content dark:text-content-dark text-2xl hover:opacity-80 lg:text-4xl"
     >
       設計麻糬
     </router-link>
@@ -30,9 +30,9 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
         <label class="swap swap-rotate text-content dark:text-content-dark">
           <input type="checkbox" class="theme-controller hidden" @change="() => toggleDarkMode()" />
 
-          <Icon icon="uil:sun" width="2.0rem" height="2.0rem" class="swap-off fill-current" />
+          <Icon icon="uil:sun" class="swap-off h-6 w-6 fill-current lg:h-8 lg:w-8" />
 
-          <Icon icon="uil:moon" width="2.0rem" height="2.0rem" class="swap-on fill-current" />
+          <Icon icon="uil:moon" class="swap-on h-6 w-6 fill-current lg:h-8 lg:w-8" />
         </label>
 
         <BurgerMenu />
