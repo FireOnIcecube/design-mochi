@@ -28,7 +28,16 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // 如果是返回操作，例如使用瀏覽器返回鍵，會使用先前儲存的位置
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      // 否則滾動到頂部
+      return { top: 0 }
+    }
+  }
 })
 
 export default router
