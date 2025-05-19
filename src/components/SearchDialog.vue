@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
 
 const isOpen = ref(false)
 const toggleDrawer = () => {
@@ -29,15 +30,17 @@ const toggleDrawer = () => {
         />
       </div>
     </DialogTrigger>
-    <DialogContent class="max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]">
+    <DialogContent
+      class="max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px] md:max-w-1/2"
+    >
       <DialogHeader class="p-6 pb-0">
-        <DialogTitle>Edit profile</DialogTitle>
-        <DialogDescription>
+        <DialogTitle class="text-2xl">尋找封面</DialogTitle>
+        <!-- <DialogDescription>
           Make changes to your profile here. Click save when you're done.
-        </DialogDescription>
+        </DialogDescription> -->
       </DialogHeader>
       <div class="grid gap-4 overflow-y-auto px-6 py-4">
-        <div class="flex h-[300dvh] flex-col justify-between">
+        <div class="flex flex-col justify-between">
           <p>
             This is some placeholder content to show the scrolling behavior for modals. We use
             repeated line breaks to demonstrate how content can exceed minimum inner height, thereby
@@ -48,9 +51,7 @@ const toggleDrawer = () => {
           <p>This content should appear at the bottom after you scroll.</p>
         </div>
       </div>
-      <DialogFooter class="p-6 pt-0">
-        <Button type="submit"> Save changes </Button>
-      </DialogFooter>
+      <DialogFooter class="p-6 pt-0"> <Button type="submit"> Save changes </Button> </DialogFooter>
     </DialogContent>
   </Dialog>
 </template>
