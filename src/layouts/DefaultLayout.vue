@@ -28,7 +28,7 @@ import TopButton from '@/components/TopButton.vue'
         <router-view />
       </div>
     </main>
-    <footer class="border-outline dark:border-outline-dark mt-20 border-t">
+    <footer class="border-outline dark:border-outline-dark mt-20 border-t bg-gray-900">
       <WebFooter />
     </footer>
   </div>
