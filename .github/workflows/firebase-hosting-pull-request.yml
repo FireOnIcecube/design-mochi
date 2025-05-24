@@ -2,9 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-
 on: pull_request
-
 permissions:
   checks: write
   contents: read
@@ -23,37 +21,10 @@ jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: |
-          corepack enable
-          pnpm install
-
-      - name: Create .env file for Vite
-        working-directory: apps/client
-        run: |
-          echo "VITE_API_KEY=${{ env.API_KEY }}" >> .env
-          echo "VITE_AUTH_DOMAIN=${{ env.AUTH_DOMAIN }}" >> .env
-          echo "VITE_PROJECT_ID=${{ env.PROJECT_ID }}" >> .env
-          echo "VITE_STORAGE_BUCKET=${{ env.STORAGE_BUCKET }}" >> .env
-          echo "VITE_MESSAGING_SENDER_ID=${{ env.MESSAGING_SENDER_ID }}" >> .env
-          echo "VITE_APP_ID=${{ env.APP_ID }}" >> .env
-          echo "VITE_MEASUREMENT_ID=${{ env.MEASUREMENT_ID }}" >> .env
-
-      - name: Build Vite app
-        working-directory: apps/client
-        run: pnpm build
-
-      - name: Deploy preview to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - run: npm install && npm run build-only
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_DESIGN_MOCHI }}
