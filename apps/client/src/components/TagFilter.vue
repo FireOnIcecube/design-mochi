@@ -1,8 +1,8 @@
 <script setup lang="tsx">
 import { ref } from 'vue'
 
-const categories = ['电子产品', '服饰', '家居', '运动', '图书']
-const selectedCategories = ref([])
+const categories: string[] = ['电子产品', '服饰', '家居', '运动', '图书']
+const selectedCategories = ref<string[]>([])
 </script>
 
 <template>
