@@ -1,3 +1,34 @@
+<script setup lang="tsx">
+import { ref, computed } from 'vue'
+
+// 關鍵字和選擇的 tags
+const keyword = ref('')
+const selectedTags = ref([[], [], []]) // 假設有 3 個 selector
+
+// 模擬的每個 selector 的 tag 列表
+const selectors = [
+  ['JavaScript', 'Vue 3', 'CSS', 'HTML'],
+  ['React', 'Node.js', 'Python', 'Go'],
+  ['SQL', 'MongoDB', 'Firebase', 'MySQL']
+]
+
+// 顯示所有選擇的 tags
+const allSelectedTags = computed(() => {
+  return selectedTags.value.flat()
+})
+
+// 最終查詢物件
+const query = ref<{ keyword: string; tags: string[] } | null>(null)
+
+// 提交查詢的函數
+const submitQuery = () => {
+  query.value = {
+    keyword: keyword.value,
+    tags: allSelectedTags.value
+  }
+}
+</script>
+
 <template>
   <div class="space-y-4">
     <!-- 關鍵字搜尋 input -->
@@ -6,7 +37,7 @@
         v-model="keyword"
         type="text"
         placeholder="搜尋關鍵字"
-        class="rounded-md border px-4 py-2 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+        class="focus:outline-hidden rounded-md border px-4 py-2 focus:ring-2 focus:ring-blue-500"
       />
     </div>
 
@@ -17,7 +48,7 @@
         v-model="selectedTags[index]"
         multiple
         :id="'selector-' + index"
-        class="rounded-md border px-4 py-2 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+        class="focus:outline-hidden rounded-md border px-4 py-2 focus:ring-2 focus:ring-blue-500"
       >
         <option v-for="tag in options" :key="tag" :value="tag">{{ tag }}</option>
       </select>
@@ -50,37 +81,6 @@
     <p><strong>選擇的 Tags:</strong> {{ query.tags.join(', ') }}</p>
   </div>
 </template>
-
-<script setup lang="tsx">
-import { ref, computed } from 'vue'
-
-// 關鍵字和選擇的 tags
-const keyword = ref('')
-const selectedTags = ref([[], [], []]) // 假設有 3 個 selector
-
-// 模擬的每個 selector 的 tag 列表
-const selectors = [
-  ['JavaScript', 'Vue 3', 'CSS', 'HTML'],
-  ['React', 'Node.js', 'Python', 'Go'],
-  ['SQL', 'MongoDB', 'Firebase', 'MySQL']
-]
-
-// 顯示所有選擇的 tags
-const allSelectedTags = computed(() => {
-  return selectedTags.value.flat()
-})
-
-// 最終查詢物件
-const query = ref(null)
-
-// 提交查詢的函數
-const submitQuery = () => {
-  query.value = {
-    keyword: keyword.value,
-    tags: allSelectedTags.value
-  }
-}
-</script>
 
 <style scoped>
 /* Tailwind CSS 已經提供了很多樣式 */
