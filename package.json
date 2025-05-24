@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:client": "pnpm --filter @app/client run dev:client",
     "build:client": "pnpm --filter @app/client run build",
+    "build-only:client": "pnpm --filter @app/client run build-only",
     "dev:admin": "pnpm --filter @app/admin run dev:admin",
     "build:admin": "pnpm --filter @app/admin run build"
   },
