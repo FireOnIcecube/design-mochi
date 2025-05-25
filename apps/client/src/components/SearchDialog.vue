@@ -31,7 +31,7 @@ const toggleDrawer = () => {
       </div>
     </DialogTrigger>
     <DialogContent
-      class="md:max-w-1/2 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
+      class="md:max-w-1/2 min-h-1/2 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
     >
       <DialogHeader class="p-6 pb-0">
         <DialogTitle class="text-2xl">尋找封面</DialogTitle>
@@ -39,7 +39,7 @@ const toggleDrawer = () => {
           Make changes to your profile here. Click save when you're done.
         </DialogDescription> -->
       </DialogHeader>
-      <div class="grid gap-4 overflow-y-auto px-6 py-4">
+      <div class="grid h-max gap-4 overflow-y-auto px-6 py-4">
         <div class="flex flex-col justify-between">
           <p>
             This is some placeholder content to show the scrolling behavior for modals. We use
