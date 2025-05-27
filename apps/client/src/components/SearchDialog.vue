@@ -16,6 +16,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger
 } from '@client/components/ui/collapsible'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@client/components/ui/tabs'
 
 import { Button } from '@client/components/ui/button'
 import { Search } from 'lucide-vue-next'
@@ -72,7 +73,68 @@ const toggleDialog = () => {
 
           <p>This content should appear at the bottom after you scroll.</p> -->
 
-          <div class="p-4 font-bold">isOpen: {{ isOpen }}</div>
+          <!-- <div class="p-4 font-bold">isOpen: {{ isOpen }}</div> -->
+
+          <Tabs default-value="類別一" class="min-w-2/3 mx-auto mt-12">
+            <TabsList class="gap-4">
+              <TabsTrigger
+                value="類別一"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                CATEGORY
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別二"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                TASTE
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別三"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                TOPIC
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別四"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                SHAPE
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別五"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                COLOR
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別六"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                MEDIA
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別七"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                RANKING
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別八"
+                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
+              >
+                類別八
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="類別一"> Make changes to your account here. 1 </TabsContent>
+            <TabsContent value="類別二"> Change your password here. 2</TabsContent>
+            <TabsContent value="類別三"> Make changes to your account here. 3</TabsContent>
+            <TabsContent value="類別四"> Change your password here. 4</TabsContent>
+            <TabsContent value="類別五"> Make changes to your account here. 5</TabsContent>
+            <TabsContent value="類別六"> Change your password here. 6</TabsContent>
+            <TabsContent value="類別七"> Make changes to your account here. 7</TabsContent>
+            <TabsContent value="類別八"> Change your password here. 8</TabsContent>
+          </Tabs>
         </div>
       </div>
 
