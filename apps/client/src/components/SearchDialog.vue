@@ -21,6 +21,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@client/components/ui/
 import { Button } from '@client/components/ui/button'
 import { Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
+import { Checkbox } from '@client/components/ui/checkbox'
 
 const isOpen = ref(false)
 const toggleDialog = () => {
@@ -62,8 +63,6 @@ const toggleDialog = () => {
             <Button type="submit"> Subscribe </Button>
           </div>
 
-          <!-- test -->
-
           <!-- <p>
             This is some placeholder content to show the scrolling behavior for modals. We use
             repeated line breaks to demonstrate how content can exceed minimum inner height, thereby
@@ -77,53 +76,47 @@ const toggleDialog = () => {
 
           <Tabs default-value="類別一" class="min-w-2/3 mx-auto mt-12">
             <TabsList class="gap-4">
-              <TabsTrigger
-                value="類別一"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                CATEGORY
+              <TabsTrigger value="類別一" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> CATEGORY </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別二"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                TASTE
+              <TabsTrigger value="類別二" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> TASTE </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別三"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                TOPIC
+              <TabsTrigger value="類別三" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> TOPIC </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別四"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                SHAPE
+              <TabsTrigger value="類別四" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> SHAPE </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別五"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                COLOR
+              <TabsTrigger value="類別五" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> COLOR </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別六"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                MEDIA
+              <TabsTrigger value="類別六" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> MEDIA </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別七"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                RANKING
-              </TabsTrigger>
-              <TabsTrigger
-                value="類別八"
-                class="bg-muted font-notosans cursor-pointer rounded-b-none border-b-0 p-5"
-              >
-                類別八
+              <TabsTrigger value="類別七" class="font-notosans rounded-b-none border-b-0 p-5">
+                <div class="flex space-x-2">
+                  <label class="leading-none"> RANKING </label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
               </TabsTrigger>
             </TabsList>
             <TabsContent value="類別一"> Make changes to your account here. 1 </TabsContent>
