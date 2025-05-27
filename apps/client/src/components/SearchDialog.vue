@@ -10,6 +10,13 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@client/components/ui/dialog'
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from '@client/components/ui/collapsible'
+
 import { Button } from '@client/components/ui/button'
 import { Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
@@ -43,9 +50,7 @@ const toggleDialog = () => {
       </DialogHeader>
       <div class="grid h-max gap-4 overflow-y-auto px-6 py-4">
         <div class="flex flex-col justify-between">
-          <!-- test -->
-
-          <div class="flex w-full max-w-sm items-center justify-center gap-1.5">
+          <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
             <div class="relative w-full max-w-sm items-center">
               <Input id="search" type="text" placeholder="Search..." class="pl-10" />
               <span class="absolute inset-y-0 start-0 flex items-center justify-center px-2">
@@ -56,14 +61,16 @@ const toggleDialog = () => {
             <Button type="submit"> Subscribe </Button>
           </div>
 
-          <p>
+          <!-- test -->
+
+          <!-- <p>
             This is some placeholder content to show the scrolling behavior for modals. We use
             repeated line breaks to demonstrate how content can exceed minimum inner height, thereby
             showing inner scrolling. When content becomes longer than the predefined max-height of
             modal, content will be cropped and scrollable within the modal.
           </p>
 
-          <p>This content should appear at the bottom after you scroll.</p>
+          <p>This content should appear at the bottom after you scroll.</p> -->
 
           <div class="p-4 font-bold">isOpen: {{ isOpen }}</div>
         </div>
