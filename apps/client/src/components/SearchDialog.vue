@@ -75,7 +75,7 @@ const toggleDialog = () => {
           <!-- <div class="p-4 font-bold">isOpen: {{ isOpen }}</div> -->
 
           <Tabs default-value="類別一" class="min-w-2/3 mx-auto mt-12">
-            <TabsList class="gap-4">
+            <TabsList class="mx-auto gap-4">
               <TabsTrigger value="類別一" class="font-notosans rounded-b-none border-b-0 p-5">
                 <div class="flex space-x-2">
                   <label class="leading-none"> CATEGORY </label>
