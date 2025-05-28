@@ -60,7 +60,7 @@ const toggleDialog = () => {
               </span>
             </div>
 
-            <Button type="submit"> Subscribe </Button>
+            <Button type="submit" class="font-notosans text-md tracking-widest">搜尋</Button>
           </div>
 
           <!-- <p>
@@ -76,45 +76,66 @@ const toggleDialog = () => {
 
           <Tabs default-value="類別一" class="min-w-2/3 mx-auto mt-12">
             <TabsList class="mx-auto gap-4">
-              <TabsTrigger value="類別一" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別一"
+                class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> CATEGORY </label>
+                  <label class="leading-none">CATEGORY</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger value="類別二" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別二"
+                class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> TASTE </label>
+                  <label class="leading-none">TASTE</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger value="類別三" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別三"
+                class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> TOPIC </label>
+                  <label class="leading-none">TOPIC</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger value="類別四" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別四"
+                class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> SHAPE </label>
+                  <label class="leading-none">SHAPE</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger value="類別五" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別五"
+                class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> COLOR </label>
+                  <label class="leading-none">COLOR</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger value="類別六" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別六"
+                class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> MEDIA </label>
+                  <label class="leading-none">MEDIA</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger value="類別七" class="font-notosans rounded-b-none border-b-0 p-5">
+              <TabsTrigger
+                value="類別七"
+                class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
+              >
                 <div class="flex space-x-2">
-                  <label class="leading-none"> RANKING </label>
+                  <label class="leading-none">RANKING</label>
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
