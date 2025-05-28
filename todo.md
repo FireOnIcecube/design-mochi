@@ -1,2 +1,3 @@
 - 寫後台時需要重新配置各項 config
-- [ ] 處理 Search Dialog 中 Tab overflow-x-flow 作用對象錯誤
+- 需要重新包裝各部分元件
+- [x] 處理 Search Dialog 中 Tab overflow-x-flow 作用對象錯誤
