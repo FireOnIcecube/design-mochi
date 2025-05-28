@@ -7,8 +7,8 @@ const liked = ref(false)
 
 <template>
   <div class="px-4">
-    <div class="flex flex-col justify-around md:flex-row">
-      <div class="w-full select-none md:w-1/2">
+    <div class="flex flex-col justify-around lg:flex-row">
+      <div class="w-full select-none lg:w-1/2">
         <div class="flex items-center justify-center bg-gray-100 lg:h-[50vh]">
           <img src="/testimage.jpg" class="max-h-[50vh] object-contain" />
         </div>
@@ -24,7 +24,7 @@ const liked = ref(false)
             >
           </span>
 
-          <div class="mr-4 hidden md:block">
+          <div class="mr-4 hidden lg:block">
             <button
               @click="liked = !liked"
               aria-label="收藏"
@@ -46,14 +46,14 @@ const liked = ref(false)
         </div>
       </div>
 
-      <div class="w-full md:w-1/3">
+      <div class="w-full lg:w-1/3">
         <div class="border-outline dark:text-content-dark mt-8 border-b-2 pb-6 lg:mt-0">
           <p class="font-notosans text-xl lg:text-2xl">
             【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
             cooking【ティアキン再現】
           </p>
 
-          <div class="flex justify-end md:hidden">
+          <div class="flex justify-end lg:hidden">
             <button
               @click="liked = !liked"
               aria-label="收藏"
