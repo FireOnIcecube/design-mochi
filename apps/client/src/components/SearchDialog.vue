@@ -42,7 +42,7 @@ const toggleDialog = () => {
       </div>
     </DialogTrigger>
     <DialogContent
-      class="md:max-w-1/2 min-h-2/3 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
+      class="md:max-w-2/3 min-h-2/3 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
     >
       <DialogHeader class="p-6 pb-0">
         <DialogTitle class="text-3xl">尋找封面</DialogTitle>
@@ -64,7 +64,7 @@ const toggleDialog = () => {
         </div>
 
         <!-- Checkbox Group -->
-        <div class="mt-12 w-full overflow-x-auto">
+        <div class="mt-12 overflow-x-auto">
           <Tabs default-value="類別一">
             <TabsList class="mx-auto flex gap-2">
               <TabsTrigger
@@ -76,24 +76,7 @@ const toggleDialog = () => {
                   <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
                 </div>
               </TabsTrigger>
-              <TabsTrigger
-                value="類別一"
-                class="font-notosans dark:data-[state=active]:bg-background flex-1 rounded-b-none border-b-0 p-5"
-              >
-                <div class="flex space-x-2">
-                  <label class="leading-none">CATEGORY</label>
-                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-                </div>
-              </TabsTrigger>
-              <TabsTrigger
-                value="類別一"
-                class="font-notosans dark:data-[state=active]:bg-background flex-1 rounded-b-none border-b-0 p-5"
-              >
-                <div class="flex space-x-2">
-                  <label class="leading-none">CATEGORY</label>
-                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-                </div>
-              </TabsTrigger>
+
               <TabsTrigger
                 value="類別二"
                 class="dark:data-[state=active]:bg-background font-notosans flex-1 rounded-b-none border-b-0 p-5"
