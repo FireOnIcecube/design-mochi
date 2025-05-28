@@ -95,8 +95,8 @@ const categories = ref<Category[]>([
 
 <template>
   <div class="bg-surface dark:bg-surface-dark transition-theme shadow-md">
-    <div class="mx-auto flex max-w-screen-xl justify-center">
-      <NavigationMenu class="py-2">
+    <div class="mx-auto flex max-w-screen-xl">
+      <NavigationMenu class="mx-auto py-2">
         <NavigationMenuList class="gap-x-8">
           <NavigationMenuItem v-for="(category, categoryIndex) in categories" :key="categoryIndex">
             <NavigationMenuTrigger class="text-content dark:text-content-dark text-lg font-bold">{{
