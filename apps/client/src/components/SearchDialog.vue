@@ -42,7 +42,7 @@ const toggleDialog = () => {
       </div>
     </DialogTrigger>
     <DialogContent
-      class="md:max-w-1/2 min-h-1/2 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
+      class="md:max-w-1/2 min-h-2/3 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
     >
       <DialogHeader class="p-6 pb-0">
         <DialogTitle class="text-3xl">尋找封面</DialogTitle>
@@ -51,31 +51,22 @@ const toggleDialog = () => {
         </DialogDescription> -->
       </DialogHeader>
       <div class="grid h-max gap-4 overflow-y-auto px-6 py-4">
-        <div class="flex flex-col justify-between">
-          <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
-            <div class="relative w-full max-w-sm items-center">
-              <Input id="search" type="text" placeholder="Search..." class="pl-10" />
-              <span class="absolute inset-y-0 start-0 flex items-center justify-center px-2">
-                <Search class="text-muted-foreground size-6" />
-              </span>
-            </div>
-
-            <Button type="submit" class="font-notosans text-md tracking-widest">搜尋</Button>
+        <!-- Search Input -->
+        <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
+          <div class="relative w-full max-w-sm items-center">
+            <Input id="search" type="text" placeholder="Search..." class="pl-10" />
+            <span class="absolute inset-y-0 start-0 flex items-center justify-center px-2">
+              <Search class="text-muted-foreground size-6" />
+            </span>
           </div>
 
-          <!-- <p>
-            This is some placeholder content to show the scrolling behavior for modals. We use
-            repeated line breaks to demonstrate how content can exceed minimum inner height, thereby
-            showing inner scrolling. When content becomes longer than the predefined max-height of
-            modal, content will be cropped and scrollable within the modal.
-          </p>
+          <Button type="submit" class="font-notosans text-md tracking-widest">搜尋</Button>
+        </div>
 
-          <p>This content should appear at the bottom after you scroll.</p> -->
-
-          <!-- <div class="p-4 font-bold">isOpen: {{ isOpen }}</div> -->
-
-          <Tabs default-value="類別一" class="min-w-2/3 mx-auto mt-12">
-            <TabsList class="mx-auto gap-4">
+        <!-- Checkbox Group -->
+        <div class="mt-12 w-full overflow-x-auto">
+          <Tabs default-value="類別一">
+            <TabsList class="mx-auto flex gap-2">
               <TabsTrigger
                 value="類別一"
                 class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
