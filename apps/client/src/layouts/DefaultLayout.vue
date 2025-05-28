@@ -12,7 +12,7 @@ import TopButton from '@client/components/TopButton.vue'
       <NavHeader />
     </header>
 
-    <section class="sticky top-0 z-10 hidden overflow-x-auto lg:block">
+    <section class="sticky top-0 z-10 hidden xl:block">
       <CategoryMenu />
     </section>
 

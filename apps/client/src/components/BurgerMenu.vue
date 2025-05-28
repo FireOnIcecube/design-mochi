@@ -10,7 +10,7 @@ const toggleDrawer = () => {
 
 <template>
   <div @click="toggleDrawer" class="p-4">
-    <label class="swap swap-rotate text-content dark:text-content-dark lg:hidden">
+    <label class="swap swap-rotate text-content dark:text-content-dark xl:hidden">
       <input
         type="checkbox"
         v-model="isOpen"
@@ -42,7 +42,7 @@ const toggleDrawer = () => {
   >
     <div
       v-if="isOpen"
-      class="bg-surface dark:bg-surface-dark fixed top-0 left-0 z-20 h-full w-1/2 transform p-4 shadow-lg"
+      class="bg-surface dark:bg-surface-dark fixed left-0 top-0 z-20 h-full w-1/2 transform p-4 shadow-lg"
     >
       <button @click="toggleDrawer" class="mb-4 cursor-pointer text-gray-600">Close</button>
       <p class="text-content dark:text-content-dark text-lg font-bold">這是 Drawer 內容</p>
