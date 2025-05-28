@@ -66,7 +66,25 @@ const toggleDialog = () => {
         <!-- Checkbox Group -->
         <div class="mt-12 w-full overflow-x-auto">
           <Tabs default-value="類別一">
-            <TabsList class="mx-auto flex w-full gap-2">
+            <TabsList class="mx-auto flex gap-2">
+              <TabsTrigger
+                value="類別一"
+                class="font-notosans dark:data-[state=active]:bg-background flex-1 rounded-b-none border-b-0 p-5"
+              >
+                <div class="flex space-x-2">
+                  <label class="leading-none">CATEGORY</label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
+              </TabsTrigger>
+              <TabsTrigger
+                value="類別一"
+                class="font-notosans dark:data-[state=active]:bg-background flex-1 rounded-b-none border-b-0 p-5"
+              >
+                <div class="flex space-x-2">
+                  <label class="leading-none">CATEGORY</label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
+              </TabsTrigger>
               <TabsTrigger
                 value="類別一"
                 class="font-notosans dark:data-[state=active]:bg-background flex-1 rounded-b-none border-b-0 p-5"
