@@ -64,9 +64,9 @@ const toggleDialog = () => {
         </div>
 
         <!-- Checkbox Group -->
-        <Tabs default-value="類別一" class="mt-12 grow overflow-x-hidden">
+        <Tabs default-value="類別一" class="mt-12 grow gap-0 overflow-x-hidden">
           <TabsList
-            class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto xl:flex-nowrap"
+            class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
           >
             <TabsTrigger
               value="類別一"
@@ -135,7 +135,7 @@ const toggleDialog = () => {
             </TabsTrigger>
           </TabsList>
 
-          <div class="max-h-1/2 mx-auto w-full overflow-y-auto lg:w-2/3">
+          <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
             <TabsContent value="類別一"> Make changes to your account here. 1 </TabsContent>
             <TabsContent value="類別二"> Change your password here. 2</TabsContent>
             <TabsContent value="類別三"> Make changes to your account here. 3</TabsContent>
