@@ -66,7 +66,7 @@ const toggleDialog = () => {
         <!-- Checkbox Group -->
         <Tabs default-value="類別一" class="mt-12 grow overflow-x-hidden">
           <TabsList
-            class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto"
+            class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto xl:flex-nowrap"
           >
             <TabsTrigger
               value="類別一"
