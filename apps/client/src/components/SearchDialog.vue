@@ -136,7 +136,39 @@ const toggleDialog = () => {
           </TabsList>
 
           <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
-            <TabsContent value="類別一"> Make changes to your account here. 1 </TabsContent>
+            <TabsContent value="類別一" class="h-full">
+              <div class="mx-auto h-full overflow-y-auto px-8 py-12 xl:w-3/4">
+                <div class="grid grid-cols-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+                  <div class="col-span-full flex items-center space-x-2">
+                    <Checkbox id="terms" />
+                    <label
+                      for="terms"
+                      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      全選
+                    </label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <Checkbox id="A" />
+                    <label
+                      for="A"
+                      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      測試項目 A
+                    </label>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <Checkbox id="B" />
+                    <label
+                      for="B"
+                      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      測試項目 B
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
             <TabsContent value="類別二"> Change your password here. 2</TabsContent>
             <TabsContent value="類別三"> Make changes to your account here. 3</TabsContent>
             <TabsContent value="類別四"> Change your password here. 4</TabsContent>
