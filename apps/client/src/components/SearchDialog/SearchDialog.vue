@@ -22,6 +22,72 @@ const isOpen = ref(false)
 const toggleDialog = () => {
   isOpen.value = !isOpen.value
 }
+
+// mockFilterData
+const categories = [
+  {
+    key: 'CATEGORY',
+    label: '分類',
+    options: [
+      { label: 'A', value: 'A' },
+      { label: 'B', value: 'B' },
+      { label: 'C', value: 'C' }
+    ]
+  },
+  {
+    key: 'TASTE',
+    label: '特色',
+    options: [
+      { label: 'A', value: 'A' },
+      { label: 'B', value: 'B' }
+    ]
+  },
+  {
+    key: 'TOPIC',
+    label: '主題',
+    options: [
+      { label: 'X', value: 'X' },
+      { label: 'Y', value: 'Y' }
+    ]
+  },
+  {
+    key: 'SHAPE',
+    label: '形狀',
+    options: [
+      { label: 'A', value: 'A' },
+      { label: 'B', value: 'B' }
+    ]
+  },
+  {
+    key: 'COLOR',
+    label: '顏色',
+    options: [
+      { label: '紅色', value: 'red' },
+      { label: '藍色', value: 'blue' },
+      { label: '綠色', value: 'green' }
+    ]
+  },
+  {
+    key: 'MEDIA',
+    label: '媒體',
+    options: [
+      { label: '測試項目 A', value: 'A' },
+      { label: '測試項目 B', value: 'B' },
+      { label: '測試項目 C', value: 'C' },
+      { label: '測試項目 D', value: 'D' },
+      { label: '測試項目 E', value: 'E' },
+      { label: '測試項目 F', value: 'F' }
+    ]
+  },
+  {
+    key: 'RANKING',
+    label: '排行',
+    options: [
+      { label: 'Top 1', value: '1' },
+      { label: 'Top 2', value: '2' }
+    ]
+  }
+]
 </script>
 
 <template>
@@ -59,79 +125,30 @@ const toggleDialog = () => {
         </div>
 
         <!-- Checkbox Group -->
-        <Tabs default-value="類別一" class="mt-12 grow gap-0 overflow-x-hidden">
+        <Tabs :default-value="categories[0].key" class="mt-12 grow gap-0 overflow-x-hidden">
           <TabsList
             class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
           >
-            <TabsTrigger
-              value="類別一"
-              class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">CATEGORY</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
-
-            <TabsTrigger
-              value="類別二"
-              class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">TASTE</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
-
-            <TabsTrigger
-              value="類別三"
-              class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">TOPIC</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
-            <TabsTrigger
-              value="類別四"
-              class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">SHAPE</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
-            <TabsTrigger
-              value="類別五"
-              class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">COLOR</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
-            <TabsTrigger
-              value="類別六"
-              class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">MEDIA</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
-            <TabsTrigger
-              value="類別七"
-              class="dark:data-[state=active]:bg-background font-notosans rounded-b-none border-b-0 p-5"
-            >
-              <div class="flex space-x-2">
-                <label class="leading-none">RANKING</label>
-                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-              </div>
-            </TabsTrigger>
+            <div v-for="(category, index) in categories" :key="index">
+              <TabsTrigger
+                :value="category.key"
+                class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
+              >
+                <div class="flex space-x-2">
+                  <label class="leading-none">{{ category.label }}</label>
+                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+                </div>
+              </TabsTrigger>
+            </div>
           </TabsList>
 
           <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
-            <TabsContent value="類別一" class="h-full">
+            <TabsContent
+              v-for="(category, index) in categories"
+              :key="index"
+              :value="category.key"
+              class="h-full"
+            >
               <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
                 <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
                   <div class="col-span-full flex items-center space-x-2">
@@ -143,310 +160,17 @@ const toggleDialog = () => {
                       全選
                     </label>
                   </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
+                  <div
+                    v-for="(option, optionIndex) in category.options"
+                    :key="optionIndex"
+                    class="flex items-center space-x-2"
+                  >
+                    <Checkbox :id="option.value" />
                     <label
-                      for="A"
+                      :for="option.value"
                       class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
                     >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-            <TabsContent value="類別二" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                </div>
-              </div> </TabsContent
-            ><TabsContent value="類別三" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="C" />
-                    <label
-                      for="C"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 C
-                    </label>
-                  </div>
-                </div>
-              </div> </TabsContent
-            ><TabsContent value="類別四" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="C" />
-                    <label
-                      for="C"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 C
-                    </label>
-                  </div>
-                </div>
-              </div> </TabsContent
-            ><TabsContent value="類別五" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                </div>
-              </div> </TabsContent
-            ><TabsContent value="類別六" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="C" />
-                    <label
-                      for="C"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 C
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="D" />
-                    <label
-                      for="D"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 D
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="E" />
-                    <label
-                      for="E"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 E
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="F" />
-                    <label
-                      for="F"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 F
-                    </label>
-                  </div>
-                </div>
-              </div> </TabsContent
-            ><TabsContent value="類別七" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="C" />
-                    <label
-                      for="C"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 C
-                    </label>
-                  </div>
-                </div>
-              </div> </TabsContent
-            ><TabsContent value="類別八" class="h-full">
-              <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-                  <div class="col-span-full flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <label
-                      for="terms"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      全選
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="A" />
-                    <label
-                      for="A"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 A
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="B" />
-                    <label
-                      for="B"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 B
-                    </label>
-                  </div>
-                  <div class="flex items-center space-x-2">
-                    <Checkbox id="C" />
-                    <label
-                      for="C"
-                      class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
-                    >
-                      測試項目 C
+                      {{ option.label }}
                     </label>
                   </div>
                 </div>
