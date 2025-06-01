@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import { ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import {
@@ -11,11 +11,6 @@ import {
   DialogTrigger
 } from '@client/components/ui/dialog'
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger
-} from '@client/components/ui/collapsible'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@client/components/ui/tabs'
 
 import { Button } from '@client/components/ui/button'

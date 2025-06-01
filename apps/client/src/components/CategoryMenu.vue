@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { ChevronDown, ChevronFirst, ChevronRight } from 'lucide-vue-next'
 import { Icon } from '@iconify/vue'
-import SearchDialog from '@client/components/SearchDialog.vue'
+import { SearchDialog } from '@client/components/SearchDialog'
 
 import {
   NavigationMenu,
