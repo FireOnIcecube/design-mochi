@@ -129,17 +129,17 @@ const categories = [
           <TabsList
             class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
           >
-            <div v-for="(category, index) in categories" :key="index">
-              <TabsTrigger
-                :value="category.key"
-                class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
-              >
-                <div class="flex space-x-2">
-                  <label class="leading-none">{{ category.label }}</label>
-                  <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
-                </div>
-              </TabsTrigger>
-            </div>
+            <TabsTrigger
+              v-for="(category, index) in categories"
+              :key="index"
+              :value="category.key"
+              class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
+            >
+              <div class="flex space-x-2">
+                <label class="leading-none">{{ category.label }}</label>
+                <Checkbox disabled class="disabled:cursor-default disabled:opacity-100" />
+              </div>
+            </TabsTrigger>
           </TabsList>
 
           <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
