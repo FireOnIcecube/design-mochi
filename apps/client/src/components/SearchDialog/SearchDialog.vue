@@ -180,11 +180,11 @@ const categories = [
         </Tabs>
       </div>
 
-      <DialogFooter class="p-6 pt-0">
+      <!-- <DialogFooter class="p-6 pt-0">
         <DialogTrigger asChild>
           <Button type="submit" @click="toggleDialog"> Save changes </Button></DialogTrigger
         >
-      </DialogFooter>
+      </DialogFooter> -->
     </DialogContent>
   </Dialog>
 </template>
