@@ -24,11 +24,17 @@ import {
 import { Button } from '@client/components/ui/button'
 import { Filter, Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
+import { useForm } from 'vee-validate'
 
 const isOpen = ref(false)
 const toggleDialog = () => {
   isOpen.value = !isOpen.value
 }
+
+const form = useForm()
+const onSubmit = form.handleSubmit((values) => {
+  console.log('Form submitted!', values)
+})
 
 //
 // const isAllChecked = (options: (typeof categories)[number]['options']) =>
@@ -125,7 +131,7 @@ const categories = [
         </DialogDescription> -->
       </DialogHeader>
       <div class="flex flex-col gap-4 overflow-y-auto px-6 py-4">
-        <Form>
+        <form @submit.prevent="onSubmit" class="w-full">
           <FormField v-slot="{ componentField }" name="keyword">
             <FormItem>
               <FormControl>
@@ -149,7 +155,7 @@ const categories = [
               <FormMessage />
             </FormItem>
           </FormField>
-        </Form>
+        </form>
 
         <FilterTab :categories="categories" class="mt-12 grow gap-0" />
       </div>
