@@ -12,6 +12,15 @@ import {
   DialogTrigger
 } from '@client/components/ui/dialog'
 
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@client/components/ui/form'
+
 import { Button } from '@client/components/ui/button'
 import { Filter, Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
@@ -116,17 +125,31 @@ const categories = [
         </DialogDescription> -->
       </DialogHeader>
       <div class="flex flex-col gap-4 overflow-y-auto px-6 py-4">
-        <!-- Search Input -->
-        <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
-          <div class="relative w-full max-w-sm items-center">
-            <Input id="search" type="text" placeholder="Search..." class="pl-10" />
-            <span class="absolute inset-y-0 start-0 flex items-center justify-center px-2">
-              <Search class="text-muted-foreground size-6" />
-            </span>
-          </div>
+        <Form>
+          <FormField v-slot="{ componentField }" name="keyword">
+            <FormItem>
+              <FormControl>
+                <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
+                  <div class="relative w-full max-w-sm items-center">
+                    <Input
+                      type="text"
+                      placeholder="輸入關鍵字..."
+                      v-bind="componentField"
+                      class="pl-10"
+                    />
+                    <span class="absolute inset-y-0 start-0 flex items-center justify-center px-2">
+                      <Search class="text-muted-foreground size-6" />
+                    </span>
+                  </div>
 
-          <Button type="submit" class="font-notosans text-md tracking-widest">搜尋</Button>
-        </div>
+                  <Button type="submit" class="font-notosans text-md tracking-widest">搜尋</Button>
+                </div>
+              </FormControl>
+              <!-- <FormDescription class="mx-auto"> 搜尋相關的封面。 </FormDescription> -->
+              <FormMessage />
+            </FormItem>
+          </FormField>
+        </Form>
 
         <FilterTab :categories="categories" class="mt-12 grow gap-0" />
       </div>
