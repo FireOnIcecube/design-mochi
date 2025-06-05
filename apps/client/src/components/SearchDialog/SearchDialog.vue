@@ -155,9 +155,21 @@ const categories = [
               <FormMessage />
             </FormItem>
           </FormField>
-        </form>
 
-        <FilterTab :categories="categories" class="mt-12 grow gap-0" />
+          <FormField v-slot="{ componentField }" name="tags">
+            <FormItem>
+              <FormControl>
+                <FilterTab
+                  :categories="categories"
+                  v-bind="componentField"
+                  class="mt-12 grow gap-0"
+                />
+              </FormControl>
+              <!-- <FormDescription class="mx-auto"> 搜尋相關的封面。 </FormDescription> -->
+              <FormMessage />
+            </FormItem>
+          </FormField>
+        </form>
       </div>
 
       <!-- <DialogFooter class="p-6 pt-0">
