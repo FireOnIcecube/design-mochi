@@ -33,62 +33,62 @@ const categories = [
     key: 'CATEGORY',
     label: '分類',
     options: [
-      { label: 'A', value: 'A' },
-      { label: 'B', value: 'B' },
-      { label: 'C', value: 'C' }
+      { id: 1, label: 'A', value: 'A' },
+      { id: 2, label: 'B', value: 'B' },
+      { id: 3, label: 'C', value: 'C' }
     ]
   },
   {
     key: 'TASTE',
     label: '特色',
     options: [
-      { label: 'A', value: 'A' },
-      { label: 'B', value: 'B' }
+      { id: 1, label: 'A', value: 'A' },
+      { id: 2, label: 'B', value: 'B' }
     ]
   },
   {
     key: 'TOPIC',
     label: '主題',
     options: [
-      { label: 'X', value: 'X' },
-      { label: 'Y', value: 'Y' }
+      { id: 1, label: 'X', value: 'X' },
+      { id: 2, label: 'Y', value: 'Y' }
     ]
   },
   {
     key: 'SHAPE',
     label: '形狀',
     options: [
-      { label: 'A', value: 'A' },
-      { label: 'B', value: 'B' }
+      { id: 1, label: 'A', value: 'A' },
+      { id: 2, label: 'B', value: 'B' }
     ]
   },
   {
     key: 'COLOR',
     label: '顏色',
     options: [
-      { label: '紅色', value: 'red' },
-      { label: '藍色', value: 'blue' },
-      { label: '綠色', value: 'green' }
+      { id: 1, label: '紅色', value: 'red' },
+      { id: 2, label: '藍色', value: 'blue' },
+      { id: 3, label: '綠色', value: 'green' }
     ]
   },
   {
     key: 'MEDIA',
     label: '媒體',
     options: [
-      { label: '測試項目 A', value: 'A' },
-      { label: '測試項目 B', value: 'B' },
-      { label: '測試項目 C', value: 'C' },
-      { label: '測試項目 D', value: 'D' },
-      { label: '測試項目 E', value: 'E' },
-      { label: '測試項目 F', value: 'F' }
+      { id: 1, label: '測試項目 A', value: 'A' },
+      { id: 2, label: '測試項目 B', value: 'B' },
+      { id: 3, label: '測試項目 C', value: 'C' },
+      { id: 4, label: '測試項目 D', value: 'D' },
+      { id: 5, label: '測試項目 E', value: 'E' },
+      { id: 6, label: '測試項目 F', value: 'F' }
     ]
   },
   {
     key: 'RANKING',
     label: '排行',
     options: [
-      { label: 'Top 1', value: '1' },
-      { label: 'Top 2', value: '2' }
+      { id: 1, label: 'Top 1', value: '1' },
+      { id: 2, label: 'Top 2', value: '2' }
     ]
   }
 ]

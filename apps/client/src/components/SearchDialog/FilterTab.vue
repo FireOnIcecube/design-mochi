@@ -46,7 +46,7 @@ onMounted(() => {
         <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
           <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
             <div class="col-span-full flex items-center space-x-2">
-              <Checkbox id="terms" :default-value="true" />
+              <Checkbox id="terms" />
               <label
                 for="terms"
                 class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
