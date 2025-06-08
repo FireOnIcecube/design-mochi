@@ -10,12 +10,6 @@ const props = defineProps<{
     options: { label: string; value: string }[]
   }[]
 }>()
-
-defineExpose({})
-
-onMounted(() => {
-  // This is a placeholder for any initialization logic if needed
-})
 </script>
 
 <template>
