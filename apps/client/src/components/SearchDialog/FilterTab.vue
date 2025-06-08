@@ -11,47 +11,54 @@ const props = defineProps<{
   }[]
 }>()
 
-const selectedMap = reactive(new Map<string, Set<string>>())
+// 選取狀態：每個類別 key 對應一組 Set<string>
+const selectedMap = reactive<Record<string, Set<string>>>({})
 
-props.categories.forEach((cat) => {
-  if (!selectedMap.has(cat.key)) {
-    selectedMap.set(cat.key, new Set())
-  }
+// 初始化每個分類為空 Set
+onMounted(() => {
+  props.categories.forEach((cat) => {
+    selectedMap[cat.key] = new Set()
+  })
 })
 
 function isChecked(catId: string, value: string) {
-  return selectedMap.get(catId)?.has(value) ?? false
+  return selectedMap[catId]?.has(value) ?? false
 }
 
-function toggleOption(catId: string, value: string) {
-  const set = selectedMap.get(catId)
+function toggleOption(catId: string, value: string, checked: boolean | 'indeterminate') {
+  if (checked !== true && checked !== false) return
+  const set = selectedMap[catId]
   if (!set) return
-  set.has(value) ? set.delete(value) : set.add(value)
+
+  if (checked) {
+    set.add(value)
+  } else {
+    set.delete(value)
+  }
+
+  // 替換 Set 實例以觸發 reactivity
+  selectedMap[catId] = new Set(set)
 }
 
-function isAllSeleted(catId: string) {
+function isAllSelected(catId: string) {
   const category = props.categories.find((c) => c.key === catId)
-  const set = selectedMap.get(catId)
-
+  const set = selectedMap[catId]
   return category && set?.size === category.options.length
 }
 
 function isIndeterminate(catId: string) {
   const category = props.categories.find((c) => c.key === catId)
-  const set = selectedMap.get(catId)
+  const set = selectedMap[catId]
   return category && set && set.size > 0 && set.size < category.options.length
 }
 
-function toggleAll(catId: string) {
-  const category = props.categories.find((c) => c.key === catId)
-  const set = selectedMap.get(catId)
-  if (!category || !set) return
+function toggleAll(catId: string, checked: boolean | 'indeterminate') {
+  if (checked !== true && checked !== false) return
 
-  if (set.size === category.options.length) {
-    set.clear()
-  } else {
-    category.options.forEach((opt) => set.add(opt.value))
-  }
+  const category = props.categories.find((c) => c.key === catId)
+  if (!category) return
+
+  selectedMap[catId] = checked ? new Set(category.options.map((opt) => opt.value)) : new Set()
 }
 </script>
 
@@ -71,7 +78,7 @@ function toggleAll(catId: string) {
           <input
             type="checkbox"
             disabled
-            :checked="isAllSeleted(category.key)"
+            :checked="isAllSelected(category.key)"
             :indeterminate="isIndeterminate(category.key)"
           />
         </div>
@@ -87,19 +94,20 @@ function toggleAll(catId: string) {
       >
         <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
           <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
+            <!-- 全選 Checkbox -->
             <div class="col-span-full flex items-center space-x-2">
               <label
-                for="terms"
-                class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
+                class="lg:text-md font-notosans select-none text-sm font-medium leading-none xl:text-lg"
               >
                 <Checkbox
-                  id="terms"
-                  :modelValue="isAllSeleted(category.key)"
-                  @click="toggleAll(category.key)"
+                  :modelValue="isAllSelected(category.key)"
+                  @update:modelValue="(checked) => toggleAll(category.key, checked)"
                 />
                 全選
               </label>
             </div>
+
+            <!-- 各選項 Checkbox -->
             <div
               v-for="(option, optionIndex) in category.options"
               :key="optionIndex"
@@ -107,14 +115,14 @@ function toggleAll(catId: string) {
             >
               <label
                 :for="option.id.toString()"
-                class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
+                class="lg:text-md font-notosans select-none text-sm font-medium leading-none xl:text-lg"
               >
                 <Checkbox
-                  :name="option.id.toString()"
-                  :value="option.value"
                   :id="option.id.toString()"
                   :modelValue="isChecked(category.key, option.value)"
-                  @click="toggleOption(category.key, option.value)"
+                  @update:modelValue="
+                    (checked) => toggleOption(category.key, option.value, checked)
+                  "
                 />
                 {{ option.label }}
               </label>
