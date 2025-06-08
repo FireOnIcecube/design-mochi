@@ -32,6 +32,7 @@ function toggleOption(catId: string, value: string) {
 function isAllSeleted(catId: string) {
   const category = props.categories.find((c) => c.key === catId)
   const set = selectedMap.get(catId)
+
   return category && set?.size === category.options.length
 }
 
@@ -71,11 +72,11 @@ function toggleAll(catId: string) {
       >
         <div class="flex space-x-2">
           <label class="leading-none">{{ category.label }}</label>
-          <Checkbox
+          <input
+            type="checkbox"
             disabled
             :checked="isAllSeleted(category.key)"
             :indeterminate="isIndeterminate(category.key)"
-            class="disabled:cursor-default disabled:opacity-100"
           />
         </div>
       </TabsTrigger>
@@ -91,16 +92,15 @@ function toggleAll(catId: string) {
         <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
           <div class="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
             <div class="col-span-full flex items-center space-x-2">
-              <Checkbox
-                id="terms"
-                :modelValue="isAllSeleted(category.key)"
-                :indeterminate="isIndeterminate(category.key)"
-                @click="toggleAll(category.key)"
-              />
               <label
                 for="terms"
                 class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
               >
+                <Checkbox
+                  id="terms"
+                  :modelValue="isAllSeleted(category.key)"
+                  @click="toggleAll(category.key)"
+                />
                 全選
               </label>
             </div>
@@ -109,17 +109,17 @@ function toggleAll(catId: string) {
               :key="optionIndex"
               class="flex items-center space-x-2"
             >
-              <Checkbox
-                :name="option.id.toString()"
-                :value="option.value"
-                :id="option.id.toString()"
-                :modelValue="isChecked(category.key, option.value)"
-                @click="toggleOption(category.key, option.value)"
-              />
               <label
                 :for="option.id.toString()"
                 class="lg:text-md font-notosans text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 xl:text-lg"
               >
+                <Checkbox
+                  :name="option.id.toString()"
+                  :value="option.value"
+                  :id="option.id.toString()"
+                  :modelValue="isChecked(category.key, option.value)"
+                  @click="toggleOption(category.key, option.value)"
+                />
                 {{ option.label }}
               </label>
             </div>
