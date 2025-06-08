@@ -56,10 +56,6 @@ function toggleAll(catId: string) {
 </script>
 
 <template>
-  <pre class="rounded bg-gray-100 p-2 text-sm">{{
-    [...selectedMap].map(([k, v]) => [k, [...v]])
-  }}</pre>
-
   <Tabs :default-value="props.categories[0].key" class="overflow-x-hidden">
     <TabsList
       class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
