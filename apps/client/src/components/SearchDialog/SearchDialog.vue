@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import FilterTab from './FilterTab.vue'
 import {
@@ -35,12 +35,6 @@ const form = useForm()
 const onSubmit = form.handleSubmit((values) => {
   console.log('Form submitted!', values)
 })
-
-//
-// const isAllChecked = (options: (typeof categories)[number]['options']) =>
-//   options.every((i) => i.checked)
-// const isSomeChecked = (options: (typeof categories)[number]['options']) =>
-//   options.some((i) => i.checked) && !isAllChecked(items)
 
 // mockFilterData
 const categories = [
@@ -107,6 +101,12 @@ const categories = [
     ]
   }
 ]
+
+const selectedTags = reactive<Record<string, Set<number>>>({})
+
+function updateSelectedTags(val: Record<string, Set<number>>) {
+  Object.assign(selectedTags, val)
+}
 </script>
 
 <template>
@@ -131,6 +131,7 @@ const categories = [
         </DialogDescription> -->
       </DialogHeader>
       <div class="flex flex-col gap-4 overflow-y-auto px-6 py-4">
+        <div>{{ selectedTags }}</div>
         <form @submit.prevent="onSubmit" class="w-full">
           <FormField v-slot="{ componentField }" name="keyword">
             <FormItem>
@@ -163,6 +164,7 @@ const categories = [
                   :categories="categories"
                   v-bind="componentField"
                   class="mt-12 grow gap-0"
+                  @update="updateSelectedTags"
                 />
               </FormControl>
               <!-- <FormDescription class="mx-auto"> 搜尋相關的封面。 </FormDescription> -->

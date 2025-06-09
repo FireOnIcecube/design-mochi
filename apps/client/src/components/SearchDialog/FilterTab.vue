@@ -10,10 +10,10 @@ const props = defineProps<{
     options: { id: number; label: string; value: string }[]
   }[]
 }>()
-const selectedTags = reactive<Record<string, Set<string>>>({})
+const selectedTags = reactive<Record<string, Set<number>>>({})
 
 const emit = defineEmits<{
-  (e: 'update', selectedTags: Record<string, Set<string>>): void
+  (e: 'update', selectedTags: Record<string, Set<number>>): void
 }>()
 
 // 選取狀態：每個類別 key 對應一組 Set<string>
@@ -25,19 +25,19 @@ onMounted(() => {
   })
 })
 
-function isChecked(catId: string, value: string) {
-  return selectedTags[catId]?.has(value) ?? false
+function isChecked(catId: string, optId: number) {
+  return selectedTags[catId]?.has(optId) ?? false
 }
 
-function toggleOption(catId: string, value: string, checked: boolean | 'indeterminate') {
+function toggleOption(catId: string, optId: number, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
   const set = selectedTags[catId]
   if (!set) return
 
   if (checked) {
-    set.add(value)
+    set.add(optId)
   } else {
-    set.delete(value)
+    set.delete(optId)
   }
 
   // 替換 Set 實例以觸發 reactivity
@@ -62,7 +62,7 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
   const category = props.categories.find((c) => c.key === catId)
   if (!category) return
 
-  selectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.value)) : new Set()
+  selectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.id)) : new Set()
 }
 </script>
 
@@ -128,10 +128,10 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
               >
                 <Checkbox
                   :id="option.id.toString()"
-                  :modelValue="isChecked(category.key, option.value)"
+                  :modelValue="isChecked(category.key, option.id)"
                   @update:modelValue="
                     (checked) => {
-                      toggleOption(category.key, option.value, checked)
+                      toggleOption(category.key, option.id, checked)
                       emit('update', selectedTags)
                     }
                   "
