@@ -102,11 +102,23 @@ const categories = [
   }
 ]
 
-const selectedTags = reactive<Record<string, Set<number>>>({})
+const selectedTags = reactive<Record<string, number[]>>({})
 
-function updateSelectedTags(val: Record<string, Set<number>>) {
+function updateSelectedTags(val: Record<string, number[]>) {
   Object.assign(selectedTags, val)
 }
+
+const selectedTagList = computed(() => {
+  const result: { key: string; label: string }[] = []
+  for (const category of categories) {
+    const ids = selectedTags[category.key] || []
+    for (const id of ids) {
+      const label = category.options.find((opt) => opt.id === id)?.label
+      if (label) result.push({ key: category.key, label })
+    }
+  }
+  return result
+})
 </script>
 
 <template>
@@ -131,7 +143,7 @@ function updateSelectedTags(val: Record<string, Set<number>>) {
         </DialogDescription> -->
       </DialogHeader>
       <div class="flex flex-col gap-4 overflow-y-auto px-6 py-4">
-        <div>{{ selectedTags }}</div>
+        <div>{{ selectedTagList }}</div>
         <form @submit.prevent="onSubmit" class="w-full">
           <FormField v-slot="{ componentField }" name="keyword">
             <FormItem>

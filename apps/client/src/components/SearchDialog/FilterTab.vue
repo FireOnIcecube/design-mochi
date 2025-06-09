@@ -13,10 +13,16 @@ const props = defineProps<{
 const selectedTags = reactive<Record<string, Set<number>>>({})
 
 const emit = defineEmits<{
-  (e: 'update', selectedTags: Record<string, Set<number>>): void
+  (e: 'update', selectedTags: Record<string, number[]>): void
 }>()
 
-// 選取狀態：每個類別 key 對應一組 Set<string>
+function updateSelectedTags() {
+  const convertedTags = Object.fromEntries(
+    Object.entries(selectedTags).map(([k, v]) => [k, Array.from(v)])
+  )
+
+  emit('update', convertedTags)
+}
 
 // 初始化每個分類為空 Set
 onMounted(() => {
@@ -108,7 +114,7 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
                   @update:modelValue="
                     (checked) => {
                       toggleAll(category.key, checked)
-                      emit('update', selectedTags)
+                      updateSelectedTags()
                     }
                   "
                 />
@@ -132,7 +138,7 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
                   @update:modelValue="
                     (checked) => {
                       toggleOption(category.key, option.id, checked)
-                      emit('update', selectedTags)
+                      updateSelectedTags()
                     }
                   "
                 />
