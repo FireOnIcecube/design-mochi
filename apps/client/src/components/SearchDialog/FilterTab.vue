@@ -10,24 +10,28 @@ const props = defineProps<{
     options: { id: number; label: string; value: string }[]
   }[]
 }>()
+const selectedTags = reactive<Record<string, Set<string>>>({})
+
+const emit = defineEmits<{
+  (e: 'update', selectedTags: Record<string, Set<string>>): void
+}>()
 
 // 選取狀態：每個類別 key 對應一組 Set<string>
-const selectedMap = reactive<Record<string, Set<string>>>({})
 
 // 初始化每個分類為空 Set
 onMounted(() => {
   props.categories.forEach((cat) => {
-    selectedMap[cat.key] = new Set()
+    selectedTags[cat.key] = new Set()
   })
 })
 
 function isChecked(catId: string, value: string) {
-  return selectedMap[catId]?.has(value) ?? false
+  return selectedTags[catId]?.has(value) ?? false
 }
 
 function toggleOption(catId: string, value: string, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
-  const set = selectedMap[catId]
+  const set = selectedTags[catId]
   if (!set) return
 
   if (checked) {
@@ -37,18 +41,18 @@ function toggleOption(catId: string, value: string, checked: boolean | 'indeterm
   }
 
   // 替換 Set 實例以觸發 reactivity
-  selectedMap[catId] = new Set(set)
+  selectedTags[catId] = new Set(set)
 }
 
 function isAllSelected(catId: string) {
   const category = props.categories.find((c) => c.key === catId)
-  const set = selectedMap[catId]
+  const set = selectedTags[catId]
   return category && set?.size === category.options.length
 }
 
 function isIndeterminate(catId: string) {
   const category = props.categories.find((c) => c.key === catId)
-  const set = selectedMap[catId]
+  const set = selectedTags[catId]
   return category && set && set.size > 0 && set.size < category.options.length
 }
 
@@ -58,7 +62,7 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
   const category = props.categories.find((c) => c.key === catId)
   if (!category) return
 
-  selectedMap[catId] = checked ? new Set(category.options.map((opt) => opt.value)) : new Set()
+  selectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.value)) : new Set()
 }
 </script>
 
@@ -101,7 +105,12 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
               >
                 <Checkbox
                   :modelValue="isAllSelected(category.key)"
-                  @update:modelValue="(checked) => toggleAll(category.key, checked)"
+                  @update:modelValue="
+                    (checked) => {
+                      toggleAll(category.key, checked)
+                      emit('update', selectedTags)
+                    }
+                  "
                 />
                 全選
               </label>
@@ -121,7 +130,10 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
                   :id="option.id.toString()"
                   :modelValue="isChecked(category.key, option.value)"
                   @update:modelValue="
-                    (checked) => toggleOption(category.key, option.value, checked)
+                    (checked) => {
+                      toggleOption(category.key, option.value, checked)
+                      emit('update', selectedTags)
+                    }
                   "
                 />
                 {{ option.label }}
