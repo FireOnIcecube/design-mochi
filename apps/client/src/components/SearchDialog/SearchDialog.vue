@@ -112,6 +112,10 @@ const selectedTagList = computed(() => {
   const result: { key: string; label: string }[] = []
   for (const category of categories) {
     const ids = selectedTags[category.key] || []
+    if (ids.length === category.options.length) {
+      result.push({ key: category.key, label: '全選' })
+      continue
+    }
     for (const id of ids) {
       const label = category.options.find((opt) => opt.id === id)?.label
       if (label) result.push({ key: category.key, label })
