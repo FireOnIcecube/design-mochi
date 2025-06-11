@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@client/views/HomePage.vue'
 import ThumbnailDetail from '@client/views/ThumbnailDetail.vue'
 import DefaultLayout from '@client/layouts/DefaultLayout.vue'
+import SearchPage from '@client/views/SearchPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -15,6 +16,12 @@ const routes: RouteRecordRaw[] = [
     path: '/thumbnail/:id',
     name: 'ThumbnailDetail',
     component: ThumbnailDetail,
+    meta: { layout: DefaultLayout }
+  },
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: SearchPage,
     meta: { layout: DefaultLayout }
   }
 

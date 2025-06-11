@@ -1,4 +1,4 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import ThumbnailCard from '@client/components/ThumbnailCard.vue'
 </script>
 
