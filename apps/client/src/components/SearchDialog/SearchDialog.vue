@@ -12,6 +12,8 @@ import {
   DialogTrigger
 } from '@client/components/ui/dialog'
 
+import { DialogClose } from 'reka-ui'
+
 import {
   FormControl,
   FormDescription,
@@ -25,16 +27,26 @@ import { Button } from '@client/components/ui/button'
 import { Filter, Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
 import { useForm } from 'vee-validate'
+import { useRoute, useRouter } from 'vue-router'
 
+// dialog 的開關
 const isOpen = ref(false)
 const toggleDialog = () => {
   isOpen.value = !isOpen.value
 }
 
-const form = useForm()
-const onSubmit = form.handleSubmit((values) => {
-  console.log('Form submitted!', values)
-})
+// 初始化表單上的輸入欄位
+const keyword = ref('')
+
+const route = useRoute()
+const router = useRouter()
+
+function handleSubmit() {
+  console.log('Form submitted!')
+  console.info(`keyword : ${keyword.value}`)
+  console.info(`selectedTags : ${JSON.stringify(selectedTags)} `)
+  router.push({ name: 'SearchPage' })
+}
 
 // mockFilterData
 const categories = [
@@ -143,12 +155,13 @@ function updateSelectedTags(val: Record<string, number[]>) {
     >
       <DialogHeader class="p-6 pb-0">
         <DialogTitle class="text-3xl">尋找封面</DialogTitle>
+
         <!-- <DialogDescription>
           Make changes to your profile here. Click save when you're done.
         </DialogDescription> -->
       </DialogHeader>
       <div class="flex flex-col gap-4 overflow-y-auto px-6 py-4">
-        <form @submit.prevent="onSubmit" class="w-full">
+        <form @submit.prevent="handleSubmit" class="w-full">
           <FormField v-slot="{ componentField }" name="keyword">
             <FormItem>
               <FormControl>
@@ -158,6 +171,7 @@ function updateSelectedTags(val: Record<string, number[]>) {
                       type="text"
                       placeholder="輸入關鍵字..."
                       v-bind="componentField"
+                      v-model="keyword"
                       class="pl-10"
                     />
                     <span class="absolute inset-y-0 start-0 flex items-center justify-center px-2">
@@ -165,7 +179,11 @@ function updateSelectedTags(val: Record<string, number[]>) {
                     </span>
                   </div>
 
-                  <Button type="submit" class="font-notosans text-md tracking-widest">搜尋</Button>
+                  <DialogClose>
+                    <Button type="submit" class="font-notosans text-md tracking-widest"
+                      >搜尋</Button
+                    >
+                  </DialogClose>
                 </div>
               </FormControl>
               <!-- <FormDescription class="mx-auto"> 搜尋相關的封面。 </FormDescription> -->
