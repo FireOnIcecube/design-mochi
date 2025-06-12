@@ -13,3 +13,4 @@
 - 需要重新包裝各部分元件
 - 需要加入讓使用者查看自己所選 搜尋tag 的設計
 - 搜尋表單的 tag 傳遞邏輯
+- 目前的 CategoryMenu 還有 SearchDialog 都需要 fetch category 資料，毫無復用性
