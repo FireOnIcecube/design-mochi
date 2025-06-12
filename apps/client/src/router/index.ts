@@ -3,7 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@client/views/HomePage.vue'
 import ThumbnailDetail from '@client/views/ThumbnailDetail.vue'
 import DefaultLayout from '@client/layouts/DefaultLayout.vue'
-import SearchPage from '@client/views/SearchPage.vue'
+import SearchPage from '@/apps/client/src/views/SearchPage.vue'
+import TestPage from '@/apps/client/src/views/TestPage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -22,6 +23,12 @@ const routes: RouteRecordRaw[] = [
     path: '/search',
     name: 'SearchPage',
     component: SearchPage,
+    meta: { layout: DefaultLayout }
+  },
+  {
+    path: '/test',
+    name: 'TestPage',
+    component: TestPage,
     meta: { layout: DefaultLayout }
   }
 
