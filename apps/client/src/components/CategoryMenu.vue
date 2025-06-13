@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport
 } from '@client/components/ui/navigation-menu'
+import { RouterLink } from 'vue-router'
 
 const props = defineProps<{
   filters: { key: string; label: string; options: { id: number; label: string; value: string }[] }[]
@@ -24,77 +25,6 @@ const isCategoryOpen = ref(false)
 const toggleCategoryMenu = () => {
   isCategoryOpen.value = !isCategoryOpen.value
 }
-
-type Category = {
-  title: string
-  items: { name: string; href: string; description?: string }[]
-  children?: Category[]
-}
-
-const categories = ref<Category[]>([
-  {
-    title: '類別一',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' }
-    ]
-  },
-
-  {
-    title: '類別二',
-    items: [{ name: '測試項目 A', href: '#' }]
-  },
-  {
-    title: '類別三',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' },
-      { name: '測試項目 C', href: '#' }
-    ]
-  },
-  {
-    title: '類別四',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' },
-      { name: '測試項目 C', href: '#' }
-    ]
-  },
-  {
-    title: '類別五',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' }
-    ]
-  },
-  {
-    title: '類別六',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' },
-      { name: '測試項目 C', href: '#' },
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B ', href: '#' },
-      { name: '測試項目 C', href: '#' }
-    ]
-  },
-  {
-    title: '類別七',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' },
-      { name: '測試項目 C', href: '#' }
-    ]
-  },
-  {
-    title: '類別八',
-    items: [
-      { name: '測試項目 A', href: '#' },
-      { name: '測試項目 B', href: '#' },
-      { name: '測試項目 C', href: '#' }
-    ]
-  }
-])
 </script>
 
 <template>
@@ -102,30 +32,33 @@ const categories = ref<Category[]>([
     <div class="mx-auto flex max-w-screen-xl justify-center">
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
-          <NavigationMenuItem v-for="(category, categoryIndex) in categories" :key="categoryIndex">
+          <NavigationMenuItem
+            v-for="(category, categoryIndex) in props.filters"
+            :key="categoryIndex"
+          >
             <NavigationMenuTrigger class="text-content dark:text-content-dark text-lg font-bold">{{
-              category.title
+              category.label
             }}</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul
                 class="w-max gap-3 p-4"
-                :class="`grid grid-cols-${Math.ceil(category.items.length / 5)} `"
+                :class="`grid grid-cols-${Math.ceil(category.options.length / 5)} `"
               >
-                <li v-for="(item, itemIndex) in category.items" :key="itemIndex" class="w-[250px]">
+                <li v-for="(opt, optIndex) in category.options" :key="optIndex" class="w-[250px]">
                   <NavigationMenuLink as-child>
-                    <a
-                      :href="item.href"
+                    <RouterLink
+                      :to="''"
                       class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors"
                     >
                       <div
                         class="text-content dark:text-content-dark flex items-center justify-between"
                       >
                         <p class="text-md font-notosans leading-none">
-                          {{ item.name }}
+                          {{ opt.label }}
                         </p>
                         <ChevronRight class="size-5" aria-hidden="true" />
                       </div>
-                    </a>
+                    </RouterLink>
                   </NavigationMenuLink>
                 </li>
               </ul>
