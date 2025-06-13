@@ -10,33 +10,34 @@ const filters = [
     key: 'CATEGORY',
     label: '分類',
     options: [
-      { id: 1, label: 'A', value: 'A' },
-      { id: 2, label: 'B', value: 'B' },
-      { id: 3, label: 'C', value: 'C' }
+      { id: 1, label: '科技產品', value: 'tech' },
+      { id: 2, label: '生活用品', value: 'life' },
+      { id: 3, label: '藝術設計', value: 'design' }
     ]
   },
   {
     key: 'TASTE',
     label: '特色',
     options: [
-      { id: 1, label: 'A', value: 'A' },
-      { id: 2, label: 'B', value: 'B' }
+      { id: 1, label: '極簡風', value: 'minimal' },
+      { id: 2, label: '繽紛活潑', value: 'colorful' }
     ]
   },
   {
     key: 'TOPIC',
     label: '主題',
     options: [
-      { id: 1, label: 'X', value: 'X' },
-      { id: 2, label: 'Y', value: 'Y' }
+      { id: 1, label: '教育', value: 'education' },
+      { id: 2, label: '娛樂', value: 'entertainment' },
+      { id: 3, label: '旅遊', value: 'travel' }
     ]
   },
   {
     key: 'SHAPE',
     label: '形狀',
     options: [
-      { id: 1, label: 'A', value: 'A' },
-      { id: 2, label: 'B', value: 'B' }
+      { id: 1, label: '方形', value: 'square' },
+      { id: 2, label: '圓形', value: 'circle' }
     ]
   },
   {
@@ -45,27 +46,25 @@ const filters = [
     options: [
       { id: 1, label: '紅色', value: 'red' },
       { id: 2, label: '藍色', value: 'blue' },
-      { id: 3, label: '綠色', value: 'green' }
+      { id: 3, label: '綠色', value: 'green' },
+      { id: 4, label: '黑色', value: 'black' }
     ]
   },
   {
     key: 'MEDIA',
-    label: '媒體',
+    label: '媒體類型',
     options: [
-      { id: 1, label: '測試項目 A', value: 'A' },
-      { id: 2, label: '測試項目 B', value: 'B' },
-      { id: 3, label: '測試項目 C', value: 'C' },
-      { id: 4, label: '測試項目 D', value: 'D' },
-      { id: 5, label: '測試項目 E', value: 'E' },
-      { id: 6, label: '測試項目 F', value: 'F' }
+      { id: 1, label: '圖片', value: 'image' },
+      { id: 2, label: '影片', value: 'video' },
+      { id: 3, label: '動畫', value: 'animation' }
     ]
   },
   {
     key: 'RANKING',
     label: '排行',
     options: [
-      { id: 1, label: 'Top 1', value: '1' },
-      { id: 2, label: 'Top 2', value: '2' }
+      { id: 1, label: '熱門', value: 'popular' },
+      { id: 2, label: '最新', value: 'newest' }
     ]
   }
 ]

@@ -53,7 +53,7 @@ const toggleCategoryMenu = () => {
                       <div
                         class="text-content dark:text-content-dark flex items-center justify-between"
                       >
-                        <p class="text-md font-notosans leading-none">
+                        <p class="font-notosans text-lg leading-none">
                           {{ opt.label }}
                         </p>
                         <ChevronRight class="size-5" aria-hidden="true" />
