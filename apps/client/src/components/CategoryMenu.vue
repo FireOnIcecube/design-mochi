@@ -47,7 +47,7 @@ const toggleCategoryMenu = () => {
                 <li v-for="(opt, optIndex) in category.options" :key="optIndex" class="w-[250px]">
                   <NavigationMenuLink as-child>
                     <RouterLink
-                      :to="''"
+                      to="/"
                       class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors"
                     >
                       <div

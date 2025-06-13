@@ -124,7 +124,6 @@ function updateSelectedTags(val: Record<string, number[]>) {
                   </DialogClose>
                 </div>
               </FormControl>
-              <!-- <FormDescription class="mx-auto"> 搜尋相關的封面。 </FormDescription> -->
               <FormMessage />
             </FormItem>
           </FormField>
