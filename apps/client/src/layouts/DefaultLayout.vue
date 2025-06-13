@@ -10,61 +10,67 @@ const filters = [
     key: 'CATEGORY',
     label: '分類',
     options: [
-      { id: 1, label: '科技產品', value: 'tech' },
-      { id: 2, label: '生活用品', value: 'life' },
-      { id: 3, label: '藝術設計', value: 'design' }
+      { id: 1, label: '遊戲實況', value: 'gaming' },
+      { id: 2, label: '日常雜談', value: 'talk' },
+      { id: 3, label: '音樂 / Cover', value: 'music' },
+      { id: 4, label: '開箱 / 評測', value: 'review' },
+      { id: 5, label: '教學 / 知識型', value: 'education' },
+      { id: 6, label: '節目單元 / 特輯', value: 'program' },
+      { id: 7, label: '搞笑 / 創意短片', value: 'comedy' }
     ]
   },
   {
-    key: 'TASTE',
-    label: '特色',
+    key: 'STYLE',
+    label: '設計風格',
     options: [
-      { id: 1, label: '極簡風', value: 'minimal' },
-      { id: 2, label: '繽紛活潑', value: 'colorful' }
-    ]
-  },
-  {
-    key: 'TOPIC',
-    label: '主題',
-    options: [
-      { id: 1, label: '教育', value: 'education' },
-      { id: 2, label: '娛樂', value: 'entertainment' },
-      { id: 3, label: '旅遊', value: 'travel' }
-    ]
-  },
-  {
-    key: 'SHAPE',
-    label: '形狀',
-    options: [
-      { id: 1, label: '方形', value: 'square' },
-      { id: 2, label: '圓形', value: 'circle' }
+      { id: 1, label: '極簡', value: 'minimal' },
+      { id: 2, label: '插畫風', value: 'illustration' },
+      { id: 3, label: '潮流感', value: 'trendy' },
+      { id: 4, label: '寫實風', value: 'realistic' },
+      { id: 5, label: '拼貼風', value: 'collage' },
+      { id: 6, label: '漫畫風', value: 'comic' },
+      { id: 7, label: '手寫字感', value: 'handwritten' }
     ]
   },
   {
     key: 'COLOR',
-    label: '顏色',
+    label: '主色調',
     options: [
       { id: 1, label: '紅色', value: 'red' },
       { id: 2, label: '藍色', value: 'blue' },
-      { id: 3, label: '綠色', value: 'green' },
-      { id: 4, label: '黑色', value: 'black' }
+      { id: 3, label: '黑白灰', value: 'mono' },
+      { id: 4, label: '霓虹色系', value: 'neon' },
+      { id: 5, label: '馬卡龍', value: 'pastel' },
+      { id: 6, label: '大地色系', value: 'earth' }
+    ]
+  },
+  {
+    key: 'SHAPE',
+    label: '構圖樣式',
+    options: [
+      { id: 1, label: '大頭特寫', value: 'closeup' },
+      { id: 2, label: '左右分割', value: 'split' },
+      { id: 3, label: '中置角色', value: 'center' },
+      { id: 4, label: '多圖拼貼', value: 'multi' },
+      { id: 5, label: '標題主導', value: 'text-heavy' }
     ]
   },
   {
     key: 'MEDIA',
-    label: '媒體類型',
+    label: '素材類型',
     options: [
-      { id: 1, label: '圖片', value: 'image' },
-      { id: 2, label: '影片', value: 'video' },
-      { id: 3, label: '動畫', value: 'animation' }
+      { id: 1, label: '靜態圖', value: 'image' },
+      { id: 2, label: '動圖 / 動態封面', value: 'animated' },
+      { id: 3, label: '影片頭圖', value: 'video' }
     ]
   },
   {
-    key: 'RANKING',
-    label: '排行',
+    key: 'CREATOR_TYPE',
+    label: '創作者類型',
     options: [
-      { id: 1, label: '熱門', value: 'popular' },
-      { id: 2, label: '最新', value: 'newest' }
+      { id: 1, label: 'Vtuber', value: 'vtuber' },
+      { id: 2, label: '實體 Youtuber', value: 'human' },
+      { id: 3, label: '企業品牌', value: 'brand' }
     ]
   }
 ]
