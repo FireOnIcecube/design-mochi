@@ -24,11 +24,9 @@ import {
 } from '@client/components/ui/form'
 
 import { Button } from '@client/components/ui/button'
-import { Filter, Search } from 'lucide-vue-next'
+import { Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
-import { useForm } from 'vee-validate'
-import { useRoute, useRouter } from 'vue-router'
-import { watch } from 'fs'
+import { useRouter } from 'vue-router'
 
 const props = defineProps<{
   filters: { key: string; label: string; options: { id: number; label: string; value: string }[] }[]
@@ -43,7 +41,6 @@ const toggleDialog = () => {
 // 初始化表單上的輸入欄位
 const keyword = ref('')
 
-const route = useRoute()
 const router = useRouter()
 
 function handleSubmit() {
