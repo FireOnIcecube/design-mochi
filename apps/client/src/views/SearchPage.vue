@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+</script>
 
 <template>
-  <h1>it work</h1>
+  <h1>{{ route.query }}</h1>
 </template>

@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/search',
-    name: 'SearchPage',
+    name: 'SearchResult',
     component: SearchPage,
     meta: { layout: DefaultLayout }
   },
