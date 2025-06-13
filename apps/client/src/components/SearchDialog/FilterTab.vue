@@ -29,6 +29,8 @@ onMounted(() => {
   props.filters.forEach((cat) => {
     selectedTags[cat.key] = new Set()
   })
+
+  updateSelectedTags()
 })
 
 function isChecked(catId: string, optId: number) {
