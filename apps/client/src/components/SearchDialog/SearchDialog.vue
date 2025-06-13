@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import FilterTab from './FilterTab.vue'
 import {
@@ -28,6 +28,11 @@ import { Filter, Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
 import { useForm } from 'vee-validate'
 import { useRoute, useRouter } from 'vue-router'
+import { watch } from 'fs'
+
+const props = defineProps<{
+  filters: { key: string; label: string; options: { id: number; label: string; value: string }[] }[]
+}>()
 
 // dialog 的開關
 const isOpen = ref(false)
@@ -45,80 +50,16 @@ function handleSubmit() {
   console.log('Form submitted!')
   console.info(`keyword : ${keyword.value}`)
   console.info(`selectedTags : ${JSON.stringify(selectedTags)} `)
-  router.push({ name: 'SearchPage' })
+  router.push({ name: 'SearchResult', query: { keyword: keyword.value, ...selectedTags } })
 }
-
-// mockFilterData
-const categories = [
-  {
-    key: 'CATEGORY',
-    label: '分類',
-    options: [
-      { id: 1, label: 'A', value: 'A' },
-      { id: 2, label: 'B', value: 'B' },
-      { id: 3, label: 'C', value: 'C' }
-    ]
-  },
-  {
-    key: 'TASTE',
-    label: '特色',
-    options: [
-      { id: 1, label: 'A', value: 'A' },
-      { id: 2, label: 'B', value: 'B' }
-    ]
-  },
-  {
-    key: 'TOPIC',
-    label: '主題',
-    options: [
-      { id: 1, label: 'X', value: 'X' },
-      { id: 2, label: 'Y', value: 'Y' }
-    ]
-  },
-  {
-    key: 'SHAPE',
-    label: '形狀',
-    options: [
-      { id: 1, label: 'A', value: 'A' },
-      { id: 2, label: 'B', value: 'B' }
-    ]
-  },
-  {
-    key: 'COLOR',
-    label: '顏色',
-    options: [
-      { id: 1, label: '紅色', value: 'red' },
-      { id: 2, label: '藍色', value: 'blue' },
-      { id: 3, label: '綠色', value: 'green' }
-    ]
-  },
-  {
-    key: 'MEDIA',
-    label: '媒體',
-    options: [
-      { id: 1, label: '測試項目 A', value: 'A' },
-      { id: 2, label: '測試項目 B', value: 'B' },
-      { id: 3, label: '測試項目 C', value: 'C' },
-      { id: 4, label: '測試項目 D', value: 'D' },
-      { id: 5, label: '測試項目 E', value: 'E' },
-      { id: 6, label: '測試項目 F', value: 'F' }
-    ]
-  },
-  {
-    key: 'RANKING',
-    label: '排行',
-    options: [
-      { id: 1, label: 'Top 1', value: '1' },
-      { id: 2, label: 'Top 2', value: '2' }
-    ]
-  }
-]
 
 const selectedTags = reactive<Record<string, number[]>>({})
 
 function updateSelectedTags(val: Record<string, number[]>) {
   Object.assign(selectedTags, val)
 }
+
+// 同步表單和 url query 的值
 
 // 用於顯示用戶選項的 ui ，暫不使用
 // const selectedTagList = computed(() => {
@@ -195,7 +136,7 @@ function updateSelectedTags(val: Record<string, number[]>) {
             <FormItem>
               <FormControl>
                 <FilterTab
-                  :categories="categories"
+                  :filters="props.filters"
                   v-bind="componentField"
                   class="mt-12 grow gap-0"
                   @update="updateSelectedTags"

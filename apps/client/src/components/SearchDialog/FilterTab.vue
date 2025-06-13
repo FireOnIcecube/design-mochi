@@ -4,7 +4,7 @@ import { Checkbox } from '@client/components/ui/checkbox'
 import { computed, onMounted, reactive, ref } from 'vue'
 
 const props = defineProps<{
-  categories: {
+  filters: {
     key: string
     label: string
     options: { id: number; label: string; value: string }[]
@@ -26,7 +26,7 @@ function updateSelectedTags() {
 
 // 初始化每個分類為空 Set
 onMounted(() => {
-  props.categories.forEach((cat) => {
+  props.filters.forEach((cat) => {
     selectedTags[cat.key] = new Set()
   })
 })
@@ -51,13 +51,13 @@ function toggleOption(catId: string, optId: number, checked: boolean | 'indeterm
 }
 
 function isAllSelected(catId: string) {
-  const category = props.categories.find((c) => c.key === catId)
+  const category = props.filters.find((c) => c.key === catId)
   const set = selectedTags[catId]
   return category && set?.size === category.options.length
 }
 
 function isIndeterminate(catId: string) {
-  const category = props.categories.find((c) => c.key === catId)
+  const category = props.filters.find((c) => c.key === catId)
   const set = selectedTags[catId]
   return category && set && set.size > 0 && set.size < category.options.length
 }
@@ -65,7 +65,7 @@ function isIndeterminate(catId: string) {
 function toggleAll(catId: string, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
 
-  const category = props.categories.find((c) => c.key === catId)
+  const category = props.filters.find((c) => c.key === catId)
   if (!category) return
 
   selectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.id)) : new Set()
@@ -73,12 +73,12 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
 </script>
 
 <template>
-  <Tabs :default-value="props.categories[0].key" class="overflow-x-hidden">
+  <Tabs :default-value="props.filters[0].key" class="overflow-x-hidden">
     <TabsList
       class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
     >
       <TabsTrigger
-        v-for="(category, index) in props.categories"
+        v-for="(category, index) in props.filters"
         :key="index"
         :value="category.key"
         class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
@@ -97,7 +97,7 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
 
     <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
       <TabsContent
-        v-for="(category, index) in props.categories"
+        v-for="(category, index) in props.filters"
         :key="index"
         :value="category.key"
         class="h-full"

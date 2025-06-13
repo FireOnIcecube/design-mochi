@@ -15,6 +15,10 @@ import {
   NavigationMenuViewport
 } from '@client/components/ui/navigation-menu'
 
+const props = defineProps<{
+  filters: { key: string; label: string; options: { id: number; label: string; value: string }[] }[]
+}>()
+
 const isCategoryOpen = ref(false)
 
 const toggleCategoryMenu = () => {
@@ -133,7 +137,7 @@ const categories = ref<Category[]>([
       <div
         class="group ml-12 flex cursor-pointer items-center justify-center bg-gray-200 dark:bg-gray-800"
       >
-        <SearchDialog />
+        <SearchDialog :filters="props.filters" />
       </div>
     </div>
   </div>
