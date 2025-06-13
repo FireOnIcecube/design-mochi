@@ -10,7 +10,7 @@ const props = defineProps<{
     options: { id: number; label: string; value: string }[]
   }[]
 }>()
-const selectedTags = reactive<Record<string, Set<number>>>({})
+const rawSelectedTags = reactive<Record<string, Set<number>>>({})
 
 const emit = defineEmits<{
   (e: 'update', selectedTags: Record<string, number[]>): void
@@ -18,7 +18,7 @@ const emit = defineEmits<{
 
 function updateSelectedTags() {
   const convertedTags = Object.fromEntries(
-    Object.entries(selectedTags).map(([k, v]) => [k, Array.from(v)])
+    Object.entries(rawSelectedTags).map(([k, v]) => [k, Array.from(v)])
   )
 
   emit('update', convertedTags)
@@ -27,19 +27,19 @@ function updateSelectedTags() {
 // 初始化每個分類為空 Set
 onMounted(() => {
   props.filters.forEach((cat) => {
-    selectedTags[cat.key] = new Set()
+    rawSelectedTags[cat.key] = new Set()
   })
 
   updateSelectedTags()
 })
 
 function isChecked(catId: string, optId: number) {
-  return selectedTags[catId]?.has(optId) ?? false
+  return rawSelectedTags[catId]?.has(optId) ?? false
 }
 
 function toggleOption(catId: string, optId: number, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
-  const set = selectedTags[catId]
+  const set = rawSelectedTags[catId]
   if (!set) return
 
   if (checked) {
@@ -49,18 +49,18 @@ function toggleOption(catId: string, optId: number, checked: boolean | 'indeterm
   }
 
   // 替換 Set 實例以觸發 reactivity
-  selectedTags[catId] = new Set(set)
+  rawSelectedTags[catId] = new Set(set)
 }
 
 function isAllSelected(catId: string) {
   const category = props.filters.find((c) => c.key === catId)
-  const set = selectedTags[catId]
+  const set = rawSelectedTags[catId]
   return category && set?.size === category.options.length
 }
 
 function isIndeterminate(catId: string) {
   const category = props.filters.find((c) => c.key === catId)
-  const set = selectedTags[catId]
+  const set = rawSelectedTags[catId]
   return category && set && set.size > 0 && set.size < category.options.length
 }
 
@@ -70,7 +70,7 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
   const category = props.filters.find((c) => c.key === catId)
   if (!category) return
 
-  selectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.id)) : new Set()
+  rawSelectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.id)) : new Set()
 }
 </script>
 
