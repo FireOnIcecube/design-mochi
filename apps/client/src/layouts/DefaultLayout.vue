@@ -5,9 +5,9 @@ import WebFooter from '@client/components/WebFooter.vue'
 import SearchBar from '@client/components/SearchBar.vue'
 import TopButton from '@client/components/TopButton.vue'
 
-const filters = [
+const thumbnailCategories = [
   {
-    key: 'STYLE',
+    id: 'STYLE',
     label: '設計風格',
     options: [
       { id: 1, label: '極簡', value: 'minimal' },
@@ -20,7 +20,7 @@ const filters = [
     ]
   },
   {
-    key: 'COLOR',
+    id: 'COLOR',
     label: '主色調',
     options: [
       { id: 1, label: '紅色', value: 'red' },
@@ -32,7 +32,7 @@ const filters = [
     ]
   },
   {
-    key: 'SHAPE',
+    id: 'SHAPE',
     label: '構圖樣式',
     options: [
       { id: 1, label: '大頭特寫', value: 'closeup' },
@@ -43,7 +43,7 @@ const filters = [
     ]
   },
   {
-    key: 'MEDIA',
+    id: 'MEDIA',
     label: '素材類型',
     options: [
       { id: 1, label: '靜態圖', value: 'image' },
@@ -52,7 +52,7 @@ const filters = [
     ]
   },
   {
-    key: 'CREATOR_TYPE',
+    id: 'CREATOR_TYPE',
     label: '創作者類型',
     options: [
       { id: 1, label: 'Vtuber', value: 'vtuber' },
@@ -70,7 +70,7 @@ const filters = [
     </header>
 
     <section class="sticky top-0 z-10 hidden xl:block">
-      <CategoryMenu :filters="filters" />
+      <CategoryMenu :thumbnailCategories="thumbnailCategories" />
     </section>
 
     <!-- Banner 暫不啟用-->

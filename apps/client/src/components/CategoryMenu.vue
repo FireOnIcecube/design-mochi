@@ -17,7 +17,11 @@ import {
 import { RouterLink } from 'vue-router'
 
 const props = defineProps<{
-  filters: { key: string; label: string; options: { id: number; label: string; value: string }[] }[]
+  thumbnailCategories: {
+    id: string
+    label: string
+    options: { id: number; label: string; value: string }[]
+  }[]
 }>()
 
 const isCategoryOpen = ref(false)
@@ -33,7 +37,7 @@ const toggleCategoryMenu = () => {
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
           <NavigationMenuItem
-            v-for="(category, categoryIndex) in props.filters"
+            v-for="(category, categoryIndex) in props.thumbnailCategories"
             :key="categoryIndex"
           >
             <NavigationMenuTrigger class="text-content dark:text-content-dark text-lg font-bold">{{
@@ -70,7 +74,7 @@ const toggleCategoryMenu = () => {
       <div
         class="group ml-12 flex cursor-pointer items-center justify-center bg-gray-200 dark:bg-gray-800"
       >
-        <SearchDialog :filters="props.filters" />
+        <SearchDialog :thumbnailCategories="props.thumbnailCategories" />
       </div>
     </div>
   </div>

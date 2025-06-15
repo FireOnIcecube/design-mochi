@@ -4,8 +4,8 @@ import { Checkbox } from '@client/components/ui/checkbox'
 import { computed, onMounted, reactive, ref } from 'vue'
 
 const props = defineProps<{
-  filters: {
-    key: string
+  thumbnailCategories: {
+    id: string
     label: string
     options: { id: number; label: string; value: string }[]
   }[]
@@ -26,8 +26,8 @@ function updateSelectedTags() {
 
 // 初始化每個分類為空 Set
 onMounted(() => {
-  props.filters.forEach((cat) => {
-    rawSelectedTags[cat.key] = new Set()
+  props.thumbnailCategories.forEach((cat) => {
+    rawSelectedTags[cat.id] = new Set()
   })
 
   updateSelectedTags()
@@ -53,13 +53,13 @@ function toggleOption(catId: string, optId: number, checked: boolean | 'indeterm
 }
 
 function isAllSelected(catId: string) {
-  const category = props.filters.find((c) => c.key === catId)
+  const category = props.thumbnailCategories.find((c) => c.id === catId)
   const set = rawSelectedTags[catId]
   return category && set?.size === category.options.length
 }
 
 function isIndeterminate(catId: string) {
-  const category = props.filters.find((c) => c.key === catId)
+  const category = props.thumbnailCategories.find((c) => c.id === catId)
   const set = rawSelectedTags[catId]
   return category && set && set.size > 0 && set.size < category.options.length
 }
@@ -67,7 +67,7 @@ function isIndeterminate(catId: string) {
 function toggleAll(catId: string, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
 
-  const category = props.filters.find((c) => c.key === catId)
+  const category = props.thumbnailCategories.find((c) => c.id === catId)
   if (!category) return
 
   rawSelectedTags[catId] = checked ? new Set(category.options.map((opt) => opt.id)) : new Set()
@@ -75,14 +75,14 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
 </script>
 
 <template>
-  <Tabs :default-value="props.filters[0].key" class="overflow-x-hidden">
+  <Tabs :default-value="props.thumbnailCategories[0].id" class="overflow-x-hidden">
     <TabsList
       class="max-h-1/2 mx-auto flex h-auto max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
     >
       <TabsTrigger
-        v-for="(category, index) in props.filters"
+        v-for="(category, index) in props.thumbnailCategories"
         :key="index"
-        :value="category.key"
+        :value="category.id"
         class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
       >
         <div class="flex space-x-2">
@@ -90,8 +90,8 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
           <input
             type="checkbox"
             disabled
-            :checked="isAllSelected(category.key)"
-            :indeterminate="isIndeterminate(category.key)"
+            :checked="isAllSelected(category.id)"
+            :indeterminate="isIndeterminate(category.id)"
           />
         </div>
       </TabsTrigger>
@@ -99,9 +99,9 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
 
     <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
       <TabsContent
-        v-for="(category, index) in props.filters"
+        v-for="(category, index) in props.thumbnailCategories"
         :key="index"
-        :value="category.key"
+        :value="category.id"
         class="h-full"
       >
         <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
@@ -112,10 +112,10 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
                 class="lg:text-md font-notosans select-none text-sm font-medium leading-none xl:text-lg"
               >
                 <Checkbox
-                  :modelValue="isAllSelected(category.key)"
+                  :modelValue="isAllSelected(category.id)"
                   @update:modelValue="
                     (checked) => {
-                      toggleAll(category.key, checked)
+                      toggleAll(category.id, checked)
                       updateSelectedTags()
                     }
                   "
@@ -136,10 +136,10 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
               >
                 <Checkbox
                   :id="option.id.toString()"
-                  :modelValue="isChecked(category.key, option.id)"
+                  :modelValue="isChecked(category.id, option.id)"
                   @update:modelValue="
                     (checked) => {
-                      toggleOption(category.key, option.id, checked)
+                      toggleOption(category.id, option.id, checked)
                       updateSelectedTags()
                     }
                   "

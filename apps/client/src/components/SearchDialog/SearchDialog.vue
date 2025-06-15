@@ -29,7 +29,11 @@ import { Input } from '@client/components/ui/input'
 import { useRouter } from 'vue-router'
 
 const props = defineProps<{
-  filters: { key: string; label: string; options: { id: number; label: string; value: string }[] }[]
+  thumbnailCategories: {
+    id: string
+    label: string
+    options: { id: number; label: string; value: string }[]
+  }[]
 }>()
 
 // dialog 的開關
@@ -132,7 +136,7 @@ function updateSelectedTags(val: Record<string, number[]>) {
             <FormItem>
               <FormControl>
                 <FilterTab
-                  :filters="props.filters"
+                  :thumbnailCategories="props.thumbnailCategories"
                   v-bind="componentField"
                   class="mt-12 grow gap-0"
                   @update="updateSelectedTags"
