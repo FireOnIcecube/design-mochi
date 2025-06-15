@@ -7,19 +7,6 @@ import TopButton from '@client/components/TopButton.vue'
 
 const filters = [
   {
-    key: 'CATEGORY',
-    label: '分類',
-    options: [
-      { id: 1, label: '遊戲實況', value: 'gaming' },
-      { id: 2, label: '日常雜談', value: 'talk' },
-      { id: 3, label: '音樂 / Cover', value: 'music' },
-      { id: 4, label: '開箱 / 評測', value: 'review' },
-      { id: 5, label: '教學 / 知識型', value: 'education' },
-      { id: 6, label: '節目單元 / 特輯', value: 'program' },
-      { id: 7, label: '搞笑 / 創意短片', value: 'comedy' }
-    ]
-  },
-  {
     key: 'STYLE',
     label: '設計風格',
     options: [
