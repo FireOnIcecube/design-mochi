@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
-import SearchForm from '@client/components/SearchForm.vue'
+// import SearchForm from '@client/components/SearchForm.vue'
 
 import { storage } from '../firebase'
 import {
@@ -96,7 +96,7 @@ async function uploadImage() {
 </script>
 
 <template>
-  <SearchForm :filterConfig="filterConfig" :modelValue="filterModel" @submit="handleSubmit" />
+  <!-- <SearchForm :filterConfig="filterConfig" :modelValue="filterModel" @submit="handleSubmit" /> -->
   <hr />
 
   <div class="mt-20 space-y-4 p-4">
