@@ -9,7 +9,8 @@
     "build:client": "pnpm --filter @app/client run build",
     "build-only:client": "pnpm --filter @app/client run build-only",
     "dev:admin": "pnpm --filter @app/admin run dev:admin",
-    "build:admin": "pnpm --filter @app/admin run build"
+    "build:admin": "pnpm --filter @app/admin run build",
+    "build-only:admin": "pnpm --filter @app/admin run build-only"
   },
   "keywords": [],
   "author": "",
