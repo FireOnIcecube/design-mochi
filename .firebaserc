@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "design-mochi"
-  }
+  },
+  "targets": {
+    "design-mochi": {
+      "hosting": {
+        "client": [
+          "design-mochi"
+        ],
+        "admin": [
+          "admin-design-mochi"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
