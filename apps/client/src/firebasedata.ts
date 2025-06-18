@@ -7,7 +7,7 @@ import {
   doc,
   where
 } from 'firebase/firestore'
-import { db, storage } from '../firebase'
+import { db, storage } from '../../../firebase'
 import { ref, uploadBytes, getStorage } from 'firebase/storage'
 
 // try {

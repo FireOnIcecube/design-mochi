@@ -16,7 +16,8 @@
       "@/*": ["./*"],
       "@client/*": ["./apps/client/src/*"],
       "@admin/*": ["./apps/admin/src/*"],
-      "@configs/*": ["./configs/*"]
+      "@configs/*": ["./configs/*"],
+      "@firebase/*": ["./firebase/*"]
     }
   },
   "files": [],
