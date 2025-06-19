@@ -3,7 +3,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
 // import SearchForm from '@client/components/SearchForm.vue'
 
-import { storage } from '@firebase/index'
+import { storage } from '@pkg/firebase'
 import {
   getStorage,
   ref as storageRef,
