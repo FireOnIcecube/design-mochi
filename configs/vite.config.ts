@@ -13,7 +13,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('../', import.meta.url)),
       '@client': fileURLToPath(new URL('../apps/client/src', import.meta.url)),
       '@admin': fileURLToPath(new URL('../apps/admin/src', import.meta.url)),
-      '@configs': fileURLToPath(new URL('../configs', import.meta.url))
+      '@configs': fileURLToPath(new URL('../configs', import.meta.url)),
+      '@pkg/firebase': fileURLToPath(new URL('../../packages/firebase', import.meta.url))
     }
   }
 })

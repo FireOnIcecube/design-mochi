@@ -16,6 +16,7 @@
       "@/*": ["./*"],
       "@client/*": ["./apps/client/src/*"],
       "@admin/*": ["./apps/admin/src/*"],
+      "@pkg/*": ["./packages/*"],
       "@configs/*": ["./configs/*"]
     }
   },
