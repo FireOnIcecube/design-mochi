@@ -5,10 +5,23 @@ import {
   serverTimestamp,
   getDoc,
   doc,
-  where
+  where,
+  setDoc
 } from 'firebase/firestore'
-import { db, storage } from '../../../packages/firebase'
+import { db, storage } from './index'
 import { ref, uploadBytes, getStorage } from 'firebase/storage'
+
+const customIds = ['z03888648@gmail.com', 'kgoe8869@gmail.com']
+
+try {
+  customIds.forEach(async (adminId) => {
+    const docRef = doc(db, 'admins', adminId)
+    await setDoc(docRef, {})
+    console.log('Document written with ID: ', docRef.id)
+  })
+} catch (e) {
+  console.log('Error adding document: ', e)
+}
 
 // try {
 //   const docRef = await addDoc(collection(db, 'users'), {
