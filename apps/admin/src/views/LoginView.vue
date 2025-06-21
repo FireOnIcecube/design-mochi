@@ -1,35 +1,54 @@
+<!-- src/views/LoginView.vue -->
 <template>
-  <div>
-    <h1>請登入</h1>
-    <div ref="uiContainer"></div>
+  <div class="container">
+    <h1>🔐 請使用 Google 登入</h1>
+    <button @click="login">Google 登入</button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { auth } from '@pkg/firebase'
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { useRouter } from 'vue-router'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import { checkWhitelist } from '@admin/whitelist'
 
-const uiContainer = ref<HTMLElement | null>(null)
+const auth = getAuth()
+const db = getFirestore()
 const router = useRouter()
 
-onMounted(() => {
-  const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth)
-  ui.start(uiContainer.value!, {
-    signInOptions: [
-      {
-        provider: 'google.com',
-      },
-    ],
-    signInSuccessUrl: '/', // 或使用 callback 自行導向
-    callbacks: {
-      signInSuccessWithAuthResult() {
-        router.push('/')
-        return false
-      },
-    },
-  })
-})
+async function login() {
+  try {
+    const provider = new GoogleAuthProvider()
+    const result = await signInWithPopup(auth, provider)
+
+    const email = result.user.email?.toLowerCase()
+    if (!email) throw new Error('找不到 Email')
+
+    const isAdminExist = await checkWhitelist(email)
+
+    if (!isAdminExist) {
+      alert('未授權帳號，將登出')
+      await signOut(auth)
+      return
+    }
+
+    // ✅ 通過驗證 → 導向首頁
+    router.push('/')
+  } catch (err) {
+    console.error('登入失敗', err)
+    alert('登入失敗，請稍後再試')
+  }
+}
 </script>
+
+<style scoped>
+.container {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+</style>

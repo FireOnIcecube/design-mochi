@@ -1,34 +1,18 @@
-<!-- <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
+<!-- src/views/Home.vue -->
 <template>
-  <main>
-    <TheWelcome />
-  </main>
-</template> -->
-
-<template>
-  <div>
-    <h1>歡迎回來，{{ user?.displayName }}</h1>
+  <div class="container">
+    <h1>🎉 歡迎進入主頁</h1>
+    <p>你已經成功登入，且通過白名單驗證！</p>
     <button @click="logout">登出</button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { auth } from '@pkg/firebase'
-import { onAuthStateChanged, signOut } from 'firebase/auth'
-import { ref, onMounted } from 'vue'
+import { getAuth, signOut } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 
-const user = ref(auth.currentUser)
 const router = useRouter()
-
-onMounted(() => {
-  onAuthStateChanged(auth, (u) => {
-    user.value = u
-  })
-})
+const auth = getAuth()
 
 function logout() {
   signOut(auth).then(() => {
@@ -36,3 +20,15 @@ function logout() {
   })
 }
 </script>
+
+<style scoped>
+.container {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+</style>
