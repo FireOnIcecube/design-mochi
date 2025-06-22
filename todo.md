@@ -16,3 +16,8 @@
 - 需要重新包裝各部分元件
 - 需要加入讓使用者查看自己所選 搜尋tag 的設計
 - 目前的 CategoryMenu 還有 SearchDialog 都需要 fetch category 資料，毫無復用性
+- 理解 // ⭐ 等待 Firebase auth 初始化
+  onAuthStateChanged(auth, () => {
+  app.use(router)
+  app.mount('#app')
+  })
