@@ -30,6 +30,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@headlessui/vue':
+        specifier: ^1.7.23
+        version: 1.7.23(vue@3.5.13)
       '@tailwindcss/postcss':
         specifier: ^4.1.5
         version: 4.1.5
@@ -1393,6 +1396,16 @@ packages:
       yargs: 17.7.2
     dev: false
 
+  /@headlessui/vue@1.7.23(vue@3.5.13):
+    resolution: {integrity: sha512-JzdCNqurrtuu0YW6QaDtR2PIYCKPUWq28csDyMvN4zmGccmE7lz40Is6hc3LA4HFeCI7sekZ/PQMTNmn9I/4Wg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@tanstack/vue-virtual': 3.13.8(vue@3.5.13)
+      vue: 3.5.13(typescript@5.8.3)
+    dev: false
+
   /@humanfs/core@0.19.1:
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -1962,7 +1975,7 @@ packages:
       vue: ^2.7.0 || ^3.0.0
     dependencies:
       '@tanstack/virtual-core': 3.13.8
-      vue: 3.5.13(typescript@5.4.5)
+      vue: 3.5.13(typescript@5.8.3)
     dev: false
 
   /@tsconfig/node20@20.1.5:
