@@ -14,7 +14,5 @@ app.use(createPinia())
 const auth = getAuth()
 
 // ⭐ 等待 Firebase auth 初始化
-onAuthStateChanged(auth, () => {
-  app.use(router)
-  app.mount('#app')
-})
+app.use(router)
+app.mount('#app')

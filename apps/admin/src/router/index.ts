@@ -49,15 +49,30 @@ const router = createRouter({
 //   })
 // })
 
-router.beforeEach((to, from, next) => {
-  const auth = getAuth()
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+let firebaseInit = new Promise((resolve) => {
+  onAuthStateChanged(auth, (user) => {
+    resolve(user)
+  })
+})
 
-  if (requiresAuth && !auth.currentUser) {
+router.beforeEach(async (to, from, next) => {
+  const user = await firebaseInit
+  if (to.meta.requiresAuth && !user) {
     next('/login')
   } else {
     next()
   }
 })
+
+// router.beforeEach((to, from, next) => {
+//   const auth = getAuth()
+//   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+
+//   if (requiresAuth && !auth.currentUser) {
+//     next('/login')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
