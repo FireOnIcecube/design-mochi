@@ -10,7 +10,7 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 import { doc, getDoc, getFirestore } from 'firebase/firestore'
-import { checkWhitelist } from '@admin/whitelist'
+import { checkWhitelist } from '@admin/utils/whitelist'
 
 const auth = getAuth()
 const db = getFirestore()
