@@ -1,10 +1,4 @@
 <!-- src/views/LoginView.vue -->
-<template>
-  <div class="container">
-    <h1>🔐 請使用 Google 登入</h1>
-    <button @click="login">Google 登入</button>
-  </div>
-</template>
 
 <script setup lang="ts">
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
@@ -39,6 +33,13 @@ async function login() {
   }
 }
 </script>
+
+<template>
+  <div class="container">
+    <h1>🔐 請使用 Google 登入</h1>
+    <button @click="login">Google 登入</button>
+  </div>
+</template>
 
 <style scoped>
 .container {
