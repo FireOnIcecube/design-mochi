@@ -13,7 +13,6 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore'
 import { checkWhitelist } from '@admin/utils/whitelist'
 
 const auth = getAuth()
-const db = getFirestore()
 const router = useRouter()
 
 async function login() {
