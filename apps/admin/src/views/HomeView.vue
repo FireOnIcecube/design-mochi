@@ -22,15 +22,3 @@ function logout() {
     <button @click="logout">登出</button>
   </div>
 </template>
-
-<style scoped>
-.container {
-  padding: 2rem;
-  font-family: sans-serif;
-}
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-}
-</style>

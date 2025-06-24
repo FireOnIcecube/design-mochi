@@ -30,6 +30,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.1.5
+        version: 4.1.5
       firebase:
         specifier: ^10.13.1
         version: 10.14.1
@@ -39,6 +42,12 @@ importers:
       pinia:
         specifier: ^3.0.1
         version: 3.0.3(typescript@5.8.3)(vue@3.5.13)
+      postcss:
+        specifier: ^8.4.42
+        version: 8.5.3
+      tailwindcss:
+        specifier: ^4.1.5
+        version: 4.1.5
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
@@ -238,7 +247,6 @@ packages:
   /@alloc/quick-lru@5.2.0:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
-    dev: true
 
   /@ampproject/remapping@2.3.0:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -1920,7 +1928,6 @@ packages:
       '@tailwindcss/oxide': 4.1.5
       postcss: 8.5.3
       tailwindcss: 4.1.5
-    dev: true
 
   /@tailwindcss/typography@0.5.16(tailwindcss@4.1.5):
     resolution: {integrity: sha512-0wDLwCVF5V3x3b1SGXPCDcdsbDHMBe+lkFzBRaHeLvNi+nrrnZ1lA18u+OTWO8iSWU2GxUOCvlXtDuqftc1oiA==}
