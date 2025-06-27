@@ -14,7 +14,7 @@ function logout() {
 
 <!-- src/views/Home.vue -->
 <template>
-  <div class="container">
+  <div class="container mx-auto bg-red-200">
     <h1>🎉 歡迎進入後台主頁</h1>
     <h1>用戶: {{ auth.currentUser?.displayName }}</h1>
     <h1>電子郵件: {{ auth.currentUser?.email }}</h1>

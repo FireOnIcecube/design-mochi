@@ -4,6 +4,7 @@ import LoginView from '../views/LoginView.vue'
 import { auth } from '@pkg/firebase/index'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import AboutView from '../views/AboutView.vue'
+import DefaultLayout from '../layouts/DefaultLayout.vue'
 
 // const router = createRouter({
 //   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +26,7 @@ import AboutView from '../views/AboutView.vue'
 // })
 
 const routes = [
-  { path: '/', component: HomeView, meta: { requiresAuth: true } },
+  { path: '/', component: HomeView, meta: { requiresAuth: true, layout: DefaultLayout } },
   { path: '/about', component: AboutView, meta: { requiresAuth: true } },
 
   { path: '/login', component: LoginView },
@@ -34,6 +35,10 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition
+    return { top: 0 }
+  },
 })
 
 // 導航守衛
