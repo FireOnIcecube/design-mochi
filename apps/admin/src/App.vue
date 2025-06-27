@@ -7,7 +7,7 @@ const router = useRoute()
 const layout = computed(() => router.meta.layout || DefaultLayout)
 </script>
 <template>
-  <div class="bg-blue-400">
+  <div class="bg-surface dark:bg-surface-dark transition-theme">
     <component :is="layout"> <RouterView /> </component>
   </div>
 </template>
