@@ -5,6 +5,7 @@ import { auth } from '@pkg/firebase/index'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import AboutView from '../views/AboutView.vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
+import BlankLayout from '../layouts/BlankLayout.vue'
 
 // const router = createRouter({
 //   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +30,7 @@ const routes = [
   { path: '/', component: HomeView, meta: { requiresAuth: true, layout: DefaultLayout } },
   { path: '/about', component: AboutView, meta: { requiresAuth: true } },
 
-  { path: '/login', component: LoginView },
+  { path: '/login', component: LoginView, meta: { layout: BlankLayout } },
 ]
 
 const router = createRouter({
