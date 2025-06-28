@@ -40,7 +40,7 @@ async function login() {
       <h1 class="font-notosans text-2xl text-gray-600">🔐 請使用 Google 登入</h1>
       <button
         @click="login"
-        class="rounded-md bg-blue-400 px-4 py-2 text-lg font-black text-white shadow-md transition-colors hover:bg-blue-500 active:translate-y-0.5 active:scale-95 active:bg-blue-700 active:shadow-inner"
+        class="cursor-pointer rounded-md bg-blue-400 px-4 py-2 text-lg font-black text-white shadow-md transition-colors hover:bg-blue-500 active:translate-y-0.5 active:scale-95 active:bg-blue-700 active:shadow-inner"
       >
         Google 登入
       </button>
