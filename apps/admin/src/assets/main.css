@@ -1,4 +1,19 @@
 @import 'tailwindcss';
-@plugin "daisyui";
-
+@plugin "daisyui" {
+  themes: false;
+}
 @config '../../tailwind.config.mjs';
+
+@font-face {
+  font-family: 'MantouSans';
+  src: url('./fonts/MantouSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSansTC';
+  src: url('./fonts/NotoSansTC-Regular.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
