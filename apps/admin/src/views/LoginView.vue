@@ -35,20 +35,17 @@ async function login() {
 </script>
 
 <template>
-  <div class="container">
-    <h1>🔐 請使用 Google 登入</h1>
-    <button @click="login">Google 登入</button>
+  <div class="grid h-screen place-items-center">
+    <div class="flex flex-col items-center gap-6">
+      <h1 class="font-notosans text-2xl text-gray-600">🔐 請使用 Google 登入</h1>
+      <button
+        @click="login"
+        class="rounded-md bg-blue-400 px-4 py-2 text-lg font-black text-white shadow-md transition-colors hover:bg-blue-500 active:translate-y-0.5 active:scale-95 active:bg-blue-700 active:shadow-inner"
+      >
+        Google 登入
+      </button>
+    </div>
   </div>
 </template>
 
-<style scoped>
-.container {
-  padding: 2rem;
-  font-family: sans-serif;
-}
-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-}
-</style>
+<style scoped></style>
