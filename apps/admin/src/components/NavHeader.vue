@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
-import { useDarkMode } from '@client/composables/useDarkMode'
+import { useDarkMode } from '@admin/composables/useDarkMode'
 
 const { isDarkMode, toggleDarkMode } = useDarkMode()
 </script>
@@ -14,7 +14,7 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
       to="/"
       class="font-mantou text-content dark:text-content-dark text-2xl hover:opacity-80 lg:text-4xl"
     >
-      設計麻糬
+      設計麻糬後台
     </router-link>
 
     <div>

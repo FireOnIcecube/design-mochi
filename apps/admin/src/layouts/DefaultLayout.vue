@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getAuth, signOut } from 'firebase/auth'
-import NavHeader from '@client/components/NavHeader.vue'
+import NavHeader from '@admin/components/NavHeader.vue'
 
 const auth = getAuth()
 </script>
