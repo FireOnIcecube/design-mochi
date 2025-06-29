@@ -3,5 +3,7 @@ import { ref } from 'process'
 </script>
 
 <template>
-  <div class="h-full max-w-[300px] bg-red-300 md:w-64">1234</div>
+  <div class="h-full w-64 bg-red-300 p-4">
+    <div class="h-full bg-blue-300">ffef</div>
+  </div>
 </template>
