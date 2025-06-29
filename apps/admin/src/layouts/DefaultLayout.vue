@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { getAuth, signOut } from 'firebase/auth'
 import NavHeader from '@admin/components/NavHeader.vue'
+import Sidebar from '../components/Sidebar.vue'
 
 const auth = getAuth()
 </script>
@@ -16,10 +17,15 @@ const auth = getAuth()
       <NavHeader />
     </header>
 
-    <header>共用導航</header>
+    <div class="flex flex-1">
+      <aside class="border-r dark:border-gray-700">
+        <Sidebar />
+        <!-- <router-link to="/">首頁</router-link>
+      <router-link to="/login">登入</router-link>
+      <router-link to="/about">關於</router-link> -->
+      </aside>
 
-    <router-view />
-
-    <footer>共用底部</footer>
+      <main class="container mx-auto bg-blue-400 p-4"><router-view /></main>
+    </div>
   </div>
 </template>
