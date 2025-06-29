@@ -35,7 +35,7 @@ async function login() {
 </script>
 
 <template>
-  <div class="grid h-screen place-items-center">
+  <div class="grid flex-1 place-items-center">
     <div class="flex flex-col items-center gap-6">
       <h1 class="font-notosans text-2xl text-gray-600">🔐 請使用 Google 登入</h1>
       <button
