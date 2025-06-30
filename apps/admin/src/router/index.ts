@@ -5,6 +5,8 @@ import { auth } from '@pkg/firebase/index'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import AboutView from '../views/AboutView.vue'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
+import CategoryPage from '../views/CategoryPage.vue'
+import ThumbnailPage from '../views/ThumbnailPage.vue'
 import BlankLayout from '../layouts/BlankLayout.vue'
 
 // const router = createRouter({
@@ -29,7 +31,8 @@ import BlankLayout from '../layouts/BlankLayout.vue'
 const routes = [
   { path: '/', component: HomeView, meta: { requiresAuth: true, layout: DefaultLayout } },
   { path: '/about', component: AboutView, meta: { requiresAuth: true } },
-
+  { path: '/thumbnails', component: ThumbnailPage, meta: { requiresAuth: true } },
+  { path: '/categories', component: CategoryPage, meta: { requiresAuth: true } },
   { path: '/login', component: LoginView, meta: { layout: BlankLayout } },
 ]
 
