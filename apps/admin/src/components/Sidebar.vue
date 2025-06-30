@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import { signOut, getAuth } from 'firebase/auth'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 
+const route = useRoute()
 const router = useRouter()
 const auth = getAuth()
 
 const isOpen = ref(true)
+const isActive = (path: string) => route.path.startsWith(path)
 
 function logout() {
   signOut(auth)
@@ -21,8 +23,8 @@ function logout() {
 }
 
 const links = [
-  { name: '管理封面', path: 'thumbnails' },
-  { name: '管理類別', path: 'categories' },
+  { name: '管理封面', path: '/thumbnails' },
+  { name: '管理類別', path: '/categories' },
 ]
 </script>
 
@@ -37,6 +39,7 @@ const links = [
           <router-link
             :to="{ path: link.path }"
             class="block cursor-pointer rounded px-4 py-2 text-gray-700 transition-colors select-none hover:bg-gray-200 active:scale-95 dark:text-gray-300 dark:hover:bg-gray-700"
+            :class="{ 'bg-gray-200 dark:bg-gray-700': isActive(link.path) }"
           >
             <span class="text-lg font-black"> {{ link.name }} </span>
           </router-link>
