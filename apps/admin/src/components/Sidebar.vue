@@ -50,7 +50,10 @@ const links = [
       </button>
     </div>
 
-    <div class="absolute top-4 right-0 translate-x-full bg-gray-700" @click="isOpen = !isOpen">
+    <div
+      class="absolute top-4 right-0 translate-x-full bg-gray-300 dark:bg-gray-700"
+      @click="isOpen = !isOpen"
+    >
       <Icon
         :icon="isOpen ? 'fe:arrow-left' : 'fe:arrow-right'"
         class="text-content dark:text-content-dark h-8 w-8 cursor-pointer transition-transform duration-300 lg:h-10 lg:w-10"
