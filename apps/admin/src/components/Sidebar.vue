@@ -2,6 +2,7 @@
 import { signOut, getAuth } from 'firebase/auth'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Icon } from '@iconify/vue'
 
 const router = useRouter()
 const auth = getAuth()
@@ -49,8 +50,11 @@ const links = [
       </button>
     </div>
 
-    <div class="absolute top-4 right-0 translate-x-full bg-yellow-300" @click="isOpen = !isOpen">
-      123456
+    <div class="absolute top-4 right-0 translate-x-full bg-gray-700" @click="isOpen = !isOpen">
+      <Icon
+        :icon="isOpen ? 'fe:arrow-left' : 'fe:arrow-right'"
+        class="text-content dark:text-content-dark h-8 w-8"
+      />
     </div>
   </div>
 </template>
