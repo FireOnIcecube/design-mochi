@@ -8,7 +8,7 @@ const auth = getAuth()
 function logout() {
   signOut(auth)
     .then(() => {
-      router.push('/login')
+      router.go(0)
     })
     .catch((error) => {
       console.error('登出失敗:', error)
