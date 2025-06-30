@@ -5,6 +5,8 @@ import ThumbnailDetail from '@client/views/ThumbnailDetail.vue'
 import DefaultLayout from '@client/layouts/DefaultLayout.vue'
 import SearchPage from '@/apps/client/src/views/SearchPage.vue'
 import TestPage from '@/apps/client/src/views/TestPage.vue'
+import NotFound from '../views/NotFound.vue'
+import BlankLayout from '@client/layouts/BlankLayout.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -30,6 +32,11 @@ const routes: RouteRecordRaw[] = [
     name: 'TestPage',
     component: TestPage,
     meta: { layout: DefaultLayout }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
+    meta: { layout: BlankLayout }
   }
 
   // admin

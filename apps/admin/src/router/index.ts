@@ -8,6 +8,7 @@ import DefaultLayout from '../layouts/DefaultLayout.vue'
 import CategoryPage from '../views/CategoryPage.vue'
 import ThumbnailPage from '../views/ThumbnailPage.vue'
 import BlankLayout from '../layouts/BlankLayout.vue'
+import NotFound from '../views/NotFound.vue'
 
 // const router = createRouter({
 //   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,7 @@ const routes = [
   { path: '/thumbnails', component: ThumbnailPage, meta: { requiresAuth: true } },
   { path: '/categories', component: CategoryPage, meta: { requiresAuth: true } },
   { path: '/login', component: LoginView, meta: { layout: BlankLayout } },
+  { path: '/:pathMatch(.*)*', component: NotFound, meta: { layout: BlankLayout } },
 ]
 
 const router = createRouter({
