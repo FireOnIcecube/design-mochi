@@ -5,9 +5,8 @@ import { useRouter } from 'vue-router'
 const auth = getAuth()
 </script>
 
-<!-- src/views/Home.vue -->
 <template>
-  <div class="bg-red-200">
+  <div class="text-content dark:text-content-dark">
     <h1>🎉 歡迎進入後台主頁</h1>
     <h1>用戶: {{ auth.currentUser?.displayName }}</h1>
     <h1>電子郵件: {{ auth.currentUser?.email }}</h1>

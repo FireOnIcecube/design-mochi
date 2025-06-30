@@ -25,7 +25,7 @@ const auth = getAuth()
       <router-link to="/about">關於</router-link> -->
       </aside>
 
-      <main class="container mx-auto overflow-auto p-4"><router-view /></main>
+      <main class="container mx-auto mt-8 overflow-auto p-4 md:mt-0 md:ml-12"><router-view /></main>
     </div>
   </div>
 </template>
