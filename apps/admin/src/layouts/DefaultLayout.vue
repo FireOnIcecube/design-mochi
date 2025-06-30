@@ -8,11 +8,6 @@ const auth = getAuth()
 
 <template>
   <div class="flex h-screen flex-col">
-    <!-- <header>
-      <div>{{ auth.currentUser?.displayName }}</div>
-      <div>{{ auth.currentUser?.email }}</div>
-    </header> -->
-
     <header class="border-b px-4 lg:p-4 dark:border-gray-700">
       <NavHeader />
     </header>
@@ -20,12 +15,11 @@ const auth = getAuth()
     <div class="flex flex-1 overflow-hidden">
       <aside class="border-r dark:border-gray-700">
         <Sidebar />
-        <!-- <router-link to="/">首頁</router-link>
-      <router-link to="/login">登入</router-link>
-      <router-link to="/about">關於</router-link> -->
       </aside>
 
-      <main class="container mx-auto mt-8 overflow-auto p-4 md:mt-0 md:ml-12"><router-view /></main>
+      <main class="container mx-auto mt-10 overflow-auto p-4 md:mt-0 md:ml-12">
+        <router-view />
+      </main>
     </div>
   </div>
 </template>
