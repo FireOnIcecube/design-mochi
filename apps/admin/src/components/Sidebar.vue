@@ -23,8 +23,8 @@ function logout() {
 }
 
 const links = [
-  { name: '管理封面', path: '/thumbnails' },
-  { name: '管理類別', path: '/categories' },
+  { label: '管理封面', path: '/thumbnails' },
+  { label: '管理類別', path: '/categories' },
 ]
 </script>
 
@@ -41,7 +41,7 @@ const links = [
             class="block cursor-pointer rounded px-4 py-2 text-gray-700 transition-colors select-none hover:bg-gray-200 active:scale-95 dark:text-gray-300 dark:hover:bg-gray-700"
             :class="{ 'bg-gray-200 dark:bg-gray-700': isActive(link.path) }"
           >
-            <span class="text-lg font-black"> {{ link.name }} </span>
+            <span class="text-lg font-black"> {{ link.label }} </span>
           </router-link>
         </li>
       </ul>
