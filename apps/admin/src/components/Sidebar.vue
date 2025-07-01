@@ -34,7 +34,7 @@ const links = [
       class="fixed flex flex-1 flex-col overflow-hidden bg-gray-100 transition-all duration-300 ease-in-out md:static dark:bg-gray-800"
       :class="isOpen ? ['w-64', 'p-4'] : 'w-0'"
     >
-      <ul class="mt-10 flex-1 md:mt-0">
+      <ul class="mt-10 flex-1 md:mt-0" :class="{ hidden: !isOpen }">
         <li v-for="link in links" :key="link.path" class="mb-2">
           <router-link
             :to="{ path: link.path }"
@@ -47,6 +47,7 @@ const links = [
       </ul>
       <button
         class="bg-surface-dark dark:bg-surface cursor-pointer rounded-lg py-2 shadow-md transition-colors hover:bg-gray-700 active:scale-95 active:shadow-inner dark:hover:bg-gray-200"
+        :class="{ hidden: !isOpen }"
         @click="logout"
       >
         <span class="text-content-dark dark:text-content font-notosans text-lg">登出</span>
