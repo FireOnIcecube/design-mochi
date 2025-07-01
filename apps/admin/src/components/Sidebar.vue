@@ -26,6 +26,23 @@ const links = [
   { label: '管理封面', path: '/thumbnails' },
   { label: '管理類別', path: '/categories' },
 ]
+
+// const menuItems = [
+//   {
+//     title: '管理封面',
+//     children: [
+//       { label: '子頁面 A1', path: '/a/a1' },
+//       { label: '子頁面 A2', path: '/a/a2' },
+//     ],
+//   },
+//   {
+//     title: '管理類別',
+//     children: [
+//       { label: '子頁面 B1', path: '/b/b1' },
+//       { label: '子頁面 B2', path: '/b/b2' },
+//     ],
+//   },
+// ]
 </script>
 
 <template>
