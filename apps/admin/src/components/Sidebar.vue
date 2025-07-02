@@ -10,7 +10,6 @@ const router = useRouter()
 const auth = getAuth()
 
 const isOpen = ref(true)
-const isActive = (path: string) => route.path.startsWith(path)
 
 function logout() {
   signOut(auth)
@@ -67,16 +66,19 @@ const menuItems = [
               <template #default="{ open }">
                 <!-- 主分類 -->
                 <DisclosureButton
-                  class="w-full px-2 py-1 text-left font-bold hover:bg-gray-200 dark:hover:bg-gray-700"
+                  class="w-full px-4 py-2 font-bold hover:bg-gray-200 dark:hover:bg-gray-700"
+                  :class="{ 'bg-gray-200 dark:bg-gray-700': open }"
                 >
-                  <div class="flex items-center justify-between text-lg font-black">
+                  <div
+                    class="text-content dark:text-content-dark flex items-center justify-between text-lg font-black"
+                  >
                     <span>{{ item.title }}</span>
                     <span>{{ open ? '−' : '+' }}</span>
                   </div>
                 </DisclosureButton>
 
                 <!-- 子分類 -->
-                <DisclosurePanel class="space-y-1 pt-1 pl-4">
+                <DisclosurePanel class="space-y-2 pt-1 pl-4">
                   <router-link
                     v-for="link in item.children"
                     :key="link.path"
@@ -84,7 +86,9 @@ const menuItems = [
                     class="block rounded px-2 py-1 hover:bg-gray-300 dark:hover:bg-gray-700"
                     :class="{ 'bg-blue-500 text-white': route.path === link.path }"
                   >
-                    {{ link.label }}
+                    <span class="text-content dark:text-content-dark text-md">{{
+                      link.label
+                    }}</span>
                   </router-link>
                 </DisclosurePanel>
               </template>
