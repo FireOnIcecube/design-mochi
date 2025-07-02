@@ -84,9 +84,9 @@ const menuItems = [
                     :key="link.path"
                     :to="link.path"
                     class="block rounded px-2 py-1 hover:bg-gray-300 dark:hover:bg-gray-700"
-                    :class="{ 'bg-blue-500 text-white': route.path === link.path }"
+                    :class="{ 'bg-blue-400 text-white': route.path === link.path }"
                   >
-                    <span class="text-content dark:text-content-dark text-md">{{
+                    <span class="text-content dark:text-content-dark text-md font-notosans">{{
                       link.label
                     }}</span>
                   </router-link>
