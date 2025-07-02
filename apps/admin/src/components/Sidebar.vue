@@ -48,7 +48,7 @@ const menuItems = [
 <template>
   <div class="relative flex h-full">
     <div
-      class="fixed overflow-hidden bg-gray-100 transition-all duration-300 ease-in-out md:static dark:bg-gray-800"
+      class="absolute h-full overflow-hidden bg-gray-100 transition-all duration-300 ease-in-out md:static dark:bg-gray-800"
       :class="isOpen ? ['w-64', 'p-4'] : 'w-0'"
     >
       <div class="flex h-full w-full flex-col" :class="{ hidden: !isOpen }">
