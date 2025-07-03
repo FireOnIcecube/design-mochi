@@ -83,12 +83,13 @@ const menuItems = [
                     v-for="link in item.children"
                     :key="link.path"
                     :to="link.path"
-                    class="block rounded px-2 py-1 hover:bg-gray-300 dark:hover:bg-gray-700"
-                    :class="{ 'bg-blue-400 text-white': route.path === link.path }"
+                    class="text-md block rounded px-2 py-1 font-semibold"
+                    :class="{
+                      'bg-blue-400 text-white': route.path === link.path,
+                      'hover:bg-gray-300 dark:hover:bg-gray-700': route.path !== link.path,
+                    }"
                   >
-                    <span class="text-content dark:text-content-dark text-md font-notosans">{{
-                      link.label
-                    }}</span>
+                    {{ link.label }}
                   </router-link>
                 </DisclosurePanel>
               </template>
