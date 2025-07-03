@@ -83,7 +83,7 @@ const menuItems = [
                     v-for="link in item.children"
                     :key="link.path"
                     :to="link.path"
-                    class="text-md block rounded px-2 py-1 font-semibold"
+                    class="text-md text-content dark:text-content-dark block rounded px-2 py-1 font-semibold"
                     :class="{
                       'bg-blue-400 text-white': route.path === link.path,
                       'hover:bg-gray-300 dark:hover:bg-gray-700': route.path !== link.path,
