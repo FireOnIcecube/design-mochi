@@ -17,7 +17,7 @@ const auth = getAuth()
         <Sidebar />
       </aside>
 
-      <div class="mt-10 flex-1 overflow-auto">
+      <div class="mt-10 flex-1 overflow-auto md:ml-12">
         <main class="container mx-auto p-4">
           <router-view />
         </main>
