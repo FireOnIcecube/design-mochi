@@ -175,23 +175,29 @@ async function uploadThumbnail() {
     </div>
 
     <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-2">
-      <div v-if="thumbnailURL" class="text-content dark:text-content-dark text-md font-semibold">
+      <div
+        v-if="thumbnailURL"
+        class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
+      >
         <div class="h-12 overflow-y-auto">
           <p>{{ videoTitle }}</p>
         </div>
-        <img :src="thumbnailURL" class="rounded shadow" />
+        <img :src="thumbnailURL" class="flex-1 rounded object-cover shadow" />
         <div v-if="uploadURL" class="mt-4">
           <p>✅ 縮圖上傳成功！</p>
           <a :href="uploadURL" target="_blank" class="text-blue-600 underline">點此開啟縮圖</a>
         </div>
       </div>
 
-      <div v-if="thumbnailURL" class="text-content dark:text-content-dark text-md font-semibold">
+      <div
+        v-if="thumbnailURL"
+        class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
+      >
         <div class="h-12">
           <p>選擇 Tag</p>
         </div>
 
-        <div class="bg-surface border-outline h-full w-full rounded border-2">1</div>
+        <div class="bg-surface border-outline h-full w-full flex-1 rounded border-2">1</div>
       </div>
     </div>
   </div>
