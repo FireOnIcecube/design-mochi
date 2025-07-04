@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
+import {
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+  getDownloadURL,
+  uploadBytesResumable,
+} from 'firebase/storage'
 import { storage } from '@pkg/firebase'
+import imageCompression from 'browser-image-compression'
 
 // 狀態變數
 const youtubeURL = ref('')
@@ -10,6 +17,9 @@ const videoID = ref('')
 const videoTitle = ref('')
 
 const uploadURL = ref('')
+
+const compressedSizeMB = ref<number | null>(null)
+const uploadProgress = ref(0)
 
 // 依序嘗試多個解析度
 const fallbackResolutions = [
@@ -27,6 +37,16 @@ function extractVideoID(url: string): string | null {
   return match ? match[1] : null
 }
 
+function handleInput() {
+  // 清除之前的結果
+  thumbnailURL.value = ''
+  videoID.value = ''
+  videoTitle.value = ''
+  uploadURL.value = ''
+  compressedSizeMB.value = null
+  uploadProgress.value = 0
+}
+
 // 擷取縮圖與標題
 async function fetchThumbnail() {
   const id = extractVideoID(youtubeURL.value)
@@ -36,7 +56,7 @@ async function fetchThumbnail() {
   }
 
   videoID.value = id
-
+  uploadURL.value = ''
   // 以 fallback 方式取得縮圖
   for (const resolution of fallbackResolutions) {
     try {
@@ -65,18 +85,48 @@ async function fetchThumbnail() {
 
 // 上傳縮圖到 Firebase
 async function uploadThumbnail() {
-  if (!thumbnailURL.value || !videoTitle.value) return
+  if (!thumbnailURL.value || !videoTitle.value) {
+    alert('請先擷取縮圖和標題')
+    return
+  }
 
   try {
     const response = await fetch(thumbnailURL.value)
     const blob = await response.blob()
 
+    const options = {
+      maxSizeMB: 1, // 最大 1MB
+      maxWidthOrHeight: 1920, // 最大寬高 1280px
+      useWebWorker: true, // 使用 Web Worker 進行壓縮
+    }
+    const file = new File([blob], `${videoID.value}.jpg`, { type: blob.type })
+    const compressedBlob = await imageCompression(file, options)
+
     // 生成檔名
     const safeTitle = videoID.value
     const filename = `thumbnails/${safeTitle}.jpg`
-
     const ref = storageRef(storage, filename)
-    await uploadBytes(ref, blob)
+
+    const uploadTask = uploadBytesResumable(ref, compressedBlob)
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        uploadProgress.value = Math.round(progress)
+        console.log(`上傳進度: ${uploadProgress.value}%`)
+      },
+      (error) => {
+        console.error('上傳錯誤:', error)
+      },
+      async () => {
+        // 上傳完成後獲取下載 URL
+        uploadURL.value = await getDownloadURL(uploadTask.snapshot.ref)
+        compressedSizeMB.value = compressedBlob.size / (1024 * 1024) // 轉換為 MB
+        console.log('上傳成功:', uploadURL.value)
+      },
+    )
+
     uploadURL.value = await getDownloadURL(ref)
   } catch (err) {
     console.error('上傳錯誤:', err)
@@ -93,18 +143,35 @@ async function uploadThumbnail() {
       v-model="youtubeURL"
       placeholder="輸入 YouTube 網址"
       class="w-full border p-2"
+      @input="handleInput"
     />
     <div class="space-x-4">
-      <button @click="fetchThumbnail" class="rounded bg-blue-500 px-4 py-2 text-white">
+      <button
+        @click="fetchThumbnail"
+        class="cursor-pointer rounded bg-blue-500 px-4 py-2 text-white"
+      >
         預覽縮圖
       </button>
       <button
         @click="uploadThumbnail"
         :disabled="!thumbnailURL"
-        class="mt-4 rounded bg-green-500 px-4 py-2 text-white"
+        class="mt-4 cursor-pointer rounded bg-green-500 px-4 py-2 text-white"
       >
         上傳縮圖到 Firebase
       </button>
+    </div>
+
+    <div v-if="compressedSizeMB !== null" class="mt-2 text-sm text-gray-600">
+      壓縮後大小：{{ compressedSizeMB }} MB
+    </div>
+
+    <div v-if="uploadProgress > 0" class="mt-2 w-full rounded bg-gray-200">
+      <div
+        class="rounded bg-green-500 py-1 text-center text-sm text-white transition-all"
+        :style="{ width: uploadProgress + '%' }"
+      >
+        上傳中 {{ uploadProgress }}%
+      </div>
     </div>
 
     <div v-if="thumbnailURL" class="mt-4">
