@@ -18,7 +18,7 @@ const auth = getAuth()
       </aside>
 
       <div class="mt-10 flex-1 overflow-auto md:ml-8">
-        <main class="container mx-auto p-4">
+        <main class="container mx-auto h-full p-4">
           <router-view />
         </main>
       </div>

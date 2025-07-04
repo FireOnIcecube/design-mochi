@@ -135,7 +135,7 @@ async function uploadThumbnail() {
 </script>
 
 <template>
-  <div class="space-y-4 p-4">
+  <div class="flex h-full flex-col space-y-4 p-4">
     <h1 class="text-content dark:text-content-dark text-xl font-bold">上傳 YouTube 縮圖</h1>
 
     <input
@@ -174,14 +174,25 @@ async function uploadThumbnail() {
       </div>
     </div>
 
-    <div v-if="thumbnailURL" class="mt-4">
-      <p class="text-content dark:text-content-dark font-medium">影片標題：{{ videoTitle }}</p>
-      <img :src="thumbnailURL" class="max-w-xl rounded shadow" />
-    </div>
+    <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div v-if="thumbnailURL" class="text-content dark:text-content-dark text-md font-semibold">
+        <div class="h-12 overflow-y-auto">
+          <p>{{ videoTitle }}</p>
+        </div>
+        <img :src="thumbnailURL" class="rounded shadow" />
+        <div v-if="uploadURL" class="mt-4">
+          <p>✅ 縮圖上傳成功！</p>
+          <a :href="uploadURL" target="_blank" class="text-blue-600 underline">點此開啟縮圖</a>
+        </div>
+      </div>
 
-    <div v-if="uploadURL" class="mt-4">
-      <p class="text-content dark:text-content-dark font-medium">✅ 縮圖上傳成功！</p>
-      <a :href="uploadURL" target="_blank" class="text-blue-600 underline">點此開啟縮圖</a>
+      <div v-if="thumbnailURL" class="text-content dark:text-content-dark text-md font-semibold">
+        <div class="h-12">
+          <p>選擇 Tag</p>
+        </div>
+
+        <div class="bg-surface w-full">1</div>
+      </div>
     </div>
   </div>
 </template>
