@@ -5,19 +5,9 @@
 - 搜尋頁面
 - 分頁
 - 收藏功能
-- 後台
-- 之後可以將搜尋和表單連動
 - 重新設計 fire store 的資料結構
 
 ### 技術債
 
-- 搞清楚 firebase auth 的運作機制
-- 寫後台時需要重新配置各項 config
 - 需要重新包裝各部分元件
-- 需要加入讓使用者查看自己所選 搜尋tag 的設計
-- 目前的 CategoryMenu 還有 SearchDialog 都需要 fetch category 資料，毫無復用性
-- 理解 // ⭐ 等待 Firebase auth 初始化
-  onAuthStateChanged(auth, () => {
-  app.use(router)
-  app.mount('#app')
-  })
+- 理解 圖片上傳的原理
