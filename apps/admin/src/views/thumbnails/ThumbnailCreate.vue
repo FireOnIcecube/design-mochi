@@ -36,18 +36,18 @@ async function fetchThumbnail() {
   }
 
   videoID.value = id
-  thumbnailURL.value = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
 
   // 以 fallback 方式取得縮圖
-
-  try {
-    const response = await fetch(thumbnailURL.value)
-    if (!response.ok) {
-      thumbnailURL.value = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
+  for (const resolution of fallbackResolutions) {
+    try {
+      const response = await fetch(`https://i.ytimg.com/vi/${id}/${resolution}`)
+      if (response.ok) {
+        thumbnailURL.value = `https://i.ytimg.com/vi/${id}/${resolution}`
+        break
+      }
+    } catch (e) {
+      console.error(`無法取得 ${resolution} 縮圖`)
     }
-  } catch (e) {
-    console.error('無法取得最高解析度縮圖，使用預設縮圖')
-    thumbnailURL.value = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
   }
 
   // 用 oEmbed API 抓取標題（安全快速）
@@ -72,8 +72,8 @@ async function uploadThumbnail() {
     const blob = await response.blob()
 
     // 生成檔名
-    const safeTitle = videoTitle.value.replace(/[^\w\u4e00-\u9fa5\s-]/g, '_').slice(0, 100)
-    const filename = `youtube_thumbnails/${safeTitle}-${Date.now()}.jpg`
+    const safeTitle = videoID.value
+    const filename = `thumbnails/${safeTitle}.jpg`
 
     const ref = storageRef(storage, filename)
     await uploadBytes(ref, blob)
@@ -86,7 +86,7 @@ async function uploadThumbnail() {
 
 <template>
   <div class="space-y-4 p-4">
-    <h1 class="text-xl font-bold">上傳 YouTube 縮圖</h1>
+    <h1 class="text-content dark:text-content-dark text-xl font-bold">上傳 YouTube 縮圖</h1>
 
     <input
       type="text"
@@ -94,25 +94,26 @@ async function uploadThumbnail() {
       placeholder="輸入 YouTube 網址"
       class="w-full border p-2"
     />
-    <button @click="fetchThumbnail" class="rounded bg-blue-500 px-4 py-2 text-white">
-      預覽縮圖
-    </button>
-
-    <div v-if="thumbnailURL" class="mt-4">
-      <p class="font-medium">影片標題：{{ videoTitle }}</p>
-      <img :src="thumbnailURL" class="max-w-xs rounded shadow" />
+    <div class="space-x-4">
+      <button @click="fetchThumbnail" class="rounded bg-blue-500 px-4 py-2 text-white">
+        預覽縮圖
+      </button>
+      <button
+        @click="uploadThumbnail"
+        :disabled="!thumbnailURL"
+        class="mt-4 rounded bg-green-500 px-4 py-2 text-white"
+      >
+        上傳縮圖到 Firebase
+      </button>
     </div>
 
-    <button
-      @click="uploadThumbnail"
-      :disabled="!thumbnailURL"
-      class="mt-4 rounded bg-green-500 px-4 py-2 text-white"
-    >
-      上傳縮圖到 Firebase
-    </button>
+    <div v-if="thumbnailURL" class="mt-4">
+      <p class="text-content dark:text-content-dark font-medium">影片標題：{{ videoTitle }}</p>
+      <img :src="thumbnailURL" class="max-w-xl rounded shadow" />
+    </div>
 
     <div v-if="uploadURL" class="mt-4">
-      ✅ 上傳成功！<br />
+      <p class="text-content dark:text-content-dark font-medium">✅ 縮圖上傳成功！</p>
       <a :href="uploadURL" target="_blank" class="text-blue-600 underline">點此開啟縮圖</a>
     </div>
   </div>
