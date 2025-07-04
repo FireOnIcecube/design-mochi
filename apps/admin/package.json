@@ -17,6 +17,7 @@
     "@iconify/vue": "^4.1.2",
     "@tailwindcss/postcss": "^4.1.5",
     "@vueuse/core": "^11.3.0",
+    "browser-image-compression": "^2.0.2",
     "firebase": "^10.13.1",
     "firebaseui": "^6.1.0",
     "pinia": "^3.0.1",
