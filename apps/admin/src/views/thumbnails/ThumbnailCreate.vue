@@ -191,7 +191,7 @@ async function uploadThumbnail() {
           <p>選擇 Tag</p>
         </div>
 
-        <div class="bg-surface w-full">1</div>
+        <div class="bg-surface w-full rounded">1</div>
       </div>
     </div>
   </div>
