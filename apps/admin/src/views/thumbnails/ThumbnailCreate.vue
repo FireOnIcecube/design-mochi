@@ -174,12 +174,12 @@ async function uploadThumbnail() {
       </div>
     </div>
 
-    <div class="mt-4 grid grid-cols-1 gap-8 md:grid-cols-2">
+    <div class="mt-4 grid grid-cols-1 gap-12 md:grid-cols-2">
       <div
         v-if="thumbnailURL"
         class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
       >
-        <div class="h-12 overflow-y-auto">
+        <div class="h-8 overflow-y-auto">
           <p>{{ videoTitle }}</p>
         </div>
         <img :src="thumbnailURL" class="flex-1 rounded object-cover shadow" />
@@ -193,11 +193,13 @@ async function uploadThumbnail() {
         v-if="thumbnailURL"
         class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
       >
-        <div class="h-12">
+        <div class="h-8">
           <p>選擇 Tag</p>
         </div>
 
-        <div class="bg-surface border-outline h-full w-full flex-1 rounded border-2">1</div>
+        <div class="bg-surface border-outline h-full min-h-64 w-full flex-1 rounded border-2">
+          1
+        </div>
       </div>
     </div>
   </div>
