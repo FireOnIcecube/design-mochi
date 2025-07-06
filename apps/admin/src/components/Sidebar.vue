@@ -37,10 +37,7 @@ const menuItems = [
   },
   {
     title: '管理類別',
-    children: [
-      { label: '管理類別', path: '/categories' },
-      { label: '增加類別', path: '/categories/create' },
-    ],
+    children: [{ label: '管理列表', path: '/categories' }],
   },
 ]
 </script>
