@@ -60,7 +60,7 @@ function deleteCategory(id) {
 <template>
   <div class="p-6">
     <div class="mb-4 flex items-center justify-between">
-      <h1 class="text-content text-2xl font-bold">分類管理</h1>
+      <h1 class="text-content dark:text-content-dark text-2xl font-bold">分類管理</h1>
       <button
         class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         @click="openCreateModal"
@@ -82,7 +82,7 @@ function deleteCategory(id) {
       <thead class="bg-gray-100">
         <tr>
           <th class="border-b px-4 py-2 text-left">名稱</th>
-          <th class="border-b px-4 py-2 text-left">識別名</th>
+          <th class="border-b px-4 py-2 text-left">識別名(用於網址，必須唯一)</th>
           <th class="border-b px-4 py-2 text-right">操作</th>
         </tr>
       </thead>

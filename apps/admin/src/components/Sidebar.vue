@@ -22,11 +22,6 @@ function logout() {
     })
 }
 
-// const links = [
-//   { label: '管理封面', path: '/thumbnails' },
-//   { label: '管理類別', path: '/categories' },
-// ]
-
 const menuItems = [
   {
     title: '管理封面',
