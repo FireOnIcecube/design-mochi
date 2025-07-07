@@ -5,6 +5,7 @@ import type { ThumbnailCategory } from '@pkg/firebase/db/types'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import { thumbnailConverter } from '@pkg/firebase/db/entities/thumbnailCategory'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
+import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
 
 const docRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 
@@ -61,12 +62,13 @@ function deleteCategory(id) {
   <div class="p-6">
     <div class="mb-4 flex items-center justify-between">
       <h1 class="text-content dark:text-content-dark text-2xl font-bold">分類管理</h1>
-      <button
+      <!-- <button
         class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         @click="openCreateModal"
       >
         新增分類
-      </button>
+      </button> -->
+      <CategoryCreateModal />
     </div>
 
     <div class="mb-4">
