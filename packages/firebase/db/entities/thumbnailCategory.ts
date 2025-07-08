@@ -4,7 +4,8 @@ import { ThumbnailCategory } from '../types'
 // firestore 轉換器
 export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {
   toFirestore(thumbnailCategory: ThumbnailCategory) {
-    return thumbnailCategory
+    const { id, ...data } = thumbnailCategory
+    return data
   },
 
   fromFirestore(snapshot, options) {
