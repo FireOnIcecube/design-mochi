@@ -52,7 +52,7 @@ async function validate() {
   }
 
   // 驗證識別名是否已存在
-  const q = query(docRef, where('slug', '==', form.slug))
+  const q = query(docRef, where('slug', '==', form.slug.trim()))
   const isExist = await getDocs(q).then((docs) => !docs.empty)
   if (isExist) errors.slug = '該識別名已存在'
 
