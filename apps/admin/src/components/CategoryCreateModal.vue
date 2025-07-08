@@ -19,15 +19,16 @@ function closeModal() {
 }
 function openModal() {
   isOpen.value = true
+  handleClear()
 }
 
 const emit = defineEmits<{
-  (e: 'submit'): void
+  (e: 'submit', formData: { name: string; slug: string }): void
 }>()
 
 function handleSubmit() {
   if (validate()) {
-    emit('submit')
+    emit('submit', { ...form })
     closeModal()
   }
 }
