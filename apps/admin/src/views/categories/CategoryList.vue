@@ -10,6 +10,8 @@ import {
   orderBy,
   addDoc,
   serverTimestamp,
+  deleteDoc,
+  doc,
 } from 'firebase/firestore'
 import { thumbnailConverter } from '@pkg/firebase/db/entities/thumbnailCategory'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
@@ -52,10 +54,6 @@ async function handleCategoryCreate(formData: { name: string; slug: string }) {
   }
 }
 
-onMounted(() => {
-  fetchCategories()
-})
-
 const searchTerm = ref('')
 
 const filteredCategories = computed(() => {
@@ -64,19 +62,29 @@ const filteredCategories = computed(() => {
   )
 })
 
-function openCreateModal() {
-  alert('打開新增分類 Modal')
-}
-
 function editCategory(category: ThumbnailCategory) {
   alert(`編輯分類: ${category.name}`)
 }
 
-function deleteCategory(id) {
+async function deleteCategory(id: string | undefined) {
+  if (!id) {
+    alert('無法刪除封面類別，請稍後再試。')
+  }
+
   if (confirm('確定要刪除這個分類嗎？')) {
-    thumbnailCategories.value = thumbnailCategories.value.filter((cat) => cat.id !== id)
+    try {
+      await deleteDoc(doc(docRef, id))
+      console.log(`刪除成功，文件: ${id}`)
+      fetchCategories()
+    } catch (e) {
+      alert('無法刪除封面類別，請稍後再試。')
+    }
   }
 }
+
+onMounted(() => {
+  fetchCategories()
+})
 </script>
 
 <template>
