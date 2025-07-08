@@ -1,8 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
+import { Icon } from '@iconify/vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 
 const isOpen = ref(false)
+const form = reactive({
+  name: '',
+  slug: '',
+})
+
+const errors = reactive({
+  name: '',
+  slug: '',
+})
 
 function closeModal() {
   isOpen.value = false
@@ -16,7 +26,30 @@ const emit = defineEmits<{
 }>()
 
 function handleSubmit() {
-  emit('submit')
+  if (validate()) {
+    emit('submit')
+    closeModal()
+  }
+}
+
+function validate() {
+  errors.name = ''
+  errors.slug = ''
+
+  if (!form.name.trim()) errors.name = '名稱是必填的'
+  if (!form.slug.trim()) {
+  }
+  // 正則表達式， 處理 query 的非法字元
+  else if (!/^(?:[a-z0-9\-._~]|%[0-9a-f]{2})*$/.test(form.slug)) {
+    errors.slug = '僅允許小寫字母、數字與 -._~'
+  }
+
+  return !errors.name && !errors.slug
+}
+
+function handleClear() {
+  form.name = ''
+  form.slug = ''
 }
 </script>
 
@@ -24,7 +57,7 @@ function handleSubmit() {
   <button
     type="button"
     @click="openModal"
-    class="cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-black/30 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+    class="font-notosans cursor-pointer rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
   >
     新增分類
   </button>
@@ -56,26 +89,39 @@ function handleSubmit() {
             <DialogPanel
               class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
-              <DialogTitle as="h3" class="text-lg leading-6 font-medium text-gray-900">
-                新增分類
-              </DialogTitle>
-              <div class="mt-2">
-                <form @submit.prevent></form>
+              <div class="flex justify-between">
+                <DialogTitle as="h3" class="font-notosans text-content text-lg leading-6">
+                  新增分類
+                </DialogTitle>
 
-                <!-- <p class="text-sm text-gray-500">
-                  Your payment has been successfully submitted. We’ve sent you an email with all of
-                  the details of your order.
-                </p> -->
+                <Icon icon="material-symbols:close-rounded" class="h-6 w-6" @click="closeModal" />
               </div>
 
-              <div class="mt-4">
-                <button
-                  type="button"
-                  class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                  @click="closeModal"
-                >
-                  Got it, thanks!
-                </button>
+              <div class="mt-8">
+                <form @submit.prevent="handleSubmit" class="space-y-4">
+                  <div class="text-content flex flex-col">
+                    <label>名稱</label> <input v-model="form.name" />
+                    <p v-if="errors.name" class="mt-1 text-sm text-red-600">{{ errors.name }}</p>
+                  </div>
+                  <div class="text-content flex flex-col">
+                    <label>識別名</label> <input v-model="form.slug" />
+                    <p v-if="errors.slug" class="mt-1 text-sm text-red-600">{{ errors.slug }}</p>
+                  </div>
+
+                  <div class="mt-4 flex justify-end gap-4">
+                    <button
+                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
+                      @click="handleClear"
+                    >
+                      清除
+                    </button>
+                    <button
+                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-white shadow-md hover:bg-blue-500 hover:shadow-inner"
+                    >
+                      完成
+                    </button>
+                  </div>
+                </form>
               </div>
             </DialogPanel>
           </TransitionChild>

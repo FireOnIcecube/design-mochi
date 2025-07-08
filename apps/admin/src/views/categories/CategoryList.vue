@@ -92,11 +92,17 @@ function deleteCategory(id) {
         <tr v-for="category in filteredCategories" :key="category.id">
           <td class="border-b px-4 py-2">{{ category.name }}</td>
           <td class="border-b px-4 py-2">{{ category.slug }}</td>
-          <td class="border-b px-4 py-2 text-right">
-            <button class="mr-2 text-blue-600 hover:underline" @click="editCategory(category)">
+          <td class="flex justify-end gap-2 border-b px-4 py-2">
+            <button
+              class="cursor-pointer text-blue-600 hover:underline"
+              @click="editCategory(category)"
+            >
               編輯
             </button>
-            <button class="text-red-600 hover:underline" @click="deleteCategory(category.id)">
+            <button
+              class="cursor-pointer text-red-600 hover:underline"
+              @click="deleteCategory(category.id)"
+            >
               刪除
             </button>
           </td>
