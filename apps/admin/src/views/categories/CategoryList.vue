@@ -2,7 +2,15 @@
 import { ref, computed, onMounted } from 'vue'
 import { db } from '@pkg/firebase/index'
 import type { ThumbnailCategory } from '@pkg/firebase/db/types'
-import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  orderBy,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore'
 import { thumbnailConverter } from '@pkg/firebase/db/entities/thumbnailCategory'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
@@ -28,6 +36,19 @@ async function fetchCategories() {
   } catch (error) {
     alert('無法載入分類資料，請稍後再試。')
     console.error('Error fetching categories:', error)
+  }
+}
+
+async function handleCategoryCreate(formData: { name: string; slug: string }) {
+  try {
+    await addDoc(docRef, {
+      ...formData,
+      createdAt: serverTimestamp(),
+    })
+    await fetchCategories()
+  } catch (error) {
+    alert('無法創建封面類別，請稍後再試。')
+    console.error('Error create categories:', error)
   }
 }
 
@@ -68,7 +89,7 @@ function deleteCategory(id) {
       >
         新增分類
       </button> -->
-      <CategoryCreateModal />
+      <CategoryCreateModal @submit="handleCategoryCreate" />
     </div>
 
     <div class="mb-4">
