@@ -38,9 +38,10 @@ function validate() {
 
   if (!form.name.trim()) errors.name = '名稱是必填的'
   if (!form.slug.trim()) {
+    errors.slug = '識別名是必填的'
   }
   // 正則表達式， 處理 query 的非法字元
-  else if (!/^(?:[a-z0-9\-._~]|%[0-9a-f]{2})*$/.test(form.slug)) {
+  else if (!/^(?:[a-z0-9\-._~]|%[0-9a-f]{2})+$/.test(form.slug)) {
     errors.slug = '僅允許小寫字母、數字與 -._~'
   }
 
@@ -50,6 +51,8 @@ function validate() {
 function handleClear() {
   form.name = ''
   form.slug = ''
+  errors.name = ''
+  errors.slug = ''
 }
 </script>
 
@@ -110,12 +113,14 @@ function handleClear() {
 
                   <div class="mt-4 flex justify-end gap-4">
                     <button
+                      type="reset"
                       class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
                       @click="handleClear"
                     >
                       清除
                     </button>
                     <button
+                      type="submit"
                       class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-white shadow-md hover:bg-blue-500 hover:shadow-inner"
                     >
                       完成
