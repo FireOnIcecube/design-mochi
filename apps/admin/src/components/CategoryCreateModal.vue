@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Icon } from '@iconify/vue'
+import { db } from '@pkg/firebase/index'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
+import { thumbnailConverter } from '@/packages/firebase/db/entities/thumbnailCategory'
+
+const docRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 
 const isOpen = ref(false)
 const form = reactive({
@@ -26,14 +31,14 @@ const emit = defineEmits<{
   (e: 'submit', formData: { name: string; slug: string }): void
 }>()
 
-function handleSubmit() {
-  if (validate()) {
+async function handleSubmit() {
+  if (await validate()) {
     emit('submit', { ...form })
     closeModal()
   }
 }
 
-function validate() {
+async function validate() {
   errors.name = ''
   errors.slug = ''
 
@@ -45,6 +50,11 @@ function validate() {
   else if (!/^(?:[a-z0-9\-._~]|%[0-9a-f]{2})+$/.test(form.slug)) {
     errors.slug = '僅允許小寫字母、數字與 -._~'
   }
+
+  // 驗證識別名是否已存在
+  const q = query(docRef, where('slug', '==', form.slug))
+  const isExist = await getDocs(q).then((docs) => !docs.empty)
+  if (isExist) errors.slug = '該識別名已存在'
 
   return !errors.name && !errors.slug
 }
@@ -98,7 +108,11 @@ function handleClear() {
                   新增分類
                 </DialogTitle>
 
-                <Icon icon="material-symbols:close-rounded" class="h-6 w-6" @click="closeModal" />
+                <Icon
+                  icon="material-symbols:close-rounded"
+                  class="h-6 w-6 cursor-pointer"
+                  @click="closeModal"
+                />
               </div>
 
               <div class="mt-8">
