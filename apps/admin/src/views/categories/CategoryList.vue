@@ -17,29 +17,21 @@ import {
   deleteDoc,
   doc,
 } from 'firebase/firestore'
-import { thumbnailConverter } from '@pkg/firebase/db/entities/thumbnailCategory'
+import {
+  createThumbnailCategory,
+  deleteCategory,
+  fetchThumbnailCategory,
+  thumbnailConverter,
+} from '@pkg/firebase/db/entities/thumbnailCategory'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
 import CategoryEditModal from '@admin/components/CategoryEditModal.vue'
 
-const docRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
-
 const thumbnailCategories = ref<ThumbnailCategory[]>([])
 
-async function fetchCategories() {
+async function handleCategoryfetch() {
   try {
-    const q = query(docRef, orderBy('createdAt', 'asc'))
-    const categories = await getDocs(q)
-    thumbnailCategories.value = categories.docs.map((doc) => {
-      return {
-        ...doc.data(),
-        id: doc.id,
-      }
-    })
-    console.log(
-      'Categories fetched:',
-      categories.docs.map((doc) => doc.data()),
-    )
+    thumbnailCategories.value = await fetchThumbnailCategory()
   } catch (error) {
     alert('無法載入分類資料，請稍後再試。')
     console.error('Error fetching categories:', error)
@@ -48,14 +40,11 @@ async function fetchCategories() {
 
 async function handleCategoryCreate(formData: ThumbnailCategoryCreateData) {
   try {
-    await addDoc(docRef, {
-      ...formData,
-      createdAt: serverTimestamp(),
-    } as ThumbnailCategory)
-    await fetchCategories()
+    await createThumbnailCategory(formData)
+    await handleCategoryfetch()
   } catch (error) {
-    alert('無法創建封面類別，請稍後再試。')
-    console.error('Error create categories:', error)
+    alert('無法新增分類資料，請稍後再試。')
+    console.error('Error add categories:', error)
   }
 }
 
@@ -79,24 +68,18 @@ function editCategory(category: ThumbnailCategory) {
   alert(`編輯分類: ${category.name} : ${category.id}`)
 }
 
-async function deleteCategory(id: string) {
-  if (!id) {
-    alert('無法刪除封面類別，請稍後再試。')
-  }
-
-  if (confirm('確定要刪除這個分類嗎？')) {
-    try {
-      await deleteDoc(doc(docRef, id))
-      console.log(`刪除成功，文件: ${id}`)
-      fetchCategories()
-    } catch (e) {
-      alert('無法刪除封面類別，請稍後再試。')
-    }
+async function handleDeleteCategory(id: string) {
+  try {
+    await deleteCategory(id)
+    await handleCategoryfetch()
+  } catch (error) {
+    alert('無法編輯封面類別，請稍後再試。')
+    console.error('Error delete categories:', error)
   }
 }
 
 onMounted(() => {
-  fetchCategories()
+  handleCategoryfetch()
 })
 </script>
 
@@ -135,7 +118,7 @@ onMounted(() => {
           <td class="border-b px-4 py-2">{{ category.name }}</td>
           <td class="border-b px-4 py-2">{{ category.slug }}</td>
           <td class="flex justify-end gap-2 border-b px-4 py-2">
-            <CategoryEditModal :id="category.id" @refetch="fetchCategories" />
+            <CategoryEditModal :id="category.id" @refetch="handleCategoryfetch" />
             <!-- <button
               class="cursor-pointer text-blue-600 hover:underline"
               @click="editCategory(category)"
@@ -144,7 +127,7 @@ onMounted(() => {
             </button> -->
             <button
               class="cursor-pointer text-red-600 hover:underline"
-              @click="deleteCategory(category.id)"
+              @click="handleDeleteCategory(category.id)"
             >
               刪除
             </button>
