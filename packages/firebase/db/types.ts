@@ -24,7 +24,7 @@ export interface Thumbnail {
 }
 
 export interface ThumbnailCategory {
-  id?: string
+  id: string
   slug: string
   name: string
   tags?: ThumbnailTag[]
