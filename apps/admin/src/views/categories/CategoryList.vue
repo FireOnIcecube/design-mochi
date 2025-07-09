@@ -16,6 +16,7 @@ import {
 import { thumbnailConverter } from '@pkg/firebase/db/entities/thumbnailCategory'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
+import CategoryEditModal from '@admin/components/CategoryEditModal.vue'
 
 const docRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 
@@ -46,11 +47,19 @@ async function handleCategoryCreate(formData: { name: string; slug: string }) {
     await addDoc(docRef, {
       ...formData,
       createdAt: serverTimestamp(),
-    })
+    } as ThumbnailCategory)
     await fetchCategories()
   } catch (error) {
     alert('無法創建封面類別，請稍後再試。')
     console.error('Error create categories:', error)
+  }
+}
+
+function handleCategoryEdit(formData: Omit<ThumbnailCategory, 'slug'>) {
+  try {
+  } catch (error) {
+    alert('無法編輯封面類別，請稍後再試。')
+    console.error('Error edit categories:', error)
   }
 }
 
@@ -63,7 +72,7 @@ const filteredCategories = computed(() => {
 })
 
 function editCategory(category: ThumbnailCategory) {
-  alert(`編輯分類: ${category.name}`)
+  alert(`編輯分類: ${category.name} : ${category.id}`)
 }
 
 async function deleteCategory(id: string | undefined) {
@@ -122,12 +131,13 @@ onMounted(() => {
           <td class="border-b px-4 py-2">{{ category.name }}</td>
           <td class="border-b px-4 py-2">{{ category.slug }}</td>
           <td class="flex justify-end gap-2 border-b px-4 py-2">
-            <button
+            <CategoryEditModal :id="category.id" @refetch="fetchCategories" />
+            <!-- <button
               class="cursor-pointer text-blue-600 hover:underline"
               @click="editCategory(category)"
             >
               編輯
-            </button>
+            </button> -->
             <button
               class="cursor-pointer text-red-600 hover:underline"
               @click="deleteCategory(category.id)"
