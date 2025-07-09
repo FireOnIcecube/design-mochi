@@ -3,8 +3,8 @@ import { ref, computed, onMounted } from 'vue'
 import { db } from '@pkg/firebase/index'
 import type {
   ThumbnailCategory,
-  ThumbnailCategoryCreateForm,
-  ThumbnailCategoryEditForm,
+  ThumbnailCategoryCreateData,
+  ThumbnailCategoryEditData,
 } from '@pkg/types'
 import {
   collection,
@@ -46,7 +46,7 @@ async function fetchCategories() {
   }
 }
 
-async function handleCategoryCreate(formData: ThumbnailCategoryCreateForm) {
+async function handleCategoryCreate(formData: ThumbnailCategoryCreateData) {
   try {
     await addDoc(docRef, {
       ...formData,
@@ -59,7 +59,7 @@ async function handleCategoryCreate(formData: ThumbnailCategoryCreateForm) {
   }
 }
 
-function handleCategoryEdit(formData: ThumbnailCategoryEditForm) {
+function handleCategoryEdit(formData: ThumbnailCategoryEditData) {
   try {
   } catch (error) {
     alert('無法編輯封面類別，請稍後再試。')

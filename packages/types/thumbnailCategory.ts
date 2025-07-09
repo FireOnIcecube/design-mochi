@@ -11,7 +11,7 @@ export interface ThumbnailCategoryBase {
 export type ThumbnailCategory = WithId<WithTimestamps<ThumbnailCategoryBase>>
 
 // 創建用表單
-export type ThumbnailCategoryCreateForm = Pick<ThumbnailCategoryBase, 'name' | 'slug'>
+export type ThumbnailCategoryCreateData = Pick<ThumbnailCategoryBase, 'name' | 'slug'>
 
 // 編輯用表單
-export type ThumbnailCategoryEditForm = Pick<ThumbnailCategoryBase, 'name' | 'tags'>
+export type ThumbnailCategoryEditData = Pick<ThumbnailCategoryBase, 'name' | 'tags'>
