@@ -17,9 +17,6 @@ import ThumbnailEdit from '@admin/views/thumbnails/ThumbnailEdit.vue'
 import ThumbnailDetail from '@admin/views/thumbnails/ThumbnailDetail.vue'
 
 import CateogoryList from '@admin/views/categories/CategoryList.vue'
-import CateogoryCreate from '@admin/views/categories/CategoryCreate.vue'
-import CateogoryEdit from '@admin/views/categories/CategoryEdit.vue'
-import CateogoryDetail from '@admin/views/categories/CategoryDetail.vue'
 
 const routes = [
   { path: '/', component: HomeView, meta: { requiresAuth: true, layout: DefaultLayout } },
@@ -44,19 +41,6 @@ const routes = [
 
   // Categories
   { path: '/categories', component: CateogoryList, meta: { requiresAuth: true } },
-  { path: '/categories/create', component: CateogoryCreate, meta: { requiresAuth: true } },
-  {
-    path: '/categories/edit/:id',
-    component: CateogoryEdit,
-    props: true,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/categories/detail/:id',
-    component: CateogoryDetail,
-    props: true,
-    meta: { requiresAuth: true },
-  },
   { path: '/:pathMatch(.*)*', component: NotFound, meta: { layout: BlankLayout } },
 ]
 
