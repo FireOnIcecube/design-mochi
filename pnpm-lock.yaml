@@ -263,6 +263,8 @@ importers:
 
   packages/firebase: {}
 
+  packages/types: {}
+
 packages:
 
   /@alloc/quick-lru@5.2.0:
