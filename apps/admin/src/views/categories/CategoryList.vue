@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { db } from '@pkg/firebase/index'
-import type { ThumbnailCategory } from '@pkg/firebase/db/types'
+import type {
+  ThumbnailCategory,
+  ThumbnailCategoryCreateForm,
+  ThumbnailCategoryEditForm,
+} from '@pkg/types'
 import {
   collection,
   query,
@@ -42,7 +46,7 @@ async function fetchCategories() {
   }
 }
 
-async function handleCategoryCreate(formData: { name: string; slug: string }) {
+async function handleCategoryCreate(formData: ThumbnailCategoryCreateForm) {
   try {
     await addDoc(docRef, {
       ...formData,
@@ -55,7 +59,7 @@ async function handleCategoryCreate(formData: { name: string; slug: string }) {
   }
 }
 
-function handleCategoryEdit(formData: Omit<ThumbnailCategory, 'slug'>) {
+function handleCategoryEdit(formData: ThumbnailCategoryEditForm) {
   try {
   } catch (error) {
     alert('無法編輯封面類別，請稍後再試。')
@@ -75,7 +79,7 @@ function editCategory(category: ThumbnailCategory) {
   alert(`編輯分類: ${category.name} : ${category.id}`)
 }
 
-async function deleteCategory(id: string | undefined) {
+async function deleteCategory(id: string) {
   if (!id) {
     alert('無法刪除封面類別，請稍後再試。')
   }
