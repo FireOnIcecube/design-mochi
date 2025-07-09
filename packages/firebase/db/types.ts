@@ -27,6 +27,7 @@ export interface ThumbnailCategory {
   id?: string
   slug: string
   name: string
+  tags?: ThumbnailTag[]
   createdAt: Timestamp
 }
 
