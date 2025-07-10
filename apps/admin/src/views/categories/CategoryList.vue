@@ -29,7 +29,7 @@ import CategoryEditModal from '@admin/components/CategoryEditModal.vue'
 
 const thumbnailCategories = ref<ThumbnailCategory[]>([])
 
-async function handleCategoryfetch() {
+async function handleFetchCategory() {
   try {
     thumbnailCategories.value = await fetchThumbnailCategory()
   } catch (error) {
@@ -38,17 +38,17 @@ async function handleCategoryfetch() {
   }
 }
 
-async function handleCategoryCreate(formData: ThumbnailCategoryCreateData) {
+async function handleCreateCategory(formData: ThumbnailCategoryCreateData) {
   try {
     await createThumbnailCategory(formData)
-    await handleCategoryfetch()
+    await handleFetchCategory()
   } catch (error) {
     alert('無法新增分類資料，請稍後再試。')
     console.error('Error add categories:', error)
   }
 }
 
-function handleCategoryEdit(formData: ThumbnailCategoryEditData) {
+function handleEditCategory(formData: ThumbnailCategoryEditData) {
   try {
   } catch (error) {
     alert('無法編輯封面類別，請稍後再試。')
@@ -64,14 +64,10 @@ const filteredCategories = computed(() => {
   )
 })
 
-function editCategory(category: ThumbnailCategory) {
-  alert(`編輯分類: ${category.name} : ${category.id}`)
-}
-
 async function handleDeleteCategory(id: string) {
   try {
     await deleteCategory(id)
-    await handleCategoryfetch()
+    await handleFetchCategory()
   } catch (error) {
     alert('無法編輯封面類別，請稍後再試。')
     console.error('Error delete categories:', error)
@@ -79,7 +75,7 @@ async function handleDeleteCategory(id: string) {
 }
 
 onMounted(() => {
-  handleCategoryfetch()
+  handleFetchCategory()
 })
 </script>
 
@@ -93,7 +89,7 @@ onMounted(() => {
       >
         新增分類
       </button> -->
-      <CategoryCreateModal @submit="handleCategoryCreate" />
+      <CategoryCreateModal @submit="handleCreateCategory" />
     </div>
 
     <div class="mb-4">
@@ -107,18 +103,18 @@ onMounted(() => {
 
     <table class="min-w-full rounded border bg-white shadow-sm">
       <thead class="bg-gray-100">
-        <tr>
-          <th class="border-b px-4 py-2 text-left">名稱</th>
-          <th class="border-b px-4 py-2 text-left">識別名(用於網址，必須唯一)</th>
-          <th class="border-b px-4 py-2 text-right">操作</th>
+        <tr class="border-b">
+          <th class="px-4 py-2 text-left">名稱</th>
+          <th class="px-4 py-2 text-left">識別名(用於網址，必須唯一)</th>
+          <th class="px-4 py-2 text-right">操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="category in filteredCategories" :key="category.id">
-          <td class="border-b px-4 py-2">{{ category.name }}</td>
-          <td class="border-b px-4 py-2">{{ category.slug }}</td>
-          <td class="flex justify-end gap-2 border-b px-4 py-2">
-            <CategoryEditModal :id="category.id" @refetch="handleCategoryfetch" />
+        <tr v-for="category in filteredCategories" :key="category.id" class="border-b">
+          <td class="px-4 py-2">{{ category.name }}</td>
+          <td class="px-4 py-2">{{ category.slug }}</td>
+          <td class="flex justify-end gap-2 px-4 py-2">
+            <CategoryEditModal :id="category.id" @refetch="handleFetchCategory" />
             <!-- <button
               class="cursor-pointer text-blue-600 hover:underline"
               @click="editCategory(category)"

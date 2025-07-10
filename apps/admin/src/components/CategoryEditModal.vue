@@ -89,7 +89,9 @@ async function openModal() {
 }
 
 async function handleSubmit() {}
-function handleClear() {}
+function handleCancel() {
+  isOpen.value = false
+}
 </script>
 <template>
   <button type="button" @click="openModal" class="cursor-pointer text-blue-600 hover:underline">
@@ -121,7 +123,7 @@ function handleClear() {}
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+              class="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
             >
               <div class="flex justify-between">
                 <DialogTitle as="h3" class="font-notosans text-content text-lg leading-6">
@@ -146,22 +148,6 @@ function handleClear() {}
                     <p v-if="errors.slug" class="mt-1 text-sm text-red-600">{{ errors.slug }}</p>
                   </div>
 
-                  <div class="mt-4 flex justify-end gap-4">
-                    <button
-                      type="reset"
-                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
-                      @click="handleClear"
-                    >
-                      取消
-                    </button>
-                    <button
-                      type="submit"
-                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-white shadow-md hover:bg-blue-500 hover:shadow-inner"
-                    >
-                      完成
-                    </button>
-                  </div>
-
                   <table
                     v-if="form.tags && form.tags.length > 0"
                     class="min-w-full rounded border bg-white shadow-sm"
@@ -179,6 +165,21 @@ function handleClear() {}
                       </tr>
                     </tbody>
                   </table>
+
+                  <div class="mt-4 flex justify-end gap-4">
+                    <button
+                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
+                      @click="handleCancel"
+                    >
+                      取消
+                    </button>
+                    <button
+                      type="submit"
+                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-white shadow-md hover:bg-blue-500 hover:shadow-inner"
+                    >
+                      完成
+                    </button>
+                  </div>
                 </form>
               </div>
             </DialogPanel>
