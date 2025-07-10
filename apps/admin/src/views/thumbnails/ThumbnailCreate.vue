@@ -179,7 +179,7 @@ async function uploadThumbnail() {
         v-if="thumbnailURL"
         class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
       >
-        <div class="h-8 overflow-y-auto">
+        <div class="max-h-12 overflow-y-auto">
           <p>{{ videoTitle }}</p>
         </div>
         <img :src="thumbnailURL" class="flex-1 rounded object-cover shadow" />
