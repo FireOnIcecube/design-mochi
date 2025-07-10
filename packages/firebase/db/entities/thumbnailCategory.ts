@@ -18,6 +18,7 @@ import {
   ThumbnailCategoryEditData
 } from '@pkg/types'
 import { db } from '@pkg/firebase/index'
+import { ThumbnailTag } from '@/packages/types/thumbnailTag'
 
 // firestore 轉換器
 export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {
@@ -35,9 +36,9 @@ export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {
 const collectionRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 
 export async function fetchThumbnailCategory(...constraints: QueryConstraint[]) {
-  try {
-    const q = constraints.length > 0 ? query(collectionRef, ...constraints) : query(collectionRef)
+  const q = constraints.length > 0 ? query(collectionRef, ...constraints) : query(collectionRef)
 
+  try {
     const snapshot = await getDocs(q)
 
     return snapshot.docs.map((doc) => ({
@@ -60,6 +61,27 @@ export async function getThumbnailCategory(id: string) {
       ...docSnap.data(),
       id: docSnap.id
     } as ThumbnailCategory
+  } catch (e) {
+    throw e
+  }
+}
+
+export async function fetchCategoryTags(catId: string, ...constraints: QueryConstraint[]) {
+  if (!catId) throw new Error('無法找到封面類別，請稍後再試。')
+  const subCollectionRef = collection(collectionRef, catId, 'tags')
+
+  const q =
+    constraints.length > 0 ? query(subCollectionRef, ...constraints) : query(subCollectionRef)
+
+  try {
+    const snapshot = await getDocs(q)
+    return snapshot.docs.map(
+      (doc) =>
+        ({
+          ...doc.data(),
+          id: doc.id
+        }) as ThumbnailTag
+    )
   } catch (e) {
     throw e
   }
