@@ -113,20 +113,17 @@ onMounted(() => {
         <tr v-for="category in filteredCategories" :key="category.id" class="border-b">
           <td class="px-4 py-2">{{ category.name }}</td>
           <td class="px-4 py-2">{{ category.slug }}</td>
-          <td class="flex justify-end gap-2 px-4 py-2">
-            <CategoryEditModal :id="category.id" @refetch="handleFetchCategory" />
-            <!-- <button
-              class="cursor-pointer text-blue-600 hover:underline"
-              @click="editCategory(category)"
-            >
-              編輯
-            </button> -->
-            <button
-              class="cursor-pointer text-red-600 hover:underline"
-              @click="handleDeleteCategory(category.id)"
-            >
-              刪除
-            </button>
+          <td class="px-4 py-2">
+            <div class="flex justify-end gap-2">
+              <CategoryEditModal :id="category.id" @refetch="handleFetchCategory" />
+
+              <button
+                class="cursor-pointer text-red-600 hover:underline"
+                @click="handleDeleteCategory(category.id)"
+              >
+                刪除
+              </button>
+            </div>
           </td>
         </tr>
         <tr v-if="filteredCategories.length === 0">
