@@ -1,8 +1,12 @@
-import { Timestamp } from 'firebase/firestore'
+import type { WithId, WithTimestamps } from './common'
 
-export interface ThumbnailTag {
-  id: string
+export interface ThumbnailTagBase {
   slug: string
   name: string
-  createdAt: Timestamp
 }
+
+export type ThumbnailTag = WithId<WithTimestamps<ThumbnailTagBase>>
+
+export type ThumbnailTagCreateData = Pick<ThumbnailTagBase, 'name' | 'slug'>
+
+export type ThumbnailTagEditData = Pick<ThumbnailTagBase, 'name' | 'slug'>

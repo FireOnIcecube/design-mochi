@@ -1,10 +1,10 @@
 import type { WithId, WithTimestamps } from './common'
-import type { ThumbnailTag } from './thumbnailTag'
+import type { ThumbnailTag, ThumbnailTagBase } from './thumbnailTag'
 
 export interface ThumbnailCategoryBase {
   name: string
   slug: string
-  tags?: ThumbnailTag[]
+  tags?: ThumbnailTagBase[]
 }
 
 // firebase store 中的 ThumbnailCategorys
