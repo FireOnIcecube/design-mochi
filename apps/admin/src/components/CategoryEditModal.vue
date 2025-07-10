@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { db } from '@/packages/firebase'
 import { Icon } from '@iconify/vue'
-import { thumbnailConverter } from '@/packages/firebase/db/entities/thumbnailCategory'
+import {
+  getThumbnailCategory,
+  thumbnailConverter,
+} from '@/packages/firebase/db/entities/thumbnailCategory'
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 
@@ -17,31 +20,11 @@ const emit = defineEmits<{
   (e: 'submit'): void
 }>()
 
-const docRef = doc(db, 'thumbnail_categories', props.id).withConverter(thumbnailConverter)
-const category = ref<ThumbnailCategory>()
-
-async function fetchEditedDoc() {
-  const editedDoc = await getDoc(docRef)
-
-  if (!editedDoc.exists()) {
-    alert('欲編輯目標不存在')
-    closeModal()
-    emit('refetch')
-    return
-  }
-
-  const collectionRef = collection(docRef, 'tags')
-  const test = await getDocs(collectionRef)
-  console.error(`超酷: `, JSON.stringify(test.docs.map((t) => t.data())))
-
-  category.value = editedDoc.data()
-  //   console.error(JSON.stringify(category.value))
-}
-
 const isOpen = ref(false)
 const form = reactive({
   name: '',
   slug: '',
+  tags: [],
 })
 
 const errors = reactive({
@@ -49,12 +32,37 @@ const errors = reactive({
   slug: '',
 })
 
+const docRef = doc(db, 'thumbnail_categories', props.id).withConverter(thumbnailConverter)
+const categorySnapshot = ref<ThumbnailCategory>()
+
+async function getEditedDoc() {
+  try {
+    const editedDoc = await getDoc(docRef)
+
+    if (!editedDoc.exists()) {
+      alert('欲編輯目標不存在')
+      closeModal()
+      emit('refetch')
+      return
+    }
+    categorySnapshot.value = await getThumbnailCategory(props.id)
+
+    Object.assign(form, {
+      name: categorySnapshot.value.name,
+      slug: categorySnapshot.value.slug,
+      tags: categorySnapshot.value.tags,
+    })
+  } catch (e) {
+    throw e
+  }
+}
+
 function closeModal() {
   isOpen.value = false
 }
-function openModal() {
-  fetchEditedDoc()
+async function openModal() {
   isOpen.value = true
+  await getEditedDoc()
 }
 
 async function handleSubmit() {}
@@ -94,7 +102,7 @@ function handleClear() {}
             >
               <div class="flex justify-between">
                 <DialogTitle as="h3" class="font-notosans text-content text-lg leading-6">
-                  編輯 {{ category?.name }}
+                  編輯 {{ categorySnapshot?.name }}
                 </DialogTitle>
 
                 <Icon
@@ -121,7 +129,7 @@ function handleClear() {}
                       class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
                       @click="handleClear"
                     >
-                      清除
+                      取消
                     </button>
                     <button
                       type="submit"
@@ -130,6 +138,17 @@ function handleClear() {}
                       完成
                     </button>
                   </div>
+
+                  <table class="w-full">
+                    <thead>
+                      <tr>
+                        <th>ff</th>
+                        <th>ff</th>
+                        <th>ff</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
                 </form>
               </div>
             </DialogPanel>
