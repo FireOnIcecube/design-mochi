@@ -9,9 +9,10 @@ import {
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 
-import type { ThumbnailCategory, ThumbnailTag } from '@pkg/firebase/db/types'
+import type { ThumbnailCategory, ThumbnailTag } from '@pkg/types/index'
 import { onMounted, reactive, ref } from 'vue'
 import { ThumbnailCategoryBase } from '@/packages/types'
+import LoadingSpinner from './LoadingSpinner.vue'
 
 const props = defineProps<{
   id: string
@@ -23,6 +24,8 @@ const emit = defineEmits<{
 }>()
 
 const isOpen = ref(false)
+const loading = ref(false)
+
 const form = reactive<ThumbnailCategoryBase>({
   name: '',
   slug: '',
@@ -83,18 +86,32 @@ function closeModal() {
   isOpen.value = false
 }
 async function openModal() {
-  isOpen.value = true
+  loading.value = true
+
   await getEditedDoc(props.id)
   await getEditedTags(props.id)
+  loading.value = false
+
+  isOpen.value = true
 }
 
 async function handleSubmit() {}
 function handleCancel() {
   isOpen.value = false
 }
+
+function addTag() {
+  form.tags?.push({ name: '', slug: '' })
+}
 </script>
 <template>
-  <button type="button" @click="openModal" class="cursor-pointer text-blue-600 hover:underline">
+  <LoadingSpinner v-if="loading" />
+  <button
+    v-else
+    type="button"
+    @click="openModal"
+    class="cursor-pointer text-blue-600 hover:underline"
+  >
     編輯
   </button>
   <TransitionRoot appear :show="isOpen" as="template">
@@ -150,6 +167,7 @@ function handleCancel() {
 
                   <button
                     class="font-notosans font-notosans text-md cursor-pointe mt-8 cursor-pointer rounded border border-transparent bg-blue-400 px-4 py-2 text-white shadow hover:bg-blue-500 hover:shadow-inner active:scale-95"
+                    @click="addTag"
                   >
                     新增標籤
                   </button>
@@ -162,12 +180,30 @@ function handleCancel() {
                       <tr>
                         <th class="border-b px-4 py-2">名稱</th>
                         <th class="border-b px-4 py-2">識別名</th>
+                        <th class="border-b px-4 py-2">操作</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="(tag, index) in form.tags" :key="index">
-                        <td class="border-b px-4 py-2">{{ tag.name }}</td>
-                        <td class="border-b px-4 py-2">{{ tag.slug }}</td>
+                        <td class="border-b px-4 py-2">
+                          <input
+                            v-model="tag.name"
+                            class="w-full rounded border px-2 py-1"
+                            placeholder="輸入標籤名稱"
+                          />
+                        </td>
+                        <td class="border-b px-4 py-2">
+                          <input
+                            v-model="tag.slug"
+                            class="w-full rounded border px-2 py-1"
+                            placeholder="輸入識別名"
+                          />
+                        </td>
+                        <td class="items-center border-b px-4 py-2">
+                          <button @click="form.tags.splice(index, 1)">
+                            <Icon icon="material-symbols:delete" class="h-6 w-6 text-red-500" />
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
