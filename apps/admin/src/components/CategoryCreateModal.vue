@@ -65,6 +65,11 @@ function handleClear() {
   errors.name = ''
   errors.slug = ''
 }
+
+function handleCancel() {
+  handleClear()
+  isOpen.value = false
+}
 </script>
 
 <template>
@@ -130,9 +135,9 @@ function handleClear() {
                     <button
                       type="reset"
                       class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
-                      @click="handleClear"
+                      @click="handleCancel"
                     >
-                      清除
+                      取消
                     </button>
                     <button
                       type="submit"
