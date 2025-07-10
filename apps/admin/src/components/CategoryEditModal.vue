@@ -148,6 +148,12 @@ function handleCancel() {
                     <p v-if="errors.slug" class="mt-1 text-sm text-red-600">{{ errors.slug }}</p>
                   </div>
 
+                  <button
+                    class="font-notosans font-notosans text-md cursor-pointe mt-8 cursor-pointer rounded border border-transparent bg-blue-400 px-4 py-2 text-white shadow hover:bg-blue-500 hover:shadow-inner active:scale-95"
+                  >
+                    新增標籤
+                  </button>
+
                   <table
                     v-if="form.tags && form.tags.length > 0"
                     class="min-w-full rounded border bg-white shadow-sm"
@@ -166,16 +172,16 @@ function handleCancel() {
                     </tbody>
                   </table>
 
-                  <div class="mt-4 flex justify-end gap-4">
+                  <div class="mt-8 flex justify-end gap-4">
                     <button
-                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner"
+                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner active:scale-95"
                       @click="handleCancel"
                     >
                       取消
                     </button>
                     <button
                       type="submit"
-                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-white shadow-md hover:bg-blue-500 hover:shadow-inner"
+                      class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-white shadow-md hover:bg-blue-500 hover:shadow-inner active:scale-95"
                     >
                       完成
                     </button>
