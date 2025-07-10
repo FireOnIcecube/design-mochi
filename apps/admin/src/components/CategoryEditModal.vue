@@ -2,6 +2,7 @@
 import { db } from '@/packages/firebase'
 import { Icon } from '@iconify/vue'
 import {
+  fetchCategoryTags,
   getThumbnailCategory,
   thumbnailConverter,
 } from '@/packages/firebase/db/entities/thumbnailCategory'
@@ -10,6 +11,7 @@ import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } fro
 
 import type { ThumbnailCategory, ThumbnailTag } from '@pkg/firebase/db/types'
 import { onMounted, reactive, ref } from 'vue'
+import { ThumbnailCategoryBase } from '@/packages/types'
 
 const props = defineProps<{
   id: string
@@ -21,7 +23,7 @@ const emit = defineEmits<{
 }>()
 
 const isOpen = ref(false)
-const form = reactive({
+const form = reactive<ThumbnailCategoryBase>({
   name: '',
   slug: '',
   tags: [],
@@ -33,9 +35,10 @@ const errors = reactive({
 })
 
 const docRef = doc(db, 'thumbnail_categories', props.id).withConverter(thumbnailConverter)
-const categorySnapshot = ref<ThumbnailCategory>()
+const categories = ref<ThumbnailCategory>()
+const tags = ref<ThumbnailTag[]>([])
 
-async function getEditedDoc() {
+async function getEditedDoc(catId: string) {
   try {
     const editedDoc = await getDoc(docRef)
 
@@ -45,12 +48,31 @@ async function getEditedDoc() {
       emit('refetch')
       return
     }
-    categorySnapshot.value = await getThumbnailCategory(props.id)
+    categories.value = await getThumbnailCategory(catId)
 
     Object.assign(form, {
-      name: categorySnapshot.value.name,
-      slug: categorySnapshot.value.slug,
-      tags: categorySnapshot.value.tags,
+      name: categories.value.name,
+      slug: categories.value.slug,
+    })
+  } catch (e) {
+    throw e
+  }
+}
+
+async function getEditedTags(catId: string) {
+  try {
+    const editedDoc = await getDoc(docRef)
+
+    if (!editedDoc.exists()) {
+      alert('欲編輯目標不存在')
+      closeModal()
+      emit('refetch')
+      return
+    }
+    tags.value = await fetchCategoryTags(catId)
+
+    Object.assign(form, {
+      tags: tags.value,
     })
   } catch (e) {
     throw e
@@ -62,7 +84,8 @@ function closeModal() {
 }
 async function openModal() {
   isOpen.value = true
-  await getEditedDoc()
+  await getEditedDoc(props.id)
+  await getEditedTags(props.id)
 }
 
 async function handleSubmit() {}
@@ -102,7 +125,7 @@ function handleClear() {}
             >
               <div class="flex justify-between">
                 <DialogTitle as="h3" class="font-notosans text-content text-lg leading-6">
-                  編輯 {{ categorySnapshot?.name }}
+                  編輯 {{ categories?.name }}
                 </DialogTitle>
 
                 <Icon
@@ -139,15 +162,22 @@ function handleClear() {}
                     </button>
                   </div>
 
-                  <table class="w-full">
+                  <table
+                    v-if="form.tags && form.tags.length > 0"
+                    class="min-w-full rounded border bg-white shadow-sm"
+                  >
                     <thead>
                       <tr>
-                        <th>ff</th>
-                        <th>ff</th>
-                        <th>ff</th>
+                        <th class="border-b px-4 py-2">名稱</th>
+                        <th class="border-b px-4 py-2">識別名</th>
                       </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                      <tr v-for="(tag, index) in form.tags" :key="index">
+                        <td class="border-b px-4 py-2">{{ tag.name }}</td>
+                        <td class="border-b px-4 py-2">{{ tag.slug }}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </form>
               </div>
