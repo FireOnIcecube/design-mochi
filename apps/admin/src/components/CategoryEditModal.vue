@@ -20,7 +20,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'refetch'): void
-  (e: 'submit'): void
+  (e: 'submit', formData: ThumbnailCategoryBase): void
 }>()
 
 const isOpen = ref(false)
@@ -35,8 +35,10 @@ const form = reactive<ThumbnailCategoryBase>({
 const errors = reactive({
   name: '',
   slug: '',
+  tag: '',
 })
 
+const collectionRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 const docRef = doc(db, 'thumbnail_categories', props.id).withConverter(thumbnailConverter)
 const categories = ref<ThumbnailCategory>()
 const tags = ref<ThumbnailTag[]>([])
@@ -95,7 +97,46 @@ async function openModal() {
   isOpen.value = true
 }
 
-async function handleSubmit() {}
+async function validate() {
+  errors.name = ''
+  errors.slug = ''
+  errors.tag = ''
+
+  //  正則表達式， 處理 query 的非法字元
+  const slugRegex = /^(?:[a-z0-9\-._~]|%[0-9a-f]{2})+$/
+
+  // Set ，用於檢測重複的 slug
+  const slugSet = new Set<string>(form.tags?.map((t) => t.slug))
+
+  if (!form.name.trim()) errors.name = '名稱是必填的'
+  if (!form.slug.trim()) {
+    errors.slug = '識別名是必填的'
+  } else if (!slugRegex.test(form.slug)) {
+    errors.slug = '僅允許小寫字母、數字與 -._~'
+  }
+  // 驗證 tags 中的 slug 是否出現 空白、不合法、重複
+  if (!form.tags?.every((t) => t.slug.trim())) {
+    errors.tag = '標籤識別名不可空白'
+  } else if (!form.tags?.every((t) => !slugRegex.test(t.slug))) {
+    errors.slug = '標籤識別名僅允許小寫字母、數字與 -._~'
+  } else if (!form.tags.some((t) => slugSet.has(t.slug))) {
+    errors.slug = '標籤識別名不可重複'
+  }
+
+  // 驗證識別名是否已存在
+  const q = query(collectionRef, where('slug', '==', form.slug.trim()))
+  const isExist = await getDocs(q).then((docs) => !docs.empty)
+  if (isExist) errors.slug = '該識別名已存在'
+
+  return !errors.name && !errors.slug && !errors.tag
+}
+
+async function handleSubmit() {
+  if (await validate()) {
+    emit('submit', { ...form })
+    closeModal()
+  }
+}
 function handleCancel() {
   isOpen.value = false
 }
