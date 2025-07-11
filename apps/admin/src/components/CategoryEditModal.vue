@@ -9,7 +9,12 @@ import {
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 
-import type { ThumbnailCategory, ThumbnailTag } from '@pkg/types/index'
+import type {
+  ThumbnailCategory,
+  ThumbnailCategoryEditData,
+  ThumbnailTag,
+  ThumbnailTagEditData,
+} from '@pkg/types/index'
 import { onMounted, reactive, ref } from 'vue'
 import { ThumbnailCategoryBase } from '@/packages/types'
 import LoadingSpinner from './LoadingSpinner.vue'
@@ -20,7 +25,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'refetch'): void
-  (e: 'submit', formData: ThumbnailCategoryBase): void
+  (e: 'submit', formData: ThumbnailCategoryEditData): void
 }>()
 
 const isOpen = ref(false)
@@ -92,6 +97,13 @@ async function openModal() {
 
   await getEditedDoc(props.id)
   await getEditedTags(props.id)
+
+  Object.assign(errors, {
+    name: '',
+    slug: '',
+    tags: [],
+  })
+
   loading.value = false
 
   isOpen.value = true
@@ -117,23 +129,23 @@ async function validate() {
   // 驗證 tags 中的 slug 是否出現 空白、不合法、重複
   if (!form.tags?.every((t) => t.slug.trim())) {
     errors.tag = '標籤識別名不可空白'
-  } else if (!form.tags?.every((t) => !slugRegex.test(t.slug))) {
+  } else if (!form.tags?.every((t) => slugRegex.test(t.slug))) {
     errors.slug = '標籤識別名僅允許小寫字母、數字與 -._~'
-  } else if (!form.tags.some((t) => slugSet.has(t.slug))) {
+  } else if (form.tags.length < slugSet.size) {
     errors.slug = '標籤識別名不可重複'
   }
 
   // 驗證識別名是否已存在
   const q = query(collectionRef, where('slug', '==', form.slug.trim()))
-  const isExist = await getDocs(q).then((docs) => !docs.empty)
-  if (isExist) errors.slug = '該識別名已存在'
+  const hasDuplicate = await getDocs(q).then((docs) => docs.size > 1)
+  if (hasDuplicate) errors.slug = '該識別名已存在'
 
   return !errors.name && !errors.slug && !errors.tag
 }
 
 async function handleSubmit() {
   if (await validate()) {
-    emit('submit', { ...form })
+    emit('submit', { ...form, id: props.id })
     closeModal()
   }
 }
@@ -206,12 +218,15 @@ function addTag() {
                     <p v-if="errors.slug" class="mt-1 text-sm text-red-600">{{ errors.slug }}</p>
                   </div>
 
-                  <button
-                    class="font-notosans font-notosans text-md cursor-pointe mt-8 cursor-pointer rounded border border-transparent bg-blue-400 px-4 py-2 text-white shadow hover:bg-blue-500 hover:shadow-inner active:scale-95"
-                    @click="addTag"
-                  >
-                    新增標籤
-                  </button>
+                  <div>
+                    <button
+                      class="font-notosans font-notosans text-md cursor-pointe mt-8 cursor-pointer rounded border border-transparent bg-blue-400 px-4 py-2 text-white shadow hover:bg-blue-500 hover:shadow-inner active:scale-95 disabled:scale-100 disabled:cursor-default disabled:bg-gray-400"
+                      @click="addTag"
+                    >
+                      新增標籤
+                    </button>
+                    <p v-if="errors.tag" class="mt-1 text-sm text-red-600">{{ errors.tag }}</p>
+                  </div>
 
                   <table
                     v-if="form.tags && form.tags.length > 0"

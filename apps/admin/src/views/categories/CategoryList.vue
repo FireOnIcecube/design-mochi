@@ -20,6 +20,7 @@ import {
 import {
   createThumbnailCategory,
   deleteCategory,
+  editThumbnailCategory,
   fetchThumbnailCategory,
   thumbnailConverter,
 } from '@pkg/firebase/db/entities/thumbnailCategory'
@@ -48,8 +49,10 @@ async function handleCreateCategory(formData: ThumbnailCategoryCreateData) {
   }
 }
 
-function handleEditCategory(formData: ThumbnailCategoryEditData) {
+async function handleEditCategory(formData: ThumbnailCategoryEditData) {
   try {
+    await editThumbnailCategory(formData.id, formData)
+    await handleFetchCategory()
   } catch (error) {
     alert('無法編輯封面類別，請稍後再試。')
     console.error('Error edit categories:', error)
@@ -115,7 +118,11 @@ onMounted(() => {
           <td class="px-4 py-2">{{ category.slug }}</td>
           <td class="px-4 py-2">
             <div class="flex justify-end gap-2">
-              <CategoryEditModal :id="category.id" @refetch="handleFetchCategory" />
+              <CategoryEditModal
+                :id="category.id"
+                @refetch="handleFetchCategory"
+                @submit="handleEditCategory"
+              />
 
               <button
                 class="cursor-pointer text-red-600 hover:underline"

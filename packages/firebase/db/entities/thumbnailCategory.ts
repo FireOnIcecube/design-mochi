@@ -108,6 +108,9 @@ export async function editThumbnailCategory(id: string, value: ThumbnailCategory
     const editedDoc = await getDoc(editedDocRef)
     if (!editedDoc.exists()) throw new Error('編輯封面類別不存在')
 
+    // 依照 value 重新生成一批類別標籤
+    await replaceCategoryTags(id, value.tags)
+
     await setDoc(editedDocRef, {
       ...value,
       updatedAt: serverTimestamp()
@@ -117,8 +120,9 @@ export async function editThumbnailCategory(id: string, value: ThumbnailCategory
   }
 }
 
-export async function replaceCategoryTags(id: string, values: ThumbnailTagEditData[]) {
+export async function replaceCategoryTags(id: string, values?: ThumbnailTagEditData[]) {
   if (!id) throw new Error('無法編輯封面類別，請稍後再試。')
+  if (!values) return
 
   const editedDocRef = doc(collectionRef, id)
   const tagsRef = collection(editedDocRef, 'tags')

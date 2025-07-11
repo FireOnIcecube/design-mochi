@@ -14,4 +14,4 @@ export type ThumbnailCategory = WithId<WithTimestamps<ThumbnailCategoryBase>>
 export type ThumbnailCategoryCreateData = Pick<ThumbnailCategoryBase, 'name' | 'slug'>
 
 // 編輯用表單
-export type ThumbnailCategoryEditData = Pick<ThumbnailCategoryBase, 'name' | 'tags'>
+export type ThumbnailCategoryEditData = WithId<ThumbnailCategoryBase>
