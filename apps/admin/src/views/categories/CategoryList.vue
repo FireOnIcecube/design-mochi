@@ -27,8 +27,10 @@ import {
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
 import CategoryEditModal from '@admin/components/CategoryEditModal.vue'
+import LoadingSpinner from '@admin/components/LoadingSpinner.vue'
 
 const thumbnailCategories = ref<ThumbnailCategory[]>([])
+const isLoading = ref(false)
 
 async function handleFetchCategory() {
   try {
@@ -68,12 +70,15 @@ const filteredCategories = computed(() => {
 })
 
 async function handleDeleteCategory(id: string) {
+  isLoading.value = true
   try {
     await deleteCategory(id)
     await handleFetchCategory()
   } catch (error) {
     alert('無法刪除封面類別，請稍後再試。')
     console.error('Error delete categories:', error)
+  } finally {
+    isLoading.value = false
   }
 }
 
@@ -124,7 +129,9 @@ onMounted(() => {
                 @submit="handleEditCategory"
               />
 
+              <LoadingSpinner v-if="isLoading" />
               <button
+                v-else
                 class="cursor-pointer text-red-600 hover:underline"
                 @click="handleDeleteCategory(category.id)"
               >
