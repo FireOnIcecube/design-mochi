@@ -4,7 +4,7 @@ import type { ThumbnailTag, ThumbnailTagBase } from './thumbnailTag'
 export interface ThumbnailCategoryBase {
   name: string
   slug: string
-  tags?: ThumbnailTagBase[]
+  tags?: ThumbnailTag[]
 }
 
 // firebase store 中的 ThumbnailCategorys

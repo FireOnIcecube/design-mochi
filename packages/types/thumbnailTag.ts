@@ -5,7 +5,7 @@ export interface ThumbnailTagBase {
   name: string
 }
 
-export type ThumbnailTag = WithId<WithTimestamps<ThumbnailTagBase>>
+export type ThumbnailTag = WithId<ThumbnailTagBase>
 
 export type ThumbnailTagCreateData = Pick<ThumbnailTagBase, 'name' | 'slug'>
 

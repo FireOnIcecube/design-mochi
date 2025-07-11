@@ -72,7 +72,7 @@ async function handleDeleteCategory(id: string) {
     await deleteCategory(id)
     await handleFetchCategory()
   } catch (error) {
-    alert('無法編輯封面類別，請稍後再試。')
+    alert('無法刪除封面類別，請稍後再試。')
     console.error('Error delete categories:', error)
   }
 }

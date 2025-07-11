@@ -118,7 +118,7 @@ async function validate() {
   const slugRegex = /^(?:[a-z0-9\-._~]|%[0-9a-f]{2})+$/
 
   // Set ，用於檢測重複的 slug
-  const slugSet = new Set<string>(form.tags?.map((t) => t.slug))
+  const slugSet = new Set<string>(form.tags?.map((t) => t.slug.trim()))
 
   if (!form.name.trim()) errors.name = '名稱是必填的'
   if (!form.slug.trim()) {
@@ -130,9 +130,9 @@ async function validate() {
   if (!form.tags?.every((t) => t.slug.trim())) {
     errors.tag = '標籤識別名不可空白'
   } else if (!form.tags?.every((t) => slugRegex.test(t.slug))) {
-    errors.slug = '標籤識別名僅允許小寫字母、數字與 -._~'
-  } else if (form.tags.length < slugSet.size) {
-    errors.slug = '標籤識別名不可重複'
+    errors.tag = '標籤識別名僅允許小寫字母、數字與 -._~'
+  } else if (form.tags.length > slugSet.size) {
+    errors.tag = '標籤識別名不可重複'
   }
 
   // 驗證識別名是否已存在
@@ -154,7 +154,7 @@ function handleCancel() {
 }
 
 function addTag() {
-  form.tags?.push({ name: '', slug: '' })
+  form.tags?.push({ name: '', slug: '' } as ThumbnailTag)
 }
 </script>
 <template>
