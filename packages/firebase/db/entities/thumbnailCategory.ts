@@ -9,6 +9,7 @@ import {
   QueryConstraint,
   serverTimestamp,
   setDoc,
+  writeBatch,
   type FirestoreDataConverter
 } from 'firebase/firestore'
 import {
@@ -18,7 +19,7 @@ import {
   ThumbnailCategoryEditData
 } from '@pkg/types'
 import { db } from '@pkg/firebase/index'
-import { ThumbnailTag } from '@/packages/types/thumbnailTag'
+import { ThumbnailTag, ThumbnailTagEditData } from '@/packages/types/thumbnailTag'
 
 // firestore 轉換器
 export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {
@@ -111,6 +112,24 @@ export async function editThumbnailCategory(id: string, value: ThumbnailCategory
       ...value,
       updatedAt: serverTimestamp()
     } as ThumbnailCategory)
+  } catch (e) {
+    throw e
+  }
+}
+
+export async function replaceCategoryTags(id: string, values: ThumbnailTagEditData[]) {
+  if (!id) throw new Error('無法編輯封面類別，請稍後再試。')
+
+  const editedDocRef = doc(collectionRef, id)
+  const tagsRef = collection(editedDocRef, 'tags')
+  try {
+    const snapshot = await getDocs(tagsRef)
+    const batch = writeBatch(db)
+    snapshot.forEach((doc) => batch.delete(doc.ref))
+
+    values.forEach((tag) => batch.set(doc(tagsRef), tag))
+
+    await batch.commit()
   } catch (e) {
     throw e
   }
