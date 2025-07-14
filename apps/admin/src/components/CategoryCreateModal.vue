@@ -6,7 +6,9 @@ import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } fro
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { thumbnailConverter } from '@/packages/firebase/db/entities/thumbnailCategory'
 
-const docRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
+const categoriesCollectionRef = collection(db, 'thumbnail_categories').withConverter(
+  thumbnailConverter,
+)
 
 const isOpen = ref(false)
 const form = reactive({
@@ -52,7 +54,7 @@ async function validate() {
   }
 
   // 驗證識別名是否已存在
-  const q = query(docRef, where('slug', '==', form.slug.trim()))
+  const q = query(categoriesCollectionRef, where('slug', '==', form.slug.trim()))
   const isExist = await getDocs(q).then((docs) => !docs.empty)
   if (isExist) errors.slug = '該識別名已存在'
 
