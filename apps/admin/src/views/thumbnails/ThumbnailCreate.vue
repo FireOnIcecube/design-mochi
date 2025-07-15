@@ -9,10 +9,12 @@ import {
 } from 'firebase/storage'
 import { storage } from '@pkg/firebase'
 import imageCompression from 'browser-image-compression'
+import type { ThumbnailCategory } from '@/packages/types'
+import TagSelector from '@admin/components/TagSelector.vue'
 
 // 狀態變數
 const youtubeURL = ref('')
-const thumbnailURL = ref('')
+const thumbnailURL = ref('https://i.ytimg.com/vi/0EiAOUVYy8Q/maxresdefault.jpg')
 const videoID = ref('')
 const videoTitle = ref('')
 
@@ -20,6 +22,9 @@ const uploadURL = ref('')
 
 const compressedSizeMB = ref<number | null>(null)
 const uploadProgress = ref(0)
+
+// 封面類別資料
+const categories = ref<ThumbnailCategory[]>([])
 
 // 依序嘗試多個解析度
 const fallbackResolutions = [
@@ -174,7 +179,7 @@ async function uploadThumbnail() {
       </div>
     </div>
 
-    <div class="mt-4 grid grid-cols-1 gap-12 md:grid-cols-2">
+    <div class="mt-4 grid grid-cols-1 gap-12 lg:grid-cols-2">
       <div
         v-if="thumbnailURL"
         class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
@@ -189,16 +194,13 @@ async function uploadThumbnail() {
         </div>
       </div>
 
-      <div
-        v-if="thumbnailURL"
-        class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
-      >
-        <div class="h-8">
+      <div v-if="thumbnailURL" class="text-content dark:text-content-dark text-md font-semibold">
+        <!-- <div class="h-8">
           <p>選擇 Tag</p>
-        </div>
+        </div> -->
 
-        <div class="bg-surface border-outline h-full min-h-64 w-full flex-1 rounded border-2">
-          1
+        <div class="h-full min-h-64 w-full flex-1">
+          <TagSelector />
         </div>
       </div>
     </div>

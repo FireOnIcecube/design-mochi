@@ -280,12 +280,22 @@ function changeValue() {
           'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:ring-2 focus:outline-none',
         ]"
       >
-        <ul class="grid auto-rows-[80px] grid-cols-4 bg-red-200">
-          <li class="overflow-hidden bg-blue-200 text-ellipsis whitespace-nowrap">fe</li>
-          <li class="overflow-hidden bg-blue-200 text-ellipsis whitespace-nowrap">fe</li>
-          <li class="overflow-hidden bg-blue-200 text-ellipsis whitespace-nowrap">fe</li>
-          <li class="overflow-hidden bg-blue-200 text-ellipsis whitespace-nowrap">fe</li>
-          <li class="overflow-hidden bg-blue-200 text-ellipsis whitespace-nowrap">fe</li>
+        <ul class="grid auto-rows-[40px] grid-cols-4 place-content-stretch">
+          <li class="border-outline dark:border-outline-dark overflow-hidden border-2 px-2">
+            <label
+              class="inline-flex h-full w-full cursor-pointer items-center hover:bg-gray-100 dark:hover:bg-gray-950"
+            >
+              <input type="checkbox" class="peer sr-only" />
+              <div
+                class="h-5 w-5 rounded border-2 border-gray-400 peer-checked:border-blue-500 peer-checked:bg-blue-500"
+              ></div>
+              <span
+                class="text-md font-notosans ml-2 flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
+              >
+                選項選項選項選項選項選項選項選項選項選項選項選項選項選項選項選項選項選項選項選項
+              </span>
+            </label>
+          </li>
         </ul>
         <!-- <ul>
           <li
