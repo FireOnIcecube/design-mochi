@@ -214,7 +214,9 @@ function addTag() {
                     <p v-if="errors.name" class="mt-1 text-sm text-red-600">{{ errors.name }}</p>
                   </div>
                   <div class="text-content flex flex-col">
-                    <label>識別名</label> <input v-model="form.slug" />
+                    <label>識別名 (不可更改)</label>
+
+                    <input v-model="form.slug" disabled readonly class="disabled:bg-gray-100" />
                     <p v-if="errors.slug" class="mt-1 text-sm text-red-600">{{ errors.slug }}</p>
                   </div>
 
