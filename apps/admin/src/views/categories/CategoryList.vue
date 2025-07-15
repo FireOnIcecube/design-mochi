@@ -21,7 +21,7 @@ import {
   createThumbnailCategory,
   deleteCategory,
   editThumbnailCategory,
-  fetchThumbnailCategory,
+  fetchThumbnailCategories,
   thumbnailConverter,
 } from '@pkg/firebase/db/entities/thumbnailCategory'
 import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
@@ -34,7 +34,7 @@ const isLoading = ref(false)
 
 async function handleFetchCategory() {
   try {
-    thumbnailCategories.value = await fetchThumbnailCategory()
+    thumbnailCategories.value = await fetchThumbnailCategories()
   } catch (error) {
     alert('無法載入分類資料，請稍後再試。')
     console.error('Error fetching categories:', error)

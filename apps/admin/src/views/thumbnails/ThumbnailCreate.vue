@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import {
   getStorage,
   ref as storageRef,
@@ -11,6 +11,7 @@ import { storage } from '@pkg/firebase'
 import imageCompression from 'browser-image-compression'
 import type { ThumbnailCategory } from '@/packages/types'
 import TagSelector from '@admin/components/TagSelector.vue'
+import { fetchThumbnailCategories } from '@pkg/firebase/db/entities/thumbnailCategory'
 
 // 狀態變數
 const youtubeURL = ref('')
@@ -24,8 +25,19 @@ const compressedSizeMB = ref<number | null>(null)
 const uploadProgress = ref(0)
 
 // 封面類別資料
-const categories = ref<ThumbnailCategory[]>([])
+const thumbnailCategories = ref<ThumbnailCategory[]>([])
 
+async function fetchCategories() {
+  try {
+    thumbnailCategories.value = await fetchThumbnailCategories()
+    console.log('categotries: ', JSON.stringify(thumbnailCategories.value))
+  } catch (e) {
+    alert('無法獲取封面類別，請稍後再試。')
+    console.error(e)
+  }
+}
+
+onMounted(fetchCategories)
 // 依序嘗試多個解析度
 const fallbackResolutions = [
   'maxresdefault.jpg',
@@ -200,7 +212,7 @@ async function uploadThumbnail() {
         </div> -->
 
         <div class="h-full min-h-64 w-full flex-1">
-          <TagSelector />
+          <TagSelector :thumbnail-categories="thumbnailCategories" />
         </div>
       </div>
     </div>

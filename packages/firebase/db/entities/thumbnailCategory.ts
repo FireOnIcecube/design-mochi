@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   QueryConstraint,
   runTransaction,
@@ -38,8 +39,11 @@ export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {
 
 const collectionRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 
-export async function fetchThumbnailCategory(...constraints: QueryConstraint[]) {
-  const q = constraints.length > 0 ? query(collectionRef, ...constraints) : query(collectionRef)
+export async function fetchThumbnailCategories(...constraints: QueryConstraint[]) {
+  const q =
+    constraints.length > 0
+      ? query(collectionRef, ...constraints)
+      : query(collectionRef, orderBy('createdAt', 'asc'))
 
   try {
     const snapshot = await getDocs(q)
@@ -74,7 +78,9 @@ export async function fetchCategoryTags(catId: string, ...constraints: QueryCons
   const subCollectionRef = collection(collectionRef, catId, 'tags')
 
   const q =
-    constraints.length > 0 ? query(subCollectionRef, ...constraints) : query(subCollectionRef)
+    constraints.length > 0
+      ? query(subCollectionRef, ...constraints)
+      : query(subCollectionRef, orderBy('name', 'asc'))
 
   try {
     const snapshot = await getDocs(q)
@@ -113,10 +119,14 @@ export async function editThumbnailCategory(id: string, value: ThumbnailCategory
     // 依照 value 重新生成一批類別標籤
     await replaceCategoryTags(id, value.tags)
 
-    await setDoc(editedDocRef, {
-      ...value,
-      updatedAt: serverTimestamp()
-    } as ThumbnailCategory)
+    await setDoc(
+      editedDocRef,
+      {
+        ...value,
+        updatedAt: serverTimestamp()
+      } as ThumbnailCategory,
+      { merge: true }
+    )
   } catch (e) {
     throw e
   }
