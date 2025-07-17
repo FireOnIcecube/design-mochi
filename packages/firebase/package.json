@@ -12,5 +12,8 @@
     ".": {
       "import": "./index.ts"
     }
+  },
+  "dependencies": {
+    "@pkg/types": "workspace:*"
   }
 }
