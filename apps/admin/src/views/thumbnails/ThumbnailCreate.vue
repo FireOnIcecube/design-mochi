@@ -15,7 +15,8 @@ import { fetchThumbnailCategories } from '@pkg/firebase/db/entities/thumbnailCat
 import { createThumbnail } from '@pkg/firebase/db/entities/thumbnail'
 import { doc } from 'firebase/firestore'
 import axios, { isAxiosError } from 'axios'
-import { error } from 'console'
+import { Console, error } from 'console'
+import { NonEmptyArray } from '@/packages/types/common'
 
 // 狀態變數
 
@@ -112,9 +113,19 @@ async function uploadThumbnailToStorage(file: Blob, path: string): Promise<strin
   })
 }
 
+function hasSelectedTags(input: Record<string, string[]> | undefined): boolean {
+  if (!input) return false
+  return Object.values(input).some((tags) => tags.length > 0)
+}
+
 async function submitThumbnailUpload() {
   if (!thumbnailPreviewUrl.value || !videoTitle.value || !videoId.value) {
     alert('請先預覽縮圖')
+    return
+  }
+
+  if (!selectedTagsByCategory.value || !hasSelectedTags(selectedTagsByCategory.value)) {
+    alert('請選擇至少一個分類標籤')
     return
   }
 
@@ -134,6 +145,10 @@ async function submitThumbnailUpload() {
       name: videoTitle.value,
       imageUrl: downloadUrl,
       videoId: videoId.value,
+      categories: normalizeCategoryTagList(selectedTagsByCategory.value) as NonEmptyArray<{
+        category: string
+        tags: NonEmptyArray<string>
+      }>,
     })
   } catch (error) {
     alert('上傳失敗，請稍後再試。')
@@ -157,15 +172,12 @@ function resetThumbnailForm() {
   uploadProgress.value = 0
 }
 
-function normalizCategoryTagList() {
-  const raw = toRaw(selectedTagsByCategory)
-
-  return Object.entries(raw).map(([category, tags]) => ({
+function normalizeCategoryTagList(tagsByCategory: Record<string, string[]>) {
+  return Object.entries(tagsByCategory).map(([category, tags]) => ({
     category,
     tags,
   }))
 }
-
 // 擷取縮圖與標題
 async function fetchThumbnail() {
   const id = extractYoutubeVideoId(youtubeUrl.value)
@@ -268,10 +280,6 @@ function updateSelectedTags(data: Record<string, string[]>) {
         v-if="thumbnailPreviewUrl"
         class="text-content dark:text-content-dark text-md font-semibold"
       >
-        <!-- <div class="h-8">
-          <p>選擇 Tag</p>
-        </div> -->
-
         <div class="h-full min-h-64 w-full flex-1">
           <TagSelector :thumbnail-categories="thumbnailCategories" @change="updateSelectedTags" />
         </div>
