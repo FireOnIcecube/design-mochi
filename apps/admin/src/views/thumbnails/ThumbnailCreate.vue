@@ -133,6 +133,7 @@ async function submitThumbnailUpload() {
     await createThumbnail({
       name: videoTitle.value,
       imageUrl: downloadUrl,
+      videoId: videoId.value,
     })
   } catch (error) {
     alert('上傳失敗，請稍後再試。')

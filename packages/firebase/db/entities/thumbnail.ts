@@ -22,10 +22,11 @@ export const thumbnailConverter: FirestoreDataConverter<Thumbnail> = {
 const collectionRef = collection(db, 'thumbnails').withConverter(thumbnailConverter)
 
 export async function createThumbnail(value: ThumbnailBase) {
-  const docRef = doc(collectionRef)
+  const docRef = doc(collectionRef, value.videoId)
   try {
     await setDoc(docRef, {
       ...value,
+      videoId: value.videoId,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     } as Thumbnail)
