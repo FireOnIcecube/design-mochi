@@ -20,28 +20,28 @@ import { error } from 'console'
 // 狀態變數
 
 // youtube 影片網址
-const youtubeURL = ref('')
+const youtubeUrl = ref('')
 
 // 預覽縮圖的 url
-const previewUrl = ref('https://i.ytimg.com/vi/0EiAOUVYy8Q/maxresdefault.jpg')
+const thumbnailPreviewUrl = ref('https://i.ytimg.com/vi/0EiAOUVYy8Q/maxresdefault.jpg')
 
 // 影片 id 和標題
-const videoID = ref('')
+const videoId = ref('')
 const videoTitle = ref('')
 
 // 上傳後的縮圖 url
-const thumbnailUrl = ref('')
+const uploadedThumbnailUrl = ref('')
 
 // 檔案狀態相關的ref 變數
-const compressedSizeMb = ref<number | null>(null)
+const thumbnailCompressedSizeMb = ref<number | null>(null)
 const uploadProgress = ref(0)
 
 // 封面類別資料
 const thumbnailCategories = ref<ThumbnailCategory[]>([])
-const selectedCategoriesWithTags = ref<Record<string, string[]>>()
+const selectedTagsByCategory = ref<Record<string, string[]>>()
 
 // 依序嘗試多個解析度
-const fallbackResolutions = [
+const youtubeThumbnailResolutions = [
   'maxresdefault.jpg',
   'sddefault.jpg',
   'hqdefault.jpg',
@@ -86,7 +86,7 @@ async function compressImage(blob: Blob, filename: string): Promise<Blob> {
   }
 }
 
-async function uploadToFirebase(file: Blob, path: string): Promise<string> {
+async function uploadThumbnailToStorage(file: Blob, path: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const ref = storageRef(storage, path)
     const task = uploadBytesResumable(ref, file)
@@ -112,21 +112,21 @@ async function uploadToFirebase(file: Blob, path: string): Promise<string> {
   })
 }
 
-async function handleUploadThumbnail() {
-  if (!previewUrl.value || !videoTitle.value || !videoID.value) {
+async function submitThumbnailUpload() {
+  if (!thumbnailPreviewUrl.value || !videoTitle.value || !videoId.value) {
     alert('請先預覽縮圖')
     return
   }
 
   try {
-    const blob = await getThumbnailBlob(previewUrl.value)
-    const compressedBlob = await compressImage(blob, `${videoID.value}.jpg`)
-    compressedSizeMb.value = compressedBlob.size / (1024 * 1024) // 轉換為 MB
+    const blob = await getThumbnailBlob(thumbnailPreviewUrl.value)
+    const compressedBlob = await compressImage(blob, `${videoId.value}.jpg`)
+    thumbnailCompressedSizeMb.value = compressedBlob.size / (1024 * 1024) // 轉換為 MB
 
-    const path = `thumbnails/${videoID.value}.jpg`
-    const downloadUrl = await uploadToFirebase(compressedBlob, path)
+    const path = `thumbnails/${videoId.value}.jpg`
+    const downloadUrl = await uploadThumbnailToStorage(compressedBlob, path)
 
-    thumbnailUrl.value = downloadUrl
+    uploadedThumbnailUrl.value = downloadUrl
     console.log('✅ 上傳成功:', downloadUrl)
 
     //  建立 firestore 資料
@@ -140,24 +140,24 @@ async function handleUploadThumbnail() {
 }
 
 // 解析影片 ID
-function extractVideoID(url: string): string | null {
+function extractYoutubeVideoId(url: string): string | null {
   const regex = /(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/
   const match = url.match(regex)
   return match ? match[1] : null
 }
 
-function handleInput() {
+function resetThumbnailForm() {
   // 清除之前的結果
-  previewUrl.value = ''
-  videoID.value = ''
+  thumbnailPreviewUrl.value = ''
+  videoId.value = ''
   videoTitle.value = ''
-  thumbnailUrl.value = ''
-  compressedSizeMb.value = null
+  uploadedThumbnailUrl.value = ''
+  thumbnailCompressedSizeMb.value = null
   uploadProgress.value = 0
 }
 
 function normalizCategoryTagList() {
-  const raw = toRaw(selectedCategoriesWithTags)
+  const raw = toRaw(selectedTagsByCategory)
 
   return Object.entries(raw).map(([category, tags]) => ({
     category,
@@ -167,20 +167,20 @@ function normalizCategoryTagList() {
 
 // 擷取縮圖與標題
 async function fetchThumbnail() {
-  const id = extractVideoID(youtubeURL.value)
+  const id = extractYoutubeVideoId(youtubeUrl.value)
   if (!id) {
     alert('無法解析影片 ID')
     return
   }
 
-  videoID.value = id
-  thumbnailUrl.value = ''
+  videoId.value = id
+  uploadedThumbnailUrl.value = ''
   // 以 fallback 方式取得縮圖
-  for (const resolution of fallbackResolutions) {
+  for (const resolution of youtubeThumbnailResolutions) {
     try {
       const response = await fetch(`https://i.ytimg.com/vi/${id}/${resolution}`)
       if (response.ok) {
-        previewUrl.value = `https://i.ytimg.com/vi/${id}/${resolution}`
+        thumbnailPreviewUrl.value = `https://i.ytimg.com/vi/${id}/${resolution}`
         break
       }
     } catch (e) {
@@ -202,7 +202,7 @@ async function fetchThumbnail() {
 }
 
 function updateSelectedTags(data: Record<string, string[]>) {
-  selectedCategoriesWithTags.value = data
+  selectedTagsByCategory.value = data
 }
 </script>
 
@@ -212,10 +212,10 @@ function updateSelectedTags(data: Record<string, string[]>) {
 
     <input
       type="text"
-      v-model="youtubeURL"
+      v-model="youtubeUrl"
       placeholder="輸入 YouTube 網址"
       class="w-full border p-2"
-      @input="handleInput"
+      @input="resetThumbnailForm"
     />
     <div class="space-x-4">
       <button
@@ -225,16 +225,16 @@ function updateSelectedTags(data: Record<string, string[]>) {
         預覽縮圖
       </button>
       <button
-        :disabled="!previewUrl"
+        :disabled="!thumbnailPreviewUrl"
         class="mt-4 cursor-pointer rounded bg-green-500 px-4 py-2 text-white"
-        @click="handleUploadThumbnail"
+        @click="submitThumbnailUpload"
       >
         上傳縮圖到 Firebase
       </button>
     </div>
 
-    <div v-if="compressedSizeMb !== null" class="mt-2 text-sm text-gray-600">
-      壓縮後大小：{{ compressedSizeMb }} MB
+    <div v-if="thumbnailCompressedSizeMb !== null" class="mt-2 text-sm text-gray-600">
+      壓縮後大小：{{ thumbnailCompressedSizeMb }} MB
     </div>
 
     <div v-if="uploadProgress > 0" class="mt-2 w-full rounded bg-gray-200">
@@ -248,20 +248,25 @@ function updateSelectedTags(data: Record<string, string[]>) {
 
     <div class="mt-4 grid grid-cols-1 gap-12 lg:grid-cols-2">
       <div
-        v-if="previewUrl"
+        v-if="thumbnailPreviewUrl"
         class="text-content dark:text-content-dark text-md flex flex-col font-semibold"
       >
         <div class="max-h-12 overflow-y-auto">
           <p>{{ videoTitle }}</p>
         </div>
-        <img :src="previewUrl" class="flex-1 rounded object-cover shadow" />
-        <div v-if="thumbnailUrl" class="mt-4">
+        <img :src="thumbnailPreviewUrl" class="flex-1 rounded object-cover shadow" />
+        <div v-if="uploadedThumbnailUrl" class="mt-4">
           <p>✅ 縮圖上傳成功！</p>
-          <a :href="thumbnailUrl" target="_blank" class="text-blue-600 underline">點此開啟縮圖</a>
+          <a :href="uploadedThumbnailUrl" target="_blank" class="text-blue-600 underline"
+            >點此開啟縮圖</a
+          >
         </div>
       </div>
 
-      <div v-if="previewUrl" class="text-content dark:text-content-dark text-md font-semibold">
+      <div
+        v-if="thumbnailPreviewUrl"
+        class="text-content dark:text-content-dark text-md font-semibold"
+      >
         <!-- <div class="h-8">
           <p>選擇 Tag</p>
         </div> -->
