@@ -11,6 +11,7 @@ import {
   runTransaction,
   serverTimestamp,
   setDoc,
+  updateDoc,
   WriteBatch,
   writeBatch,
   type FirestoreDataConverter
@@ -119,14 +120,10 @@ export async function editThumbnailCategory(id: string, value: ThumbnailCategory
     // 依照 value 重新生成一批類別標籤
     await replaceCategoryTags(id, value.tags)
 
-    await setDoc(
-      editedDocRef,
-      {
-        ...value,
-        updatedAt: serverTimestamp()
-      } as ThumbnailCategory,
-      { merge: true }
-    )
+    await updateDoc(editedDocRef, {
+      ...value,
+      updatedAt: serverTimestamp()
+    })
   } catch (e) {
     throw e
   }
