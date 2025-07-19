@@ -24,7 +24,7 @@ import { NonEmptyArray } from '@/packages/types/common'
 const youtubeUrl = ref('')
 
 // 預覽縮圖的 url
-const thumbnailPreviewUrl = ref('https://i.ytimg.com/vi/0EiAOUVYy8Q/maxresdefault.jpg')
+const thumbnailPreviewUrl = ref('')
 
 // 影片 id 和標題
 const videoId = ref('')
