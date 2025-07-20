@@ -77,8 +77,8 @@ const menuItems = [
                     :to="link.path"
                     class="text-md text-content dark:text-content-dark block rounded px-2 py-1 font-semibold"
                     :class="{
-                      'bg-blue-400 text-white': route.path === link.path,
-                      'hover:bg-gray-300 dark:hover:bg-gray-700': route.path !== link.path,
+                      'bg-blue-400 text-white': route.path.startsWith(link.path),
+                      'hover:bg-gray-300 dark:hover:bg-gray-700': !route.path.startsWith(link.path),
                     }"
                   >
                     {{ link.label }}
@@ -86,13 +86,6 @@ const menuItems = [
                 </DisclosurePanel>
               </template>
             </Disclosure>
-            <!-- <router-link
-              :to="{ path: link.path }"
-              class="block cursor-pointer rounded px-4 py-2 text-gray-700 transition-colors select-none hover:bg-gray-200 active:scale-95 dark:text-gray-300 dark:hover:bg-gray-700"
-              :class="{ 'bg-gray-200 dark:bg-gray-700': isActive(link.path) }"
-            >
-              <span class="text-lg font-black"> {{ link.label }} </span>
-            </router-link> -->
           </li>
         </ul>
 
@@ -103,25 +96,6 @@ const menuItems = [
           <span class="text-content-dark dark:text-content font-notosans text-lg">登出</span>
         </button>
       </div>
-
-      <!-- <ul class="mt-10 flex-1 md:mt-0" :class="{ hidden: !isOpen }">
-        <li v-for="link in links" :key="link.path" class="mb-2">
-          <router-link
-            :to="{ path: link.path }"
-            class="block cursor-pointer rounded px-4 py-2 text-gray-700 transition-colors select-none hover:bg-gray-200 active:scale-95 dark:text-gray-300 dark:hover:bg-gray-700"
-            :class="{ 'bg-gray-200 dark:bg-gray-700': isActive(link.path) }"
-          >
-            <span class="text-lg font-black"> {{ link.label }} </span>
-          </router-link>
-        </li>
-      </ul>
-      <button
-        class="bg-surface-dark dark:bg-surface cursor-pointer rounded-lg py-2 shadow-md transition-colors hover:bg-gray-700 active:scale-95 active:shadow-inner dark:hover:bg-gray-200"
-        :class="{ hidden: !isOpen }"
-        @click="logout"
-      >
-        <span class="text-content-dark dark:text-content font-notosans text-lg">登出</span>
-      </button> -->
     </div>
 
     <div

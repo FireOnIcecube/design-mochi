@@ -33,7 +33,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/thumbnails/detail/:id',
+    path: '/thumbnails/:id',
     component: ThumbnailDetail,
     props: true,
     meta: { requiresAuth: true },

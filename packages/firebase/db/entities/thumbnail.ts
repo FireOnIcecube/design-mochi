@@ -1,6 +1,7 @@
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -52,6 +53,18 @@ export async function createThumbnail(value: ThumbnailBase) {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     } as Thumbnail)
+  } catch (e) {
+    throw e
+  }
+}
+
+export async function getThumbnail(id: string) {
+  const docRef = doc(collectionRef, id)
+  try {
+    const snapshot = await getDoc(docRef)
+    if (!snapshot.exists()) throw new Error('Thumbnail not found')
+
+    return { ...snapshot.data(), id: snapshot.id } as Thumbnail
   } catch (e) {
     throw e
   }
