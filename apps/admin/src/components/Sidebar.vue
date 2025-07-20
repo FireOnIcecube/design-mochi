@@ -77,8 +77,8 @@ const menuItems = [
                     :to="link.path"
                     class="text-md text-content dark:text-content-dark block rounded px-2 py-1 font-semibold"
                     :class="{
-                      'bg-blue-400 text-white': route.path.startsWith(link.path),
-                      'hover:bg-gray-300 dark:hover:bg-gray-700': !route.path.startsWith(link.path),
+                      'bg-blue-400 text-white': route.path === link.path,
+                      'hover:bg-gray-300 dark:hover:bg-gray-700': route.path !== link.path,
                     }"
                   >
                     {{ link.label }}
