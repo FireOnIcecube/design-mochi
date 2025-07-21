@@ -23,8 +23,10 @@ onMounted(() => {
 <template>
   <h1>ThumbnailList</h1>
   <template v-if="thumbnails && thumbnails.length > 0">
-    <div v-for="item in thumbnails" :key="item.id">
-      <ThumbnailCard :thumbnail="item" />
+    <div class="grid grid-cols-2 gap-y-2 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12 xl:grid-cols-4">
+      <div v-for="item in thumbnails" :key="item.id">
+        <ThumbnailCard :thumbnail="item" />
+      </div>
     </div>
   </template>
 </template>

@@ -5,10 +5,18 @@ const props = defineProps<{
   thumbnail: Thumbnail
 }>()
 </script>
+
 <template>
-  <router-link :to="{ name: 'ThumbnailDetail', params: { id: props.thumbnail.videoId } }">
-    <div class="aspect-video">
-      <img :src="props.thumbnail.imageUrl" class="h-full w-full object-cover" />
+  <router-link
+    :to="{ name: 'ThumbnailDetail', params: { id: props.thumbnail.videoId } }"
+    class="group block"
+  >
+    <div class="aspect-video w-full">
+      <img
+        :src="props.thumbnail.imageUrl"
+        class="h-full w-full rounded object-cover"
+        alt="Thumbnail"
+      />
     </div>
 
     <p
