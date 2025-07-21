@@ -34,6 +34,7 @@ const routes = [
   },
   {
     path: '/thumbnails/:id',
+    name: 'ThumbnailDetail',
     component: ThumbnailDetail,
     props: true,
     meta: { requiresAuth: true },
