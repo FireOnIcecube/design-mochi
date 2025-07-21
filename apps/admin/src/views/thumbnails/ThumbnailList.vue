@@ -2,6 +2,7 @@
 import { fetchThumbnails } from '@/packages/firebase/db/entities/thumbnail'
 import { Thumbnail } from '@/packages/types'
 import { onMounted, ref } from 'vue'
+import { ThumbnailCard } from '@admin/components/ThumbnailCard'
 
 const thumbnails = ref<Thumbnail[]>([])
 
@@ -21,18 +22,9 @@ onMounted(() => {
 
 <template>
   <h1>ThumbnailList</h1>
-  <hr />
   <template v-if="thumbnails && thumbnails.length > 0">
-    <div v-for="(thumbnail, index) in thumbnails" :key="index">
-      <!-- ✅ 新增 router-link -->
-      <router-link :to="`/thumbnails/${thumbnail.videoId}`" class="block hover:underline">
-        <img :src="thumbnail.imageUrl" alt="Thumbnail Image" />
-        <p>{{ thumbnail.name }}</p>
-        <p>Video ID: {{ thumbnail.videoId }}</p>
-        <p>Categories: {{ thumbnail.categories.map((cat) => cat.category).join(', ') }}</p>
-        <p>Tags: {{ thumbnail.categories.flatMap((cat) => cat.tags).join(', ') }}</p>
-      </router-link>
-      <hr />
+    <div v-for="item in thumbnails" :key="item.id">
+      <ThumbnailCard :thumbnail="item" />
     </div>
   </template>
 </template>
