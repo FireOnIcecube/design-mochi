@@ -32,11 +32,11 @@ onMounted(async () => {
           <span class="text-sm">
             來源:
             <a
-              href="https://www.youtube.com/watch?v=6lz5BeoyknE"
+              :href="`https://www.youtube.com/watch?v={{ thumbnail.videoId }}`"
               target="_blank"
               class="hover:text-blue-400"
-              >https://www.youtube.com/watch?v={{ thumbnail.videoId }}</a
-            >
+              >https://www.youtube.com/watch?v={{ thumbnail.videoId }}
+            </a>
           </span>
         </div>
       </div>
