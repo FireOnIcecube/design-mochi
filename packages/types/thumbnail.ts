@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore'
+import type { FirestoreQueryOptions } from './firestoreQuery'
 import type { NonEmptyArray, WithId, WithTimestamps } from './common'
 
 export interface ThumbnailBase {
@@ -8,3 +10,5 @@ export interface ThumbnailBase {
 }
 
 export type Thumbnail = WithId<WithTimestamps<ThumbnailBase>>
+
+export type ThumbnailQueryOptions = FirestoreQueryOptions<keyof ThumbnailBase>
