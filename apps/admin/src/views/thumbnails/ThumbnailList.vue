@@ -2,7 +2,7 @@
 import { fetchThumbnails } from '@/packages/firebase/db/entities/thumbnail'
 import { Thumbnail } from '@/packages/types'
 import { onMounted, ref } from 'vue'
-import { ThumbnailCard } from '@admin/components/ThumbnailCard'
+import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 
 const thumbnails = ref<Thumbnail[]>([])
 

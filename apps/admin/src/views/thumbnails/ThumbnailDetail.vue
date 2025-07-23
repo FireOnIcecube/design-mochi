@@ -83,72 +83,6 @@ onMounted(async () => {
               </template>
             </div>
           </div>
-          <!-- <div class="flex items-center gap-x-8">
-            <div class="font-notosans text-xl">配色:</div>
-            <div class="text-md font-notosans flex gap-x-4">
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #綠色
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-x-8">
-            <div class="font-notosans text-xl">主題:</div>
-            <div class="text-md font-notosans flex gap-x-4">
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #生活
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-x-8">
-            <div class="font-notosans text-xl">語調:</div>
-            <div class="text-md font-notosans flex gap-x-4">
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #文青
-              </div>
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #專業
-              </div>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-x-8">
-            <div class="font-notosans text-xl">風格:</div>
-            <div class="text-md font-notosans flex gap-x-4">
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #藝術
-              </div>
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #財經
-              </div>
-            </div>
-          </div>
-          <div class="flex items-center gap-x-8">
-            <div class="font-notosans text-xl">情緒:</div>
-            <div class="text-md font-notosans flex gap-x-4">
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #療癒
-              </div>
-              <div
-                class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
-              >
-                #理性
-              </div>
-            </div>
-          </div> -->
         </div>
 
         <!-- 分享功能，暫時不實裝 -->
@@ -227,15 +161,3 @@ onMounted(async () => {
   </template>
   <template v-else>載入中或找不到資料...</template>
 </template>
-
-<!-- <div v-if="thumbnail">
-    <h1>詳細頁</h1>
-    <img :src="thumbnail.imageUrl" />
-    <p>{{ thumbnail.name }}</p>
-    <p>Video ID: {{ thumbnail.videoId }}</p>
-    <p>分類: {{ thumbnail.categories.map((c) => c.category).join(', ') }}</p>
-    <p>標籤: {{ thumbnail.categories.flatMap((c) => c.tags).join(', ') }}</p>
-  </div>
-  <div v-else>
-    <p>載入中或找不到資料</p>
-  </div> -->
