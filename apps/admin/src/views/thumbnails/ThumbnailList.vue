@@ -29,4 +29,7 @@ onMounted(() => {
       </div>
     </div>
   </template>
+  <template v-else>
+    <p class="text-center text-gray-500">沒有縮圖可顯示</p>
+  </template>
 </template>
