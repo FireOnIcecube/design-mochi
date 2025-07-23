@@ -32,7 +32,7 @@ onMounted(async () => {
           <span class="text-sm">
             來源:
             <a
-              :href="`https://www.youtube.com/watch?v={{ thumbnail.videoId }}`"
+              :href="`https://www.youtube.com/watch?v=${thumbnail.videoId}`"
               target="_blank"
               class="hover:text-blue-400"
               >https://www.youtube.com/watch?v={{ thumbnail.videoId }}
@@ -69,9 +69,21 @@ onMounted(async () => {
         </div>
 
         <div
-          class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 border-b-2 pt-3 pb-6"
+          class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 gap-y-8 border-b-2 pt-3 pb-6"
         >
-          <div class="flex items-center gap-x-8">
+          <div v-for="cat in thumbnail.categories" class="flex items-center gap-x-8">
+            <div class="font-notosans text-xl whitespace-nowrap">{{ cat.category }}:</div>
+            <div class="text-md font-notosans flex flex-wrap gap-x-4 gap-y-2">
+              <template v-for="tag in cat.tags">
+                <div
+                  class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                >
+                  #{{ tag }}
+                </div>
+              </template>
+            </div>
+          </div>
+          <!-- <div class="flex items-center gap-x-8">
             <div class="font-notosans text-xl">配色:</div>
             <div class="text-md font-notosans flex gap-x-4">
               <div
@@ -136,7 +148,7 @@ onMounted(async () => {
                 #理性
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <!-- 分享功能，暫時不實裝 -->
