@@ -3,8 +3,11 @@ import { fetchThumbnails } from '@/packages/firebase/db/entities/thumbnail'
 import { Thumbnail } from '@/packages/types'
 import { onMounted, ref } from 'vue'
 import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
+import { PaginationBar } from '@admin/components/common/paginationBar'
 
 const thumbnails = ref<Thumbnail[]>([])
+const currentPage = ref(1)
+const totalPages = 20 // 假設有20頁，實際應根據後端數據動態計算
 
 async function loadThumbnails() {
   try {
@@ -13,6 +16,10 @@ async function loadThumbnails() {
     alert('無法載入縮圖資料，請稍後再試。')
     console.error('Error fetching thumbnails:', error)
   }
+}
+
+function handlePageChange(newPage: number) {
+  currentPage.value = newPage
 }
 
 onMounted(() => {
@@ -28,6 +35,7 @@ onMounted(() => {
         <ThumbnailCard :thumbnail="item" />
       </div>
     </div>
+    <PaginationBar :currentPage="currentPage" :totalPages="totalPages" @change="handlePageChange" />
   </template>
   <template v-else>
     <p class="text-center text-gray-500">沒有縮圖可顯示</p>
