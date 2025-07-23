@@ -11,4 +11,4 @@ export interface ThumbnailBase {
 
 export type Thumbnail = WithId<WithTimestamps<ThumbnailBase>>
 
-export type ThumbnailQueryOptions = FirestoreQueryOptions<keyof ThumbnailBase>
+export type ThumbnailQueryOptions = FirestoreQueryOptions<keyof Thumbnail>
