@@ -53,10 +53,10 @@ const pagesToShow = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center space-x-1 text-sm select-none">
+  <div class="flex items-center space-x-1 text-lg select-none">
     <!-- Prev -->
     <button
-      class="rounded px-2 py-1 hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400"
+      class="text-content dark:text-content-dark rounded px-2 py-1 hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 dark:hover:bg-gray-700"
       :disabled="props.currentPage === 1"
       @click="goToPage(props.currentPage - 1)"
     >
@@ -67,7 +67,7 @@ const pagesToShow = computed(() => {
     <button
       v-for="(p, i) in pagesToShow"
       :key="i"
-      class="rounded px-2 py-1 hover:bg-gray-200"
+      class="text-content dark:text-content-dark rounded px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-700"
       :class="{
         'bg-blue-500 text-white': p === props.currentPage,
         'cursor-default': p === '...',
@@ -80,7 +80,7 @@ const pagesToShow = computed(() => {
 
     <!-- Next -->
     <button
-      class="rounded px-2 py-1 hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400"
+      class="text-content dark:text-content-dark rounded px-2 py-1 hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 dark:hover:bg-gray-700"
       :disabled="props.currentPage === props.totalPages"
       @click="goToPage(props.currentPage + 1)"
     >

@@ -67,7 +67,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="mr-auto">
+    <div class="mt-10 flex justify-end">
       <PaginationBar
         :currentPage="currentPage"
         :totalPages="totalPages"
