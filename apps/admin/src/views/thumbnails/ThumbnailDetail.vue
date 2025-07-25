@@ -1,22 +1,30 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { getThumbnail } from '@pkg/firebase/db/entities/thumbnail'
 import type { Thumbnail } from '@/packages/types'
-
-// const route = useRoute()
-// const videoId = route.params.id as string
+import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
+import { Icon } from '@iconify/vue'
 
 const props = defineProps<{
   id: string
 }>()
 
-const liked = ref(false)
+const thumbnailStore = useThumbnailStore()
 
-const thumbnail = ref<Thumbnail>()
+const allThumbnails = computed(() => thumbnailStore.thumbnails)
+const currentIndex = computed(() => allThumbnails.value.findIndex((t) => t.id === props.id))
+const thumbnail = computed(() => allThumbnails.value[currentIndex.value])
+
+const prev = computed(() => allThumbnails.value[currentIndex.value - 1] ?? null)
+const next = computed(() => allThumbnails.value[currentIndex.value + 1] ?? null)
+
+// const liked = ref(false)
 
 onMounted(async () => {
-  thumbnail.value = await getThumbnail(props.id)
+  if (!thumbnailStore.thumbnails.length) {
+    await thumbnailStore.fetchAll()
+  }
 })
 </script>
 
@@ -46,7 +54,7 @@ onMounted(async () => {
           <p class="font-notosans text-xl lg:text-2xl">
             {{ thumbnail.name }}
           </p>
-
+          <!-- 
           <div class="flex justify-end lg:hidden">
             <button
               @click="liked = !liked"
@@ -65,7 +73,7 @@ onMounted(async () => {
                 />
               </div>
             </button>
-          </div>
+          </div> -->
         </div>
 
         <div
@@ -100,62 +108,80 @@ onMounted(async () => {
     <section class="mt-16 px-4">
       <div class="flex flex-col gap-4 md:flex-row md:justify-between">
         <!-- Prev -->
-        <div
-          class="border-outline w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
-        >
-          <div class="flex items-center gap-4">
-            <div class="group relative inline-block h-12 w-12">
-              <Icon
-                icon="bxs:left-arrow"
-                class="text-content dark:text-content-dark"
-                width="48"
-                height="48"
-              />
-            </div>
 
-            <div class="text-content font-notosans dark:text-content-dark block text-2xl lg:hidden">
-              Prev
-            </div>
+        <template v-if="prev">
+          <router-link
+            :to="{ name: 'ThumbnailDetail', params: { id: prev.videoId } }"
+            class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
+          >
+            <div class="flex items-center gap-4">
+              <div class="group relative inline-block h-12 w-12">
+                <Icon
+                  icon="bxs:left-arrow"
+                  class="text-content dark:text-content-dark"
+                  width="48"
+                  height="48"
+                />
+              </div>
 
-            <div
-              class="text-content dark:text-content-dark line-clamp-2 hidden text-lg font-semibold lg:[display:-webkit-box]"
-            >
-              【ゼルダ飯】７種のキノコのうまみ。キノコのトマト煮込み Live-action ZELDA
-              cooking【ティアキン再現】
-            </div>
+              <div
+                class="text-content font-notosans dark:text-content-dark block text-2xl lg:hidden"
+              >
+                Prev
+              </div>
 
-            <div class="flex h-28 w-36 shrink-0 items-center justify-center">
-              <!-- <img src="/testimage.jpg" class="h-full w-full object-contain" /> -->
+              <div
+                class="text-content dark:text-content-dark line-clamp-2 hidden text-lg font-semibold lg:[display:-webkit-box]"
+              >
+                {{ prev.name }}
+              </div>
+
+              <div class="flex h-28 w-36 shrink-0 items-center justify-center">
+                <img :src="prev.imageUrl" class="h-full w-full object-contain" />
+              </div>
             </div>
-          </div>
-        </div>
+          </router-link>
+        </template>
+        <template v-else>
+          <!-- 這裡用透明或佔位元素固定高度 -->
+          <div class="h-full opacity-0">佔位</div>
+        </template>
+
         <!-- Next -->
-        <div
-          class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg lg:max-w-2xl"
-        >
-          <div class="flex items-center gap-4">
-            <div class="flex h-28 w-36 shrink-0 items-center justify-center">
-              <!-- <img src="/testimage2.jpg" class="h-full w-full object-contain" /> -->
-            </div>
-            <div
-              class="text-content dark:text-content-dark line-clamp-2 hidden text-lg font-semibold lg:[display:-webkit-box]"
-            >
-              歓送迎会シーズンにおすすめ ルミネ立川厳選【プチギフト】
-            </div>
+        <template v-if="next">
+          <router-link
+            :to="{ name: 'ThumbnailDetail', params: { id: next.videoId } }"
+            class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg lg:max-w-2xl"
+          >
+            <div class="flex items-center gap-4">
+              <div class="flex h-28 w-36 shrink-0 items-center justify-center">
+                <img :src="next.imageUrl" class="h-full w-full object-contain" />
+              </div>
+              <div
+                class="text-content dark:text-content-dark line-clamp-2 hidden text-lg font-semibold lg:[display:-webkit-box]"
+              >
+                {{ next.name }}
+              </div>
 
-            <div class="text-content font-notosans dark:text-content-dark block text-2xl lg:hidden">
-              Next
+              <div
+                class="text-content font-notosans dark:text-content-dark block text-2xl lg:hidden"
+              >
+                Next
+              </div>
+              <div class="group relative inline-block h-12 w-12">
+                <Icon
+                  icon="bxs:right-arrow"
+                  class="text-content dark:text-content-dark"
+                  width="48"
+                  height="48"
+                />
+              </div>
             </div>
-            <div class="group relative inline-block h-12 w-12">
-              <Icon
-                icon="bxs:right-arrow"
-                class="text-content dark:text-content-dark"
-                width="48"
-                height="48"
-              />
-            </div>
-          </div>
-        </div>
+          </router-link>
+        </template>
+        <template v-else>
+          <div class="h-full opacity-0">佔位</div>
+        </template>
       </div>
     </section>
   </template>
