@@ -3,10 +3,8 @@
 ### TODO
 
 - 搜尋頁面
-- 分頁
 - slug 轉換功能
 - 收藏功能
-- 整理出專案使用的 types
 - 正確使用 FirestoreDataConverter ，取代目前 api 中的 as
 
 ### 技術債
