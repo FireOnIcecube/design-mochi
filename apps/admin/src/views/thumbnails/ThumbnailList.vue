@@ -4,13 +4,19 @@ import { Thumbnail, ThumbnailQueryOptions } from '@/packages/types'
 import { onMounted, ref, computed, watch } from 'vue'
 import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 import { PaginationBar } from '@admin/components/common/paginationBar'
+import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
+
+const thumbnailStore = useThumbnailStore()
 
 // 原始全部資料
-const allThumbnails = ref<Thumbnail[]>([])
+const allThumbnails = computed(() => thumbnailStore.thumbnails)
 
 // 當前頁顯示資料
-const thumbnails = ref<Thumbnail[]>([])
-
+const thumbnails = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = start + pageSize
+  return allThumbnails.value.slice(start, end)
+})
 const currentPage = ref(1)
 const pageSize = 30
 
@@ -18,34 +24,33 @@ const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
 // 根據 currentPage 切割資料
-function updateThumbnailsByPage() {
-  const start = (currentPage.value - 1) * pageSize
-  const end = start + pageSize
-  thumbnails.value = allThumbnails.value.slice(start, end)
-}
+// function updateThumbnailsByPage() {
+//   const start = (currentPage.value - 1) * pageSize
+//   const end = start + pageSize
+//   thumbnails.value = allThumbnails.value.slice(start, end)
+// }
 
-async function loadAllThumbnails() {
-  const q = buildThumbnailQuery({
-    order: { createdAt: 'desc' },
-  })
-  try {
-    allThumbnails.value = await fetchThumbnails(q)
-    updateThumbnailsByPage()
-  } catch (error) {
-    alert('無法載入縮圖資料，請稍後再試。')
-    console.error('Error fetching thumbnails:', error)
-  }
-}
+// async function loadAllThumbnails() {
+//   const q = buildThumbnailQuery({
+//     order: { createdAt: 'desc' },
+//   })
+//   try {
+//     allThumbnails.value = await fetchThumbnails(q)
+//     updateThumbnailsByPage()
+//   } catch (error) {
+//     alert('無法載入縮圖資料，請稍後再試。')
+//     console.error('Error fetching thumbnails:', error)
+//   }
+// }
 
 function handlePageChange(newPage: number) {
   currentPage.value = newPage
 }
 
 // 切換頁碼時，重新切割資料
-watch(currentPage, updateThumbnailsByPage)
 
 onMounted(() => {
-  loadAllThumbnails()
+  thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
 })
 </script>
 

@@ -2,8 +2,14 @@
 import { getAuth, signOut } from 'firebase/auth'
 import NavHeader from '@admin/components/NavHeader.vue'
 import Sidebar from '../components/Sidebar.vue'
+import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
+import { onMounted } from 'vue'
 
-const auth = getAuth()
+const thumbnailStore = useThumbnailStore()
+
+onMounted(() => {
+  thumbnailStore.fetchAll()
+})
 </script>
 
 <template>

@@ -12,7 +12,7 @@ export const useThumbnailStore = defineStore('thumbnail', {
     getById: (state) => (id: string) => state.thumbnails.find((t) => t.id === id),
   },
   actions: {
-    async fetchAll(queryOptions: ThumbnailQueryOptions) {
+    async fetchAll(queryOptions: ThumbnailQueryOptions = {}) {
       this.loading = true
       this.error = null
 
