@@ -32,7 +32,7 @@ onMounted(async () => {
   <template v-if="thumbnail">
     <section class="flex flex-col justify-around lg:flex-row">
       <div class="w-full lg:w-1/2">
-        <div class="flex items-center justify-center bg-gray-100 select-none lg:h-[50vh]">
+        <div class="flex items-center justify-center rounded bg-gray-100 select-none lg:h-[50vh]">
           <img :src="thumbnail.imageUrl" class="object-contain" />
         </div>
 
@@ -115,29 +115,25 @@ onMounted(async () => {
             class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
           >
             <div class="flex items-center gap-4">
-              <div class="group relative inline-block h-12 w-12">
-                <Icon
-                  icon="bxs:left-arrow"
-                  class="text-content dark:text-content-dark"
-                  width="48"
-                  height="48"
-                />
-              </div>
+              <Icon
+                icon="bxs:left-arrow"
+                class="text-content dark:text-content-dark size-12 shrink-0"
+              />
 
               <div
-                class="text-content font-notosans dark:text-content-dark block text-2xl lg:hidden"
+                class="text-content font-notosans dark:text-content-dark truncate text-2xl lg:hidden"
               >
                 Prev
               </div>
 
               <div
-                class="text-content dark:text-content-dark line-clamp-2 hidden text-lg font-semibold lg:[display:-webkit-box]"
+                class="text-content dark:text-content-dark line-clamp-2 hidden grow text-lg font-semibold lg:[display:-webkit-box]"
               >
                 {{ prev.name }}
               </div>
 
               <div class="flex h-28 w-36 shrink-0 items-center justify-center">
-                <img :src="prev.imageUrl" class="h-full w-full object-contain" />
+                <img :src="prev.imageUrl" class="w-full rounded object-contain" />
               </div>
             </div>
           </router-link>
@@ -155,27 +151,24 @@ onMounted(async () => {
           >
             <div class="flex items-center gap-4">
               <div class="flex h-28 w-36 shrink-0 items-center justify-center">
-                <img :src="next.imageUrl" class="h-full w-full object-contain" />
+                <img :src="next.imageUrl" class="w-full rounded object-contain" />
               </div>
               <div
-                class="text-content dark:text-content-dark line-clamp-2 hidden text-lg font-semibold lg:[display:-webkit-box]"
+                class="text-content dark:text-content-dark line-clamp-2 hidden grow text-lg font-semibold lg:[display:-webkit-box]"
               >
                 {{ next.name }}
               </div>
 
               <div
-                class="text-content font-notosans dark:text-content-dark block text-2xl lg:hidden"
+                class="text-content font-notosans dark:text-content-dark truncate text-2xl lg:hidden"
               >
                 Next
               </div>
-              <div class="group relative inline-block h-12 w-12">
-                <Icon
-                  icon="bxs:right-arrow"
-                  class="text-content dark:text-content-dark"
-                  width="48"
-                  height="48"
-                />
-              </div>
+
+              <Icon
+                icon="bxs:right-arrow"
+                class="text-content dark:text-content-dark size-12 shrink-0"
+              />
             </div>
           </router-link>
         </template>
