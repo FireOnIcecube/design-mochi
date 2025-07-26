@@ -11,7 +11,10 @@ import { storage } from '@pkg/firebase'
 import imageCompression from 'browser-image-compression'
 import type { ThumbnailBase, ThumbnailCategory } from '@/packages/types'
 import TagSelector from '@admin/components/TagSelector.vue'
-import { fetchThumbnailCategories } from '@pkg/firebase/db/entities/thumbnailCategory'
+import {
+  buildCategoryQuery,
+  fetchThumbnailCategories,
+} from '@pkg/firebase/db/entities/thumbnailCategory'
 import { createThumbnail } from '@pkg/firebase/db/entities/thumbnail'
 import { doc } from 'firebase/firestore'
 import axios, { isAxiosError } from 'axios'
@@ -53,8 +56,9 @@ const youtubeThumbnailResolutions = [
 onMounted(fetchCategories)
 
 async function fetchCategories() {
+  const q = buildCategoryQuery({ order: { createdAt: 'asc' } })
   try {
-    thumbnailCategories.value = await fetchThumbnailCategories()
+    thumbnailCategories.value = await fetchThumbnailCategories(q)
   } catch (e) {
     alert('無法獲取封面類別，請稍後再試。')
     console.error(e)

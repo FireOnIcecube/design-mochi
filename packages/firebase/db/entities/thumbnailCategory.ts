@@ -5,13 +5,16 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
   orderBy,
+  Query,
   query,
   QueryConstraint,
   runTransaction,
   serverTimestamp,
   setDoc,
   updateDoc,
+  where,
   WriteBatch,
   writeBatch,
   type FirestoreDataConverter
@@ -20,7 +23,8 @@ import {
   ThumbnailCategory,
   ThumbnailCategoryBase,
   ThumbnailCategoryCreateData,
-  ThumbnailCategoryEditData
+  ThumbnailCategoryEditData,
+  ThumbnailCategoryQueryOptions
 } from '@pkg/types'
 import { db } from '@pkg/firebase/index'
 import { ThumbnailTag, ThumbnailTagEditData } from '@/packages/types/thumbnailTag'
@@ -40,19 +44,46 @@ export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {
 
 const collectionRef = collection(db, 'thumbnail_categories').withConverter(thumbnailConverter)
 
-export async function fetchThumbnailCategories(...constraints: QueryConstraint[]) {
-  const q =
-    constraints.length > 0
-      ? query(collectionRef, ...constraints)
-      : query(collectionRef, orderBy('createdAt', 'asc'))
+export function buildCategoryQuery(options: ThumbnailCategoryQueryOptions = {}) {
+  let q: Query<ThumbnailCategory> = collectionRef
 
+  if (options.createdAfter) q = query(q, where('createdAt', '>', options.createdAfter))
+  if (options.createdBefore) q = query(q, where('createdAt', '<', options.createdBefore))
+
+  if (options.whereEquals) {
+    for (const [key, value] of Object.entries(options.whereEquals)) {
+      if (value !== undefined) q = query(q, where(key, '==', value))
+    }
+  }
+
+  if (options.whereIn) {
+    for (const [key, value] of Object.entries(options.whereIn)) {
+      if (value !== undefined && value.length > 0) q = query(q, where(key, 'in', value))
+    }
+  }
+
+  if (options.whereArrayContains) {
+    for (const [key, value] of Object.entries(options.whereArrayContains)) {
+      if (value !== undefined && value.length > 0) q = query(q, where(key, 'array-contains', value))
+    }
+  }
+
+  if (options.order) {
+    const [[field, direction]] = Object.entries(options.order) as [string, 'asc' | 'desc'][]
+    q = query(q, orderBy(field, direction))
+  } else {
+    q = query(q, orderBy('createdAt', 'desc'))
+  }
+
+  if (options.limit) q = query(q, limit(options.limit))
+
+  return q
+}
+
+export async function fetchThumbnailCategories(q: Query<ThumbnailCategory>) {
   try {
     const snapshot = await getDocs(q)
-
-    return snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id
-    })) as ThumbnailCategory[]
+    return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
   } catch (e) {
     throw e
   }

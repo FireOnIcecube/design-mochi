@@ -1,4 +1,5 @@
 import type { WithId, WithTimestamps } from './common'
+import { FirestoreQueryOptions } from './firestoreQuery'
 import type { ThumbnailTag, ThumbnailTagBase } from './thumbnailTag'
 
 export interface ThumbnailCategoryBase {
@@ -15,3 +16,5 @@ export type ThumbnailCategoryCreateData = Pick<ThumbnailCategoryBase, 'name' | '
 
 // 編輯用表單
 export type ThumbnailCategoryEditData = WithId<ThumbnailCategoryBase>
+
+export type ThumbnailCategoryQueryOptions = FirestoreQueryOptions<keyof ThumbnailCategory>

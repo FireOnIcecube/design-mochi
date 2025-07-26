@@ -18,6 +18,7 @@ import {
   doc,
 } from 'firebase/firestore'
 import {
+  buildCategoryQuery,
   createThumbnailCategory,
   deleteCategory,
   editThumbnailCategory,
@@ -33,8 +34,10 @@ const thumbnailCategories = ref<ThumbnailCategory[]>([])
 const isLoading = ref(false)
 
 async function handleFetchCategory() {
+  const q = buildCategoryQuery({ order: { createdAt: 'asc' } })
+
   try {
-    thumbnailCategories.value = await fetchThumbnailCategories()
+    thumbnailCategories.value = await fetchThumbnailCategories(q)
   } catch (error) {
     alert('無法載入分類資料，請稍後再試。')
     console.error('Error fetching categories:', error)
