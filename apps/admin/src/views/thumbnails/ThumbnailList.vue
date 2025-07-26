@@ -5,6 +5,10 @@ import { onMounted, ref, computed, watch } from 'vue'
 import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 import { PaginationBar } from '@admin/components/common/paginationBar'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 const thumbnailStore = useThumbnailStore()
 
@@ -17,41 +21,42 @@ const thumbnails = computed(() => {
   const end = start + pageSize
   return allThumbnails.value.slice(start, end)
 })
-const currentPage = ref(1)
+const currentPage = ref(Number(route.query.page) || 1)
 const pageSize = 30
 
 const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
-// 根據 currentPage 切割資料
-// function updateThumbnailsByPage() {
-//   const start = (currentPage.value - 1) * pageSize
-//   const end = start + pageSize
-//   thumbnails.value = allThumbnails.value.slice(start, end)
-// }
-
-// async function loadAllThumbnails() {
-//   const q = buildThumbnailQuery({
-//     order: { createdAt: 'desc' },
-//   })
-//   try {
-//     allThumbnails.value = await fetchThumbnails(q)
-//     updateThumbnailsByPage()
-//   } catch (error) {
-//     alert('無法載入縮圖資料，請稍後再試。')
-//     console.error('Error fetching thumbnails:', error)
-//   }
-// }
-
 function handlePageChange(newPage: number) {
   currentPage.value = newPage
 }
 
-// 切換頁碼時，重新切割資料
-
 onMounted(() => {
   thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
 })
+
+watch(currentPage, (newPage) => {
+  router.push({
+    query: {
+      ...route.query,
+      page: newPage.toString(),
+    },
+  })
+})
+
+watch(
+  () => route.query.page, // ← 第一個參數：要監看的資料（是個 function）
+  (newPage) => {
+    // ← 第二個參數：資料變動時執行的回呼
+    const page = Number(newPage)
+    if (!Number.isInteger(page) || page < 1 || page > totalPages.value) {
+      currentPage.value = 1
+    } else {
+      currentPage.value = page
+    }
+  },
+  { immediate: true }, // ← 第三個參數：watch 選項（立刻執行一次）
+)
 </script>
 
 <template>
