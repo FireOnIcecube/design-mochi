@@ -4,11 +4,14 @@ import NavHeader from '@admin/components/NavHeader.vue'
 import Sidebar from '../components/Sidebar.vue'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { onMounted } from 'vue'
+import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
 
 const thumbnailStore = useThumbnailStore()
+const thumbnailCategoryStore = useThumbnailCategoryStore()
 
 onMounted(() => {
   thumbnailStore.fetchAll()
+  thumbnailCategoryStore.fetchAll()
 })
 </script>
 

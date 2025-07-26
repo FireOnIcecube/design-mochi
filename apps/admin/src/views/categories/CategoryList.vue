@@ -29,15 +29,17 @@ import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui
 import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
 import CategoryEditModal from '@admin/components/CategoryEditModal.vue'
 import LoadingSpinner from '@admin/components/LoadingSpinner.vue'
+import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
 
-const thumbnailCategories = ref<ThumbnailCategory[]>([])
+const categoryStore = useThumbnailCategoryStore()
+
+// const thumbnailCategories = ref<ThumbnailCategory[]>([])
+const thumbnailCategories = computed(() => categoryStore.thumbnailCategories)
 const isLoading = ref(false)
 
-async function handleFetchCategory() {
-  const q = buildCategoryQuery({ order: { createdAt: 'asc' } })
-
+async function loadCategories() {
   try {
-    thumbnailCategories.value = await fetchThumbnailCategories(q)
+    await categoryStore.fetchAll({ order: { createdAt: 'asc' } })
   } catch (error) {
     alert('無法載入分類資料，請稍後再試。')
     console.error('Error fetching categories:', error)
@@ -47,7 +49,8 @@ async function handleFetchCategory() {
 async function handleCreateCategory(formData: ThumbnailCategoryCreateData) {
   try {
     await createThumbnailCategory(formData)
-    await handleFetchCategory()
+
+    await loadCategories()
   } catch (error) {
     alert('無法新增分類資料，請稍後再試。')
     console.error('Error add categories:', error)
@@ -57,7 +60,8 @@ async function handleCreateCategory(formData: ThumbnailCategoryCreateData) {
 async function handleEditCategory(formData: ThumbnailCategoryEditData) {
   try {
     await editThumbnailCategory(formData.id, formData)
-    await handleFetchCategory()
+
+    await loadCategories()
   } catch (error) {
     alert('無法編輯封面類別，請稍後再試。')
     console.error('Error edit categories:', error)
@@ -76,7 +80,7 @@ async function handleDeleteCategory(id: string) {
   isLoading.value = true
   try {
     await deleteCategory(id)
-    await handleFetchCategory()
+    await loadCategories()
   } catch (error) {
     alert('無法刪除封面類別，請稍後再試。')
     console.error('Error delete categories:', error)
@@ -86,7 +90,7 @@ async function handleDeleteCategory(id: string) {
 }
 
 onMounted(() => {
-  handleFetchCategory()
+  loadCategories()
 })
 </script>
 
@@ -128,7 +132,7 @@ onMounted(() => {
             <div class="flex justify-end gap-2">
               <CategoryEditModal
                 :id="category.id"
-                @refetch="handleFetchCategory"
+                @refetch="categoryStore.fetchAll({ order: { createdAt: 'asc' } })"
                 @submit="handleEditCategory"
               />
 
