@@ -44,6 +44,7 @@ watch(currentPage, (newPage) => {
   })
 })
 
+// 對 page 的監聽，能夠確保 page 處在安全範圍
 watch(
   () => route.query.page, // ← 第一個參數：要監看的資料（是個 function）
   (newPage) => {
