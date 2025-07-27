@@ -2,22 +2,51 @@
 import { useRoute } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
 import { getThumbnail } from '@pkg/firebase/db/entities/thumbnail'
-import type { Thumbnail } from '@/packages/types'
+import type { Thumbnail, ThumbnailCategory } from '@/packages/types'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { Icon } from '@iconify/vue'
+import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
 
 const props = defineProps<{
   id: string
 }>()
 
 const thumbnailStore = useThumbnailStore()
+const categoryStore = useThumbnailCategoryStore()
 
 const allThumbnails = computed(() => thumbnailStore.thumbnails)
 const currentIndex = computed(() => allThumbnails.value.findIndex((t) => t.id === props.id))
-const thumbnail = computed(() => allThumbnails.value[currentIndex.value])
+const currentThumbnail = computed(() => allThumbnails.value[currentIndex.value])
+
+const enrichedThumbnail = computed(() => {
+  if (!currentThumbnail.value) return null
+  return enrichThumbnail(currentThumbnail.value, categoryStore.thumbnailCategories)
+})
 
 const prev = computed(() => allThumbnails.value[currentIndex.value - 1] ?? null)
 const next = computed(() => allThumbnails.value[currentIndex.value + 1] ?? null)
+
+function enrichThumbnail(thumbnail: Thumbnail, categories: ThumbnailCategory[]) {
+  const enrichedCategories = thumbnail.categories
+    .map(({ category: categorySlug, tags: selectedTagSlugs }) => {
+      const categoryMeta = categories.find((cat) => cat.slug === categorySlug)
+      if (!categoryMeta) return null
+
+      const selectedTags = categoryMeta.tags?.filter((tag) => selectedTagSlugs.includes(tag.slug))
+
+      return {
+        categorySlug: categoryMeta.slug,
+        categoryName: categoryMeta.name,
+        tags: selectedTags,
+      }
+    })
+    .filter(Boolean)
+
+  return {
+    ...thumbnail,
+    categories: enrichedCategories,
+  }
+}
 
 // const liked = ref(false)
 
@@ -25,25 +54,28 @@ onMounted(async () => {
   if (!thumbnailStore.thumbnails.length) {
     await thumbnailStore.fetchAll()
   }
+  if (!categoryStore.thumbnailCategories.length) {
+    await categoryStore.fetchAll()
+  }
 })
 </script>
 
 <template>
-  <template v-if="thumbnail">
+  <template v-if="enrichedThumbnail">
     <section class="flex flex-col justify-around lg:flex-row">
       <div class="w-full lg:w-1/2">
         <div class="flex items-center justify-center rounded bg-gray-100 select-none lg:h-[50vh]">
-          <img :src="thumbnail.imageUrl" class="object-contain" />
+          <img :src="enrichedThumbnail.imageUrl" class="object-contain" />
         </div>
 
         <div class="text-content dark:text-content-dark flex flex-nowrap justify-between">
           <span class="text-sm">
             來源:
             <a
-              :href="`https://www.youtube.com/watch?v=${thumbnail.videoId}`"
+              :href="`https://www.youtube.com/watch?v=${enrichedThumbnail.videoId}`"
               target="_blank"
               class="hover:text-blue-400"
-              >https://www.youtube.com/watch?v={{ thumbnail.videoId }}
+              >https://www.youtube.com/watch?v={{ enrichedThumbnail.videoId }}
             </a>
           </span>
         </div>
@@ -52,7 +84,7 @@ onMounted(async () => {
       <div class="w-full lg:w-1/3">
         <div class="border-outline dark:text-content-dark mt-8 border-b-2 pb-6 lg:mt-0">
           <p class="font-notosans text-xl lg:text-2xl">
-            {{ thumbnail.name }}
+            {{ enrichedThumbnail.name }}
           </p>
           <!-- 
           <div class="flex justify-end lg:hidden">
@@ -79,14 +111,14 @@ onMounted(async () => {
         <div
           class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 gap-y-8 border-b-2 pt-3 pb-6"
         >
-          <div v-for="cat in thumbnail.categories" class="flex items-center gap-x-8">
-            <div class="font-notosans text-xl whitespace-nowrap">{{ cat.category }}:</div>
+          <div v-for="cat in enrichedThumbnail.categories" class="flex items-center gap-x-8">
+            <div class="font-notosans text-xl whitespace-nowrap">{{ cat?.categoryName }}:</div>
             <div class="text-md font-notosans flex flex-wrap gap-x-4 gap-y-2">
-              <template v-for="tag in cat.tags">
+              <template v-for="tag in cat?.tags">
                 <div
                   class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
                 >
-                  #{{ tag }}
+                  #{{ tag.name }}
                 </div>
               </template>
             </div>
