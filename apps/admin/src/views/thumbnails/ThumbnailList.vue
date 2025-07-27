@@ -6,6 +6,7 @@ import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 import { PaginationBar } from '@admin/components/common/paginationBar'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { useRoute, useRouter } from 'vue-router'
+import { usePageSync } from '@admin/composables/usePageSync'
 
 const route = useRoute()
 const router = useRouter()
@@ -35,29 +36,8 @@ onMounted(() => {
   thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
 })
 
-watch(currentPage, (newPage) => {
-  router.push({
-    query: {
-      ...route.query,
-      page: newPage.toString(),
-    },
-  })
-})
-
-// 對 page 的監聽，能夠確保 page 處在安全範圍
-watch(
-  () => route.query.page, // ← 第一個參數：要監看的資料（是個 function）
-  (newPage) => {
-    // ← 第二個參數：資料變動時執行的回呼
-    const page = Number(newPage)
-    if (!Number.isInteger(page) || page < 1 || page > totalPages.value) {
-      currentPage.value = 1
-    } else {
-      currentPage.value = page
-    }
-  },
-  { immediate: true }, // ← 第三個參數：watch 選項（立刻執行一次）
-)
+// 同步頁碼和 page query
+usePageSync(currentPage, totalPages)
 </script>
 
 <template>
