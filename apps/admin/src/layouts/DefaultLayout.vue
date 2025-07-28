@@ -6,13 +6,13 @@ import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { onMounted } from 'vue'
 import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
 
-const thumbnailStore = useThumbnailStore()
-const thumbnailCategoryStore = useThumbnailCategoryStore()
+// const thumbnailStore = useThumbnailStore()
+// const thumbnailCategoryStore = useThumbnailCategoryStore()
 
-onMounted(() => {
-  thumbnailStore.fetchAll()
-  thumbnailCategoryStore.fetchAll()
-})
+// onMounted(() => {
+//   thumbnailStore.fetchAll({ order: { createdAt: 'desc' }, isHidden: true })
+//   thumbnailCategoryStore.fetchAll()
+// })
 </script>
 
 <template>

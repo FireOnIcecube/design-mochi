@@ -12,7 +12,8 @@ import {
   setDoc,
   where,
   getCountFromServer,
-  type FirestoreDataConverter
+  type FirestoreDataConverter,
+  updateDoc
 } from 'firebase/firestore'
 import { db } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
@@ -37,6 +38,7 @@ export function buildThumbnailQuery(options: ThumbnailQueryOptions = {}): Query<
 
   if (options.createdAfter) q = query(q, where('createdAt', '>', options.createdAfter))
   if (options.createdBefore) q = query(q, where('createdAt', '<', options.createdBefore))
+  if (options.isHidden !== undefined) q = query(q, where('isHidden', '==', options.isHidden))
 
   if (options.whereEquals) {
     for (const [key, value] of Object.entries(options.whereEquals)) {
@@ -108,14 +110,38 @@ export async function getThumbnail(id: string): Promise<Thumbnail> {
 }
 
 /**
+ * 修改指定縮圖欄位，並更新 updatedAt。
+ */
+export async function editThumbnail(id: string, data: Partial<ThumbnailBase>): Promise<Thumbnail> {
+  const docRef = doc(collectionRef, id)
+
+  try {
+    // 更新指定欄位 + updatedAt
+    await updateDoc(docRef, {
+      ...data,
+      updatedAt: serverTimestamp()
+    })
+
+    // 重新取得最新資料
+    const snapshot = await getDoc(docRef)
+    if (!snapshot.exists()) throw new Error('Thumbnail not found')
+
+    return { ...snapshot.data(), id: snapshot.id } as Thumbnail
+  } catch (error) {
+    throw error
+  }
+}
+
+/**
  * 新增縮圖
  */
-export async function createThumbnail(value: ThumbnailBase) {
-  const docRef = doc(collectionRef, value.videoId)
+export async function createThumbnail(data: ThumbnailBase) {
+  const docRef = doc(collectionRef, data.videoId)
   try {
     await setDoc(docRef, {
-      ...value,
-      videoId: value.videoId,
+      ...data,
+      videoId: data.videoId,
+      isHidden: false,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     } as Thumbnail)

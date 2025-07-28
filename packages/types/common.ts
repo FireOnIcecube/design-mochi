@@ -4,4 +4,6 @@ export type WithId<T> = T & { id: string }
 
 export type WithTimestamps<T> = T & { createdAt: Timestamp; updatedAt: Timestamp }
 
+export type WithHidden<T> = T & { isHidden: boolean }
+
 export type NonEmptyArray<T> = [T, ...T[]]
