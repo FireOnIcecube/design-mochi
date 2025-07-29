@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { fetchThumbnails, buildThumbnailQuery } from '@pkg/firebase/db/entities/thumbnail'
+import {
+  fetchThumbnails,
+  buildThumbnailQuery,
+  editThumbnail,
+} from '@pkg/firebase/db/entities/thumbnail'
 import { Thumbnail, ThumbnailQueryOptions } from '@/packages/types'
-import { onMounted, ref, computed, watch } from 'vue'
+import { onMounted, ref, computed, watch, nextTick } from 'vue'
 import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 import { PaginationBar } from '@admin/components/common/paginationBar'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
@@ -28,11 +32,17 @@ const pageSize = 30
 const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
+async function onThumbnailToggleHidden(payload: { id: string; value: boolean }) {
+  await editThumbnail(payload.id, { isHidden: payload.value })
+
+  await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+}
+
 function handlePageChange(newPage: number) {
   currentPage.value = newPage
 }
 
-onMounted(() => {
+onMounted(async () => {
   thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
 })
 
@@ -54,7 +64,7 @@ usePageSync(currentPage, totalPages)
       class="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12 xl:grid-cols-4"
     >
       <div v-for="item in thumbnails" :key="item.id">
-        <ThumbnailCard :thumbnail="item" />
+        <ThumbnailCard :thumbnail="item" @toggle-hidden="onThumbnailToggleHidden" />
       </div>
     </div>
 

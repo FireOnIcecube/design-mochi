@@ -7,11 +7,11 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'toggle-hidden', id: string): void
+  (e: 'toggle-hidden', payload: { id: string; value: boolean }): void
 }>()
 
 function handleToggleHidden() {
-  emit('toggle-hidden', props.thumbnail.id)
+  emit('toggle-hidden', { id: props.thumbnail.id, value: !props.thumbnail.isHidden })
 }
 </script>
 
@@ -23,7 +23,12 @@ function handleToggleHidden() {
     >
       <div class="flex items-center justify-end gap-3 px-4 py-1">
         <div @click="handleToggleHidden">
-          <Icon icon="streamline:visible-solid" class="size-7 text-white" />
+          <Icon
+            :icon="
+              props.thumbnail.isHidden ? 'streamline:invisible-1-solid' : 'streamline:visible-solid'
+            "
+            class="size-7 text-white"
+          />
         </div>
 
         <div><Icon icon="material-symbols:delete" class="size-8 text-red-500" /></div>

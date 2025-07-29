@@ -17,6 +17,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
+import { WithHidden } from '@/packages/types/common'
 
 export const thumbnailConverter: FirestoreDataConverter<Thumbnail> = {
   toFirestore(thumbnail: Thumbnail) {
@@ -112,7 +113,10 @@ export async function getThumbnail(id: string): Promise<Thumbnail> {
 /**
  * 修改指定縮圖欄位，並更新 updatedAt。
  */
-export async function editThumbnail(id: string, data: Partial<ThumbnailBase>): Promise<Thumbnail> {
+export async function editThumbnail(
+  id: string,
+  data: Partial<WithHidden<ThumbnailBase>>
+): Promise<Thumbnail> {
   const docRef = doc(collectionRef, id)
 
   try {
