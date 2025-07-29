@@ -33,9 +33,12 @@ const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
 async function onThumbnailToggleHidden({ id, value }: { id: string; value: boolean }) {
-  await editThumbnail(id, { isHidden: value })
-
-  await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+  try {
+    await editThumbnail(id, { isHidden: value })
+    await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+  } catch (e) {
+    alert('暫時無法 封存/顯示 封面 , 請稍後再試')
+  }
 }
 
 function handlePageChange(newPage: number) {
