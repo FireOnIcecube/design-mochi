@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Thumbnail } from '@/packages/types'
 import { Icon } from '@iconify/vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps<{
   thumbnail: Thumbnail
@@ -10,9 +11,22 @@ const emit = defineEmits<{
   (e: 'toggle-hidden', payload: { id: string; value: boolean }): void
 }>()
 
+const localHidden = ref(props.thumbnail.isHidden)
+
 function handleToggleHidden() {
+  const nextValue = !localHidden.value
+  localHidden.value = nextValue // 立即切換 UI
+
   emit('toggle-hidden', { id: props.thumbnail.id, value: !props.thumbnail.isHidden })
 }
+
+// 如果外部 props 有變化，保持同步（防止外部強制改變）
+watch(
+  () => props.thumbnail.isHidden,
+  (newVal) => {
+    localHidden.value = newVal
+  },
+)
 </script>
 
 <template>
@@ -24,9 +38,7 @@ function handleToggleHidden() {
       <div class="flex items-center justify-end gap-3 px-4 py-1">
         <div @click="handleToggleHidden">
           <Icon
-            :icon="
-              props.thumbnail.isHidden ? 'streamline:invisible-1-solid' : 'streamline:visible-solid'
-            "
+            :icon="localHidden ? 'streamline:invisible-1-solid' : 'streamline:visible-solid'"
             class="size-7 text-white"
           />
         </div>

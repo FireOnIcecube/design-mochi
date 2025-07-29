@@ -32,8 +32,8 @@ const pageSize = 30
 const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
-async function onThumbnailToggleHidden(payload: { id: string; value: boolean }) {
-  await editThumbnail(payload.id, { isHidden: payload.value })
+async function onThumbnailToggleHidden({ id, value }: { id: string; value: boolean }) {
+  await editThumbnail(id, { isHidden: value })
 
   await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
 }
