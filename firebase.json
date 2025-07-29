@@ -3,7 +3,6 @@
     {
       "target": "client",
       "public": "apps/client/dist",
-
       "rewrites": [
         {
           "source": "**",
@@ -26,7 +25,6 @@
     {
       "target": "admin",
       "public": "apps/admin/dist",
-
       "rewrites": [
         {
           "source": "**",
@@ -45,6 +43,17 @@
         }
       ],
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    }
+  ],
+  "functions": [
+    {
+      "source": "packages/functions",
+      "codebase": "default",
+      "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log", "*.local"],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
     }
   ]
 }
