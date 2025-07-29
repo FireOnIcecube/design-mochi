@@ -62,6 +62,13 @@ onMounted(async () => {
 
 <template>
   <template v-if="enrichedThumbnail">
+    <div
+      v-if="enrichedThumbnail.isHidden"
+      class="text-content-dark mb-10 flex w-full items-center justify-center gap-2 bg-amber-400 py-2"
+    >
+      <Icon icon="streamline:invisible-1-solid" class="size-7" />
+      <span class="font-notosans text-lg">此封面已被封存</span>
+    </div>
     <section class="flex flex-col justify-around lg:flex-row">
       <div class="w-full lg:w-1/2">
         <div class="flex items-center justify-center rounded bg-gray-100 select-none lg:h-[50vh]">
