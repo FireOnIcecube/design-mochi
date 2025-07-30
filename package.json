@@ -10,7 +10,8 @@
     "build-only:client": "pnpm --filter @app/client run build-only",
     "dev:admin": "pnpm --filter @app/admin run dev:admin",
     "build:admin": "pnpm --filter @app/admin run build",
-    "build-only:admin": "pnpm --filter @app/admin run build-only"
+    "build-only:admin": "pnpm --filter @app/admin run build-only",
+    "deploy:functions": "pnpm --filter packages/functions run build && firebase deploy --only functions"
   },
   "keywords": [],
   "author": "",
