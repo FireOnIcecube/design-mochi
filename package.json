@@ -11,7 +11,8 @@
     "dev:admin": "pnpm --filter @app/admin run dev:admin",
     "build:admin": "pnpm --filter @app/admin run build",
     "build-only:admin": "pnpm --filter @app/admin run build-only",
-    "deploy:functions": "pnpm --filter packages/functions run build && firebase deploy --only functions"
+    "build:functions": "pnpm --filter @pkg/functions exec rm -rf lib && pnpm --filter @pkg/functions run build",
+    "deploy:functions": "pnpm run build:functions && firebase deploy --only functions"
   },
   "keywords": [],
   "author": "",

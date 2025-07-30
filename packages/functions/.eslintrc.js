@@ -9,8 +9,8 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended' // ✅ 新增 prettier 支援
+    'google',
+    'plugin:@typescript-eslint/recommended'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -24,17 +24,12 @@ module.exports = {
     '/lib/**/*', // Ignore built files.
     '/generated/**/*' // Ignore generated files.
   ],
-  plugins: [
-    '@typescript-eslint',
-    'import',
-    'prettier' // ✅ 新增 prettier 插件
-  ],
+  plugins: ['@typescript-eslint', 'import'],
   rules: {
-    // ✅ 規則自訂
-    // quotes: ['error', 'double'],
-    'import/no-unresolved': 0,
-    indent: 'off', // ❌ off 讓 prettier 處理
-    '@typescript-eslint/indent': 'off',
-    'prettier/prettier': ['error'] // ✅ 由 prettier 控制格式
+    quotes: 'off', // 統一交給 Prettier 處理
+    semi: 'off', // 同上
+    'comma-dangle': 'off', // Prettier 會自動處理
+    'object-curly-spacing': 'off', // 不需要 ESLint 管格式
+    '@typescript-eslint/explicit-module-boundary-types': 'off' // 有時太囉唆
   }
 }

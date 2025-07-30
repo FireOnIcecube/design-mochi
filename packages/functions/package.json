@@ -1,5 +1,5 @@
 {
-  "name": "functions",
+  "name": "@pkg/functions",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
