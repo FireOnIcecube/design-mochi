@@ -10,14 +10,14 @@ export const onThumbnailDelete = onDocumentDeleted(
   async (event) => {
     const deletedDocPath = event.document // e.g., "thumbnails/abc123"
 
-    logger.info(`🔥 Deleting subcollections under ${deletedDocPath}`)
+    logger.info(`🔥[onThumbnailDelete]: Deleting subcollections under ${deletedDocPath}`)
 
     try {
       const firestore = getFirestore()
       await firestore.recursiveDelete(firestore.doc(deletedDocPath))
-      logger.info(`✅ Recursive delete complete for ${deletedDocPath}`)
+      logger.info(`✅[onThumbnailDelete]: Recursive delete complete for ${deletedDocPath}`)
     } catch (err) {
-      logger.error(`❌ Delete failed for ${deletedDocPath}:`, err)
+      logger.error(`❌[onThumbnailDelete]: Delete failed for ${deletedDocPath}:`, err)
     }
   }
 )
