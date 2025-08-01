@@ -1,10 +1,23 @@
 import { logger } from 'firebase-functions'
-import { onDocumentDeleted } from 'firebase-functions/firestore'
+import { onDocumentDeleted } from 'firebase-functions/v2/firestore'
+import { getFirestore } from 'firebase-admin/firestore'
 
 export const onThumbnailDelete = onDocumentDeleted(
-  { document: 'thumbnails/{id}', region: 'asia-east1' },
+  {
+    document: 'thumbnails/{id}',
+    region: 'asia-east1'
+  },
   async (event) => {
-    const id = event.params.id
-    logger.error(`[onThumbnailDelete] triggered for thumbnail id: ${id}`)
+    const deletedDocPath = event.document // e.g., "thumbnails/abc123"
+
+    logger.info(`🔥 Deleting subcollections under ${deletedDocPath}`)
+
+    try {
+      const firestore = getFirestore()
+      await firestore.recursiveDelete(firestore.doc(deletedDocPath))
+      logger.info(`✅ Recursive delete complete for ${deletedDocPath}`)
+    } catch (err) {
+      logger.error(`❌ Delete failed for ${deletedDocPath}:`, err)
+    }
   }
 )
