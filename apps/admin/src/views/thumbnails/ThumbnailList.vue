@@ -3,6 +3,7 @@ import {
   fetchThumbnails,
   buildThumbnailQuery,
   editThumbnail,
+  deleteThumbnail,
 } from '@pkg/firebase/db/entities/thumbnail'
 import { Thumbnail, ThumbnailQueryOptions } from '@/packages/types'
 import { onMounted, ref, computed, watch, nextTick } from 'vue'
@@ -32,6 +33,7 @@ const pageSize = 30
 const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
+// 封存封面
 async function onThumbnailToggleHidden({ id, value }: { id: string; value: boolean }) {
   try {
     await editThumbnail(id, { isHidden: value })
@@ -41,6 +43,19 @@ async function onThumbnailToggleHidden({ id, value }: { id: string; value: boole
   }
 }
 
+// 刪除封面
+async function onThumbnailDelete(id: string) {
+  if (confirm('確定要刪除這個封面嗎？')) {
+    try {
+      await deleteThumbnail(id)
+      await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+    } catch (e) {
+      alert('暫時無法 刪除封面 , 請稍後再試')
+    }
+  }
+}
+
+// 換頁
 function handlePageChange(newPage: number) {
   currentPage.value = newPage
 }
@@ -67,7 +82,11 @@ usePageSync(currentPage, totalPages)
       class="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12 xl:grid-cols-4"
     >
       <div v-for="item in thumbnails" :key="item.id">
-        <ThumbnailCard :thumbnail="item" @toggle-hidden="onThumbnailToggleHidden" />
+        <ThumbnailCard
+          :thumbnail="item"
+          @toggle-hidden="onThumbnailToggleHidden"
+          @request-delete="onThumbnailDelete"
+        />
       </div>
     </div>
 

@@ -7,6 +7,7 @@
 - slug 轉換功能
 - 收藏功能
 - 正確使用 FirestoreDataConverter ，取代目前 api 中的 as
+- 需要構築共通的錯誤處理器
 
 ### 技術債
 

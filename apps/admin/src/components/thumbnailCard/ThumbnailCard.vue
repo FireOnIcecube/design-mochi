@@ -9,6 +9,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'toggle-hidden', payload: { id: string; value: boolean }): void
+  (e: 'request-delete', id: string): void
 }>()
 
 const localHidden = ref(props.thumbnail.isHidden)
@@ -18,6 +19,10 @@ function handleToggleHidden() {
   localHidden.value = nextValue // 立即切換 UI
 
   emit('toggle-hidden', { id: props.thumbnail.id, value: !props.thumbnail.isHidden })
+}
+
+function handleDelete() {
+  emit('request-delete', props.thumbnail.id)
 }
 
 // 如果外部 props 有變化，保持同步（防止外部強制改變）
@@ -43,7 +48,9 @@ watch(
           />
         </div>
 
-        <div><Icon icon="material-symbols:delete" class="size-8 text-red-500" /></div>
+        <div @click="handleDelete">
+          <Icon icon="material-symbols:delete" class="size-8 text-red-500" />
+        </div>
       </div>
     </div>
     <router-link :to="{ name: 'ThumbnailDetail', params: { id: props.thumbnail.id } }">

@@ -13,7 +13,8 @@ import {
   where,
   getCountFromServer,
   type FirestoreDataConverter,
-  updateDoc
+  updateDoc,
+  deleteDoc
 } from 'firebase/firestore'
 import { db } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
@@ -149,6 +150,25 @@ export async function createThumbnail(data: ThumbnailBase) {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     } as Thumbnail)
+  } catch (e) {
+    throw e
+  }
+}
+
+/**
+ * 刪除縮圖
+ */
+export async function deleteThumbnail(id: string) {
+  if (!id) throw new Error('無法刪除封面縮圖，請稍後再試。')
+
+  const deletedDocRef = doc(collectionRef, id)
+
+  try {
+    const deletedDoc = await getDoc(deletedDocRef)
+    if (!deletedDoc.exists()) throw new Error('刪除封面不存在')
+
+    await deleteDoc(deletedDocRef)
+    console.log(`刪除成功，文件: ${id}`)
   } catch (e) {
     throw e
   }
