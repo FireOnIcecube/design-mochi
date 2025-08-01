@@ -16,9 +16,10 @@ import {
   updateDoc,
   deleteDoc
 } from 'firebase/firestore'
-import { db } from '@pkg/firebase'
+import { db, storage } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
 import { WithHidden } from '@/packages/types/common'
+import { deleteObject, ref as storageRef } from 'firebase/storage'
 
 export const thumbnailConverter: FirestoreDataConverter<Thumbnail> = {
   toFirestore(thumbnail: Thumbnail) {
@@ -162,12 +163,15 @@ export async function deleteThumbnail(id: string) {
   if (!id) throw new Error('無法刪除封面縮圖，請稍後再試。')
 
   const deletedDocRef = doc(collectionRef, id)
+  const deletedStorageRef = storageRef(storage, `thumbnails/${id}.jpg`)
 
   try {
     const deletedDoc = await getDoc(deletedDocRef)
     if (!deletedDoc.exists()) throw new Error('刪除封面不存在')
 
     await deleteDoc(deletedDocRef)
+    await deleteObject(deletedStorageRef)
+
     console.log(`刪除成功，文件: ${id}`)
   } catch (e) {
     throw e
