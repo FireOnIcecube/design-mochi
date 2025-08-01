@@ -34,9 +34,9 @@ const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
 // 封存封面
-async function onThumbnailToggleHidden({ id, value }: { id: string; value: boolean }) {
+async function onThumbnailToggleArchive({ id, value }: { id: string; value: boolean }) {
   try {
-    await editThumbnail(id, { isHidden: value })
+    await editThumbnail(id, { isArchived: value })
     await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
   } catch (e) {
     alert('暫時無法 封存/顯示 封面 , 請稍後再試')
@@ -84,7 +84,7 @@ usePageSync(currentPage, totalPages)
       <div v-for="item in thumbnails" :key="item.id">
         <ThumbnailCard
           :thumbnail="item"
-          @toggle-hidden="onThumbnailToggleHidden"
+          @toggle-archive="onThumbnailToggleArchive"
           @request-delete="onThumbnailDelete"
         />
       </div>

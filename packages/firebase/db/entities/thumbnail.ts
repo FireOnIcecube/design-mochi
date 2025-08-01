@@ -18,7 +18,7 @@ import {
 } from 'firebase/firestore'
 import { db, storage } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
-import { WithHidden } from '@/packages/types/common'
+import { WithArchived } from '@/packages/types/common'
 import { deleteObject, ref as storageRef } from 'firebase/storage'
 
 export const thumbnailConverter: FirestoreDataConverter<Thumbnail> = {
@@ -41,7 +41,7 @@ export function buildThumbnailQuery(options: ThumbnailQueryOptions = {}): Query<
 
   if (options.createdAfter) q = query(q, where('createdAt', '>', options.createdAfter))
   if (options.createdBefore) q = query(q, where('createdAt', '<', options.createdBefore))
-  if (options.isHidden !== undefined) q = query(q, where('isHidden', '==', options.isHidden))
+  if (options.isArchived !== undefined) q = query(q, where('isArchived', '==', options.isArchived))
 
   if (options.whereEquals) {
     for (const [key, value] of Object.entries(options.whereEquals)) {
@@ -117,7 +117,7 @@ export async function getThumbnail(id: string): Promise<Thumbnail> {
  */
 export async function editThumbnail(
   id: string,
-  data: Partial<WithHidden<ThumbnailBase>>
+  data: Partial<WithArchived<ThumbnailBase>>
 ): Promise<Thumbnail> {
   const docRef = doc(collectionRef, id)
 
@@ -147,7 +147,7 @@ export async function createThumbnail(data: ThumbnailBase) {
     await setDoc(docRef, {
       ...data,
       videoId: data.videoId,
-      isHidden: false,
+      isArchived: false,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     } as Thumbnail)

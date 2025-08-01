@@ -8,17 +8,17 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'toggle-hidden', payload: { id: string; value: boolean }): void
+  (e: 'toggle-archive', payload: { id: string; value: boolean }): void
   (e: 'request-delete', id: string): void
 }>()
 
-const localHidden = ref(props.thumbnail.isHidden)
+const localArchived = ref(props.thumbnail.isArchived)
 
-function handleToggleHidden() {
-  const nextValue = !localHidden.value
-  localHidden.value = nextValue // 立即切換 UI
+function handleToggleArchived() {
+  const nextValue = !localArchived.value
+  localArchived.value = nextValue // 立即切換 UI
 
-  emit('toggle-hidden', { id: props.thumbnail.id, value: !props.thumbnail.isHidden })
+  emit('toggle-archive', { id: props.thumbnail.id, value: !props.thumbnail.isArchived })
 }
 
 function handleDelete() {
@@ -29,7 +29,7 @@ function handleDelete() {
 watch(
   () => props.thumbnail.isHidden,
   (newVal) => {
-    localHidden.value = newVal
+    localArchived.value = newVal
   },
 )
 </script>
@@ -41,9 +41,9 @@ watch(
       class="curosr-default absolute top-0 right-0 left-0 z-10 -translate-y-2 bg-black/40 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-y-0 group-hover:opacity-100"
     >
       <div class="flex items-center justify-end gap-3 px-4 py-1">
-        <div @click="handleToggleHidden">
+        <div @click="handleToggleArchived">
           <Icon
-            :icon="localHidden ? 'streamline:invisible-1-solid' : 'streamline:visible-solid'"
+            :icon="localArchived ? 'material-symbols:archive' : 'material-symbols:archive-outline'"
             class="size-7 text-white"
           />
         </div>

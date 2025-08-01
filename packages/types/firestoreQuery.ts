@@ -4,7 +4,7 @@ import type { Timestamp } from 'firebase/firestore'
 export type FirestoreQueryOptions<TFieldNames extends string = string> = {
   createdAfter?: Timestamp
   createdBefore?: Timestamp
-  isHidden?: boolean
+  isArchived?: boolean
   limit?: number
   order?: { [K in TFieldNames]: Record<K, 'asc' | 'desc'> }[TFieldNames]
   whereEquals?: Partial<Record<TFieldNames, unknown>>
