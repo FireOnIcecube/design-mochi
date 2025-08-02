@@ -7,9 +7,7 @@
 - 收藏功能
 - 正確使用 FirestoreDataConverter ，取代目前 api 中的 as
 - 需要構築共通的錯誤處理器
-- 前台社群分享 link
-- 後台點擊數據
-- link embed
+- 後台不記入點擊計算
 
 ### 技術債
 

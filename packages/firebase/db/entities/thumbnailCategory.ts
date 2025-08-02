@@ -26,8 +26,8 @@ import {
   ThumbnailCategoryEditData,
   ThumbnailCategoryQueryOptions
 } from '@pkg/types'
-import { db } from '@pkg/firebase/index'
-import { ThumbnailTag, ThumbnailTagEditData } from '@/packages/types/thumbnailTag'
+import { db } from '@pkg/firebase'
+import type { ThumbnailTag, ThumbnailTagEditData } from '@pkg/types'
 
 // firestore 轉換器
 export const thumbnailConverter: FirestoreDataConverter<ThumbnailCategory> = {

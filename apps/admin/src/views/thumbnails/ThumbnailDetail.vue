@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
-import { getThumbnail } from '@pkg/firebase/db/entities/thumbnail'
+import { deleteThumbnail, editThumbnail, getThumbnail } from '@pkg/firebase/db/entities/thumbnail'
 import type { Thumbnail, ThumbnailCategory } from '@/packages/types'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { Icon } from '@iconify/vue'
 import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
+import axios from 'axios'
+import router from '../../router'
 
 const props = defineProps<{
   id: string
@@ -48,6 +50,40 @@ function enrichThumbnail(thumbnail: Thumbnail, categories: ThumbnailCategory[]) 
   }
 }
 
+// 封存封面
+async function toggleArchive({ id, value }: { id: string; value: boolean }) {
+  try {
+    await editThumbnail(id, { isArchived: value })
+    await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+  } catch (e) {
+    alert('暫時無法 封存/顯示 封面 , 請稍後再試')
+  }
+}
+
+// 刪除封面
+async function onThumbnailDelete(id: string) {
+  if (confirm('確定要刪除這個封面嗎？')) {
+    try {
+      await deleteThumbnail(id)
+      router.push({ name: 'ThumbnailList' })
+    } catch (e) {
+      alert('暫時無法 刪除封面 , 請稍後再試')
+      console.error(e)
+    }
+  }
+}
+
+/** 增加點擊數，僅可於前台啟用 */
+// async function incrementClickCount() {
+//   try {
+//     await axios.post('https://incrementthumbnailclick-xpujuvtkea-de.a.run.app', {
+//       thumbnailId: props.id,
+//     })
+//   } catch (err) {
+//     console.error('❌ Failed to increment click count', err)
+//   }
+// }
+
 // const liked = ref(false)
 
 onMounted(async () => {
@@ -64,12 +100,13 @@ onMounted(async () => {
   <template v-if="enrichedThumbnail">
     <div
       v-if="enrichedThumbnail.isArchived"
-      class="text-content-dark mb-10 flex w-full items-center justify-center gap-2 bg-amber-400 py-2"
+      class="text-content-dark mb-10 flex w-full items-center justify-center gap-2 bg-amber-500 py-2"
     >
       <Icon icon="material-symbols:archive" class="size-7" />
       <span class="font-notosans text-lg">此封面已被封存</span>
     </div>
-    <section class="flex flex-col justify-around lg:flex-row">
+
+    <div class="flex flex-col justify-around lg:flex-row">
       <div class="w-full lg:w-1/2">
         <div class="flex items-center justify-center rounded bg-gray-100 select-none lg:h-[50vh]">
           <img :src="enrichedThumbnail.imageUrl" class="object-contain" />
@@ -89,7 +126,7 @@ onMounted(async () => {
       </div>
 
       <div class="w-full lg:w-1/3">
-        <div class="border-outline dark:text-content-dark mt-8 border-b-2 pb-6 lg:mt-0">
+        <section class="border-outline dark:text-content-dark mt-8 border-b-2 pb-6 lg:mt-0">
           <p class="font-notosans text-xl lg:text-2xl">
             {{ enrichedThumbnail.name }}
           </p>
@@ -113,9 +150,9 @@ onMounted(async () => {
               </div>
             </button>
           </div> -->
-        </div>
+        </section>
 
-        <div
+        <section
           class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 gap-y-8 border-b-2 pt-3 pb-6"
         >
           <div v-for="cat in enrichedThumbnail.categories" class="flex items-center gap-x-8">
@@ -130,7 +167,39 @@ onMounted(async () => {
               </template>
             </div>
           </div>
-        </div>
+        </section>
+
+        <section class="mt-16 flex items-center justify-between">
+          <div class="font-notosans dark:text-content-dark text-content text-2xl">
+            點閱數: {{ enrichedThumbnail.clickCount }}
+          </div>
+          <div class="flex items-center gap-8 text-lg font-black text-white">
+            <button
+              class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-amber-500 px-6 py-3 shadow-md hover:bg-amber-500/80 active:bg-amber-700 active:shadow-inner"
+              @click="
+                toggleArchive({ id: enrichedThumbnail.id, value: !enrichedThumbnail.isArchived })
+              "
+            >
+              <Icon
+                :icon="
+                  enrichedThumbnail.isArchived
+                    ? 'material-symbols:archive'
+                    : 'material-symbols:archive-outline'
+                "
+                class="size-7 text-white"
+              />
+              <span>封存</span>
+            </button>
+            <button
+              class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-red-500 px-6 py-3 shadow-md hover:bg-red-500/80 active:bg-red-700 active:shadow-inner"
+              @click="onThumbnailDelete(enrichedThumbnail.id)"
+            >
+              <Icon icon="material-symbols:delete" class="size-7" />
+
+              <span>刪除</span>
+            </button>
+          </div>
+        </section>
 
         <!-- 分享功能，暫時不實裝 -->
         <!-- <div class="mt-8 flex gap-x-4">
@@ -142,7 +211,7 @@ onMounted(async () => {
           </div>
         </div> -->
       </div>
-    </section>
+    </div>
 
     <section class="mt-16 px-4">
       <div class="flex flex-col gap-4 md:flex-row md:justify-between">

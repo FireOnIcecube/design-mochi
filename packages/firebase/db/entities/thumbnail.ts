@@ -18,7 +18,7 @@ import {
 } from 'firebase/firestore'
 import { db, storage } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
-import { WithArchived } from '@/packages/types/common'
+import { WithArchived } from '@pkg/types'
 import { deleteObject, ref as storageRef } from 'firebase/storage'
 
 export const thumbnailConverter: FirestoreDataConverter<Thumbnail> = {
@@ -148,6 +148,7 @@ export async function createThumbnail(data: ThumbnailBase) {
       ...data,
       videoId: data.videoId,
       isArchived: false,
+      clickCount: 0,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     } as Thumbnail)

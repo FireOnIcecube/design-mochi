@@ -149,6 +149,7 @@ async function submitThumbnailUpload() {
       name: videoTitle.value,
       imageUrl: downloadUrl,
       videoId: videoId.value,
+      clickCount: 0,
       categories: normalizeCategoryTagList(selectedTagsByCategory.value) as NonEmptyArray<{
         category: string
         tags: NonEmptyArray<string>

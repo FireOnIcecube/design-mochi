@@ -24,7 +24,12 @@ const routes = [
   { path: '/login', component: LoginView, meta: { layout: BlankLayout } },
 
   // Thumbnails
-  { path: '/thumbnails', component: ThumbnailList, meta: { requiresAuth: true } },
+  {
+    path: '/thumbnails',
+    name: 'ThumbnailList',
+    component: ThumbnailList,
+    meta: { requiresAuth: true },
+  },
   { path: '/thumbnails/create', component: ThumbnailCreate, meta: { requiresAuth: true } },
   {
     path: '/thumbnails/edit/:id',

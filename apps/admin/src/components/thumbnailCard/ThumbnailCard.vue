@@ -27,7 +27,7 @@ function handleDelete() {
 
 // 如果外部 props 有變化，保持同步（防止外部強制改變）
 watch(
-  () => props.thumbnail.isHidden,
+  () => props.thumbnail.isArchived,
   (newVal) => {
     localArchived.value = newVal
   },

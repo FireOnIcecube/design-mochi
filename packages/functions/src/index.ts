@@ -12,3 +12,4 @@ import { initializeApp } from 'firebase-admin/app'
 initializeApp()
 
 export { onThumbnailDelete } from './firestore/onThumbnailDelete'
+export { incrementThumbnailClick } from './https/incrementThumbnailClick'
