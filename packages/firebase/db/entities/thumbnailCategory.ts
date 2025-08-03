@@ -189,15 +189,6 @@ export async function deleteCategory(catId: string) {
       const deletedDoc = await getDoc(deletedDocRef)
       if (!deletedDoc.exists()) throw new Error('刪除封面類別不存在')
 
-      const batch = writeBatch(db)
-      // 刪除子集合
-      const tagDocsSnap = await getDocs(collection(deletedDocRef, 'tags'))
-      tagDocsSnap.docs.forEach((t) => {
-        console.log('tags 傳入id ', t.id)
-        batch.delete(t.ref)
-      })
-
-      await batch.commit()
       await deleteDoc(deletedDocRef)
       console.log(`刪除成功，文件: ${catId}`)
     } catch (e) {

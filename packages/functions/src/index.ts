@@ -11,5 +11,6 @@ import { initializeApp } from 'firebase-admin/app'
 
 initializeApp()
 
-export { onThumbnailDelete } from './firestore/onThumbnailDelete'
+export { onThumbnailDelete } from './firestore/thumbnail/onThumbnailDelete'
 export { incrementThumbnailClick } from './https/incrementThumbnailClick'
+export { onThumbnailCategoryDelete } from './firestore/thumbnailCategory/onThumbnailCategoryDelete'

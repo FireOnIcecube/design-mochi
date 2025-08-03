@@ -188,7 +188,12 @@ onMounted(async () => {
                 "
                 class="size-7 text-white"
               />
-              <span>封存</span>
+              <template v-if="enrichedThumbnail.isArchived">
+                <span>解除封存</span>
+              </template>
+              <template v-else>
+                <span>封存</span>
+              </template>
             </button>
             <button
               class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-red-500 px-6 py-3 shadow-md hover:bg-red-500/80 active:bg-red-700 active:shadow-inner"
