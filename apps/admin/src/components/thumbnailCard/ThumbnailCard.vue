@@ -64,7 +64,7 @@ watch(
           alt="Thumbnail"
         />
 
-        <div class="absolute right-2 bottom-2">
+        <div class="absolute right-2 bottom-2 bg-black/40 p-1">
           <div class="flex items-center gap-2 text-white">
             <Icon icon="mdi:people-outline" class="h-6 w-6" />
 
