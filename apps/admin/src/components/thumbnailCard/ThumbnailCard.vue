@@ -63,6 +63,14 @@ watch(
           class="h-full w-full rounded object-cover"
           alt="Thumbnail"
         />
+
+        <div class="absolute right-2 bottom-2">
+          <div class="flex items-center gap-2 text-white">
+            <Icon icon="mdi:people-outline" class="h-6 w-6" />
+
+            <span class="font-notosans text-md">{{ props.thumbnail.clickCount }}</span>
+          </div>
+        </div>
       </div>
 
       <p
