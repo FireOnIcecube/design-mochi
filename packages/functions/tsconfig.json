@@ -1,4 +1,6 @@
 {
+  "extends": "../../tsconfig.json",
+
   "compilerOptions": {
     "module": "NodeNext",
     "esModuleInterop": true,
@@ -11,7 +13,5 @@
     "target": "es2017"
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
