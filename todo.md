@@ -7,6 +7,7 @@
 - 收藏功能
 - 正確使用 FirestoreDataConverter ，取代目前 api 中的 as
 - 需要構築共通的錯誤處理器
+- 客戶端新增下載圖片按鈕
 
 ### 技術債
 
