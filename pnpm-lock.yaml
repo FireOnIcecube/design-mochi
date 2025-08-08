@@ -269,9 +269,6 @@ importers:
 
   packages/functions:
     dependencies:
-      '@pkg/types':
-        specifier: workspace:*
-        version: link:../types
       firebase-admin:
         specifier: ^12.6.0
         version: 12.7.0

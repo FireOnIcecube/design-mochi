@@ -14,3 +14,7 @@ initializeApp()
 export { onThumbnailDelete } from './firestore/thumbnail/onThumbnailDelete'
 export { incrementThumbnailClick } from './https/incrementThumbnailClick'
 export { onThumbnailCategoryDelete } from './firestore/thumbnailCategory/onThumbnailCategoryDelete'
+export { onThumbnailUpdate } from './firestore/thumbnail/onThumbnailUpdate'
+export { onThumbnailCreate } from './firestore/thumbnail/onThumbnailCreate'
+
+// export { onThumbnailCategoryUpdate } from './firestore/thumbnailCategory/onThumbnailCategoryUpdate'

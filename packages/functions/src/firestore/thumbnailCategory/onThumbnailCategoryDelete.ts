@@ -14,7 +14,7 @@ export const onThumbnailCategoryDelete = onDocumentDeleted(
     const deletedDocPath = event.document
 
     if (!slug || !deletedDocPath) {
-      logger.warn('⚠️ Missing slug or document path in deleted category.')
+      logger.warn('[onThumbnailCategoryDelete]: Missing slug or document path in deleted category.')
       return
     }
 
@@ -28,7 +28,7 @@ export const onThumbnailCategoryDelete = onDocumentDeleted(
       logger.info(`🧹[onThumbnailCategoryDelete]: Subcollections under ${deletedDocPath} deleted.`)
     } catch (error: any) {
       logger.error(
-        '❌[onThumbnailCategoryDelete]: Error while cleaning up after category deletion:',
+        '[onThumbnailCategoryDelete]: Error while cleaning up after category deletion:',
         {
           error: error.message || error,
           slug,
@@ -63,7 +63,7 @@ async function removeCategoryFromThumbnails(slug: string) {
     return affected
   } catch (error: any) {
     throw new Error(
-      `removeCategoryFromThumbnails() failed for slug "${slug}": ${error.message || error}`
+      `[onThumbnailCategoryDelete]: removeCategoryFromThumbnails() failed for slug "${slug}": ${error.message || error}`
     )
   }
 }
