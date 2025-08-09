@@ -108,11 +108,13 @@ onMounted(async () => {
 
     <div class="flex flex-col justify-around lg:flex-row">
       <div class="w-full lg:w-1/2">
-        <div class="flex items-center justify-center rounded bg-gray-100 select-none lg:h-[50vh]">
+        <div
+          class="flex items-center justify-center rounded bg-gray-100 select-none dark:bg-gray-400"
+        >
           <img :src="enrichedThumbnail.imageUrl" class="object-contain" />
         </div>
 
-        <div class="text-content dark:text-content-dark flex flex-nowrap justify-between">
+        <div class="text-content dark:text-content-dark flex flex-nowrap">
           <span class="text-sm">
             來源:
             <a
@@ -155,10 +157,14 @@ onMounted(async () => {
         <section
           class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 gap-y-8 border-b-2 pt-3 pb-6"
         >
-          <div v-for="cat in enrichedThumbnail.categories" class="flex items-center gap-x-8">
+          <div
+            v-for="cat in enrichedThumbnail.categories"
+            :key="cat?.categorySlug"
+            class="flex items-center gap-x-8"
+          >
             <div class="font-notosans text-xl whitespace-nowrap">{{ cat?.categoryName }}:</div>
             <div class="text-md font-notosans flex flex-wrap gap-x-4 gap-y-2">
-              <template v-for="tag in cat?.tags">
+              <template v-for="(tag, index) in cat?.tags" :key="index">
                 <div
                   class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
                 >
@@ -169,7 +175,7 @@ onMounted(async () => {
           </div>
         </section>
 
-        <section class="mt-16 flex items-center justify-between">
+        <section class="mt-8 flex flex-col justify-between gap-y-8 xl:mt-16 xl:flex-row">
           <div class="font-notosans dark:text-content-dark text-content text-2xl">
             點閱數: {{ enrichedThumbnail.clickCount }}
           </div>
@@ -225,13 +231,10 @@ onMounted(async () => {
         <template v-if="prev">
           <router-link
             :to="{ name: 'ThumbnailDetail', params: { id: prev.videoId } }"
-            class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg lg:max-w-2xl dark:hover:bg-gray-800"
+            class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg md:max-w-1/2 lg:max-w-2xl dark:hover:bg-gray-800"
           >
             <div class="flex items-center gap-4">
-              <Icon
-                icon="bxs:left-arrow"
-                class="text-content dark:text-content-dark size-12 shrink-0"
-              />
+              <Icon icon="bxs:left-arrow" class="text-content dark:text-content-dark size-12" />
 
               <div
                 class="text-content font-notosans dark:text-content-dark truncate text-2xl lg:hidden"
@@ -260,7 +263,7 @@ onMounted(async () => {
         <template v-if="next">
           <router-link
             :to="{ name: 'ThumbnailDetail', params: { id: next.videoId } }"
-            class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg lg:max-w-2xl"
+            class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg md:max-w-1/2 lg:max-w-2xl"
           >
             <div class="flex items-center gap-4">
               <div class="flex h-28 w-36 shrink-0 items-center justify-center">
@@ -278,10 +281,7 @@ onMounted(async () => {
                 Next
               </div>
 
-              <Icon
-                icon="bxs:right-arrow"
-                class="text-content dark:text-content-dark size-12 shrink-0"
-              />
+              <Icon icon="bxs:right-arrow" class="text-content dark:text-content-dark size-12" />
             </div>
           </router-link>
         </template>
