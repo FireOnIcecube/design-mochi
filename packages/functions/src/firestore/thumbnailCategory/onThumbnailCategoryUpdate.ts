@@ -1,56 +1,87 @@
-// import { getFirestore } from 'firebase-admin/firestore'
-// import { , onDocumentUpdated } from 'firebase-functions/firestore'
-// import type { ThumbnailTag } from '@pkg/types'
-// import { logger } from 'firebase-functions'
+import { getFirestore } from 'firebase-admin/firestore'
+import { onDocumentUpdated } from 'firebase-functions/firestore'
+import { logger } from 'firebase-functions'
 
-// export const onThumbnailCategoryUpdate = onDocumentUpdated(
-//   {
-//     document: 'thumbnail_categories/{id}',
-//     region: 'asia-east1'
-//   },
-//   async (event) => {
-//     const db = getFirestore()
-//     const updatedDocPath = event.document
+export const onThumbnailCategoryUpdate = onDocumentUpdated(
+  {
+    document: 'thumbnail_categories/{id}',
+    region: 'asia-east1'
+  },
+  async (event) => {
+    const updatedDocPath = event.document
 
-//     const beforeData = event.data?.before.data()
-//     const afterData = event.data?.after.data()
+    const afterData = event.data?.after.data()
 
-//     const categorySlug = event.data?.after.data().slug as string
-//     const newTags = afterData?.tags as ThumbnailTag[] | undefined
+    const categorySlug = event.data?.after.data().slug as string
+    const newTagSlugs = afterData?.tags.map((t: any) => t.slug) as string[] | undefined
 
-//     if (!categorySlug || !updatedDocPath) {
-//       logger.warn('[onThumbnailCategoryUpdate]: 缺少變更的 categorySlug')
-//       return
-//     }
+    if (!categorySlug || !updatedDocPath) {
+      logger.warn('[onThumbnailCategoryUpdate]: 缺少變更的 categorySlug')
+      return
+    }
 
-//     try {
-//       logger.info(`[onThumbnailCategoryUpdate]: Category "${categorySlug} 已經修改"`)
+    try {
+      logger.info(`[onThumbnailCategoryUpdate]: Category "${categorySlug} 已經修改"`)
 
-//       if (!newTags?.length) {
-//         logger.info('[onThumbnailCategoryUpdate]: Category 底下並沒有任何 Tag')
-//         return
-//       }
+      if (!newTagSlugs?.length) {
+        logger.info(
+          `[onThumbnailCategoryUpdate]: 更新後的 Category: ${categorySlug} 底下並沒有任何 Tag`
+        )
+        return
+      }
 
-//       //   const affected = await replaceTagsFromThumbnail(categorySlug, newTags)
-//     } catch (e) {
-//       throw e
-//     }
-//   }
-// )
+      const affected = await replaceTagsFromThumbnail(categorySlug, newTagSlugs)
 
-// async function replaceTagsFromThumbnail(categorySlug: string, newTags: ThumbnailTag[]) {
-//   const db = getFirestore()
+      logger.info(`[replaceTagsFromThumbnail]: 替換 tag 完成，共影響 ${affected} 個封面`)
+    } catch (e) {
+      logger.error(`[onThumbnailCategoryUpdate]: 更新封面使用 Tag 時失敗: `, e)
+    }
+  }
+)
 
-//   try {
-//     const thumbnailsSnapshot = await db.collection('thumbnails').where('categories','array-contains',categorySlug).get()
-//     const batch = db.batch()
-//     let affected = 0
+async function replaceTagsFromThumbnail(categorySlug: string, newTagSlugs: string[]) {
+  const db = getFirestore()
 
-//     for( const doc of thumbnailsSnapshot.docs ) {
-//       const data = doc.data()
-//       const
-//     }
+  try {
+    // 找出有使用更改 category 的 thumbnail
+    const thumbnailsSnapshot = await db
+      .collection('thumbnails')
+      .where('usedCategories', 'array-contains', categorySlug)
+      .get()
 
-//   }
+    const batch = db.batch()
+    let affected = 0
 
-// }
+    for (const doc of thumbnailsSnapshot.docs) {
+      const data = doc.data()
+      const originalCategories = data.categories || []
+
+      const udpatedCatIndex = originalCategories.findIndex(
+        (item: { category: string; tags: string[] }) => item.category === categorySlug
+      )
+
+      if (udpatedCatIndex === -1) {
+        logger.warn(
+          `[replaceTagsFromThumbnail]: 封面: ${data.name} ，中並沒有 ${categorySlug} 這個category`
+        )
+        continue
+      }
+
+      const newCategories = originalCategories.map(
+        (item: { category: string; tags: string[] }, index: number) =>
+          index === udpatedCatIndex
+            ? { category: categorySlug, tags: [...newTagSlugs] }
+            : { ...item, tags: [...item.tags] }
+      )
+
+      batch.update(doc.ref, { categories: newCategories })
+      affected++
+    }
+
+    await batch.commit()
+
+    return affected
+  } catch (err) {
+    throw err
+  }
+}

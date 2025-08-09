@@ -17,4 +17,4 @@ export { onThumbnailCategoryDelete } from './firestore/thumbnailCategory/onThumb
 export { onThumbnailUpdate } from './firestore/thumbnail/onThumbnailUpdate'
 export { onThumbnailCreate } from './firestore/thumbnail/onThumbnailCreate'
 
-// export { onThumbnailCategoryUpdate } from './firestore/thumbnailCategory/onThumbnailCategoryUpdate'
+export { onThumbnailCategoryUpdate } from './firestore/thumbnailCategory/onThumbnailCategoryUpdate'
