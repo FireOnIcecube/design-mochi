@@ -15,7 +15,7 @@ export function usePageSync(currentPage: Ref<number>, totalPages: ComputedRef<nu
     })
   })
 
-  // 監聽 url ， 變更 目前頁數，對 總頁數 進行防呆處理
+  // 監聽 url ， 變更 目前頁數，並進行防呆處理
   watch(
     () => route.query.page,
     (newPage) => {
