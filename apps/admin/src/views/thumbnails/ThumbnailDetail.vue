@@ -237,7 +237,7 @@ onMounted(async () => {
               <Icon icon="bxs:left-arrow" class="text-content dark:text-content-dark size-12" />
 
               <div
-                class="text-content font-notosans dark:text-content-dark truncate text-2xl lg:hidden"
+                class="text-content font-notosans dark:text-content-dark hidden truncate text-2xl md:block lg:hidden"
               >
                 Prev
               </div>
@@ -265,7 +265,7 @@ onMounted(async () => {
             :to="{ name: 'ThumbnailDetail', params: { id: next.videoId } }"
             class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg md:max-w-1/2 lg:max-w-2xl xl:max-w-2xl"
           >
-            <div class="flex items-center gap-4">
+            <div class="flex items-center justify-around gap-4">
               <div class="flex h-28 w-36 shrink-0 items-center justify-center">
                 <img :src="next.imageUrl" class="w-full rounded object-contain" />
               </div>
@@ -276,7 +276,7 @@ onMounted(async () => {
               </div>
 
               <div
-                class="text-content font-notosans dark:text-content-dark truncate text-2xl lg:hidden"
+                class="text-content font-notosans dark:text-content-dark hidden truncate text-2xl md:block lg:hidden"
               >
                 Next
               </div>
