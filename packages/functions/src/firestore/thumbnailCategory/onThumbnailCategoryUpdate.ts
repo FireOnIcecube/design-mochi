@@ -13,7 +13,7 @@ export const onThumbnailCategoryUpdate = onDocumentUpdated(
     const afterData = event.data?.after.data()
 
     const categorySlug = event.data?.after.data().slug as string
-    const newTagSlugs = afterData?.tags.map((t: any) => t.slug) as string[] | undefined
+    const newTagSlugs = afterData?.tags.map((t: any) => t.slug) as string[]
 
     if (!categorySlug || !updatedDocPath) {
       logger.warn('[onThumbnailCategoryUpdate]: 缺少變更的 categorySlug')
@@ -22,13 +22,6 @@ export const onThumbnailCategoryUpdate = onDocumentUpdated(
 
     try {
       logger.info(`[onThumbnailCategoryUpdate]: Category "${categorySlug} 已經修改"`)
-
-      if (!newTagSlugs?.length) {
-        logger.info(
-          `[onThumbnailCategoryUpdate]: 更新後的 Category: ${categorySlug} 底下並沒有任何 Tag`
-        )
-        return
-      }
 
       const affected = await replaceTagsFromThumbnail(categorySlug, newTagSlugs)
 
