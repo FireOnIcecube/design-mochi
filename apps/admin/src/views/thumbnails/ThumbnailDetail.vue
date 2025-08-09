@@ -231,7 +231,7 @@ onMounted(async () => {
         <template v-if="prev">
           <router-link
             :to="{ name: 'ThumbnailDetail', params: { id: prev.videoId } }"
-            class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg md:max-w-1/2 lg:max-w-2xl dark:hover:bg-gray-800"
+            class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg md:max-w-1/2 xl:max-w-2xl dark:hover:bg-gray-800"
           >
             <div class="flex items-center gap-4">
               <Icon icon="bxs:left-arrow" class="text-content dark:text-content-dark size-12" />
@@ -263,7 +263,7 @@ onMounted(async () => {
         <template v-if="next">
           <router-link
             :to="{ name: 'ThumbnailDetail', params: { id: next.videoId } }"
-            class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg md:max-w-1/2 lg:max-w-2xl"
+            class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:shadow-lg md:max-w-1/2 lg:max-w-2xl xl:max-w-2xl"
           >
             <div class="flex items-center gap-4">
               <div class="flex h-28 w-36 shrink-0 items-center justify-center">
