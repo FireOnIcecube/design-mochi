@@ -11,33 +11,34 @@ export const onThumbnailUpdate = onDocumentUpdated(
     const db = getFirestore()
     const updatedDocPath = event.document
 
-    const categoriesData = event.data?.after.data().categories as {
-      category: string
-      tags: string[]
-    }[]
-
-    const nonEmptyCategories = categoriesData.filter((cat) => cat.tags?.length)
-    const categorySlugs = nonEmptyCategories.map((cat) => cat.category)
-
     try {
-      logger.info(`[onThumbnailUpdate]: 正在移除 ${updatedDocPath} 的空白 categorys`)
+      await db.runTransaction(async (tx) => {
+        const docRef = db.doc(updatedDocPath)
+        const snapshot = await tx.get(docRef)
+        if (!snapshot.exists) return
 
-      await db.doc(updatedDocPath).update({
-        categories: nonEmptyCategories
+        const categoriesData =
+          (snapshot.data()?.categories as {
+            category: string
+            tags: string[]
+          }[]) || []
+
+        const nonEmptyCategories = categoriesData.filter((cat) => cat.tags?.length)
+        const categorySlugs = nonEmptyCategories.map((cat) => cat.category)
+
+        logger.info(
+          `[onThumbnailUpdate]: 正在移除 ${updatedDocPath} 的空白 categories 並建立 usedCategories 索引`
+        )
+
+        tx.update(docRef, {
+          categories: nonEmptyCategories,
+          usedCategories: categorySlugs
+        })
       })
-      logger.info(`[onThumbnailUpdate]: 已經移除 ${updatedDocPath} 的空白 categorys`)
 
-      logger.info(`[onThumbnailUpdate]: 正在建立 ${updatedDocPath} usedCategories 索引`)
-      await db.doc(updatedDocPath).update({
-        usedCategories: categorySlugs
-      })
-      logger.info(`[onThumbnailUpdate]: 已經建立 ${updatedDocPath} usedCategories 索引`)
-
-      logger.info(
-        `[onThumbnailUpdate]: ${updatedDocPath} 更新完成，使用 Category: ${JSON.stringify(categorySlugs)}`
-      )
+      logger.info(`[onThumbnailUpdate]: ${updatedDocPath} 更新完成`)
     } catch (err) {
-      logger.info(`[onThumbnailUpdate]: ${updatedDocPath} 更新失敗: `, err)
+      logger.error(`[onThumbnailUpdate]: ${updatedDocPath} 更新失敗: `, err)
     }
   }
 )
