@@ -60,11 +60,19 @@ async function replaceTagsFromThumbnail(categorySlug: string, newTagSlugs: strin
         continue
       }
 
+      // 將 新Category 中不存在的 tag 從Thumbnail 中移除
       const newCategories = originalCategories.map(
-        (item: { category: string; tags: string[] }, index: number) =>
-          index === udpatedCatIndex
-            ? { category: categorySlug, tags: [...newTagSlugs] }
-            : { ...item, tags: [...item.tags] }
+        (item: { category: string; tags: string[] }, index: number) => {
+          if (index !== udpatedCatIndex) return { ...item, tags: [...item.tags] }
+
+          // 過濾出新陣列中有的 tags
+          const filteredTags = item.tags.filter((tag) => newTagSlugs.includes(tag))
+
+          return {
+            category: categorySlug,
+            tags: [...filteredTags]
+          }
+        }
       )
 
       batch.update(doc.ref, { categories: newCategories })
