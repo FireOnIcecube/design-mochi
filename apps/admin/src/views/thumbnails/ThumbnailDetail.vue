@@ -172,7 +172,7 @@ onMounted(async () => {
         </section>
 
         <section
-          class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-4 gap-y-8 border-b-2 pt-3 pb-6"
+          class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-8 border-b-2 pt-3 pb-6"
         >
           <div
             v-for="cat in enrichedThumbnail.categories"
@@ -203,10 +203,8 @@ onMounted(async () => {
               class="flex cursor-pointer gap-1 rounded-md bg-blue-500 px-6 py-3 shadow-md hover:bg-blue-500/80 active:bg-blue-700 active:shadow-inner"
               @click="downloadImage(enrichedThumbnail.imageUrl, `${enrichedThumbnail.name}.jpg`)"
             >
-              <Icon icon="mdi:download" class="size-7 text-white" />
-              <span class="font-notosans dark:text-content-dark text-content truncate text-xl"
-                >下載圖片</span
-              >
+              <Icon icon="mdi:download" class="size-7" />
+              <span class="font-notosans truncate text-xl">下載圖片</span>
             </button>
           </div>
         </section>
