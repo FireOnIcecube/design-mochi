@@ -50,6 +50,23 @@ function enrichThumbnail(thumbnail: Thumbnail, categories: ThumbnailCategory[]) 
   }
 }
 
+async function downloadImage(url: string, filename: string) {
+  try {
+    const res = await fetch(url, { mode: 'cors' })
+    const blob = await res.blob()
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(link.href)
+  } catch (err) {
+    console.error('下載失敗', err)
+    alert('下載失敗，請稍後再試')
+  }
+}
+
 // 封存封面
 async function toggleArchive({ id, value }: { id: string; value: boolean }) {
   try {
@@ -175,42 +192,56 @@ onMounted(async () => {
           </div>
         </section>
 
-        <section class="mt-8 flex flex-col justify-between gap-y-8 xl:mt-16 xl:flex-row">
+        <section
+          class="mt-8 flex flex-col items-center justify-between gap-y-8 lg:flex-row xl:mt-16"
+        >
           <div class="font-notosans dark:text-content-dark text-content text-2xl">
             點閱數: {{ enrichedThumbnail.clickCount }}
           </div>
-          <div class="flex items-center gap-8 text-lg font-black text-white">
+          <div class="flex gap-8 text-lg font-black text-white">
             <button
-              class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-amber-500 px-6 py-3 shadow-md hover:bg-amber-500/80 active:bg-amber-700 active:shadow-inner"
-              @click="
-                toggleArchive({ id: enrichedThumbnail.id, value: !enrichedThumbnail.isArchived })
-              "
+              class="flex cursor-pointer gap-1 rounded-md bg-blue-500 px-6 py-3 shadow-md hover:bg-blue-500/80 active:bg-blue-700 active:shadow-inner"
+              @click="downloadImage(enrichedThumbnail.imageUrl, `${enrichedThumbnail.name}.jpg`)"
             >
-              <Icon
-                :icon="
-                  enrichedThumbnail.isArchived
-                    ? 'material-symbols:archive'
-                    : 'material-symbols:archive-outline'
-                "
-                class="size-7 text-white"
-              />
-              <template v-if="enrichedThumbnail.isArchived">
-                <span>解除封存</span>
-              </template>
-              <template v-else>
-                <span>封存</span>
-              </template>
-            </button>
-            <button
-              class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-red-500 px-6 py-3 shadow-md hover:bg-red-500/80 active:bg-red-700 active:shadow-inner"
-              @click="onThumbnailDelete(enrichedThumbnail.id)"
-            >
-              <Icon icon="material-symbols:delete" class="size-7" />
-
-              <span>刪除</span>
+              <Icon icon="mdi:download" class="size-7 text-white" />
+              <span class="font-notosans dark:text-content-dark text-content truncate text-xl"
+                >下載圖片</span
+              >
             </button>
           </div>
         </section>
+
+        <div class="mt-8 flex justify-center gap-8 text-lg font-black text-white lg:justify-end">
+          <button
+            class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-amber-500 px-6 py-3 shadow-md hover:bg-amber-500/80 active:bg-amber-700 active:shadow-inner"
+            @click="
+              toggleArchive({ id: enrichedThumbnail.id, value: !enrichedThumbnail.isArchived })
+            "
+          >
+            <Icon
+              :icon="
+                enrichedThumbnail.isArchived
+                  ? 'material-symbols:archive'
+                  : 'material-symbols:archive-outline'
+              "
+              class="size-7 text-white"
+            />
+            <template v-if="enrichedThumbnail.isArchived">
+              <span>解除封存</span>
+            </template>
+            <template v-else>
+              <span>封存</span>
+            </template>
+          </button>
+          <button
+            class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-red-500 px-6 py-3 shadow-md hover:bg-red-500/80 active:bg-red-700 active:shadow-inner"
+            @click="onThumbnailDelete(enrichedThumbnail.id)"
+          >
+            <Icon icon="material-symbols:delete" class="size-7" />
+
+            <span>刪除</span>
+          </button>
+        </div>
 
         <!-- 分享功能，暫時不實裝 -->
         <!-- <div class="mt-8 flex gap-x-4">
