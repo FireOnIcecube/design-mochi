@@ -54,6 +54,9 @@ importers:
       firebaseui:
         specifier: ^6.1.0
         version: 6.1.0(firebase@10.14.1)
+      lucide-vue-next:
+        specifier: ^0.508.0
+        version: 0.508.0(vue@3.5.13)
       pinia:
         specifier: ^3.0.1
         version: 3.0.3(typescript@5.8.3)(vue@3.5.13)
@@ -3524,8 +3527,8 @@ packages:
       '@babel/core': 7.27.1
       '@babel/plugin-transform-typescript': 7.27.1(@babel/core@7.27.1)
       '@vue/babel-plugin-jsx': 1.4.0(@babel/core@7.27.1)
-      vite: 6.3.5(@types/node@20.17.32)
-      vue: 3.5.13
+      vite: 6.3.5(@types/node@22.15.32)(jiti@2.4.2)
+      vue: 3.5.13(typescript@5.8.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3537,8 +3540,8 @@ packages:
       vite: ^5.0.0 || ^6.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 6.3.5(@types/node@20.17.32)
-      vue: 3.5.13
+      vite: 6.3.5(@types/node@22.15.32)(jiti@2.4.2)
+      vue: 3.5.13(typescript@5.8.3)
     dev: true
 
   /@volar/language-core@2.4.13:
@@ -3838,7 +3841,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.5.13
       '@vue/shared': 3.5.13
-      vue: 3.5.13
+      vue: 3.5.13(typescript@5.8.3)
 
   /@vue/shared@3.5.13:
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
@@ -7453,7 +7456,7 @@ packages:
     peerDependencies:
       vue: '>=3.0.1'
     dependencies:
-      vue: 3.5.13(typescript@5.4.5)
+      vue: 3.5.13(typescript@5.8.3)
     dev: false
 
   /magic-string@0.30.17:
@@ -9337,7 +9340,7 @@ packages:
     peerDependencies:
       vite: ^2.6.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0
     dependencies:
-      vite: 6.3.5(@types/node@20.17.32)
+      vite: 6.3.5(@types/node@22.15.32)(jiti@2.4.2)
     dev: true
 
   /vite-plugin-inspect@0.8.9(vite@6.3.5):
@@ -9616,20 +9619,6 @@ packages:
       '@vue/language-core': 2.2.10(typescript@5.8.3)
       typescript: 5.8.3
     dev: true
-
-  /vue@3.5.13:
-    resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
-    peerDependencies:
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      '@vue/compiler-dom': 3.5.13
-      '@vue/compiler-sfc': 3.5.13
-      '@vue/runtime-dom': 3.5.13
-      '@vue/server-renderer': 3.5.13(vue@3.5.13)
-      '@vue/shared': 3.5.13
 
   /vue@3.5.13(typescript@5.4.5):
     resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
