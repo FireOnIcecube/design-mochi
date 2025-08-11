@@ -7,12 +7,12 @@ import { defineStore } from 'pinia'
 
 export const useThumbnailCategoryStore = defineStore('thumbnailCategory', {
   state: () => ({
-    thumbnailCategories: [] as ThumbnailCategory[],
+    data: [] as ThumbnailCategory[],
     loading: false,
     error: null as Error | null,
   }),
   getters: {
-    getById: (state) => (id: string) => state.thumbnailCategories.find((cat) => cat.id === id),
+    getById: (state) => (id: string) => state.data.find((cat) => cat.id === id),
   },
   actions: {
     async fetchAll(queryOptions: ThumbnailCategoryQueryOptions = {}) {
@@ -21,7 +21,7 @@ export const useThumbnailCategoryStore = defineStore('thumbnailCategory', {
 
       const q = buildCategoryQuery(queryOptions)
       try {
-        this.thumbnailCategories = await fetchThumbnailCategories(q)
+        this.data = await fetchThumbnailCategories(q)
       } catch (e) {
         if (e instanceof Error) {
           this.error = e

@@ -4,12 +4,12 @@ import type { Thumbnail, ThumbnailQueryOptions } from '@pkg/types'
 
 export const useThumbnailStore = defineStore('thumbnail', {
   state: () => ({
-    thumbnails: [] as Thumbnail[],
+    data: [] as Thumbnail[],
     loading: false,
     error: null as Error | null,
   }),
   getters: {
-    getById: (state) => (id: string) => state.thumbnails.find((t) => t.id === id),
+    getById: (state) => (id: string) => state.data.find((t) => t.id === id),
   },
   actions: {
     async fetchAll(queryOptions: ThumbnailQueryOptions = {}) {
@@ -18,7 +18,7 @@ export const useThumbnailStore = defineStore('thumbnail', {
 
       const q = buildThumbnailQuery(queryOptions)
       try {
-        this.thumbnails = await fetchThumbnails(q)
+        this.data = await fetchThumbnails(q)
       } catch (e) {
         if (e instanceof Error) {
           this.error = e

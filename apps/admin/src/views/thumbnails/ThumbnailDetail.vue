@@ -16,13 +16,13 @@ const props = defineProps<{
 const thumbnailStore = useThumbnailStore()
 const categoryStore = useThumbnailCategoryStore()
 
-const allThumbnails = computed(() => thumbnailStore.thumbnails)
+const allThumbnails = computed(() => thumbnailStore.data)
 const currentIndex = computed(() => allThumbnails.value.findIndex((t) => t.id === props.id))
 const currentThumbnail = computed(() => allThumbnails.value[currentIndex.value])
 
 const enrichedThumbnail = computed(() => {
   if (!currentThumbnail.value) return null
-  return enrichThumbnail(currentThumbnail.value, categoryStore.thumbnailCategories)
+  return enrichThumbnail(currentThumbnail.value, categoryStore.data)
 })
 
 const prev = computed(() => allThumbnails.value[currentIndex.value - 1] ?? null)
@@ -104,10 +104,10 @@ async function onThumbnailDelete(id: string) {
 // const liked = ref(false)
 
 onMounted(async () => {
-  if (!thumbnailStore.thumbnails.length) {
+  if (!thumbnailStore.data.length) {
     await thumbnailStore.fetchAll()
   }
-  if (!categoryStore.thumbnailCategories.length) {
+  if (!categoryStore.data.length) {
     await categoryStore.fetchAll()
   }
 })

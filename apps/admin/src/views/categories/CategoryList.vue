@@ -34,7 +34,7 @@ import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategorySto
 const categoryStore = useThumbnailCategoryStore()
 
 // const thumbnailCategories = ref<ThumbnailCategory[]>([])
-const thumbnailCategories = computed(() => categoryStore.thumbnailCategories)
+const thumbnailCategories = computed(() => categoryStore.data)
 const isLoading = ref(false)
 
 async function loadCategories() {

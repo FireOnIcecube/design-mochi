@@ -12,14 +12,16 @@ import { PaginationBar } from '@admin/components/common/paginationBar'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { useRoute, useRouter } from 'vue-router'
 import { usePageSync } from '@admin/composables/usePageSync'
+import { useThumbnailCategoryStore } from '../../stores/useThumbnailCategoryStore'
 
 const route = useRoute()
 const router = useRouter()
 
 const thumbnailStore = useThumbnailStore()
+const categoryStore = useThumbnailCategoryStore()
 
 // 原始全部資料
-const allThumbnails = computed(() => thumbnailStore.thumbnails)
+const allThumbnails = computed(() => thumbnailStore.data)
 
 // 當前頁顯示資料
 const thumbnails = computed(() => {
@@ -61,7 +63,12 @@ function handlePageChange(newPage: number) {
 }
 
 onMounted(async () => {
-  thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+  if (!thumbnailStore.data.length) {
+    await thumbnailStore.fetchAll()
+  }
+  if (!categoryStore.data.length) {
+    await categoryStore.fetchAll()
+  }
 })
 
 // 同步頁碼和 page query
