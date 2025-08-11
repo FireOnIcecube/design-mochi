@@ -263,10 +263,13 @@ onMounted(async () => {
             class="border-outline block w-full cursor-pointer rounded-xl border p-4 shadow-md hover:bg-gray-100 hover:shadow-lg md:max-w-1/2 xl:max-w-2xl dark:hover:bg-gray-800"
           >
             <div class="flex items-center gap-4">
-              <Icon icon="bxs:left-arrow" class="text-content dark:text-content-dark size-12" />
+              <Icon
+                icon="bxs:left-arrow"
+                class="text-content dark:text-content-dark size-12 shrink-0"
+              />
 
               <div
-                class="text-content font-notosans dark:text-content-dark hidden truncate text-2xl md:block lg:hidden"
+                class="text-content font-notosans dark:text-content-dark hidden text-2xl md:block lg:hidden"
               >
                 Prev
               </div>
@@ -310,7 +313,10 @@ onMounted(async () => {
                 Next
               </div>
 
-              <Icon icon="bxs:right-arrow" class="text-content dark:text-content-dark size-12" />
+              <Icon
+                icon="bxs:right-arrow"
+                class="text-content dark:text-content-dark size-12 shrink-0"
+              />
             </div>
           </router-link>
         </template>
