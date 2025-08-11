@@ -9,7 +9,7 @@ const route = useRoute()
 const router = useRouter()
 const auth = getAuth()
 
-const isOpen = ref(true)
+const isOpen = ref(false)
 
 function logout() {
   signOut(auth)
@@ -99,7 +99,7 @@ const menuItems = [
     </div>
 
     <div
-      class="absolute top-4 right-0 translate-x-full bg-gray-300 dark:bg-gray-700"
+      class="absolute top-20 right-0 translate-x-full bg-gray-300 px-2 py-4 dark:bg-gray-700"
       @click="isOpen = !isOpen"
     >
       <Icon
