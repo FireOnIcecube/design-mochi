@@ -25,7 +25,6 @@ import {
   fetchThumbnailCategories,
   thumbnailConverter,
 } from '@pkg/firebase/db/entities/thumbnailCategory'
-import { Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import CategoryCreateModal from '@admin/components/CategoryCreateModal.vue'
 import CategoryEditModal from '@admin/components/CategoryEditModal.vue'
 import LoadingSpinner from '@admin/components/LoadingSpinner.vue'
