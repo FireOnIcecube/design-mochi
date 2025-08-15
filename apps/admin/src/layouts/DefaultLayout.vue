@@ -27,7 +27,9 @@ onMounted(async () => {
       </aside>
 
       <div class="flex flex-1 flex-col overflow-auto">
-        <div class="bg-surface dark:bg-surface-dark h-16 w-full border-b dark:border-gray-700">
+        <div
+          class="dark:bg-surface-dark bg-surface flex w-full items-center justify-center border-b dark:border-gray-700"
+        >
           <CategoryMenuBar :thumbnail-categories="categoryStore.data" />
         </div>
         <main class="container mx-auto flex-1 p-4">

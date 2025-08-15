@@ -115,7 +115,7 @@ onMounted(() => {
       />
     </div>
 
-    <table class="min-w-full rounded border bg-white shadow-sm">
+    <table class="text-content min-w-full rounded border bg-white shadow-sm">
       <thead class="bg-gray-100">
         <tr class="border-b">
           <th class="px-4 py-2 text-left">名稱</th>
