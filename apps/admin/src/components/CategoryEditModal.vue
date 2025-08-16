@@ -14,7 +14,7 @@ import type {
   ThumbnailCategoryEditData,
   ThumbnailTag,
   ThumbnailTagEditData,
-} from '@pkg/types/index'
+} from '@pkg/types'
 import { onMounted, reactive, ref } from 'vue'
 import { ThumbnailCategoryBase } from '@/packages/types'
 import LoadingSpinner from './LoadingSpinner.vue'
@@ -273,6 +273,7 @@ function addTag() {
 
                   <div class="mt-8 flex justify-end gap-4">
                     <button
+                      type="button"
                       class="text-md font-notosans inline-flex cursor-pointer justify-center rounded-md border border-transparent bg-gray-400 px-4 py-2 text-white shadow-md hover:bg-gray-500 hover:shadow-inner active:scale-95"
                       @click="handleCancel"
                     >
