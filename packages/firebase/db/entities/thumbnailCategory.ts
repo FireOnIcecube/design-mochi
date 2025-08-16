@@ -171,7 +171,8 @@ export async function replaceCategoryTags(id: string, values?: ThumbnailTagEditD
     const batch = writeBatch(db)
     snapshot.forEach((doc) => batch.delete(doc.ref))
 
-    values.forEach((tag) => batch.set(doc(tagsRef), tag))
+    const newDocRef = doc(tagsRef) // <-- 每次生成不同的 ref
+    values.forEach((tag) => batch.set(newDocRef, tag))
 
     await batch.commit()
   } catch (e) {
