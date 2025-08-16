@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 // import { ChevronDown, ChevronFirst, ChevronRight } from 'lucide-vue-next'
 import { Icon } from '@iconify/vue'
-// import { SearchDialog } from '@client/components/SearchDialog'
+import { SearchDialog } from '@admin/components/common/SearchDialog'
 
 import {
   NavigationMenu,
@@ -16,24 +16,26 @@ import {
 } from '@admin/components/ui/navigation-menu'
 import { RouterLink } from 'vue-router'
 import { ThumbnailCategory } from '@/packages/types'
-
-const props = defineProps<{
-  thumbnailCategories: ThumbnailCategory[]
-}>()
+import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
 
 const isCategoryOpen = ref(false)
 
 const toggleCategoryMenu = () => {
   isCategoryOpen.value = !isCategoryOpen.value
 }
+
+const categoryStore = useThumbnailCategoryStore()
+onMounted(async () => {
+  categoryStore.fetchAll({ order: { createdAt: 'asc' } })
+})
 </script>
 
 <template>
-  <div class="bg-surface dark:bg-surface-dark transition-theme shadow-md">
+  <div class="bg-surface dark:bg-surface-dark transition-theme h-full w-full shadow-md">
     <div class="mx-auto flex max-w-screen-xl justify-center">
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
-          <NavigationMenuItem v-for="category in props.thumbnailCategories" :key="category.id">
+          <NavigationMenuItem v-for="category in categoryStore.data" :key="category.id">
             <NavigationMenuTrigger class="text-content dark:text-content-dark text-lg font-bold">{{
               category.name
             }}</NavigationMenuTrigger>
@@ -72,7 +74,7 @@ const toggleCategoryMenu = () => {
       <div
         class="group ml-12 flex cursor-pointer items-center justify-center bg-gray-200 dark:bg-gray-800"
       >
-        <SearchDialog :thumbnailCategories="props.thumbnailCategories" />
+        <SearchDialog :thumbnailCategories="categoryStore.data" />
       </div>
     </div>
   </div>

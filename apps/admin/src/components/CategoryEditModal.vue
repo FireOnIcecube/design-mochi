@@ -237,7 +237,7 @@ function addTag() {
 
                   <table
                     v-if="form.tags && form.tags.length > 0"
-                    class="min-w-full rounded border bg-white shadow-sm"
+                    class="text-content min-w-full rounded border bg-white shadow-sm"
                   >
                     <thead>
                       <tr>
