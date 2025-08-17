@@ -33,6 +33,8 @@ const props = defineProps<{
   thumbnailCategories: ThumbnailCategory[]
 }>()
 
+const router = useRouter()
+
 // dialog 的開關
 const isOpen = ref(false)
 const toggleDialog = () => {
@@ -42,13 +44,11 @@ const toggleDialog = () => {
 // 初始化表單上的輸入欄位
 const keyword = ref('')
 
-const router = useRouter()
-
 function handleSubmit() {
   console.log('Form submitted!')
   console.info(`keyword : ${keyword.value}`)
   console.info(`selectedTags : ${JSON.stringify(selectedTags)} `)
-  router.push({ name: 'SearchResult', query: { keyword: keyword.value, ...selectedTags } })
+  router.push({ name: 'ThumbnailList', query: { keyword: keyword.value, ...selectedTags } })
 }
 
 const selectedTags = reactive<Record<string, string[]>>({})
@@ -94,7 +94,6 @@ function updateSelectedTags(val: Record<string, string[]>) {
     >
       <DialogHeader class="p-6 pb-0">
         <DialogTitle class="text-3xl">尋找封面</DialogTitle>
-        <div>{{ JSON.stringify(props.thumbnailCategories) }}</div>
 
         <!-- <DialogDescription>
           Make changes to your profile here. Click save when you're done.

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@admin/components/ui/tabs'
 import { Checkbox } from '@admin/components/ui/checkbox'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { ThumbnailCategory } from '@/packages/types'
 
 const props = defineProps<{
@@ -24,19 +24,19 @@ function updateSelectedTags() {
 // 初始化每個分類為空 Set
 onMounted(() => {
   props.thumbnailCategories.forEach((cat) => {
-    rawSelectedTags[cat.id] = new Set()
+    rawSelectedTags[cat.slug] = new Set()
   })
 
   updateSelectedTags()
 })
 
-function isChecked(catId: string, tagSlug: string) {
-  return rawSelectedTags[catId]?.has(tagSlug) ?? false
+function isChecked(catSlug: string, tagSlug: string) {
+  return rawSelectedTags[catSlug]?.has(tagSlug) ?? false
 }
 
-function toggleOption(catId: string, tagSlug: string, checked: boolean | 'indeterminate') {
+function toggleOption(catSlug: string, tagSlug: string, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
-  const set = rawSelectedTags[catId]
+  const set = rawSelectedTags[catSlug]
   if (!set) return
 
   if (checked) {
@@ -46,40 +46,40 @@ function toggleOption(catId: string, tagSlug: string, checked: boolean | 'indete
   }
 
   // 替換 Set 實例以觸發 reactivity
-  rawSelectedTags[catId] = new Set(set)
+  rawSelectedTags[catSlug] = new Set(set)
 }
 
-function isAllSelected(catId: string) {
-  const category = props.thumbnailCategories.find((c) => c.id === catId)
-  const set = rawSelectedTags[catId]
+function isAllSelected(catSlug: string) {
+  const category = props.thumbnailCategories.find((c) => c.slug === catSlug)
+  const set = rawSelectedTags[catSlug]
   return category && set?.size === category.tags?.length
 }
 
-function isIndeterminate(catId: string) {
-  const category = props.thumbnailCategories.find((c) => c.id === catId)
-  const set = rawSelectedTags[catId]
+function isIndeterminate(catSlug: string) {
+  const category = props.thumbnailCategories.find((c) => c.slug === catSlug)
+  const set = rawSelectedTags[catSlug]
   return category && set && set.size > 0 && set.size < (category.tags?.length ?? 0)
 }
 
-function toggleAll(catId: string, checked: boolean | 'indeterminate') {
+function toggleAll(catSlug: string, checked: boolean | 'indeterminate') {
   if (checked !== true && checked !== false) return
 
-  const category = props.thumbnailCategories.find((c) => c.id === catId)
+  const category = props.thumbnailCategories.find((c) => c.slug === catSlug)
   if (!category) return
 
-  rawSelectedTags[catId] = checked ? new Set((category.tags ?? []).map((t) => t.slug)) : new Set()
+  rawSelectedTags[catSlug] = checked ? new Set((category.tags ?? []).map((t) => t.slug)) : new Set()
 }
 </script>
 
 <template>
-  <Tabs :default-value="props.thumbnailCategories[0].id" class="overflow-x-hidden">
+  <Tabs :default-value="props.thumbnailCategories[0].slug" class="overflow-x-hidden">
     <TabsList
       class="mx-auto flex h-auto max-h-1/2 max-w-full flex-wrap justify-start gap-2 overflow-x-auto p-0 xl:flex-nowrap"
     >
       <TabsTrigger
         v-for="(category, index) in props.thumbnailCategories"
         :key="index"
-        :value="category.id"
+        :value="category.slug"
         class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
       >
         <div class="flex space-x-2">
@@ -87,8 +87,8 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
           <input
             type="checkbox"
             disabled
-            :checked="isAllSelected(category.id)"
-            :indeterminate="isIndeterminate(category.id)"
+            :checked="isAllSelected(category.slug)"
+            :indeterminate="isIndeterminate(category.slug)"
           />
         </div>
       </TabsTrigger>
@@ -96,9 +96,9 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
 
     <div class="border-outline dark:border-outline-dark w-full grow overflow-y-auto border-2">
       <TabsContent
-        v-for="(category, index) in props.thumbnailCategories"
-        :key="index"
-        :value="category.id"
+        v-for="category in props.thumbnailCategories"
+        :key="category.id"
+        :value="category.slug"
         class="h-full"
       >
         <div class="mx-auto h-full overflow-y-auto px-6 py-12 xl:w-3/4">
@@ -109,10 +109,10 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
                 class="lg:text-md font-notosans text-sm leading-none font-medium select-none xl:text-lg"
               >
                 <Checkbox
-                  :modelValue="isAllSelected(category.id)"
+                  :modelValue="isAllSelected(category.slug)"
                   @update:modelValue="
                     (checked) => {
-                      toggleAll(category.id, checked)
+                      toggleAll(category.slug, checked)
                       updateSelectedTags()
                     }
                   "
@@ -129,15 +129,15 @@ function toggleAll(catId: string, checked: boolean | 'indeterminate') {
               >
                 <Checkbox
                   :id="tag.id"
-                  :modelValue="isChecked(category.id, tag.slug)"
+                  :modelValue="isChecked(category.slug, tag.slug)"
                   @update:modelValue="
                     (checked) => {
-                      toggleOption(category.id, tag.slug, checked)
+                      toggleOption(category.slug, tag.slug, checked)
                       updateSelectedTags()
                     }
                   "
                 />
-                {{ tag.id }}
+                {{ tag.name }}
               </label>
             </div>
           </div>
