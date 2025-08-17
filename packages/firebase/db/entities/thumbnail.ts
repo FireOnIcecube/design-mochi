@@ -14,7 +14,9 @@ import {
   getCountFromServer,
   type FirestoreDataConverter,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  startAt,
+  endAt
 } from 'firebase/firestore'
 import { db, storage } from '@pkg/firebase'
 import type { Thumbnail, ThumbnailBase, ThumbnailQueryOptions } from '@pkg/types'
@@ -42,7 +44,16 @@ export function buildThumbnailQuery(options: ThumbnailQueryOptions = {}): Query<
   if (options.createdAfter) q = query(q, where('createdAt', '>', options.createdAfter))
   if (options.createdBefore) q = query(q, where('createdAt', '<', options.createdBefore))
   if (options.isArchived !== undefined) q = query(q, where('isArchived', '==', options.isArchived))
-
+  if (options.whereStartsWith) {
+    for (const [field, prefix] of Object.entries(options.whereStartsWith)) {
+      q = query(
+        q,
+        orderBy(field), // 必須先 orderBy 欄位
+        startAt(prefix), // 前綴起點
+        endAt(`${prefix}\uf8ff`) // 前綴終點
+      )
+    }
+  }
   if (options.whereEquals) {
     for (const [key, value] of Object.entries(options.whereEquals)) {
       if (value !== undefined) q = query(q, where(key, '==', value))
