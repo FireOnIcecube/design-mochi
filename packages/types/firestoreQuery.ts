@@ -10,4 +10,5 @@ export type FirestoreQueryOptions<TFieldNames extends string = string> = {
   whereEquals?: Partial<Record<TFieldNames, unknown>>
   whereIn?: Partial<Record<TFieldNames, unknown[]>>
   whereArrayContains?: Partial<Record<TFieldNames, unknown[]>>
+  whereStartsWith?: Partial<Record<TFieldNames, string>>
 }
