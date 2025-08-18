@@ -172,7 +172,7 @@ onMounted(async () => {
         </section>
 
         <section
-          v-if="!thumbnailStore.data.length"
+          v-if="thumbnailStore.data.length"
           class="border-outline text-content dark:text-content-dark flex flex-col justify-items-center gap-y-8 border-b-2 pt-3 pb-6"
         >
           <div
