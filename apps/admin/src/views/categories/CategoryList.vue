@@ -106,7 +106,7 @@ onMounted(() => {
       <CategoryCreateModal @submit="handleCreateCategory" />
     </div>
 
-    <div class="mb-4">
+    <div class="text-content mb-4">
       <input
         v-model="searchTerm"
         type="text"
