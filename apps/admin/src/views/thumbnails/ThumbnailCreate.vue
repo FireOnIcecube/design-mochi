@@ -232,7 +232,7 @@ function updateSelectedTags(data: Record<string, string[]>) {
       type="text"
       v-model="youtubeUrl"
       placeholder="輸入 YouTube 網址"
-      class="w-full border p-2"
+      class="text-content w-full border p-2"
       @input="resetThumbnailForm"
     />
     <div class="space-x-4">
