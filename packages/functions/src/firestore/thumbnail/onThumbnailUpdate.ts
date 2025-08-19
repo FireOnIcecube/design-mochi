@@ -26,13 +26,19 @@ export const onThumbnailUpdate = onDocumentUpdated(
         const nonEmptyCategories = categoriesData.filter((cat) => cat.tags?.length)
         const categorySlugs = nonEmptyCategories.map((cat) => cat.category)
 
+        // 產生 usedTags（categorySlug -> tags[]）
+        const usedTags = nonEmptyCategories.flatMap((cat) =>
+          (cat.tags || []).map((tag) => `${cat.category}/${tag}`)
+        )
+
         logger.info(
           `[onThumbnailUpdate]: 正在移除 ${updatedDocPath} 的空白 categories 並建立 usedCategories 索引`
         )
 
         tx.update(docRef, {
           categories: nonEmptyCategories,
-          usedCategories: categorySlugs
+          usedCategories: categorySlugs,
+          usedTags: usedTags
         })
       })
 
