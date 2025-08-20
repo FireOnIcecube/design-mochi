@@ -27,7 +27,7 @@ const allThumbnails = computed(() => {
   // keyword 篩選
   if (keyword) {
     filtered = filtered.filter((thumb) =>
-      thumb.name.toLowerCase().startsWith((keyword as string).toLowerCase()),
+      thumb.name.toLowerCase().includes((keyword as string).toLowerCase()),
     )
   }
 
