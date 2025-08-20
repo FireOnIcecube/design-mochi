@@ -72,7 +72,7 @@ const router = createRouter({
 //   })
 // })
 
-let firebaseInit = new Promise((resolve) => {
+const firebaseInit = new Promise((resolve) => {
   onAuthStateChanged(auth, (user) => {
     resolve(user)
   })

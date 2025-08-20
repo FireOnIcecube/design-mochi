@@ -17,7 +17,9 @@ import {
 import { RouterLink } from 'vue-router'
 import { ThumbnailCategory } from '@/packages/types'
 import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const isCategoryOpen = ref(false)
 
 const toggleCategoryMenu = () => {
@@ -51,7 +53,12 @@ onMounted(async () => {
                 <li v-for="tag in category.tags" :key="tag.id" class="w-[250px]">
                   <NavigationMenuLink as-child>
                     <RouterLink
-                      to="/"
+                      :to="{
+                        name: 'ThumbnailList',
+                        query: {
+                          [category.slug]: tag.slug,
+                        },
+                      }"
                       class="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground block space-y-1 rounded-md p-4 leading-none no-underline transition-colors outline-none select-none"
                     >
                       <div

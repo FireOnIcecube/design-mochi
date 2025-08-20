@@ -15,13 +15,78 @@ import { usePageSync } from '@admin/composables/usePageSync'
 import { useThumbnailCategoryStore } from '../../stores/useThumbnailCategoryStore'
 
 const route = useRoute()
-const router = useRouter()
 
 const thumbnailStore = useThumbnailStore()
 const categoryStore = useThumbnailCategoryStore()
 
-// 原始全部資料
-const allThumbnails = computed(() => thumbnailStore.data)
+// 計算出要監聽的 query（排除 page & limit）
+const allThumbnails = computed(() => {
+  const { page, limit, keyword, ...rest } = route.query
+  let filtered = thumbnailStore.data
+
+  // keyword 篩選
+  if (keyword) {
+    filtered = filtered.filter((thumb) =>
+      thumb.name.toLowerCase().startsWith((keyword as string).toLowerCase()),
+    )
+  }
+
+  // 動態分類篩選
+  for (const [categoryKey, selectedTags] of Object.entries(rest)) {
+    if (!selectedTags || (Array.isArray(selectedTags) && selectedTags.length === 0)) {
+      continue // 沒有選中任何 tags 就跳過
+    }
+
+    filtered = filtered.filter((thumb) => {
+      // 找到該 thumb 的 category
+      const cat = thumb.categories.find((c) => c.category === categoryKey)
+      if (!cat) return false // 沒有這個分類就不符合
+
+      // 判斷是否有 tag 交集
+      return cat.tags.some((tag) => (selectedTags as string[]).includes(tag))
+    })
+  }
+  return filtered
+})
+
+// watch(
+//   () => route.query,
+//   (newVal) => {
+//     const { page, limit, keyword, ...rest } = newVal
+//     let filtered = thumbnailStore.data
+
+//     // keyword 篩選
+//     if (keyword) {
+//       filtered = filtered.filter((thumb) =>
+//         thumb.name.toLowerCase().startsWith(keyword.toLowerCase()),
+//       )
+//     }
+
+//     // 動態分類篩選
+//     for (const [categoryKey, selectedTags] of Object.entries(rest)) {
+//       if (!selectedTags || (Array.isArray(selectedTags) && selectedTags.length === 0)) {
+//         continue // 沒有選中任何 tags 就跳過
+//       }
+
+//       filtered = filtered.filter((thumb) => {
+//         // 找到該 thumb 的 category
+//         const cat = thumb.categories.find((c) => c.category === categoryKey)
+//         if (!cat) return false // 沒有這個分類就不符合
+
+//         // 判斷是否有 tag 交集
+//         return cat.tags.some((tag) => (selectedTags as string[]).includes(tag))
+//       })
+//     }
+
+//     console.log('原始資料長度:', thumbnailStore.data.length)
+//     console.log('篩選後長度:', filtered.length)
+//     console.log('結果:', filtered)
+//   },
+//   { immediate: true },
+// )
+
+// 經過 query 篩選後的全部資料
+// const allThumbnails = computed(() => filteredThumbnails)
 
 // 當前頁顯示資料
 const thumbnails = computed(() => {
