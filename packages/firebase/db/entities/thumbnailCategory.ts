@@ -169,10 +169,15 @@ export async function replaceCategoryTags(id: string, values?: ThumbnailTagEditD
   try {
     const snapshot = await getDocs(tagsRef)
     const batch = writeBatch(db)
+
+    // 先清掉舊的 tags
     snapshot.forEach((doc) => batch.delete(doc.ref))
 
-    const newDocRef = doc(tagsRef) // <-- 每次生成不同的 ref
-    values.forEach((tag) => batch.set(newDocRef, tag))
+    // 為每個 tag 建立新的 document
+    values.forEach((tag) => {
+      const newDocRef = doc(tagsRef) // 👈 這裡放進迴圈
+      batch.set(newDocRef, tag)
+    })
 
     await batch.commit()
   } catch (e) {
