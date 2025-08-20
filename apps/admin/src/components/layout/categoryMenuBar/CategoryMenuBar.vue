@@ -43,12 +43,11 @@ onMounted(async () => {
             }}</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul
-                class="w-max gap-3 p-4"
-                :class="
-                  category.tags?.length && category.tags.length >= 5
-                    ? `grid [grid-template-columns:repeat(${Math.ceil(category.tags.length / 5)},minmax(0,1fr))]`
-                    : ''
-                "
+                v-if="category.tags?.length"
+                class="grid w-max gap-3 p-4"
+                :style="{
+                  gridTemplateColumns: `repeat(${Math.ceil(category.tags.length / 5)}, minmax(0, 1fr))`,
+                }"
               >
                 <li v-for="tag in category.tags" :key="tag.id" class="w-[250px]">
                   <NavigationMenuLink as-child>
