@@ -1,30 +1,17 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-// import { ChevronDown, ChevronFirst, ChevronRight } from 'lucide-vue-next'
-import { Icon } from '@iconify/vue'
+import { onMounted } from 'vue'
 import { SearchDialog } from '@admin/components/common/SearchDialog'
 
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from '@admin/components/ui/navigation-menu'
 import { RouterLink } from 'vue-router'
-import { ThumbnailCategory } from '@/packages/types'
 import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
-const isCategoryOpen = ref(false)
-
-const toggleCategoryMenu = () => {
-  isCategoryOpen.value = !isCategoryOpen.value
-}
 
 const categoryStore = useThumbnailCategoryStore()
 onMounted(async () => {
