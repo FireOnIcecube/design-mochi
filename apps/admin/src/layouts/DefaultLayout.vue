@@ -17,7 +17,7 @@ onMounted(async () => {
 
 <template>
   <div class="flex h-screen flex-col">
-    <div class="border-b px-4 lg:p-4 dark:border-gray-700">
+    <div class="bg-primary dark:bg-surface-dark border-b px-4 lg:p-4 dark:border-gray-700">
       <NavHeader />
     </div>
 
@@ -28,7 +28,7 @@ onMounted(async () => {
 
       <div class="flex flex-1 flex-col overflow-auto">
         <div
-          class="dark:bg-surface-dark bg-surface flex w-full items-center justify-center border-b dark:border-gray-700"
+          class="bg-primary dark:bg-surface-dark flex w-full items-center justify-center border-b dark:border-gray-700"
         >
           <CategoryMenuBar :thumbnail-categories="categoryStore.data" />
         </div>

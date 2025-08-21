@@ -7,9 +7,7 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
 </script>
 
 <template>
-  <div
-    class="bg-surface dark:bg-surface-dark transition-theme flex items-center justify-between md:mx-4"
-  >
+  <div class="transition-theme flex items-center justify-between md:mx-4">
     <router-link
       to="/"
       class="font-mantou text-content dark:text-content-dark text-2xl hover:opacity-80 lg:text-4xl"

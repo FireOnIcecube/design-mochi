@@ -33,7 +33,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="bg-surface dark:bg-surface-dark transition-theme h-full w-full shadow-md">
+  <div class="transition-theme h-full w-full shadow-md">
     <div class="mx-auto flex max-w-screen-xl justify-center">
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
