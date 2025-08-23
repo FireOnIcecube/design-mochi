@@ -104,7 +104,7 @@ function updateSelectedTags(val: Record<string, string[]>) {
           <FormField v-slot="{ componentField }" name="keyword">
             <FormItem>
               <FormControl>
-                <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
+                <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-4">
                   <div class="relative w-full max-w-sm items-center">
                     <Input
                       type="text"
@@ -119,7 +119,9 @@ function updateSelectedTags(val: Record<string, string[]>) {
                   </div>
 
                   <DialogClose>
-                    <Button type="submit" class="font-notosans text-md tracking-widest"
+                    <Button
+                      type="submit"
+                      class="font-notosans text-md bg-gray-800 tracking-widest text-white hover:bg-gray-800/80"
                       >搜尋</Button
                     >
                   </DialogClose>
