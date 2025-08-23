@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import FilterTab from './FilterTab.vue'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,14 +12,7 @@ import {
 
 import { DialogClose } from 'reka-ui'
 
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@admin/components/ui/form'
+import { FormControl, FormField, FormItem, FormMessage } from '@admin/components/ui/form'
 
 import { Button } from '@admin/components/ui/button'
 import { Search } from 'lucide-vue-next'
