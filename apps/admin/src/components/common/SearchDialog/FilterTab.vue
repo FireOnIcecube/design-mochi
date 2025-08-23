@@ -80,7 +80,7 @@ function toggleAll(catSlug: string, checked: boolean | 'indeterminate') {
         v-for="(category, index) in props.thumbnailCategories"
         :key="index"
         :value="category.slug"
-        class="font-notosans dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
+        class="font-notosans bg-muted dark:data-[state=active]:bg-background rounded-b-none border-b-0 p-5"
       >
         <div class="flex space-x-2">
           <label class="leading-none">{{ category.name }}</label>
