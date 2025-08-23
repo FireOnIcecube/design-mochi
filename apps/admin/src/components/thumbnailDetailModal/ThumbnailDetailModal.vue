@@ -112,17 +112,17 @@ defineExpose({ open, close })
     <div
       v-if="enrichedThumbnail"
       @click.stop
-      class="max-w-8xl max-h-[90vh] w-[95%] overflow-y-auto rounded-2xl bg-white p-6 shadow-xl sm:w-[90%] md:w-[85%]"
+      class="max-w-8xl bg-surface dark:bg-surface-dark max-h-[90vh] w-[95%] overflow-y-auto rounded-2xl p-6 shadow-xl sm:w-[90%] md:w-[85%]"
     >
       <div
         v-if="enrichedThumbnail.isArchived"
-        class="text-content-dark mb-10 flex w-full items-center justify-center gap-2 bg-amber-500 py-2"
+        class="mb-10 flex w-full items-center justify-center gap-2 bg-amber-500 py-2 text-white"
       >
         <Icon icon="material-symbols:archive" class="size-7" />
         <span class="font-notosans text-lg">此封面已被封存</span>
       </div>
 
-      <div class="flex h-full flex-col justify-around bg-white lg:flex-row">
+      <div class="flex h-full flex-col justify-around lg:flex-row">
         <div class="w-full lg:w-1/2">
           <div
             class="flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gray-200"
@@ -133,7 +133,7 @@ defineExpose({ open, close })
             />
           </div>
 
-          <div class="text-content flex flex-nowrap">
+          <div class="flex flex-nowrap">
             <span class="text-sm">
               來源:
               <a
@@ -146,7 +146,7 @@ defineExpose({ open, close })
           </div>
         </div>
 
-        <div class="text-content w-full lg:w-1/3">
+        <div class="w-full lg:w-1/3">
           <section class="border-outline mt-8 border-b-2 pb-6 lg:mt-0">
             <p class="font-notosans text-xl lg:text-2xl">
               {{ enrichedThumbnail.name }}
@@ -175,7 +175,7 @@ defineExpose({ open, close })
 
           <section
             v-if="thumbnailStore.data.length"
-            class="border-outline text-content flex flex-col justify-items-center gap-y-8 border-b-2 pt-3 pb-6"
+            class="border-outline flex flex-col justify-items-center gap-y-8 border-b-2 pt-3 pb-6"
           >
             <div
               v-for="cat in enrichedThumbnail.categories"
@@ -198,9 +198,7 @@ defineExpose({ open, close })
           <section
             class="mt-8 flex flex-col items-center justify-between gap-y-8 lg:flex-row xl:mt-16"
           >
-            <div class="font-notosans text-content text-2xl">
-              點閱數: {{ enrichedThumbnail.clickCount }}
-            </div>
+            <div class="font-notosans text-2xl">點閱數: {{ enrichedThumbnail.clickCount }}</div>
             <div class="flex gap-8 text-lg font-black text-white">
               <button
                 class="flex cursor-pointer gap-1 rounded-md bg-blue-500 px-6 py-3 shadow-md hover:bg-blue-500/80 active:bg-blue-700 active:shadow-inner"
