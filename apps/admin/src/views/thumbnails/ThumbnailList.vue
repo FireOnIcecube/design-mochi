@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { editThumbnail, deleteThumbnail } from '@pkg/firebase/db/entities/thumbnail'
 import { Thumbnail } from '@/packages/types'
-import { onMounted, ref, computed, watch } from 'vue'
+import { onMounted, ref, computed, watch, nextTick } from 'vue'
 import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 import { PaginationBar } from '@admin/components/common/paginationBar'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
@@ -105,6 +105,8 @@ onMounted(async () => {
   if (!categoryStore.data.length) {
     await categoryStore.fetchAll()
   }
+
+  tryOpenModalFromRoute()
 })
 
 // 同步頁碼和 page query
@@ -113,14 +115,28 @@ usePageSync(currentPage, totalPages)
 // route 監聽 id，自動打開 modal
 watch(
   () => route.params.id,
-  (id) => {
-    if (id && thumbnails.value.length) {
-      const t = thumbnails.value.find((th) => th.id === id)
-      if (t) modalRef.value?.open(t)
-    }
+  () => {
+    tryOpenModalFromRoute()
   },
-  { immediate: true },
 )
+
+async function tryOpenModalFromRoute() {
+  const id = route.params.id
+  if (!id) return
+
+  // 確保 store 資料載入完成
+  if (!thumbnailStore.data.length) {
+    await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+  }
+
+  await nextTick() // 等 modalRef 綁定完成
+
+  // 找出對應的 thumbnail
+  const t = thumbnailStore.data.find((th) => th.id === id)
+  if (t) {
+    modalRef.value?.open(t)
+  }
+}
 </script>
 
 <template>
