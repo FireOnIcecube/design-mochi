@@ -186,7 +186,7 @@ defineExpose({ open, close })
               <div class="text-md font-notosans flex flex-wrap gap-x-4 gap-y-2">
                 <template v-for="(tag, index) in cat?.tags" :key="index">
                   <div
-                    class="border-outline hover:bg-surface-hover cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
+                    class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark cursor-pointer rounded-lg border px-3 py-2 hover:shadow-xs"
                   >
                     #{{ tag.name }}
                   </div>
