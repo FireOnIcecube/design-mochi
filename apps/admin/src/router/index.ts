@@ -30,6 +30,13 @@ const routes = [
     component: ThumbnailList,
     meta: { requiresAuth: true },
   },
+  {
+    path: '/thumbnails/:id?',
+    name: 'ThumbnailList',
+    component: ThumbnailList,
+    props: true,
+    meta: { requiresAuth: true },
+  },
   { path: '/thumbnails/create', component: ThumbnailCreate, meta: { requiresAuth: true } },
   {
     path: '/thumbnails/edit/:id',
@@ -37,13 +44,13 @@ const routes = [
     props: true,
     meta: { requiresAuth: true },
   },
-  {
-    path: '/thumbnails/:id',
-    name: 'ThumbnailDetail',
-    component: ThumbnailDetail,
-    props: true,
-    meta: { requiresAuth: true },
-  },
+  // {
+  //   path: '/thumbnails/:id',
+  //   name: 'ThumbnailDetail',
+  //   component: ThumbnailDetail,
+  //   props: true,
+  //   meta: { requiresAuth: true },
+  // },
 
   // Categories
   { path: '/categories', component: CateogoryList, meta: { requiresAuth: true } },

@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import {
-  fetchThumbnails,
-  buildThumbnailQuery,
-  editThumbnail,
-  deleteThumbnail,
-} from '@pkg/firebase/db/entities/thumbnail'
-import { Thumbnail, ThumbnailQueryOptions } from '@/packages/types'
-import { onMounted, ref, computed, watch, nextTick } from 'vue'
+import { editThumbnail, deleteThumbnail } from '@pkg/firebase/db/entities/thumbnail'
+import { Thumbnail } from '@/packages/types'
+import { onMounted, ref, computed, watch } from 'vue'
 import { ThumbnailCard } from '@/apps/admin/src/components/thumbnailCard'
 import { PaginationBar } from '@admin/components/common/paginationBar'
 import { useThumbnailStore } from '@admin/stores/useThumbnailStore'
 import { useRoute, useRouter } from 'vue-router'
 import { usePageSync } from '@admin/composables/usePageSync'
 import { useThumbnailCategoryStore } from '../../stores/useThumbnailCategoryStore'
+import { ThumbnailDetailModal } from '../../components/thumbnailDetailModal'
 
+const modalRef = ref<InstanceType<typeof ThumbnailDetailModal>>()
 const route = useRoute()
+const router = useRouter()
 
 const thumbnailStore = useThumbnailStore()
 const categoryStore = useThumbnailCategoryStore()
@@ -71,6 +69,18 @@ async function onThumbnailToggleArchive({ id, value }: { id: string; value: bool
   }
 }
 
+// 點擊卡片
+function openThumbnailModal(t: Thumbnail) {
+  router.push({ name: 'ThumbnailList', params: { id: t.id }, query: route.query }) // 更新 URL
+  modalRef.value?.open(t)
+}
+
+// modal close 時清空 URL
+// function closeModal() {
+//   modalRef.value?.close()
+//   router.push({ path: '/thumbnails', query: route.query })
+// }
+
 // 刪除封面
 async function onThumbnailDelete(id: string) {
   if (confirm('確定要刪除這個封面嗎？')) {
@@ -99,6 +109,18 @@ onMounted(async () => {
 
 // 同步頁碼和 page query
 usePageSync(currentPage, totalPages)
+
+// route 監聽 id，自動打開 modal
+watch(
+  () => route.params.id,
+  (id) => {
+    if (id && thumbnails.value.length) {
+      const t = thumbnails.value.find((th) => th.id === id)
+      if (t) modalRef.value?.open(t)
+    }
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -117,10 +139,13 @@ usePageSync(currentPage, totalPages)
       <div v-for="item in thumbnails" :key="item.id">
         <ThumbnailCard
           :thumbnail="item"
+          :openThumbnailModal="openThumbnailModal"
           @toggle-archive="onThumbnailToggleArchive"
           @request-delete="onThumbnailDelete"
         />
       </div>
+
+      <ThumbnailDetailModal ref="modalRef" />
     </div>
 
     <div class="mt-10 flex justify-end">

@@ -114,7 +114,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <template v-if="enrichedThumbnail">
+  <div v-if="enrichedThumbnail">
     <div
       v-if="enrichedThumbnail.isArchived"
       class="text-content-dark mb-10 flex w-full items-center justify-center gap-2 bg-amber-500 py-2"
@@ -326,6 +326,6 @@ onMounted(async () => {
         </template>
       </div>
     </section>
-  </template>
+  </div>
   <template v-else>載入中或找不到資料...</template>
 </template>
