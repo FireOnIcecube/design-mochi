@@ -152,7 +152,11 @@ async function tryOpenModalFromRoute() {
     <div
       class="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-12 xl:grid-cols-4"
     >
-      <div v-for="item in thumbnails" :key="item.id">
+      <div
+        v-for="item in thumbnails"
+        :key="item.id"
+        class="rounded-md p-2 transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700"
+      >
         <ThumbnailCard
           :thumbnail="item"
           :openThumbnailModal="openThumbnailModal"

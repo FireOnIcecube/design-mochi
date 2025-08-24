@@ -61,9 +61,9 @@ watch(
     </div>
     <!-- <router-link :to="{ name: 'ThumbnailDetail', params: { id: props.thumbnail.id } }"> -->
     <div class="relative aspect-video w-full">
-      <div
+      <!-- <div
         class="absolute inset-0 transition duration-300 ease-in-out group-hover:bg-white/30"
-      ></div>
+      ></div> -->
       <img
         :src="props.thumbnail.imageUrl"
         class="h-full w-full rounded object-cover"
