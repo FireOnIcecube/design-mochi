@@ -20,11 +20,14 @@ import { doc } from 'firebase/firestore'
 import axios, { isAxiosError } from 'axios'
 import { Console, error } from 'console'
 import { NonEmptyArray } from '@/packages/types/common'
+import { Switch } from '@headlessui/vue'
+
+const isVtuber = ref(false)
 
 // 狀態變數
 
 // youtube 影片網址
-const youtubeUrl = ref('https://www.youtube.com/watch?v=_CV5wVHjMfQ')
+const youtubeUrl = ref('')
 
 // 預覽縮圖的 url
 const thumbnailPreviewUrl = ref('')
@@ -149,6 +152,7 @@ async function submitThumbnailUpload() {
       name: videoTitle.value,
       imageUrl: downloadUrl,
       videoId: videoId.value,
+      isVtuber: isVtuber.value,
       clickCount: 0,
       categories: normalizeCategoryTagList(selectedTagsByCategory.value) as NonEmptyArray<{
         category: string
@@ -289,7 +293,31 @@ function updateSelectedTags(data: Record<string, string[]>) {
           <TagSelector :thumbnail-categories="thumbnailCategories" @change="updateSelectedTags" />
         </div>
 
-        <button @click="">Vtuber</button>
+        <hr class="bg-border dark:bg-border-dark h-0.5 border-0" />
+        <div class="mt-10 flex items-center gap-x-4">
+          <div class="text-lg">是否為 Vtuber</div>
+
+          <Switch
+            v-model="isVtuber"
+            :class="isVtuber ? 'bg-blue-600' : 'bg-gray-400'"
+            class="relative inline-flex h-6 w-11 items-center rounded-full"
+          >
+            <span
+              :class="isVtuber ? 'translate-x-6' : 'translate-x-1'"
+              class="block h-4 w-4 transform rounded-full bg-white transition"
+            />
+          </Switch>
+
+          <!-- <button
+            class="text-notosans mt-4 rounded-sm px-4 py-2 shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 active:scale-95 active:shadow-inner"
+            :class="isVtuber ? 'bg-blue-500 hover:bg-blue-600' : 'bg-red-500 hover:bg-red-600'"
+            @click="isVtuber = !isVtuber"
+          >
+            <span class="text-lg text-white"> {{ isVtuber }} </span>
+          </button> -->
+
+          <!-- <button> </button> -->
+        </div>
       </div>
     </div>
   </div>

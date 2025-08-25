@@ -6,6 +6,7 @@ export interface ThumbnailBase {
   name: string
   imageUrl: string
   videoId: string
+  isVtuber: boolean
   clickCount: number
   categories: NonEmptyArray<{ category: string; tags: NonEmptyArray<string> }>
 }

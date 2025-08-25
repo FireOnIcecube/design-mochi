@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { SearchDialog } from '@admin/components/common/SearchDialog'
 
 import {
@@ -18,7 +18,27 @@ onMounted(async () => {
   categoryStore.fetchAll({ order: { createdAt: 'asc' } })
 })
 
-function handleToggleStreamerMode() {}
+const props = defineProps<{
+  isVtuber: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'toggle-vtuber-mode', value: boolean): void
+}>()
+
+const localVtuber = ref<boolean>(false)
+
+function onToggleVtuberMode() {
+  localVtuber.value = !localVtuber.value
+  emit('toggle-vtuber-mode', localVtuber.value)
+}
+
+watch(
+  () => props.isVtuber,
+  (newVal) => {
+    localVtuber.value = newVal
+  },
+)
 </script>
 
 <template>
@@ -67,7 +87,14 @@ function handleToggleStreamerMode() {}
       </NavigationMenu>
 
       <div class="group ml-12 flex cursor-pointer items-center justify-center gap-x-8">
-        <button @click="handleToggleStreamerMode">Streamer</button>
+        <button
+          type="button"
+          :class="localVtuber ? 'bg-blue-300' : 'bg-red-300'"
+          class="px-4 py-2 text-white"
+          @click="onToggleVtuberMode"
+        >
+          Vtuber
+        </button>
 
         <div class="bg-gray-200 dark:bg-gray-800">
           <SearchDialog :thumbnailCategories="categoryStore.data" />

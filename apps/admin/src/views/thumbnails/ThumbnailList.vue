@@ -19,7 +19,7 @@ const categoryStore = useThumbnailCategoryStore()
 
 // 計算出要監聽的 query（排除 page & limit）
 const allThumbnails = computed(() => {
-  const { page, limit, keyword, ...rest } = route.query
+  const { page, limit, keyword, isVtuber, ...rest } = route.query
   let filtered = thumbnailStore.data
 
   // keyword 篩選
@@ -27,6 +27,11 @@ const allThumbnails = computed(() => {
     filtered = filtered.filter((thumb) =>
       thumb.name.toLowerCase().includes((keyword as string).toLowerCase()),
     )
+  }
+
+  // 是否為 vtuber
+  if (isVtuber == 'true') {
+    filtered = filtered.filter((t) => t.isVtuber)
   }
 
   // 動態分類篩選

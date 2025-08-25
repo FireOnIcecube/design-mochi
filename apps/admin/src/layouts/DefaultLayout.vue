@@ -3,11 +3,29 @@ import NavHeader from '@admin/components/NavHeader.vue'
 import Sidebar from '../components/Sidebar.vue'
 import CategoryMenuBar from '../components/layout/categoryMenuBar/CategoryMenuBar.vue'
 import { useThumbnailCategoryStore } from '../stores/useThumbnailCategoryStore'
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useThumbnailStore } from '../stores/useThumbnailStore'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 const thumbnailStore = useThumbnailStore()
 const categoryStore = useThumbnailCategoryStore()
+
+const isVtuber = computed(() => {
+  const val = route.query.isVtuber
+  if (val === 'true') return true
+  if (val === 'false') return false
+  return false // 預設值
+})
+
+function handleToggleVtuberMode(isVtuberMode: boolean) {
+  router.replace({
+    path: route.path,
+    query: { ...route.query, isVtuber: String(isVtuberMode) },
+  })
+}
 
 onMounted(async () => {
   thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
@@ -30,7 +48,11 @@ onMounted(async () => {
         <div
           class="bg-primary dark:bg-surface-dark flex w-full items-center justify-center border-b dark:border-gray-700"
         >
-          <CategoryMenuBar :thumbnail-categories="categoryStore.data" />
+          <CategoryMenuBar
+            :thumbnail-categories="categoryStore.data"
+            :is-vtuber="isVtuber"
+            @toggle-vtuber-mode="handleToggleVtuberMode"
+          />
         </div>
         <main class="container mx-auto flex-1 p-4">
           <router-view />
