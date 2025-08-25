@@ -80,7 +80,7 @@ watch(
     </div>
 
     <p
-      class="font-notosans dark:text-content-dark group-hover:text-content-link dark:group-hover:text-content-link-dark mt-2 line-clamp-2 text-xs lg:text-lg"
+      class="font-notosans dark:text-content-dark group-hover:text-content-link dark:group-hover:text-content-link-dark mt-2 line-clamp-2 text-xs select-none lg:text-lg"
     >
       {{ props.thumbnail.name }}
     </p>

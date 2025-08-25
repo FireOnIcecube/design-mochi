@@ -17,6 +17,8 @@ const categoryStore = useThumbnailCategoryStore()
 onMounted(async () => {
   categoryStore.fetchAll({ order: { createdAt: 'asc' } })
 })
+
+function handleToggleStreamerMode() {}
 </script>
 
 <template>
@@ -64,10 +66,12 @@ onMounted(async () => {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div
-        class="group ml-12 flex cursor-pointer items-center justify-center bg-gray-200 dark:bg-gray-800"
-      >
-        <SearchDialog :thumbnailCategories="categoryStore.data" />
+      <div class="group ml-12 flex cursor-pointer items-center justify-center gap-x-8">
+        <button @click="handleToggleStreamerMode">Streamer</button>
+
+        <div class="bg-gray-200 dark:bg-gray-800">
+          <SearchDialog :thumbnailCategories="categoryStore.data" />
+        </div>
       </div>
     </div>
   </div>

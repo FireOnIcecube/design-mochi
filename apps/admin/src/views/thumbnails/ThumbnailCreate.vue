@@ -24,7 +24,7 @@ import { NonEmptyArray } from '@/packages/types/common'
 // 狀態變數
 
 // youtube 影片網址
-const youtubeUrl = ref('')
+const youtubeUrl = ref('https://www.youtube.com/watch?v=_CV5wVHjMfQ')
 
 // 預覽縮圖的 url
 const thumbnailPreviewUrl = ref('')
@@ -285,9 +285,11 @@ function updateSelectedTags(data: Record<string, string[]>) {
         v-if="thumbnailPreviewUrl"
         class="text-content dark:text-content-dark text-md font-semibold"
       >
-        <div class="h-full min-h-64 w-full flex-1">
+        <div class="min-h-64 w-full flex-1">
           <TagSelector :thumbnail-categories="thumbnailCategories" @change="updateSelectedTags" />
         </div>
+
+        <button @click="">Vtuber</button>
       </div>
     </div>
   </div>

@@ -75,7 +75,7 @@ function serializeSelectedTags(): Record<string, string[]> {
 
         <ul
           v-if="category.tags && category.tags.length > 0"
-          class="grid auto-rows-[40px] grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4"
+          class="grid auto-rows-[40px] grid-cols-2 gap-3 p-4 sm:grid-cols-3 md:grid-cols-4"
         >
           <li
             v-for="tag in category.tags"

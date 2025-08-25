@@ -112,8 +112,12 @@ defineExpose({ open, close })
     <div
       v-if="enrichedThumbnail"
       @click.stop
-      class="max-w-8xl bg-surface dark:bg-surface-dark max-h-[90vh] w-[95%] overflow-y-auto rounded-2xl p-6 shadow-xl sm:w-[90%] md:w-[85%]"
+      class="max-w-8xl bg-surface dark:bg-surface-dark relative max-h-[90vh] w-[95%] overflow-y-auto rounded-2xl p-8 shadow-xl sm:w-[90%] md:w-[85%]"
     >
+      <span class="absolute top-3 right-3">
+        <Icon icon="material-symbols:close-rounded" class="size-7" @click="close" />
+      </span>
+
       <div
         v-if="enrichedThumbnail.isArchived"
         class="mb-10 flex w-full items-center justify-center gap-2 bg-amber-500 py-2 text-white"
