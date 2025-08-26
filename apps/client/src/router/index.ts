@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '@client/views/HomePage.vue'
-import ThumbnailDetail from '@client/views/ThumbnailDetail.vue'
+import ThumbnailDetail from '@client/views/thumbnail/ThumbnailDetail.vue'
+import ThumbnailList from '@client/views/thumbnail/ThumbnailList.vue'
 import DefaultLayout from '@client/layouts/DefaultLayout.vue'
 import SearchPage from '@/apps/client/src/views/SearchPage.vue'
 import TestPage from '@/apps/client/src/views/TestPage.vue'
@@ -11,8 +11,8 @@ import BlankLayout from '@client/layouts/BlankLayout.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Home',
-    component: HomePage,
+    name: 'ThumbnailList',
+    component: ThumbnailList,
     meta: { layout: DefaultLayout }
   },
   {

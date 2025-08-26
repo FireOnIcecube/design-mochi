@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import FilterTab from './FilterTab.vue'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
@@ -14,27 +12,19 @@ import {
 
 import { DialogClose } from 'reka-ui'
 
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@client/components/ui/form'
+import { FormControl, FormField, FormItem, FormMessage } from '@client/components/ui/form'
 
 import { Button } from '@client/components/ui/button'
 import { Search } from 'lucide-vue-next'
 import { Input } from '@client/components/ui/input'
 import { useRouter } from 'vue-router'
+import { ThumbnailCategory } from '@/packages/types'
 
 const props = defineProps<{
-  thumbnailCategories: {
-    id: string
-    label: string
-    options: { id: number; label: string; value: string }[]
-  }[]
+  thumbnailCategories: ThumbnailCategory[]
 }>()
+
+const router = useRouter()
 
 // dialog 的開關
 const isOpen = ref(false)
@@ -45,18 +35,16 @@ const toggleDialog = () => {
 // 初始化表單上的輸入欄位
 const keyword = ref('')
 
-const router = useRouter()
-
 function handleSubmit() {
   console.log('Form submitted!')
   console.info(`keyword : ${keyword.value}`)
   console.info(`selectedTags : ${JSON.stringify(selectedTags)} `)
-  router.push({ name: 'SearchResult', query: { keyword: keyword.value, ...selectedTags } })
+  router.push({ name: 'ThumbnailList', query: { keyword: keyword.value, ...selectedTags } })
 }
 
-const selectedTags = reactive<Record<string, number[]>>({})
+const selectedTags = reactive<Record<string, string[]>>({})
 
-function updateSelectedTags(val: Record<string, number[]>) {
+function updateSelectedTags(val: Record<string, string[]>) {
   Object.assign(selectedTags, val)
 }
 
@@ -93,7 +81,7 @@ function updateSelectedTags(val: Record<string, number[]>) {
       </div>
     </DialogTrigger>
     <DialogContent
-      class="md:max-w-2/3 min-h-2/3 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
+      class="min-h-2/3 md:max-w-2/3 max-h-[90dvh] grid-rows-[auto_minmax(0,1fr)_auto] p-0 sm:max-w-[425px]"
     >
       <DialogHeader class="p-6 pb-0">
         <DialogTitle class="text-3xl">尋找封面</DialogTitle>
@@ -107,7 +95,7 @@ function updateSelectedTags(val: Record<string, number[]>) {
           <FormField v-slot="{ componentField }" name="keyword">
             <FormItem>
               <FormControl>
-                <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-1.5">
+                <div class="mx-auto flex w-full max-w-sm items-center justify-center gap-4">
                   <div class="relative w-full max-w-sm items-center">
                     <Input
                       type="text"
@@ -122,7 +110,9 @@ function updateSelectedTags(val: Record<string, number[]>) {
                   </div>
 
                   <DialogClose>
-                    <Button type="submit" class="font-notosans text-md tracking-widest"
+                    <Button
+                      type="submit"
+                      class="font-notosans text-md bg-gray-800 tracking-widest text-white hover:bg-gray-800/80"
                       >搜尋</Button
                     >
                   </DialogClose>

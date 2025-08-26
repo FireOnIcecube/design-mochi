@@ -33,11 +33,16 @@ export default {
       },
       colors: {
         surface: {
-          DEFAULT: '#ffffff', // 白天模式的 主要 顏色
-          dark: '#0F172A', // 黑夜模式的 主要 顏色
+          DEFAULT: '#fffdfb', // 白天模式的 背景 顏色
+          dark: '#0F172A', // 黑夜模式的 背景 顏色
           hover: '#f3f4f6', // 白天模式的 Hover 顏色
           'hover-dark': '#1E293B' // 黑夜模式的 Hover 顏色
         },
+        primary: {
+          DEFAULT: '#fff9f1',
+          dark: '#0F172A'
+        },
+
         content: {
           DEFAULT: '#1E293B', // 白天模式的 文字 顏色
           dark: '#F8FAFC', // 黑夜模式的 文字 顏色

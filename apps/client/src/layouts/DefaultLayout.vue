@@ -1,92 +1,60 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import NavHeader from '@client/components/NavHeader.vue'
-import CategoryMenu from '@client/components/CategoryMenu.vue'
-import WebFooter from '@client/components/WebFooter.vue'
-import SearchBar from '@client/components/SearchBar.vue'
-import TopButton from '@client/components/TopButton.vue'
+import CategoryMenuBar from '@client/components/layout/categoryMenuBar/CategoryMenuBar.vue'
+import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategoryStore'
+import { computed, onMounted } from 'vue'
+import { useThumbnailStore } from '@client/stores/useThumbnailStore'
+import { useRoute, useRouter } from 'vue-router'
 
-const thumbnailCategories = [
-  {
-    id: 'STYLE',
-    label: '設計風格',
-    options: [
-      { id: 1, label: '極簡', value: 'minimal' },
-      { id: 2, label: '插畫風', value: 'illustration' },
-      { id: 3, label: '潮流感', value: 'trendy' },
-      { id: 4, label: '寫實風', value: 'realistic' },
-      { id: 5, label: '拼貼風', value: 'collage' },
-      { id: 6, label: '漫畫風', value: 'comic' },
-      { id: 7, label: '手寫字感', value: 'handwritten' }
-    ]
-  },
-  {
-    id: 'COLOR',
-    label: '主色調',
-    options: [
-      { id: 1, label: '紅色', value: 'red' },
-      { id: 2, label: '藍色', value: 'blue' },
-      { id: 3, label: '黑白灰', value: 'mono' },
-      { id: 4, label: '霓虹色系', value: 'neon' },
-      { id: 5, label: '馬卡龍', value: 'pastel' },
-      { id: 6, label: '大地色系', value: 'earth' }
-    ]
-  },
-  {
-    id: 'SHAPE',
-    label: '構圖樣式',
-    options: [
-      { id: 1, label: '大頭特寫', value: 'closeup' },
-      { id: 2, label: '左右分割', value: 'split' },
-      { id: 3, label: '中置角色', value: 'center' },
-      { id: 4, label: '多圖拼貼', value: 'multi' },
-      { id: 5, label: '標題主導', value: 'text-heavy' }
-    ]
-  },
-  {
-    id: 'MEDIA',
-    label: '素材類型',
-    options: [
-      { id: 1, label: '靜態圖', value: 'image' },
-      { id: 2, label: '動圖 / 動態封面', value: 'animated' },
-      { id: 3, label: '影片頭圖', value: 'video' }
-    ]
-  },
-  {
-    id: 'CREATOR_TYPE',
-    label: '創作者類型',
-    options: [
-      { id: 1, label: 'Vtuber', value: 'vtuber' },
-      { id: 2, label: '實體 Youtuber', value: 'human' },
-      { id: 3, label: '企業品牌', value: 'brand' }
-    ]
-  }
-]
+const route = useRoute()
+const router = useRouter()
+
+const thumbnailStore = useThumbnailStore()
+const categoryStore = useThumbnailCategoryStore()
+
+const isVtuber = computed(() => {
+  const val = route.query.isVtuber
+  if (val === 'true') return true
+  if (val === 'false') return false
+  return false // 預設值
+})
+
+function handleToggleVtuberMode(isVtuberMode: boolean) {
+  router.replace({
+    path: route.path,
+    query: { ...route.query, isVtuber: String(isVtuberMode) }
+  })
+}
+
+onMounted(async () => {
+  thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
+  categoryStore.fetchAll({ order: { createdAt: 'asc' } })
+})
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col">
-    <header class="border-b px-4 lg:p-4 dark:border-gray-700">
+  <div class="flex h-screen flex-col">
+    <div
+      class="bg-primary transition-theme dark:bg-surface-dark border-b px-4 lg:p-4 dark:border-gray-700"
+    >
       <NavHeader />
-    </header>
+    </div>
 
-    <section class="sticky top-0 z-10 hidden xl:block">
-      <CategoryMenu :thumbnailCategories="thumbnailCategories" />
-    </section>
-
-    <!-- Banner 暫不啟用-->
-
-    <!-- <section class="bg-blue-500 px-6 py-12 text-center text-white">
-    <h1 class="text-3xl font-bold md:text-5xl">設計封面</h1>
-    <p class="mt-2 text-lg md:text-xl">提升點擊率！從最佳封面設計中獲取靈感</p>
-  </section> -->
-
-    <main class="3xl:mt-20 grow">
-      <div class="container mx-auto mt-10">
-        <router-view />
+    <div class="flex flex-1 overflow-hidden">
+      <div class="flex flex-1 flex-col overflow-auto">
+        <div
+          class="bg-primary transition-theme dark:bg-surface-dark flex w-full items-center justify-center border-b dark:border-gray-700"
+        >
+          <CategoryMenuBar
+            :thumbnail-categories="categoryStore.data"
+            :is-vtuber="isVtuber"
+            @toggle-vtuber-mode="handleToggleVtuberMode"
+          />
+        </div>
+        <main class="container mx-auto flex-1 p-4">
+          <router-view />
+        </main>
       </div>
-    </main>
-    <footer class="border-outline dark:border-outline-dark mt-20 border-t bg-gray-900">
-      <WebFooter />
-    </footer>
+    </div>
   </div>
 </template>
