@@ -106,7 +106,7 @@ function toggleAll(catSlug: string, checked: boolean | 'indeterminate') {
             <!-- 全選 Checkbox -->
             <div class="col-span-full flex items-center space-x-2">
               <label
-                class="lg:text-md font-notosans text-sm leading-none font-medium select-none xl:text-lg"
+                class="lg:text-md font-notosans flex items-center gap-x-2 text-sm leading-none font-medium select-none xl:text-lg"
               >
                 <Checkbox
                   :modelValue="isAllSelected(category.slug)"
@@ -116,8 +116,10 @@ function toggleAll(catSlug: string, checked: boolean | 'indeterminate') {
                       updateSelectedTags()
                     }
                   "
-                />
-                全選
+                >
+                  <div class="size-5 shrink-0 rounded border-2 border-blue-500 bg-blue-500"></div>
+                </Checkbox>
+                <span>全選</span>
               </label>
             </div>
 
@@ -125,7 +127,7 @@ function toggleAll(catSlug: string, checked: boolean | 'indeterminate') {
             <div v-for="tag in category.tags" :key="tag.id" class="flex items-center space-x-2">
               <label
                 :for="tag.id"
-                class="lg:text-md font-notosans text-sm leading-none font-medium select-none xl:text-lg"
+                class="lg:text-md font-notosans flex items-center gap-x-2 text-sm leading-none font-medium select-none xl:text-lg"
               >
                 <Checkbox
                   :id="tag.id"
@@ -136,8 +138,10 @@ function toggleAll(catSlug: string, checked: boolean | 'indeterminate') {
                       updateSelectedTags()
                     }
                   "
-                />
-                {{ tag.name }}
+                >
+                  <div class="size-5 shrink-0 rounded border-2 border-blue-500 bg-blue-500"></div>
+                </Checkbox>
+                <span>{{ tag.name }}</span>
               </label>
             </div>
           </div>
