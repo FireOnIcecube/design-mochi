@@ -91,7 +91,7 @@ watch(
           type="button"
           :class="
             localVtuber
-              ? 'scale-95 bg-blue-400 shadow-[inset_4px_4px_8px_rgba(0,0,0,0.4)]'
+              ? 'scale-95 bg-blue-400 shadow-[inset_4px_4px_8px_#00000066]'
               : 'bg-red-300 shadow-lg'
           "
           class="cursor-pointer rounded px-4 py-2 text-white transition-all duration-150 active:scale-95"
