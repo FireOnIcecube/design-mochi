@@ -86,17 +86,21 @@ watch(
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div class="group ml-12 flex cursor-pointer items-center justify-center gap-x-8">
+      <div class="group ml-12 flex items-center justify-center gap-x-8">
         <button
           type="button"
-          :class="localVtuber ? 'bg-blue-300' : 'bg-red-300'"
-          class="px-4 py-2 text-white"
+          :class="
+            localVtuber
+              ? 'scale-95 bg-blue-400 shadow-[inset_4px_4px_8px_rgba(0,0,0,0.4)]'
+              : 'bg-red-300 shadow-lg'
+          "
+          class="cursor-pointer rounded px-4 py-2 text-white transition-all duration-150 active:scale-95"
           @click="onToggleVtuberMode"
         >
           Vtuber
         </button>
 
-        <div class="bg-gray-200 dark:bg-gray-800">
+        <div class="cursor-pointer bg-[#E6D7C5] dark:bg-gray-800">
           <SearchDialog :thumbnailCategories="categoryStore.data" />
         </div>
       </div>
