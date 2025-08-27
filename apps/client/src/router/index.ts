@@ -16,21 +16,21 @@ const routes: RouteRecordRaw[] = [
     meta: { layout: DefaultLayout }
   },
   {
-    path: '/thumbnail/:id',
-    name: 'ThumbnailDetail',
-    component: ThumbnailDetail,
+    path: '/:id?',
+    name: 'ThumbnailList',
+    component: ThumbnailList,
     meta: { layout: DefaultLayout }
   },
+  // {
+  //   path: '/thumbnail/:id',
+  //   name: 'ThumbnailDetail',
+  //   component: ThumbnailDetail,
+  //   meta: { layout: DefaultLayout }
+  // },
   {
     path: '/search',
     name: 'SearchResult',
     component: SearchPage,
-    meta: { layout: DefaultLayout }
-  },
-  {
-    path: '/test',
-    name: 'TestPage',
-    component: TestPage,
     meta: { layout: DefaultLayout }
   },
   {
