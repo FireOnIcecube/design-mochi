@@ -70,6 +70,7 @@ const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 // 點擊卡片
 function openThumbnailModal(t: Thumbnail) {
   router.push({ name: 'ThumbnailList', params: { id: t.id }, query: route.query }) // 更新 URL
+  modalRef.value?.open(t)
 }
 
 // 換頁
