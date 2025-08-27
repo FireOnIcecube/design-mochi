@@ -77,7 +77,6 @@ async function onThumbnailToggleArchive({ id, value }: { id: string; value: bool
 // 點擊卡片
 function openThumbnailModal(t: Thumbnail) {
   router.push({ name: 'ThumbnailList', params: { id: t.id }, query: route.query }) // 更新 URL
-  modalRef.value?.open(t)
 }
 
 // modal close 時清空 URL

@@ -14,7 +14,6 @@ import NotFound from '@admin/views/NotFound.vue'
 import ThumbnailList from '@admin/views/thumbnails/ThumbnailList.vue'
 import ThumbnailCreate from '@admin/views/thumbnails/ThumbnailCreate.vue'
 import ThumbnailEdit from '@admin/views/thumbnails/ThumbnailEdit.vue'
-import ThumbnailDetail from '@admin/views/thumbnails/ThumbnailDetail.vue'
 
 import CateogoryList from '@admin/views/categories/CategoryList.vue'
 
