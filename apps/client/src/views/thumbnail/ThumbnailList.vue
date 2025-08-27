@@ -34,6 +34,9 @@ const allThumbnails = computed(() => {
     filtered = filtered.filter((t) => t.isVtuber)
   }
 
+  // 不顯示封存的 thumbnail 僅前台使用
+  filtered = filtered.filter((t) => !t.isArchived)
+
   // 動態分類篩選
   for (const [categoryKey, selectedTags] of Object.entries(rest)) {
     if (!selectedTags || (Array.isArray(selectedTags) && selectedTags.length === 0)) {
@@ -64,38 +67,9 @@ const pageSize = 30
 const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
-// 封存封面
-async function onThumbnailToggleArchive({ id, value }: { id: string; value: boolean }) {
-  try {
-    await editThumbnail(id, { isArchived: value })
-    await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
-  } catch (e) {
-    alert('暫時無法 封存/顯示 封面 , 請稍後再試')
-  }
-}
-
 // 點擊卡片
 function openThumbnailModal(t: Thumbnail) {
   router.push({ name: 'ThumbnailList', params: { id: t.id }, query: route.query }) // 更新 URL
-  modalRef.value?.open(t)
-}
-
-// modal close 時清空 URL
-// function closeModal() {
-//   modalRef.value?.close()
-//   router.push({ path: '/thumbnails', query: route.query })
-// }
-
-// 刪除封面
-async function onThumbnailDelete(id: string) {
-  if (confirm('確定要刪除這個封面嗎？')) {
-    try {
-      await deleteThumbnail(id)
-      await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
-    } catch (e) {
-      alert('暫時無法 刪除封面 , 請稍後再試')
-    }
-  }
 }
 
 // 換頁
@@ -154,12 +128,7 @@ async function tryOpenModalFromRoute() {
         :key="item.id"
         class="rounded-md p-2 transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700"
       >
-        <ThumbnailCard
-          :thumbnail="item"
-          :openThumbnailModal="openThumbnailModal"
-          @toggle-archive="onThumbnailToggleArchive"
-          @request-delete="onThumbnailDelete"
-        />
+        <ThumbnailCard :thumbnail="item" :openThumbnailModal="openThumbnailModal" />
       </div>
 
       <ThumbnailDetailModal ref="modalRef" />
