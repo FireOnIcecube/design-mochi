@@ -77,7 +77,7 @@ async function downloadImage(url: string, filename: string) {
 
 // 取得目前的 url
 function getCurrentUrl(id: string) {
-  return `${window.location.origin}/thumbnails/${id}`
+  return `${window.location.origin}/${id}`
 }
 
 defineExpose({ open, close })
