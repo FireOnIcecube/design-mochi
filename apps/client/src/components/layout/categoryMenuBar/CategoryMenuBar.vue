@@ -11,7 +11,7 @@ import {
   NavigationMenuTrigger
 } from '@admin/components/ui/navigation-menu'
 import { RouterLink } from 'vue-router'
-import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategoryStore'
+import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategoryStore'
 
 const categoryStore = useThumbnailCategoryStore()
 onMounted(async () => {
