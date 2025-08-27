@@ -4,9 +4,10 @@ import type { Thumbnail, ThumbnailCategory } from '@/packages/types'
 import { useThumbnailStore } from '@client/stores/useThumbnailStore'
 import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategoryStore'
 import { deleteThumbnail, editThumbnail } from '@/packages/firebase/db/entities/thumbnail'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 
+const route = useRoute()
 const router = useRouter()
 
 const isOpen = ref(false)
@@ -74,30 +75,9 @@ async function downloadImage(url: string, filename: string) {
   }
 }
 
-// 封存封面
-async function toggleArchive({ id, value }: { id: string; value: boolean }) {
-  try {
-    await editThumbnail(id, { isArchived: value })
-    await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
-  } catch (e) {
-    alert('暫時無法 封存/顯示 封面 , 請稍後再試')
-  }
-}
-
-// 刪除封面
-async function onThumbnailDelete(id: string) {
-  if (confirm('確定要刪除這個封面嗎？')) {
-    try {
-      await deleteThumbnail(id)
-      router.push({ name: 'ThumbnailList', params: {} })
-    } catch (e) {
-      alert('暫時無法 刪除封面 , 請稍後再試')
-      console.error(e)
-    } finally {
-      await thumbnailStore.fetchAll({ order: { createdAt: 'desc' } })
-      close()
-    }
-  }
+// 取得目前的 url
+function getCurrentUrl(id: string) {
+  return `${window.location.origin}/thumbnails/${id}`
 }
 
 defineExpose({ open, close })
@@ -202,7 +182,40 @@ defineExpose({ open, close })
           <section
             class="mt-8 flex flex-col items-center justify-between gap-y-8 lg:flex-row xl:mt-16"
           >
-            <div class="font-notosans text-2xl">點閱數: {{ enrichedThumbnail.clickCount }}</div>
+            <div class="flex gap-6 text-3xl">
+              <a
+                :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getCurrentUrl(enrichedThumbnail.id))}`"
+                target="_blank"
+                rel="noopener"
+                aria-label="分享到 Facebook"
+              >
+                <Icon
+                  icon="fa-brands:facebook-square"
+                  class="text-[#0866FF]"
+                  width="36"
+                  height="36"
+                />
+              </a>
+
+              <a
+                :href="`https://twitter.com/intent/tweet?url=${encodeURIComponent(getCurrentUrl(enrichedThumbnail.id))}`"
+                target="_blank"
+                rel="noopener"
+                aria-label="分享到 Twitter"
+              >
+                <Icon icon="fa6-brands:twitter" class="text-[#1DA1F2]" width="36" height="36" />
+              </a>
+
+              <a
+                :href="`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(getCurrentUrl(enrichedThumbnail.id))}`"
+                target="_blank"
+                rel="noopener"
+                aria-label="分享到 LINE"
+              >
+                <Icon icon="fa6-brands:line" class="text-[#00C300]" width="36" height="36" />
+              </a>
+            </div>
+            <!-- <div class="font-notosans text-2xl">點閱數: {{ enrichedThumbnail.clickCount }}</div> -->
             <div class="flex gap-8 text-lg font-black text-white">
               <button
                 class="flex cursor-pointer gap-1 rounded-md bg-blue-500 px-6 py-3 shadow-md hover:bg-blue-500/80 active:bg-blue-700 active:shadow-inner"
@@ -213,38 +226,6 @@ defineExpose({ open, close })
               </button>
             </div>
           </section>
-
-          <div class="mt-8 flex justify-center gap-8 text-lg font-black text-white lg:justify-end">
-            <button
-              class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-amber-500 px-6 py-3 shadow-md hover:bg-amber-500/80 active:bg-amber-700 active:shadow-inner"
-              @click="
-                toggleArchive({ id: enrichedThumbnail.id, value: !enrichedThumbnail.isArchived })
-              "
-            >
-              <Icon
-                :icon="
-                  enrichedThumbnail.isArchived
-                    ? 'material-symbols:archive'
-                    : 'material-symbols:archive-outline'
-                "
-                class="size-7 text-white"
-              />
-              <template v-if="enrichedThumbnail.isArchived">
-                <span>解除封存</span>
-              </template>
-              <template v-else>
-                <span>封存</span>
-              </template>
-            </button>
-            <button
-              class="flex shrink-0 cursor-pointer gap-1 rounded-md bg-red-500 px-6 py-3 shadow-md hover:bg-red-500/80 active:bg-red-700 active:shadow-inner"
-              @click="onThumbnailDelete(enrichedThumbnail.id)"
-            >
-              <Icon icon="material-symbols:delete" class="size-7" />
-
-              <span>刪除</span>
-            </button>
-          </div>
 
           <!-- 分享功能，暫時不實裝 -->
           <!-- <div class="mt-8 flex gap-x-4">
