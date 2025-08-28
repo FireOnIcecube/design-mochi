@@ -88,9 +88,9 @@ function getShareUrl(platform: 'facebook' | 'x' | 'line', id: string) {
     case 'facebook':
       return `https://www.facebook.com/sharer/sharer.php?u=${url}`
     case 'x':
-      return `https://twitter.com/intent/tweet?text=${text}&url=${url}`
+      return `https://twitter.com/intent/tweet?text=${text + '\n'}&url=${url}`
     case 'line':
-      return `https://social-plugins.line.me/lineit/share?text=${text}&url=${url}`
+      return `https://social-plugins.line.me/lineit/share?text=${text + '\n'}&url=${url}`
   }
 }
 
