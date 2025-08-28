@@ -10,7 +10,7 @@ const emit = defineEmits<{
   (e: 'change', newPage: number): void
 }>()
 
-const pageOffsetNum = 3
+const pageOffsetNum = 2
 
 const goToPage = (page: number) => {
   if (page < 1 || page > props.totalPages) return
