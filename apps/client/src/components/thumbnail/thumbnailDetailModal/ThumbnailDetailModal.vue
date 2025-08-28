@@ -80,6 +80,20 @@ function getCurrentUrl(id: string) {
   return `${window.location.origin}/${id}`
 }
 
+function getShareUrl(platform: 'facebook' | 'x' | 'line', id: string) {
+  const url = getCurrentUrl(id)
+  const text = encodeURIComponent('我發現了個超讚的封面!!!')
+
+  switch (platform) {
+    case 'facebook':
+      return `https://www.facebook.com/sharer/sharer.php?u=${url}`
+    case 'x':
+      return `https://twitter.com/intent/tweet?text=${text}&url=${url}`
+    case 'line':
+      return `https://social-plugins.line.me/lineit/share?text=${text}&url=${url}`
+  }
+}
+
 defineExpose({ open, close })
 </script>
 
@@ -184,35 +198,36 @@ defineExpose({ open, close })
           >
             <div class="flex gap-6 text-3xl">
               <a
-                :href="`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(getCurrentUrl(enrichedThumbnail.id))}`"
+                :href="`${getShareUrl('facebook', enrichedThumbnail.id)}`"
                 target="_blank"
                 rel="noopener"
                 aria-label="分享到 Facebook"
               >
                 <Icon
-                  icon="fa-brands:facebook-square"
-                  class="text-[#0866FF]"
-                  width="36"
-                  height="36"
+                  icon="simple-icons:facebook"
+                  class="size-10 rounded bg-[#0866FF] p-1 text-white"
                 />
               </a>
 
               <a
-                :href="`https://twitter.com/intent/tweet?url=${encodeURIComponent(getCurrentUrl(enrichedThumbnail.id))}`"
+                :href="`${getShareUrl('x', enrichedThumbnail.id)}`"
                 target="_blank"
                 rel="noopener"
                 aria-label="分享到 Twitter"
               >
-                <Icon icon="fa6-brands:twitter" class="text-[#1DA1F2]" width="36" height="36" />
+                <Icon icon="simple-icons:x" class="size-10 rounded bg-black p-1 text-white" />
               </a>
 
               <a
-                :href="`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(getCurrentUrl(enrichedThumbnail.id))}`"
+                :href="`${getShareUrl('line', enrichedThumbnail.id)}`"
                 target="_blank"
                 rel="noopener"
                 aria-label="分享到 LINE"
               >
-                <Icon icon="fa6-brands:line" class="text-[#00C300]" width="36" height="36" />
+                <Icon
+                  icon="simple-icons:line"
+                  class="size-10 rounded bg-[#00C300] p-1 text-white"
+                />
               </a>
             </div>
             <!-- <div class="font-notosans text-2xl">點閱數: {{ enrichedThumbnail.clickCount }}</div> -->
