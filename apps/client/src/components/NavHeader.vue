@@ -17,13 +17,13 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
     </router-link>
 
     <div>
-      <nav class="flex gap-2 lg:mr-4">
-        <!-- <router-link
-            to="/contact"
-            class="text-content hover:text-gray-500 dark:text-content-dark dark:hover:text-gray-400"
-          >
-            我的收藏
-          </router-link> -->
+      <nav class="flex items-center gap-x-8 lg:mr-4">
+        <router-link
+          :to="{ name: 'FavoritePage' }"
+          class="text-content dark:text-content-dark block hover:text-gray-500 dark:hover:text-gray-400"
+        >
+          <span class="font-notosans text-lg">我的收藏</span>
+        </router-link>
 
         <label class="swap swap-rotate text-content dark:text-content-dark">
           <input type="checkbox" class="theme-controller hidden" @change="() => toggleDarkMode()" />
@@ -33,7 +33,7 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
           <Icon icon="uil:moon" class="swap-on h-6 w-6 fill-current lg:h-8 lg:w-8" />
         </label>
 
-        <BurgerMenu />
+        <!-- <BurgerMenu /> -->
       </nav>
     </div>
   </div>

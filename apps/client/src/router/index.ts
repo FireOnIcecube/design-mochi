@@ -4,9 +4,9 @@ import ThumbnailDetail from '@client/views/thumbnail/ThumbnailDetail.vue'
 import ThumbnailList from '@client/views/thumbnail/ThumbnailList.vue'
 import DefaultLayout from '@client/layouts/DefaultLayout.vue'
 import SearchPage from '@/apps/client/src/views/SearchPage.vue'
-import TestPage from '@/apps/client/src/views/TestPage.vue'
 import NotFound from '../views/NotFound.vue'
 import BlankLayout from '@client/layouts/BlankLayout.vue'
+import FavoritePage from '@client/views/FavoritePage.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -19,6 +19,12 @@ const routes: RouteRecordRaw[] = [
     path: '/:id?',
     name: 'ThumbnailList',
     component: ThumbnailList,
+    meta: { layout: DefaultLayout }
+  },
+  {
+    path: '/favorite',
+    name: 'FavoritePage',
+    component: FavoritePage,
     meta: { layout: DefaultLayout }
   },
   // {
