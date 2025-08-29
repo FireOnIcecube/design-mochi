@@ -9,6 +9,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { usePageSync } from '@client/composables/usePageSync'
 import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategoryStore'
 import { ThumbnailDetailModal } from '@client/components/thumbnail/thumbnailDetailModal'
+import { useLocalStorage } from '@vueuse/core'
 
 const modalRef = ref<InstanceType<typeof ThumbnailDetailModal>>()
 const route = useRoute()
@@ -100,6 +101,21 @@ watch(
   }
 )
 
+// 定義儲存 收藏 Thumbnail 的 id
+const favoriteIds = useLocalStorage<string[]>('favoriteThumbnailIds', [])
+
+function handleToggleFavorite(thumbnailId: string) {
+  const favoriteSet = new Set(favoriteIds.value)
+
+  if (favoriteSet.has(thumbnailId)) {
+    favoriteSet.delete(thumbnailId)
+  } else {
+    favoriteSet.add(thumbnailId)
+  }
+
+  favoriteIds.value = Array.from(favoriteSet)
+}
+
 async function tryOpenModalFromRoute() {
   const id = route.params.id
   if (!id) return
@@ -129,10 +145,14 @@ async function tryOpenModalFromRoute() {
         :key="item.id"
         class="rounded-md p-2 transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-gray-700"
       >
-        <ThumbnailCard :thumbnail="item" :openThumbnailModal="openThumbnailModal" />
+        <ThumbnailCard
+          :thumbnail="item"
+          :openThumbnailModal="openThumbnailModal"
+          @toggle-favorite="handleToggleFavorite"
+        />
       </div>
 
-      <ThumbnailDetailModal ref="modalRef" />
+      <ThumbnailDetailModal ref="modalRef" @toggle-favorite="handleToggleFavorite" />
     </div>
 
     <div class="mt-10 flex justify-end">

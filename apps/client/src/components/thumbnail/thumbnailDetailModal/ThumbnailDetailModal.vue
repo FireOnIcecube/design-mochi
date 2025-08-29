@@ -6,6 +6,7 @@ import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategorySt
 import { deleteThumbnail, editThumbnail } from '@/packages/firebase/db/entities/thumbnail'
 import { useRoute, useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
+import { useLocalStorage } from '@vueuse/core'
 
 const route = useRoute()
 const router = useRouter()
@@ -25,6 +26,18 @@ const enrichedThumbnail = computed(() => {
 
   return enrichThumbnail(storeThumbnail, categoryStore.data)
 })
+
+const emit = defineEmits<{
+  (e: 'toggle-favorite', thumbnailId: string): void
+}>()
+
+// 定義儲存 收藏 Thumbnail 的 id
+const favoriteThumbnailIds = useLocalStorage<string[]>('favoriteThumbnailIds', [])
+const isFavorited = computed(() => favoriteThumbnailIds.value.includes(thumbnail.value?.id ?? ''))
+
+function onToggleFavorite(id: string) {
+  emit('toggle-favorite', id)
+}
 
 function enrichThumbnail(thumbnail: Thumbnail, categories: ThumbnailCategory[]) {
   const enrichedCategories = thumbnail.categories
@@ -149,26 +162,18 @@ defineExpose({ open, close })
             <p class="font-notosans text-xl lg:text-2xl">
               {{ enrichedThumbnail.name }}
             </p>
-            <!-- 
-          <div class="flex justify-end lg:hidden">
-            <button
-              @click="liked = !liked"
-              aria-label="收藏"
-              class="mt-4 transition-colors duration-300"
-            >
+            <div class="mt-4 flex justify-end">
               <div
-                class="dark:border-outline-dark cursor-pointer rounded-full border p-3 shadow-md hover:shadow-lg"
+                class="dark:border-outline-dark inline-block cursor-pointer rounded-full border p-2.5 shadow-md transition-colors duration-300 hover:shadow-lg active:scale-95 active:shadow-inner 2xl:hidden"
+                @click="onToggleFavorite(thumbnail?.id ?? '')"
               >
                 <Icon
-                  :icon="liked ? 'mdi:heart' : 'mdi:heart-outline'"
-                  width="2rem"
-                  height="2rem"
-                  class="text-red-500 transition-all duration-300 ease-in-out"
-                  :class="liked ? 'scale-110' : 'scale-100'"
+                  :icon="isFavorited ? 'mdi:heart' : 'mdi:heart-outline'"
+                  class="size-8"
+                  :class="{ 'text-red-500': isFavorited }"
                 />
               </div>
-            </button>
-          </div> -->
+            </div>
           </section>
 
           <section
@@ -184,7 +189,7 @@ defineExpose({ open, close })
               <div class="text-md font-notosans flex flex-wrap gap-x-4 gap-y-2">
                 <template v-for="(tag, index) in cat?.tags" :key="index">
                   <div
-                    class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark hover:shadow-xs cursor-pointer rounded-lg border px-3 py-2"
+                    class="border-outline hover:bg-surface-hover dark:hover:bg-surface-hover-dark hover:shadow-xs cursor-pointer select-none rounded-lg border px-3 py-2"
                   >
                     #{{ tag.name }}
                   </div>
@@ -194,14 +199,15 @@ defineExpose({ open, close })
           </section>
 
           <section
-            class="mt-8 flex flex-col items-center justify-between gap-y-8 lg:flex-row xl:mt-16"
+            class="mt-8 flex flex-col items-center justify-between gap-y-8 xl:mt-16 xl:flex-row"
           >
-            <div class="flex gap-6 text-3xl">
+            <div class="s flex gap-x-6 text-3xl">
               <a
                 :href="`${getShareUrl('facebook', enrichedThumbnail.id)}`"
                 target="_blank"
                 rel="noopener"
                 aria-label="分享到 Facebook"
+                class="inline-block"
               >
                 <Icon
                   icon="simple-icons:facebook"
@@ -214,6 +220,7 @@ defineExpose({ open, close })
                 target="_blank"
                 rel="noopener"
                 aria-label="分享到 Twitter"
+                class="inline-block"
               >
                 <Icon icon="simple-icons:x" class="size-10 rounded bg-black p-1 text-white" />
               </a>
@@ -223,6 +230,7 @@ defineExpose({ open, close })
                 target="_blank"
                 rel="noopener"
                 aria-label="分享到 LINE"
+                class="inline-block"
               >
                 <Icon
                   icon="simple-icons:line"
@@ -230,27 +238,28 @@ defineExpose({ open, close })
                 />
               </a>
             </div>
-            <!-- <div class="font-notosans text-2xl">點閱數: {{ enrichedThumbnail.clickCount }}</div> -->
-            <div class="flex gap-8 text-lg font-black text-white">
+
+            <div class="flex gap-8 text-lg font-black">
+              <div
+                class="dark:border-outline-dark hidden cursor-pointer rounded-full border p-2.5 shadow-md transition-colors duration-300 hover:shadow-lg active:scale-95 active:shadow-inner 2xl:inline-block"
+                @click="onToggleFavorite(thumbnail?.id ?? '')"
+              >
+                <Icon
+                  :icon="isFavorited ? 'mdi:heart' : 'mdi:heart-outline'"
+                  class="size-8"
+                  :class="{ 'text-red-500': isFavorited }"
+                />
+              </div>
+
               <button
-                class="flex cursor-pointer gap-1 rounded-md bg-blue-500 px-6 py-3 shadow-md hover:bg-blue-500/80 active:bg-blue-700 active:shadow-inner"
+                class="flex cursor-pointer gap-1 rounded-md bg-blue-500 px-6 py-3 text-white shadow-md hover:bg-blue-500/80 active:scale-95 active:bg-blue-700 active:shadow-inner"
                 @click="downloadImage(enrichedThumbnail.imageUrl, `${enrichedThumbnail.name}.jpg`)"
               >
                 <Icon icon="mdi:download" class="size-7" />
-                <span class="font-notosans truncate text-xl">下載圖片</span>
+                <span class="font-notosans select-none truncate text-xl">下載圖片</span>
               </button>
             </div>
           </section>
-
-          <!-- 分享功能，暫時不實裝 -->
-          <!-- <div class="mt-8 flex gap-x-4">
-          <div class="">
-            <Icon icon="fa-brands:facebook-square" class="text-[#0866FF]" width="48" height="48" />
-          </div>
-          <div class="">
-            <Icon icon="fa6-brands:line" class="text-[#00C300]" width="48" height="48" />
-          </div>
-        </div> -->
         </div>
       </div>
     </div>
