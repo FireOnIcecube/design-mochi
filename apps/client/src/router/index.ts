@@ -27,6 +27,12 @@ const routes: RouteRecordRaw[] = [
     component: FavoritePage,
     meta: { layout: DefaultLayout }
   },
+  {
+    path: '/favorite/:id?',
+    name: 'FavoritePage',
+    component: FavoritePage,
+    meta: { layout: DefaultLayout }
+  },
   // {
   //   path: '/thumbnail/:id',
   //   name: 'ThumbnailDetail',

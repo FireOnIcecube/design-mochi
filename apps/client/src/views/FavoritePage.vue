@@ -76,7 +76,7 @@ const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
 
 // 點擊卡片
 function openThumbnailModal(t: Thumbnail) {
-  router.push({ name: 'ThumbnailList', params: { id: t.id }, query: route.query }) // 更新 URL
+  router.push({ name: 'FavoritePage', params: { id: t.id }, query: route.query }) // 更新 URL
   modalRef.value?.open(t)
 }
 
@@ -156,7 +156,7 @@ async function tryOpenModalFromRoute() {
         />
       </div>
 
-      <ThumbnailDetailModal ref="modalRef" />
+      <ThumbnailDetailModal ref="modalRef" @toggle-favorite="handleToggleFavorite" />
     </div>
 
     <div class="mt-10 flex justify-end">
