@@ -51,7 +51,7 @@ function onToggleFavorite(id: string) {
         <Icon
           :icon="isFavorited ? 'mdi:heart' : 'mdi:heart-outline'"
           class="size-7"
-          :class="{ 'text-red-500': isFavorited }"
+          :class="isFavorited ? 'text-red-500' : 'text-white'"
         />
       </div>
     </div>
