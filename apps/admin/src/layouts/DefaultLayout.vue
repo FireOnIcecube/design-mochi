@@ -57,15 +57,16 @@ onMounted(async () => {
         <main class="container mx-auto flex-1 p-4">
           <router-view />
         </main>
+
+        <div
+          class="bg-primary border-outline dark:bg-surface-dark transition-theme border-t p-4 text-center dark:border-gray-700"
+        >
+          <small>
+            所有封面與影片素材版權均屬原創作者所有，本站僅作設計靈感分享，無意侵犯任何權益。
+          </small>
+          <!-- <p>© 2025 <strong>DesignMochi</strong> 🍡 | Crafted with ❤️ for creators</p> -->
+        </div>
       </div>
-    </div>
-    <div
-      class="bg-primary border-outline dark:bg-surface-dark transition-theme border-t p-4 text-center dark:border-gray-700"
-    >
-      <small>
-        所有封面與影片素材版權均屬原創作者所有，本站僅作設計靈感分享，無意侵犯任何權益。
-      </small>
-      <!-- <p>© 2025 <strong>DesignMochi</strong> 🍡 | Crafted with ❤️ for creators</p> -->
     </div>
   </div>
 </template>
