@@ -42,7 +42,7 @@ watch(
 </script>
 
 <template>
-  <div class="transition-theme h-full w-full shadow-md">
+  <div class="transition-theme h-full w-full">
     <div class="mx-auto flex max-w-screen-xl justify-center">
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
