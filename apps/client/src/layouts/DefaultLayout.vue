@@ -41,7 +41,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col">
+  <div class="flex min-h-dvh flex-col">
     <div
       class="bg-primary transition-theme dark:bg-surface-dark border-b px-4 lg:p-4 dark:border-gray-700"
     >
@@ -84,7 +84,9 @@ onMounted(async () => {
       <div class="bg-green-300">123</div>
     </div> -->
 
-    <main class="dark:bg-surface-dark bg-surface transition-theme container mx-auto grow p-4">
+    <main
+      class="dark:bg-surface-dark bg-surface transition-theme container mx-auto min-h-0 flex-1 p-4"
+    >
       <router-view />
     </main>
 
