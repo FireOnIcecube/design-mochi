@@ -84,9 +84,7 @@ onMounted(async () => {
       <div class="bg-green-300">123</div>
     </div> -->
 
-    <main
-      class="dark:bg-surface-dark bg-surface transition-theme container mx-auto min-h-0 flex-1 p-4"
-    >
+    <main class="dark:bg-surface-dark bg-surface transition-theme container mx-auto grow p-4">
       <router-view />
     </main>
 
