@@ -5,7 +5,8 @@ import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategorySt
 import { computed, onMounted, ref } from 'vue'
 import { useThumbnailStore } from '@client/stores/useThumbnailStore'
 import { useRoute, useRouter } from 'vue-router'
-import MobileMenuBar from '@client/components/layout/mobileMenuBar/MobileMenuBar.vue'
+import { MobileMenuBar } from '@client/components/layout/mobileMenuBar'
+import { SearchDialog } from '@client/components/common/SearchDialog'
 
 const route = useRoute()
 const router = useRouter()
@@ -63,12 +64,25 @@ onMounted(async () => {
     </div>
 
     <!-- mobile 展開區塊 -->
-    <div
-      class="mx-auto w-full max-w-lg overflow-hidden bg-red-300 transition-all duration-300 xl:hidden"
-      :class="isMobileMenuOpen ? 'h-36' : 'h-0'"
+    <!-- <div
+      class="mx-auto w-full max-w-lg overflow-y-auto rounded bg-red-300 transition-all duration-300 xl:hidden"
+      :class="isMobileMenuOpen ? 'h-48' : 'h-0'"
     >
-      這裡放展開的內容
-    </div>
+      <div class="cursor-pointer bg-[#E6D7C5] dark:bg-gray-800">
+        <SearchDialog :thumbnailCategories="categoryStore.data" />
+      </div>
+
+      <div class="bg-blue-300">123</div>
+      <div class="bg-green-300">123</div>
+      <div class="bg-blue-300">123</div>
+      <div class="bg-green-300">123</div>
+      <div class="bg-blue-300">123</div>
+      <div class="bg-green-300">123</div>
+      <div class="bg-blue-300">123</div>
+      <div class="bg-green-300">123</div>
+      <div class="bg-blue-300">123</div>
+      <div class="bg-green-300">123</div>
+    </div> -->
 
     <main class="dark:bg-surface-dark bg-surface transition-theme container mx-auto flex-1 p-4">
       <router-view />

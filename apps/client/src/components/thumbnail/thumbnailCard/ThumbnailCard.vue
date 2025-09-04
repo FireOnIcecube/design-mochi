@@ -45,7 +45,7 @@ function onToggleFavorite(id: string) {
       </div> -->
 
       <div
-        class="icon-wrapper pointer-events-none absolute bottom-2 right-2 rounded-full bg-black/40 p-2"
+        class="icon-wrapper pointer-events-none absolute bottom-2 right-2 hidden rounded-full bg-black/40 p-2 xl:block"
         @click.stop="onToggleFavorite(props.thumbnail.id)"
       >
         <Icon
