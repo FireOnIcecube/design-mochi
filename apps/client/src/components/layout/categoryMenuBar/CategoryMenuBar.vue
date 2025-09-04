@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { SearchDialog } from '@admin/components/common/SearchDialog'
+import { SearchDialog } from '@client/components/common/SearchDialog'
 
 import {
   NavigationMenu,
@@ -15,7 +15,9 @@ import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategorySt
 
 const categoryStore = useThumbnailCategoryStore()
 onMounted(async () => {
-  categoryStore.fetchAll({ order: { createdAt: 'asc' } })
+  if (!categoryStore.data) {
+    categoryStore.fetchAll({ order: { createdAt: 'asc' } })
+  }
 })
 
 const props = defineProps<{

@@ -40,7 +40,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex h-screen flex-col">
+  <div>
     <div
       class="bg-primary transition-theme dark:bg-surface-dark border-b px-4 lg:p-4 dark:border-gray-700"
     >
@@ -49,9 +49,7 @@ onMounted(async () => {
 
     <div class="flex flex-1">
       <div class="flex flex-1 flex-col overflow-auto">
-        <div
-          class="bg-primary transition-theme dark:bg-surface-dark h-16 border-b dark:border-gray-700"
-        >
+        <div class="bg-primary transition-theme dark:bg-surface-dark border-b dark:border-gray-700">
           <div class="hidden items-center justify-center xl:flex">
             <CategoryMenuBar
               :thumbnail-categories="categoryStore.data"
@@ -61,20 +59,20 @@ onMounted(async () => {
           </div>
 
           <!-- mobile menu bar -->
-          <div class="mx-auto max-w-md xl:hidden">
-            <MobileMenuBar @click="toggleMobileMenu" />
+          <div class="mx-auto max-w-md xl:hidden" @click="toggleMobileMenu">
+            <MobileMenuBar />
           </div>
         </div>
 
         <!-- mobile 展開區塊 -->
         <div
-          class="overflow-hidden bg-red-300 transition-all duration-300 xl:hidden"
+          class="mx-auto w-full max-w-lg overflow-hidden bg-red-300 transition-all duration-300 xl:hidden"
           :class="isMobileMenuOpen ? 'h-36' : 'h-0'"
         >
           這裡放展開的內容
         </div>
 
-        <main class="dark:bg-surface-dark bg-surface container mx-auto flex-1 p-4">
+        <main class="dark:bg-surface-dark bg-surface transition-theme container mx-auto flex-1 p-4">
           <router-view />
         </main>
 
