@@ -59,30 +59,9 @@ onMounted(async () => {
 
       <!-- mobile menu bar -->
       <div class="mx-auto max-w-md xl:hidden" @click="toggleMobileMenu">
-        <MobileMenuBar />
+        <MobileMenuBar :is-vtuber="isVtuber" @toggle-vtuber-mode="handleToggleVtuberMode" />
       </div>
     </div>
-
-    <!-- mobile 展開區塊 -->
-    <!-- <div
-      class="mx-auto w-full max-w-lg overflow-y-auto rounded bg-red-300 transition-all duration-300 xl:hidden"
-      :class="isMobileMenuOpen ? 'h-48' : 'h-0'"
-    >
-      <div class="cursor-pointer bg-[#E6D7C5] dark:bg-gray-800">
-        <SearchDialog :thumbnailCategories="categoryStore.data" />
-      </div>
-
-      <div class="bg-blue-300">123</div>
-      <div class="bg-green-300">123</div>
-      <div class="bg-blue-300">123</div>
-      <div class="bg-green-300">123</div>
-      <div class="bg-blue-300">123</div>
-      <div class="bg-green-300">123</div>
-      <div class="bg-blue-300">123</div>
-      <div class="bg-green-300">123</div>
-      <div class="bg-blue-300">123</div>
-      <div class="bg-green-300">123</div>
-    </div> -->
 
     <main class="dark:bg-surface-dark bg-surface transition-theme container mx-auto grow p-4">
       <router-view />
