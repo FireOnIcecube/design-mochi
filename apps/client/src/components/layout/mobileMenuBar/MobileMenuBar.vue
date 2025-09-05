@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import MenuIcon from './MenuIcon.vue'
 import { SearchDialog } from '@client/components/common/SearchDialog'
 import { useThumbnailCategoryStore } from '@client/stores/useThumbnailCategoryStore'
+import { Icon } from '@iconify/vue'
 
 const isOpen = ref(false)
 const categoryStore = useThumbnailCategoryStore()
@@ -57,7 +58,7 @@ onMounted(async () => {
         class="mx-auto mt-2 w-full max-w-lg overflow-y-auto rounded border shadow-md transition-all duration-300"
       >
         <!-- 搜尋列 -->
-        <div class="mr-4 flex items-center justify-end gap-x-8 border-b p-2">
+        <div class="p mr-4 flex items-center justify-end gap-x-8 border-b">
           <button
             type="button"
             :class="
@@ -76,7 +77,23 @@ onMounted(async () => {
         </div>
 
         <div class="divide-y">
-          <!-- 顯示內容 -->
+          <RouterLink
+            v-for="cat in categoryStore.data"
+            :to="{
+              name: 'ThumbnailList',
+              query: {
+                [cat.slug]: cat.tags?.map((t) => t.slug)
+              }
+            }"
+            class="block p-3"
+          >
+            <div class="flex justify-between">
+              <span class="font-notosans">{{ cat.name }}</span>
+              <span>
+                <Icon icon="material-symbols:double-arrow-rounded" class="size-6" />
+              </span>
+            </div>
+          </RouterLink>
         </div>
       </div>
     </transition>

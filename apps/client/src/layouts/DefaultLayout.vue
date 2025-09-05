@@ -50,11 +50,7 @@ onMounted(async () => {
 
     <div class="bg-primary transition-theme dark:bg-surface-dark border-b dark:border-gray-700">
       <div class="hidden items-center justify-center xl:flex">
-        <CategoryMenuBar
-          :thumbnail-categories="categoryStore.data"
-          :is-vtuber="isVtuber"
-          @toggle-vtuber-mode="handleToggleVtuberMode"
-        />
+        <CategoryMenuBar :is-vtuber="isVtuber" @toggle-vtuber-mode="handleToggleVtuberMode" />
       </div>
 
       <!-- mobile menu bar -->
