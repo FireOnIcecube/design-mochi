@@ -41,7 +41,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex min-h-dvh flex-col">
+  <div class="flex h-dvh flex-col">
     <div class="bg-primary dark:bg-surface-dark border-b px-4 lg:p-4 dark:border-gray-700">
       <NavHeader />
     </div>
@@ -52,7 +52,7 @@ onMounted(async () => {
       </aside>
 
       <div class="flex flex-1 flex-col overflow-auto">
-        <div class="bg-primary transition-theme dark:bg-surface-dark border-b dark:border-gray-700">
+        <div class="sticky top-4 z-50 mt-4">
           <div class="hidden items-center justify-center xl:flex">
             <CategoryMenuBar :is-vtuber="isVtuber" @toggle-vtuber-mode="handleToggleVtuberMode" />
           </div>
@@ -70,7 +70,9 @@ onMounted(async () => {
         <div
           class="bg-primary border-outline dark:bg-surface-dark transition-theme mt-12 border-t p-4 text-center dark:border-gray-700"
         >
-          <small class="font-notosans"> 所有封面與影片素材版權均屬原創作者所有。 </small>
+          <small class="font-notosans">
+            所有封面與影片素材版權均屬原創作者所有，本站僅作設計靈感分享，無意侵犯任何權益。
+          </small>
           <!-- <p>© 2025 <strong>DesignMochi</strong> 🍡 | Crafted with ❤️ for creators</p> -->
         </div>
       </div>

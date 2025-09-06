@@ -45,7 +45,9 @@ watch(
 
 <template>
   <div class="transition-theme h-full w-full">
-    <div class="mx-auto flex max-w-screen-xl justify-center">
+    <div
+      class="bg-primary/70 dark:bg-primary-dark/60 mx-auto flex max-w-screen-xl justify-center rounded-full backdrop-blur-md"
+    >
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
           <NavigationMenuItem v-for="category in categoryStore.data" :key="category.id">
