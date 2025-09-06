@@ -7,7 +7,6 @@ import { computed, onMounted, ref } from 'vue'
 import { useThumbnailStore } from '../stores/useThumbnailStore'
 import { useRoute, useRouter } from 'vue-router'
 import MobileMenuBar from '@admin/components/layout/mobileMenuBar/MobileMenuBar.vue'
-import { SearchDialog } from '@admin/components/common/SearchDialog'
 
 const route = useRoute()
 const router = useRouter()
@@ -69,7 +68,7 @@ onMounted(async () => {
         </main>
 
         <div
-          class="bg-primary border-outline dark:bg-surface-dark transition-theme border-t p-4 text-center dark:border-gray-700"
+          class="bg-primary border-outline dark:bg-surface-dark transition-theme mt-12 border-t p-4 text-center dark:border-gray-700"
         >
           <small class="font-notosans"> 所有封面與影片素材版權均屬原創作者所有。 </small>
           <!-- <p>© 2025 <strong>DesignMochi</strong> 🍡 | Crafted with ❤️ for creators</p> -->

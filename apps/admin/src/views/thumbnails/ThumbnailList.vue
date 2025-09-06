@@ -173,7 +173,7 @@ async function tryOpenModalFromRoute() {
       <ThumbnailDetailModal ref="modalRef" />
     </div>
 
-    <div class="mt-10 flex justify-end">
+    <div class="mt-10 flex justify-center">
       <PaginationBar
         :currentPage="currentPage"
         :totalPages="totalPages"
