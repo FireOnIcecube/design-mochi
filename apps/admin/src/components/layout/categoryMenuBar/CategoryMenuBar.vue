@@ -15,7 +15,9 @@ import { useThumbnailCategoryStore } from '@admin/stores/useThumbnailCategorySto
 
 const categoryStore = useThumbnailCategoryStore()
 onMounted(async () => {
-  categoryStore.fetchAll({ order: { createdAt: 'asc' } })
+  if (!categoryStore.data) {
+    categoryStore.fetchAll({ order: { createdAt: 'asc' } })
+  }
 })
 
 const props = defineProps<{
@@ -42,7 +44,7 @@ watch(
 </script>
 
 <template>
-  <div class="transition-theme h-full w-full shadow-md">
+  <div class="transition-theme h-full w-full">
     <div class="mx-auto flex max-w-screen-xl justify-center">
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
