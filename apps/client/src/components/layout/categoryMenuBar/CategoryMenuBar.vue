@@ -95,8 +95,8 @@ watch(
           type="button"
           :class="
             localVtuber
-              ? 'scale-95 bg-blue-400 shadow-[inset_4px_4px_8px_#00000066]'
-              : 'bg-red-300 shadow-lg'
+              ? 'scale-95 bg-[#997557] shadow-[inset_4px_4px_8px_#00000066]'
+              : 'bg-[#BFA488] shadow-lg'
           "
           class="cursor-pointer rounded px-4 py-2 text-white transition-all duration-150 active:scale-95"
           @click="onToggleVtuberMode"
@@ -104,7 +104,7 @@ watch(
           Vtuber
         </button>
 
-        <div class="cursor-pointer rounded-full bg-[#fff9f1] dark:bg-gray-800">
+        <div class="cursor-pointer rounded-full bg-[#E6D7C5] dark:bg-gray-800">
           <SearchDialog :thumbnailCategories="categoryStore.data" />
         </div>
       </div>
