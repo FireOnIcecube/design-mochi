@@ -53,21 +53,21 @@ const pagesToShow = computed(() => {
 </script>
 
 <template>
-  <div class="flex select-none items-center space-x-1 text-lg">
+  <div class="font-notosans flex select-none items-center space-x-4 text-lg">
     <!-- Prev -->
     <button
-      class="text-content dark:text-content-dark rounded px-2 py-1 hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 dark:hover:bg-gray-700"
+      class="text-content dark:text-content-dark rounded border px-2 py-1 shadow-md hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 dark:hover:bg-gray-700"
       :disabled="props.currentPage === 1"
       @click="goToPage(props.currentPage - 1)"
     >
-      Prev
+      上一頁
     </button>
 
     <!-- Pages -->
     <button
       v-for="(p, i) in pagesToShow"
       :key="i"
-      class="text-content dark:text-content-dark rounded px-2 py-1 hover:bg-gray-200 dark:hover:bg-gray-700"
+      class="text-content dark:text-content-dark rounded-full border px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700"
       :class="{
         'bg-blue-500 text-white': p === props.currentPage,
         'cursor-default': p === '...',
@@ -80,11 +80,11 @@ const pagesToShow = computed(() => {
 
     <!-- Next -->
     <button
-      class="text-content dark:text-content-dark rounded px-2 py-1 hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 dark:hover:bg-gray-700"
+      class="text-content dark:text-content-dark rounded border px-2 py-1 shadow-md hover:bg-gray-200 disabled:cursor-not-allowed disabled:text-gray-400 dark:hover:bg-gray-700"
       :disabled="props.currentPage === props.totalPages"
       @click="goToPage(props.currentPage + 1)"
     >
-      Next
+      下一頁
     </button>
   </div>
 </template>
