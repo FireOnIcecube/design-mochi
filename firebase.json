@@ -1,18 +1,6 @@
 {
   "hosting": [
     {
-      "site": "design-mochi",
-      "public": "public",
-      "rewrites": [],
-      "redirects": [
-        {
-          "source": "/",
-          "destination": "https://design-mochi.com",
-          "type": 301
-        }
-      ]
-    },
-    {
       "target": "client",
       "public": "apps/client/dist",
       "rewrites": [
