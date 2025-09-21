@@ -71,11 +71,11 @@ function updateSelectedTags(val: Record<string, string[]>) {
 <template>
   <Dialog>
     <DialogTrigger as-child>
-      <div @click="toggleDialog" class="p-4">
+      <div @click="toggleDialog" class="p-3">
         <Icon
           icon="ion:search"
-          width="1.8rem"
-          height="1.8rem"
+          width="1.7rem"
+          height="1.7rem"
           class="translate-transform text-content dark:text-content-dark duration-150 ease-out select-none group-hover:scale-105"
         />
       </div>
