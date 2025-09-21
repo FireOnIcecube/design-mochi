@@ -46,7 +46,7 @@ watch(
 <template>
   <div class="transition-theme h-full w-full">
     <div
-      class="bg-primary/70 dark:bg-primary-dark/60 mx-auto flex max-w-screen-xl justify-center rounded-full backdrop-blur-md"
+      class="bg-primary/70 dark:bg-primary-dark/60 mx-auto flex max-w-screen-xl justify-center rounded-full p-1 backdrop-blur-md"
     >
       <NavigationMenu class="py-2">
         <NavigationMenuList class="gap-x-8">
