@@ -63,7 +63,7 @@ const thumbnails = computed(() => {
   return allThumbnails.value.slice(start, end)
 })
 const currentPage = ref(Number(route.query.page) || 1)
-const pageSize = 30
+const pageSize = 28
 
 const totalCount = computed(() => allThumbnails.value.length)
 const totalPages = computed(() => Math.ceil(totalCount.value / pageSize))
