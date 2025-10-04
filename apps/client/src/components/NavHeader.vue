@@ -22,13 +22,15 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
           :to="{ name: 'FavoritePage' }"
           class="text-content dark:text-content-dark block hover:text-gray-500 dark:hover:text-gray-400"
         >
-          <span class="font-notosans text-lg">我的收藏</span>
+          <span class="font-notosans text-lg">
+            <Icon icon="mdi:heart" class="size-7 text-[#9C754E] dark:text-white"
+          /></span>
         </router-link>
 
         <label class="swap swap-rotate text-content dark:text-content-dark">
           <input type="checkbox" class="theme-controller hidden" @change="() => toggleDarkMode()" />
 
-          <Icon icon="uil:sun" class="swap-off h-6 w-6 fill-current lg:h-8 lg:w-8" />
+          <Icon icon="uil:sun" class="swap-off h-6 w-6 fill-current text-[#9C754E] lg:h-8 lg:w-8" />
 
           <Icon icon="uil:moon" class="swap-on h-6 w-6 fill-current lg:h-8 lg:w-8" />
         </label>
