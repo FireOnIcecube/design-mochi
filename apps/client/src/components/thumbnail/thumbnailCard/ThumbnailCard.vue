@@ -61,6 +61,12 @@ function onToggleFavorite(id: string) {
     >
       {{ props.thumbnail.name }}
     </p>
+    <div class="mt-2 flex flex-wrap gap-x-2 gap-y-1">
+      <template v-for="value in props.thumbnail.categories.flatMap((cat) => cat.tags)">
+        <span class="rounded-md bg-blue-500 px-2 py-1">{{ value }}</span>
+      </template>
+    </div>
+
     <!-- </router-link> -->
   </div>
 </template>

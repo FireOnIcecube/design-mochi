@@ -30,7 +30,10 @@ const { isDarkMode, toggleDarkMode } = useDarkMode()
         <label class="swap swap-rotate text-content dark:text-content-dark">
           <input type="checkbox" class="theme-controller hidden" @change="() => toggleDarkMode()" />
 
-          <Icon icon="uil:sun" class="swap-off h-6 w-6 fill-current text-[#9C754E] lg:h-8 lg:w-8" />
+          <Icon
+            icon="uil:sun"
+            class="swap-off h-6 w-6 fill-current text-[#9C754E] lg:h-8 lg:w-8 dark:text-white"
+          />
 
           <Icon icon="uil:moon" class="swap-on h-6 w-6 fill-current lg:h-8 lg:w-8" />
         </label>
